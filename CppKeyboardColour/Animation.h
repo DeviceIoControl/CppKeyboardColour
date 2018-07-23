@@ -24,6 +24,7 @@ struct Frame
 template<unsigned int Count>
 class Animation
 {
+public:
 	Animation(unsigned int size);
 	Animation(const Frame* pFrames, unsigned int count);
 	bool AddFrame(const Frame& frame);

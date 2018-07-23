@@ -73,27 +73,6 @@ void Keyboard::SysAnimation(SystemAnimation animation)
 		nullptr);
 }
 
-template<unsigned int size> 
-void Keyboard::PlayAnimation(const Animation<size>* const pAnimation) 
-{
-	unsigned int actualSize = (!size) ? pAnimation->size() : size;
-
-	for (int i = 0; i < actualSize; ++i) {
-
-		for (int y = 0; y < 3; ++y) {
-
-			Keyboard::SetColour(pAnimation->getFrame(i).colour[y].rgb[0],
-								pAnimation->getFrame(i).colour[y].rgb[1], 
-								pAnimation->getFrame(i).colour[y].rgb[2],
-								pAnimation->getFrame(i).colour[y].zone);
-
-			if (pAnimation->getFrame(i).colour[y].zone == Zone::ALL) { break; } 
-		}
-
-		Sleep(pAnimation->getFrame(i).ms_time);
-	}
-}
-
 Keyboard::~Keyboard()
 {
 	m_ClevoGetObj->Release();
