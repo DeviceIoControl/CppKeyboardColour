@@ -1,3 +1,5 @@
+// Created by DeviceIoControl
+
 #include "stdafx.h"
 #include "Animation.h"
 
@@ -44,7 +46,7 @@ const Frame& Animation<Count>::getFrame(unsigned int idx) const
 		return (m_pFrames) ? m_pFrames[idx] : m_pFrames[idx];
 	}
 
-	return Frame{ 0 };
+	return Frame { 0 };
 }
 
 template<unsigned int Count>
