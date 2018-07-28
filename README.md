@@ -6,6 +6,10 @@ A much cleaner and simpler version of the initial program that I created in C#
 
 I will be adding more functionality later on, but for now... HERE IT IS!
 
+Feature List:
+Supports 3 zone RGB lighting CLEVO laptop keyboards.
+Added support for Animation objects.
+
 Make sure you run this program 
 ## AS ADMINISTRATOR
 WMI will fail if it cannot get administrator privileges...
