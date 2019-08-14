@@ -10,8 +10,6 @@ Feature List:
 Supports 3 zone RGB lighting CLEVO laptop keyboards.
 Added support for Animation objects.
 
-Make sure you run this program 
-## AS ADMINISTRATOR
-WMI will fail if it cannot get administrator privileges...
+Make sure you run this program **AS ADMINISTRATOR** because, WMI will fail if it cannot get administrator privileges...
 
 **This currently has already got a pre-made theme that fades colours, I will be working to optimise it later (CAUTION: It take 15% - 20% CPU utilisation at some points)**
