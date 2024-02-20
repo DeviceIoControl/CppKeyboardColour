@@ -1,42 +1,23 @@
 // Created by DeviceIoControl
 
 #pragma once
-#include <Windows.h>
 
-enum Zone : byte
-{
-	LEFT,
-	MID,
-	RIGHT,
-	ALL
-};
+#include "Frame.h"
 
-struct Colour
-{
-	byte rgb[3];
-	Zone zone;
-};
-
-struct Frame
-{
-	Colour colour[3];
-	unsigned int ms_time;
-};
-
-template<unsigned int Count>
 class Animation
 {
 public:
-	Animation(unsigned int size);
-	Animation(const Frame* pFrames, unsigned int count);
-	bool AddFrame(const Frame& frame);
-	const Frame& getFrame(unsigned int idx) const;
-	inline unsigned int size() const { return m_Size; }
-	~Animation();
+	Animation() = default;
+
+	explicit Animation(const std::vector<Frame>& frames);
+	void addFrame(const Frame& frame);
+	std::optional<Frame> getFrame(uint32_t idx);
+
+	inline uint32_t size() const { return m_frames.size(); }
+	
+	~Animation() = default;
 
 private:
-	Frame* m_pFrames;
-	Frame m_Frames[Count];
-	const unsigned int m_Size;
-	unsigned int m_Position = 0;
+	uint32_t m_Position = 0;
+	std::vector<Frame> m_frames;
 };
