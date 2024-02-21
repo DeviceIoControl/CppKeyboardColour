@@ -22,6 +22,9 @@ public:
 	{
 	}
 
+	ScopedComPtr(const ScopedComPtr&) = delete;
+	ScopedComPtr& operator=(const ScopedComPtr&) = delete;
+
 	ScopedComPtr(ScopedComPtr&& that) noexcept
 	{
 		std::swap(this->m_ptr, that.m_ptr);
@@ -65,21 +68,11 @@ private:
 
 	ULONG DoAddRef(IUnknown* pUnk) const
 	{
-		if (pUnk) 
-		{
-			return pUnk->AddRef();
-		}
-
-		return 0;
+		return pUnk ? pUnk->AddRef() : 0;
 	}
 
 	ULONG DoRelease(IUnknown* pUnk) const 
 	{
-		if (pUnk)
-		{
-			return pUnk->Release();
-		}
-
-		return 0;
+		return pUnk ? pUnk->Release() : 0;
 	}
 };

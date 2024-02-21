@@ -149,11 +149,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Animation.h" />
+    <ClInclude Include="ColourShiftAnimation.h" />
+    <ClInclude Include="FrameCollection.h" />
     <ClInclude Include="Colour.h" />
     <ClInclude Include="Frame.h" />
+    <ClInclude Include="IAnimation.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="ScopedComPtr.h" />
+    <ClInclude Include="ServiceMain.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="SystemAnimation.h" />
     <ClInclude Include="targetver.h" />
@@ -161,7 +164,8 @@
     <ClInclude Include="Zone.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="ColourShiftAnimation.cpp" />
+    <ClCompile Include="FrameCollection.cpp" />
     <ClCompile Include="CppKeyboardColour.cpp" />
     <ClCompile Include="Keyboard.cpp">
       <FileType>CppCode</FileType>

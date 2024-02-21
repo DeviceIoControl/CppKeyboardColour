@@ -3,4 +3,8 @@
 #include "stdafx.h"
 #include "Zone.h"
 
+#define INDEX_COLOUR_RED 0
+#define INDEX_COLOUR_GREEN 1
+#define INDEX_COLOUR_BLUE 2
+
 using Colour = std::array<uint8_t, 3>;
