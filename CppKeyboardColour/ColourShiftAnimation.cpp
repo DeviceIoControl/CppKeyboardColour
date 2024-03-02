@@ -12,15 +12,15 @@ ColourShiftAnimation::ColourShiftAnimation()
 
 	this->GeneratePhase1(rgb);
 	auto frame1 = m_frames.GetFrame(m_frames.Size() - 1);
-	this->GenerateIntermediateFrame(frame1.value());
+	this->GenerateDelayFrame(frame1.value());
 
 	this->GeneratePhase2(rgb);
 	auto frame2 = m_frames.GetFrame(m_frames.Size() - 1);
-	this->GenerateIntermediateFrame(frame2.value());
+	this->GenerateDelayFrame(frame2.value());
 	
 	this->GeneratePhase3(rgb);
 	auto frame3 = m_frames.GetFrame(m_frames.Size() - 1);
-	this->GenerateIntermediateFrame(frame3.value());
+	this->GenerateDelayFrame(frame3.value());
 }
 
 void ColourShiftAnimation::AddFrame(const Frame& frame) 
@@ -105,7 +105,7 @@ void  ColourShiftAnimation::GeneratePhase3(uint8_t(&rgb)[3][3])
 	}
 }
 
-void ColourShiftAnimation::GenerateIntermediateFrame(const Frame& frame)
+void ColourShiftAnimation::GenerateDelayFrame(const Frame& frame)
 {
 	Frame intermediateFrame(frame);
 	intermediateFrame.ms_time = 5000;

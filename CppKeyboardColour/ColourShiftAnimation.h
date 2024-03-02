@@ -25,5 +25,5 @@ private:
 	void GeneratePhase2(uint8_t(&rgb)[3][3]);
 	void GeneratePhase3(uint8_t(&rgb)[3][3]);
 
-	void GenerateIntermediateFrame(const Frame& frame);
+	void GenerateDelayFrame(const Frame& frame);
 };

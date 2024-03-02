@@ -20,5 +20,5 @@ public:
 
 private:
 	uint32_t m_Position = 0;
-	std::vector<Frame> m_frames;
+	std::vector<Frame> m_frames{};
 };
