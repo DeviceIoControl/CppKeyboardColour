@@ -49,9 +49,9 @@ public:
 		DoRelease(m_ptr);
 		DoAddRef(ptr);
 
-		m_ptr = static_cast<IUnknown*>(ptr);
+		m_ptr = reinterpret_cast<IUnknown*>(ptr);
 
-		return static_cast<T*>(pTemp);
+		return reinterpret_cast<T*>(pTemp);
 	}
 
 	inline bool IsValid() const { return !!(m_ptr); }

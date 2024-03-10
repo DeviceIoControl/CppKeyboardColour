@@ -23,7 +23,15 @@ private:
 	ScopedComPtr<IWbemClassObject> m_pClevoGetObject;
 	ScopedComPtr<IWbemClassObject> m_pDataParameter;
 
-	std::optional<uint32_t> GetDeviceID();
+	std::optional<uint32_t> GetDeviceID()
+	{
+		auto fnProductId = std::async(std::launch::async, DoGetDeviceID);
+		auto optDeviceId = fnProductId.get();
+
+		return optDeviceId;
+	}
+
+	static std::optional<uint32_t> DoGetDeviceID();
 
 	void DoAnimation(IAnimation& animation);
 };

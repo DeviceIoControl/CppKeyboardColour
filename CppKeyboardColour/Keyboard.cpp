@@ -73,11 +73,19 @@ void Keyboard::SysAnimation(SystemAnimation animation)
 	);
 }
 
-std::optional<uint32_t> Keyboard::GetDeviceID() 
+std::optional<uint32_t> Keyboard::DoGetDeviceID()
 {
+	//
+	// Need to call CoInitialize to balance out COM initialization reference count
+	// as the poorly programmed GetProductdll.dll attempts to change the threading-model 
+	// of COM using CoInitializeEx and has thus it's subsequent call to CoUninitialize raises 
+	// an exception on the thread as COM was never initialised.
+	//
+	CoInitialize(nullptr);
+
 	using T_GetProductID_PCI = uint32_t(__stdcall*)();
 	HMODULE hGetProductDll = LoadLibraryW(GETPRODUCTDLL_PATH);
-
+	
 	if (!IS_HANDLE_VALID(hGetProductDll))
 	{
 		std::cout << "Failed to load GetProductdll.dll - Error code 0x" << (void*)GetLastError() << "\n";
@@ -87,6 +95,7 @@ std::optional<uint32_t> Keyboard::GetDeviceID()
 	if (auto const pfnGetProductID_PCI = (T_GetProductID_PCI)GetProcAddress(hGetProductDll, "GetProductID_PCI"))
 	{
 		auto const deviceId = pfnGetProductID_PCI();
+		
 		FreeLibrary(hGetProductDll);
 		
 		return deviceId;
