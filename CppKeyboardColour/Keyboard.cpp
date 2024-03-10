@@ -78,7 +78,7 @@ std::optional<uint32_t> Keyboard::DoGetDeviceID()
 	//
 	// Need to call CoInitialize to balance out COM initialization reference count
 	// as the poorly programmed GetProductdll.dll attempts to change the threading-model 
-	// of COM using CoInitializeEx and has thus it's subsequent call to CoUninitialize raises 
+	// of COM using CoInitializeEx and thus it's subsequent call to CoUninitialize raises 
 	// an exception on the thread as COM was never initialised.
 	//
 	CoInitialize(nullptr);

@@ -25,6 +25,10 @@ private:
 
 	std::optional<uint32_t> GetDeviceID()
 	{
+		//
+		// Call DoGetDeviceID on a seperate thread as GetProductdll.dll is buggy
+		// and messes up COM on the main thread.
+		//
 		auto fnProductId = std::async(std::launch::async, DoGetDeviceID);
 		auto optDeviceId = fnProductId.get();
 
