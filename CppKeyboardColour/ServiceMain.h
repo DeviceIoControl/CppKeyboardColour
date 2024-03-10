@@ -15,5 +15,6 @@ VOID WINAPI ServiceMain(DWORD dwNumberOfArgs, LPWSTR* lpServiceArguments)
 		serviceArguments[i].assign(lpServiceArguments[i]);
 	}
 
-	g_pServiceControlHandler = std::make_shared<ServiceControlHandler>(g_strServiceName, serviceArguments);
+	constexpr DWORD dwControlAccepted = SERVICE_ACCEPT_PAUSE_CONTINUE | SERVICE_ACCEPT_SHUTDOWN | SERVICE_ACCEPT_STOP;
+	g_pServiceControlHandler = std::make_shared<ServiceControlHandler>(g_strServiceName, dwControlAccepted, serviceArguments);
 }

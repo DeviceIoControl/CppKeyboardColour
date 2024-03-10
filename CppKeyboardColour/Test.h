@@ -3,16 +3,33 @@
 #include "stdafx.h"
 #include "WbemService.h"
 
+#define GET_PRODUCT_DLL_PATH L"C:\\Program Files (x86)\\HotKey\\GetProductdll.dll"
+#define IS_HANDLE_VALID(handle) (handle && handle != INVALID_HANDLE_VALUE)
+
+using T_GetProductID_PCI = uint32_t(__stdcall*)();
+
 void Test()
 {
-	auto ptrResult = WMI::Get()->ExecuteMethod(L"CLEVO_GET.InstanceName='ACPI\\PNP0C14\\0_0'", L"GetOem1", nullptr);
+	auto const hGetProductDLL = LoadLibraryW(GET_PRODUCT_DLL_PATH);
 
-	CIMTYPE cimType{};
-	VARIANT varValue{};
-	const auto hr = ptrResult->Get(L"Data", NULL, &varValue, &cimType, nullptr);
+	if (!IS_HANDLE_VALID(hGetProductDLL)) 
+	{
+		FreeLibrary(hGetProductDLL);
 
-	std::cout << "System Board ID: 0x" << (void*)varValue.uintVal << "\n";
+		std::wcout << L"Failed to load: " << GET_PRODUCT_DLL_PATH << L"\n";
+		std::cout << "Please run as Administrator. Press enter to exit.\n";
+
+		std::getchar();
+
+		std::exit(0);
+	}
+
+	T_GetProductID_PCI pfnGetProductID_PCI = (decltype(pfnGetProductID_PCI))GetProcAddress(hGetProductDLL, "GetProductID_PCI");
+
+	std::cout << "Product PCI Device ID: 0x" << (void*)pfnGetProductID_PCI() << "\n";
 	std::cout << "Press Enter to exit.\n";
 
 	std::getchar();
+
+	std::exit(0);
 }

@@ -6,11 +6,12 @@ class NamedPipe
 {
 public:
 	NamedPipe(const std::wstring& strPipeName, uint32_t uiBufferLength) 
+		: m_dwMessageLength(uiBufferLength)
 	{
 		m_hPipe = CreatePipeInternal(strPipeName, uiBufferLength, 4);
 	}
 	
-	bool Write(const uint8_t* pData, uint32_t uiBytes) 
+	bool Write(const uint8_t* pData, uint32_t uiBytes)
 	{
 		DWORD dwBytesWritten = NULL;
 		return WriteFile(m_hPipe, pData, uiBytes, &dwBytesWritten, nullptr);
@@ -22,13 +23,16 @@ public:
 		return ReadFile(m_hPipe, pData, uiBytes, &dwBytesRead, nullptr);
 	}
 
+	DWORD MessageLength() const { return m_dwMessageLength; }
+
 	~NamedPipe()
 	{
 		CloseHandle(m_hPipe);
 	}
 
 private:
-	HANDLE m_hPipe;
+	HANDLE m_hPipe = nullptr;
+	DWORD m_dwMessageLength = NULL;
 
 	HANDLE CreatePipeInternal(const std::wstring& strPipeName, uint32_t uiBufferLength, uint16_t maxInstances)
 	{

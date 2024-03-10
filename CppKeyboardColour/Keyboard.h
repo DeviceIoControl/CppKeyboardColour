@@ -19,9 +19,11 @@ public:
 	~Keyboard() = default;
 
 private:
-	uint32_t m_uiCurrentBoardId = 0;
+	uint32_t m_uiDeviceId = 0;
 	ScopedComPtr<IWbemClassObject> m_pClevoGetObject;
 	ScopedComPtr<IWbemClassObject> m_pDataParameter;
+
+	std::optional<uint32_t> GetDeviceID();
 
 	void DoAnimation(IAnimation& animation);
 };

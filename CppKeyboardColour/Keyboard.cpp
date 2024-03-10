@@ -5,6 +5,7 @@
 #include "WbemService.h"
 
 #define CLEVO_WMI_INSTANCE_NAME L"CLEVO_GET.InstanceName='ACPI\\PNP0C14\\0_0'"
+#define GETPRODUCTDLL_PATH L"C:\\Program Files (x86)\\HotKey\\GetProductdll.dll"
 
 Keyboard::Keyboard()
 {
@@ -14,6 +15,8 @@ Keyboard::Keyboard()
 	m_pClevoGetObject->GetMethod(L"SetKBLED", NULL, &pDataParameter, nullptr);
 
 	m_pDataParameter.Reset(pDataParameter);
+
+	m_uiDeviceId = GetDeviceID().value_or(~0);
 }
 
 void Keyboard::SetColour(uint8_t r, uint8_t g, uint8_t b, Zone zone)
@@ -70,6 +73,32 @@ void Keyboard::SysAnimation(SystemAnimation animation)
 	);
 }
 
+std::optional<uint32_t> Keyboard::GetDeviceID() 
+{
+	using T_GetProductID_PCI = uint32_t(__stdcall*)();
+	HMODULE hGetProductDll = LoadLibraryW(GETPRODUCTDLL_PATH);
+
+	if (!IS_HANDLE_VALID(hGetProductDll))
+	{
+		std::cout << "Failed to load GetProductdll.dll - Error code 0x" << (void*)GetLastError() << "\n";
+		return std::nullopt;
+	}
+
+	if (auto const pfnGetProductID_PCI = (T_GetProductID_PCI)GetProcAddress(hGetProductDll, "GetProductID_PCI"))
+	{
+		auto const deviceId = pfnGetProductID_PCI();
+		FreeLibrary(hGetProductDll);
+		
+		return deviceId;
+	}
+
+	std::cout << "Failed retrieve the Device ID - Error code 0x" << (void*)GetLastError() << "\n";
+
+	FreeLibrary(hGetProductDll);
+
+	return std::nullopt;
+}
+
 void Keyboard::DoAnimation(IAnimation& animation)
 {
 	for (size_t i = 0; i < animation.Size(); ++i)
@@ -84,7 +113,7 @@ void Keyboard::DoAnimation(IAnimation& animation)
 
 void Keyboard::PlayAnimation(IAnimation& animation, bool bShouldLoop /*= true*/)
 {
-	if (animation.IsSupportedBoard(m_uiCurrentBoardId))
+	if (animation.IsSupportedDevice(m_uiDeviceId))
 	{
 		do
 		{

@@ -1,48 +1,61 @@
 #pragma once
 
-#include "stdafx.h" 
+#include "stdafx.h"
 
 class ServiceControlHandler
 {
 public:
-	ServiceControlHandler(const std::wstring& strServiceName, const std::vector<std::wstring>& arguments)
+	ServiceControlHandler(const std::wstring& strServiceName, DWORD dwControlsAccepted, const std::vector<std::wstring>& arguments)
 	{
-		RegisterServiceCtrlHandlerExW(strServiceName.c_str(), ServiceControlDispatcher, this);
+		if (this->OnInitialise(arguments))
+		{
+			m_hServiceStatus = RegisterServiceCtrlHandlerExW(strServiceName.c_str(), &ServiceControlDispatcher, this);
+			
+			SERVICE_STATUS svcStatus{};
+
+			svcStatus.dwWaitHint = 5000;
+			svcStatus.dwCurrentState = SERVICE_ACTIVE;
+			svcStatus.dwControlsAccepted = dwControlsAccepted;
+			svcStatus.dwServiceType  = SERVICE_WIN32_OWN_PROCESS;
+			
+			SetServiceStatus(m_hServiceStatus, &svcStatus);
+		}
 	}
 
 	bool OnContinue(DWORD dwEventType, LPVOID lpEventData)
 	{
-		
+		return false;
 	}
 
 	bool OnPause(DWORD dwEventType, LPVOID lpEventData)
 	{
-
+		return false;
 	}
 
 	bool OnShutdown(DWORD dwEventType, LPVOID lpEventData)
 	{
-
+		return false;
 	}
 
 	bool OnStop(DWORD dwEventType, LPVOID lpEventData)
 	{
-
+		return false;
 	}
-
-	bool OnContinue(DWORD dwEventType, LPVOID lpEventData)
-	{
-
-	}
-
 
 	bool OnInterrogate(DWORD dwEventType, LPVOID lpEventData)
 	{
-
+		return false;
 	}
 
-private:
+	~ServiceControlHandler() = default;
 
+private:
+	SERVICE_STATUS_HANDLE m_hServiceStatus; // Does not need to be closed.
+
+	bool OnInitialise(const std::vector<std::wstring>& strArguments) 
+	{	
+		return false;
+	}
 
 	static DWORD __stdcall ServiceControlDispatcher(DWORD dwControl, DWORD dwEventType, LPVOID lpEventData, LPVOID lpContext)
 	{
@@ -51,25 +64,22 @@ private:
 		switch (dwControl)
 		{
 		case SERVICE_CONTROL_CONTINUE:
-			pThis->OnContinue(dwEventType, lpEventData);
-			break;
+			return pThis->OnContinue(dwEventType, lpEventData) ? NO_ERROR : GetLastError();
 
 		case SERVICE_CONTROL_PAUSE:
-			pThis->OnPause(dwEventType, lpEventData);
-			break;
+			return pThis->OnPause(dwEventType, lpEventData) ? NO_ERROR : GetLastError();
 
 		case SERVICE_CONTROL_SHUTDOWN:
-			pThis->OnShutdown(dwEventType, lpEventData);
-			break;
+			return pThis->OnShutdown(dwEventType, lpEventData) ? NO_ERROR : GetLastError();
 
 		case SERVICE_CONTROL_STOP:
-			pThis->OnStop(dwEventType, lpEventData);
-			break;
-
+			return pThis->OnStop(dwEventType, lpEventData) ? NO_ERROR : GetLastError();
+			
 		case SERVICE_CONTROL_INTERROGATE:
-			pThis->OnInterrogate(dwEventType, lpEventData);
-			break;
+			return pThis->OnInterrogate(dwEventType, lpEventData) ? NO_ERROR : GetLastError();
 		}
+
+		return ERROR_CALL_NOT_IMPLEMENTED;
 	}
 };
 

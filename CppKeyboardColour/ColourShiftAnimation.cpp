@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ColourShiftAnimation.h"
+#include "DeviceKBCapabilities.h"
 
 ColourShiftAnimation::ColourShiftAnimation() 
 {
@@ -33,12 +34,9 @@ std::optional<Frame> ColourShiftAnimation::GetFrame(uint32_t idx)
 	return m_frames.GetFrame(idx);
 }
 
-bool ColourShiftAnimation::IsSupportedBoard(uint32_t boardId) 
+bool ColourShiftAnimation::IsSupportedDevice(uint32_t deviceId) const
 {
-	// static std::set<uint32_t> s_supportedBoardIds{};
-	// return s_supportedBoardIds.find(boardId) != s_supportedBoardIds.cend();
-
-	return true;
+	return g_tripleZoneKeyboards.find(deviceId) != g_tripleZoneKeyboards.cend();
 }
 
 uint32_t ColourShiftAnimation::Size() const 

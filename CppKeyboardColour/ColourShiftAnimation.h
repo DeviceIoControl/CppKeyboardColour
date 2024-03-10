@@ -9,14 +9,17 @@ class ColourShiftAnimation
 public:
 	ColourShiftAnimation();
 
-	void AddFrame(const Frame& frame) override;
 	std::optional<Frame> GetFrame(uint32_t idx) override;
 
-	bool IsSupportedBoard(uint32_t boardId) override;
+	// This animation requires 3-Zone keyboards.
+	bool IsSupportedDevice(uint32_t deviceId) const override;
 
 	uint32_t Size() const override;
 
 	~ColourShiftAnimation() override = default;
+
+protected:
+	void AddFrame(const Frame& frame) override;
 
 private:
 	FrameCollection m_frames;
