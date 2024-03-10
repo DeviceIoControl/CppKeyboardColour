@@ -30,9 +30,8 @@ private:
 		// and messes up COM on the main thread.
 		//
 		auto fnProductId = std::async(std::launch::async, DoGetDeviceID);
-		auto optDeviceId = fnProductId.get();
-
-		return optDeviceId;
+		
+		return fnProductId.get();
 	}
 
 	static std::optional<uint32_t> DoGetDeviceID();
