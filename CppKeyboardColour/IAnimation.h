@@ -2,13 +2,14 @@
 
 #include "stdafx.h"
 #include "Frame.h"
+#include "KeyboardType.h"
 
 class IAnimation 
 {
 public:
 	virtual std::optional<Frame> GetFrame(uint32_t idx) = 0;
 
-	virtual bool IsSupportedDevice(uint32_t deviceId) const = 0;
+	virtual bool IsSupportedKB(KeyboardType kbType) const = 0;
 
 	virtual uint32_t Size() const = 0;
 

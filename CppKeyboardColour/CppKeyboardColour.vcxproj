@@ -156,12 +156,14 @@
     <ClInclude Include="BreatheAnimation.h" />
     <ClInclude Include="ColourShiftAnimation.h" />
     <ClInclude Include="DeviceIds.h" />
-    <ClInclude Include="DeviceKBCapabilities.h" />
     <ClInclude Include="FrameCollection.h" />
     <ClInclude Include="Colour.h" />
     <ClInclude Include="Frame.h" />
     <ClInclude Include="IAnimation.h" />
+    <ClInclude Include="IKeyboard.h" />
     <ClInclude Include="Keyboard.h" />
+    <ClInclude Include="DeviceIdTranslator.h" />
+    <ClInclude Include="KeyboardType.h" />
     <ClInclude Include="NamedPipe.h" />
     <ClInclude Include="ScopedComPtr.h" />
     <ClInclude Include="Service.h" />

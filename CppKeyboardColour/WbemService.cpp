@@ -84,9 +84,9 @@ namespace WMI
 		return pWbemServices;
 	}
 
-	WbemService* Get(std::wstring strNamespace /*= L"ROOT\\WMI"*/)
+	WbemService* Get(std::wstring strNamespace /* = L"ROOT\\WMI" */)
 	{
-		// We use the Apartment threaded model in COM, therefore everything is thread local. 
+		// We use the Apartment threaded model in COM, therefore everything is thread local,
 		// thus this pointer is only really valid on the thread it was initialised on.
 		static thread_local std::unique_ptr<WbemService> s_WmiService = std::make_unique<WbemService>(strNamespace);
 		return s_WmiService.get();

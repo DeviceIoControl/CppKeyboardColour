@@ -16,39 +16,53 @@ Keyboard::Keyboard()
 
 	m_pDataParameter.Reset(pDataParameter);
 
-	m_uiDeviceId = GetDeviceID().value_or(~0);
+	DeviceIdTranslator translator;
+	m_kbType = translator.TranslateToKBType(GetDeviceID().value_or(~0));
 }
 
 void Keyboard::SetColour(uint8_t r, uint8_t g, uint8_t b, Zone zone)
 {
-	VARIANT parameters = { 0 };
-	parameters.vt = VT_I4;
-
 	if (zone == Zone::ALL)
 	{
 		for (int i = 0; i < 3; ++i)
 		{
 			const std::array<uint8_t, 4> parameterData{ g, r, b, 0xF0 + i };
-			parameters.uintVal = *reinterpret_cast<const uint32_t*>(parameterData.data());
-
-			m_pDataParameter->Put((BSTR)L"Data", NULL, &parameters, CIM_UINT32);
-
-			std::ignore = WMI::Get()->ExecuteMethod(
-				CLEVO_WMI_INSTANCE_NAME, L"SetKBLED", m_pDataParameter.Get()
-			);
+			const auto data = *reinterpret_cast<const uint32_t*>(parameterData.data());
+			this->SetKBLed(data);
 		}
 	}
 	else
 	{
 		const std::array<uint8_t, 4> parameterData{ g, r, b, 0xF0 + static_cast<uint16_t>(zone) };
-		parameters.uintVal = *reinterpret_cast<const uint32_t*>(parameterData.data());
-
-		m_pDataParameter->Put((BSTR)L"Data", NULL, &parameters, CIM_UINT32);
-
-		std::ignore = WMI::Get()->ExecuteMethod(
-			CLEVO_WMI_INSTANCE_NAME, L"SetKBLED", m_pDataParameter.Get()
-		);
+		const auto data = *reinterpret_cast<const uint32_t*>(parameterData.data());
+		this->SetKBLed(data);
 	}
+}
+
+void Keyboard::SetKBLed(uint32_t data) 
+{
+	VARIANT parameters = { 0 };
+	parameters.vt = VT_I4;
+	parameters.uintVal = data; 
+
+	m_pDataParameter->Put((BSTR)L"Data", NULL, &parameters, CIM_UINT32);
+	std::ignore = WMI::Get()->ExecuteMethod(CLEVO_WMI_INSTANCE_NAME, L"SetKBLED", m_pDataParameter.Get());
+}
+
+KeyboardType Keyboard::GetKBType() const
+{
+	return m_kbType;
+};
+
+std::optional<uint32_t> Keyboard::GetDeviceID() const
+{
+	//
+	// Call DoGetDeviceID on a seperate thread as GetProductdll.dll is buggy
+	// and messes up COM on the main thread.
+	//
+	auto fnProductId = std::async(std::launch::async, DoGetDeviceID);
+
+	return fnProductId.get();
 }
 
 void Keyboard::SysAnimation(SystemAnimation animation)
@@ -68,9 +82,7 @@ void Keyboard::SysAnimation(SystemAnimation animation)
 
 	m_pDataParameter->Put((BSTR)L"Data", NULL, &parameters, CIM_UINT32);
 
-	std::ignore = WMI::Get()->ExecuteMethod(
-		CLEVO_WMI_INSTANCE_NAME, L"SetKBLED", m_pDataParameter.Get()
-	);
+	std::ignore = WMI::Get()->ExecuteMethod(CLEVO_WMI_INSTANCE_NAME, L"SetKBLED", m_pDataParameter.Get());
 }
 
 std::optional<uint32_t> Keyboard::DoGetDeviceID()
@@ -78,8 +90,8 @@ std::optional<uint32_t> Keyboard::DoGetDeviceID()
 	//
 	// Need to call CoInitialize to balance out COM initialization reference count
 	// as the poorly programmed GetProductdll.dll attempts to change the threading-model 
-	// of COM using CoInitializeEx and thus it's subsequent call to CoUninitialize raises 
-	// an exception on the thread as COM was never initialised.
+	// of COM on it's second call to CoInitializeEx and thus it's subsequent calls to
+	// CoUninitialize raises an exception on the thread as COM was never initialised.
 	//
 	CoInitialize(nullptr);
 
@@ -122,7 +134,7 @@ void Keyboard::DoAnimation(IAnimation& animation)
 
 void Keyboard::PlayAnimation(IAnimation& animation, bool bShouldLoop /*= true*/)
 {
-	if (animation.IsSupportedDevice(m_uiDeviceId))
+	if (animation.IsSupportedKB(this->GetKBType()))
 	{
 		do
 		{

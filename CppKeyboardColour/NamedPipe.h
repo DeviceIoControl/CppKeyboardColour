@@ -36,7 +36,7 @@ private:
 
 	HANDLE CreatePipeInternal(const std::wstring& strPipeName, uint32_t uiBufferLength, uint16_t maxInstances)
 	{
-		CreateNamedPipeW(strPipeName.c_str(), PIPE_ACCESS_DUPLEX | FILE_FLAG_FIRST_PIPE_INSTANCE,
+		return CreateNamedPipeW(strPipeName.c_str(), PIPE_ACCESS_DUPLEX | FILE_FLAG_FIRST_PIPE_INSTANCE,
 			PIPE_TYPE_MESSAGE | PIPE_READMODE_MESSAGE | PIPE_WAIT | PIPE_REJECT_REMOTE_CLIENTS, maxInstances,
 			uiBufferLength, uiBufferLength, NMPWAIT_USE_DEFAULT_WAIT, nullptr);
 	}

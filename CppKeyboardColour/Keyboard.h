@@ -2,37 +2,35 @@
 
 #pragma once
 
+#include "IKeyboard.h"
 #include "IAnimation.h"
-#include "SystemAnimation.h"
 #include "ScopedComPtr.h"
+#include "SystemAnimation.h"
+#include "DeviceIdTranslator.h"
 
-class Keyboard
+class Keyboard 
+	: public IKeyboard
 {
 public:
 	Keyboard();
 
-	void SetColour(uint8_t r, uint8_t g, uint8_t b, Zone zone);
-	void SysAnimation(SystemAnimation animation);
+	void SetColour(uint8_t r, uint8_t g, uint8_t b, Zone zone) override;
+	void SysAnimation(SystemAnimation animation) override;
+	void PlayAnimation(IAnimation& animation, bool bShouldLoop = true) override;
 
-	void PlayAnimation(IAnimation& animation, bool bShouldLoop = true);
+	KeyboardType GetKBType() const;
 
 	~Keyboard() = default;
 
 private:
-	uint32_t m_uiDeviceId = 0;
+	KeyboardType m_kbType;
+	DeviceIdTranslator m_translator;
 	ScopedComPtr<IWbemClassObject> m_pClevoGetObject;
 	ScopedComPtr<IWbemClassObject> m_pDataParameter;
 
-	std::optional<uint32_t> GetDeviceID()
-	{
-		//
-		// Call DoGetDeviceID on a seperate thread as GetProductdll.dll is buggy
-		// and messes up COM on the main thread.
-		//
-		auto fnProductId = std::async(std::launch::async, DoGetDeviceID);
-		
-		return fnProductId.get();
-	}
+	void SetKBLed(uint32_t data);
+
+	std::optional<uint32_t> GetDeviceID() const;
 
 	static std::optional<uint32_t> DoGetDeviceID();
 

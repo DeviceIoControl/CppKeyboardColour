@@ -66,10 +66,16 @@
     <ClInclude Include="DeviceIds.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DeviceKBCapabilities.h">
+    <ClInclude Include="BreatheAnimation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BreatheAnimation.h">
+    <ClInclude Include="IKeyboard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceIdTranslator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyboardType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

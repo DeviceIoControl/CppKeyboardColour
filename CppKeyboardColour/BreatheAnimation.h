@@ -3,6 +3,7 @@
 #include "Frame.h"
 #include "FrameCollection.h"
 #include "IAnimation.h"
+#include "DeviceIdTranslator.h"
 
 class BreatheAnimation 
 	: public IAnimation
@@ -12,7 +13,7 @@ public:
 
 	std::optional<Frame> GetFrame(uint32_t idx) override;
 
-	bool IsSupportedDevice(uint32_t deviceId) const override;
+	bool IsSupportedKB(KeyboardType kbType) const override;
 
 	uint32_t Size() const override;
 
@@ -23,7 +24,7 @@ protected:
 
 private:
 	FrameCollection m_frames;
-
+	
 	void GeneratePhase1();
 	void GeneratePhase2();
 	void GeneratePhase3();

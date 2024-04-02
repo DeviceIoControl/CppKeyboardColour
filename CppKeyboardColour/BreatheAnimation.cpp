@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "BreatheAnimation.h"
-#include "DeviceKBCapabilities.h"
 
 constexpr size_t STEPS = 50.0f;
 constexpr float MATH_PI = 3.14159f;
@@ -22,10 +21,9 @@ std::optional<Frame> BreatheAnimation::GetFrame(uint32_t idx)
 	return m_frames.GetFrame(idx);
 }
 
-bool BreatheAnimation::IsSupportedDevice(uint32_t deviceId) const 
+bool BreatheAnimation::IsSupportedKB(KeyboardType kbType) const 
 {
-	return (g_singleZoneKeyboards.find(deviceId) != g_singleZoneKeyboards.cend())
-		|| (g_tripleZoneKeyboards.find(deviceId) != g_tripleZoneKeyboards.cend());
+	return kbType != KeyboardType::NONE;
 }
 
 uint32_t BreatheAnimation::Size() const 
