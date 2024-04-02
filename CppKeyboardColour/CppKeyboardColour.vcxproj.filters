@@ -78,6 +78,9 @@
     <ClInclude Include="KeyboardType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Animations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

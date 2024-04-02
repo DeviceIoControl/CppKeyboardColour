@@ -153,6 +153,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Animations.h" />
     <ClInclude Include="BreatheAnimation.h" />
     <ClInclude Include="ColourShiftAnimation.h" />
     <ClInclude Include="DeviceIds.h" />
