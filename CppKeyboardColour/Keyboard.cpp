@@ -20,7 +20,14 @@ Keyboard::Keyboard()
 	m_kbType = translator.TranslateToKBType(GetDeviceID().value_or(~0));
 }
 
-void Keyboard::SetColour(uint8_t r, uint8_t g, uint8_t b, Zone zone)
+void Keyboard::SetSingleLedKB(uint8_t r, uint8_t g, uint8_t b) 
+{
+	const std::array<uint8_t, 4> parameterData{ g, r, b, 0 };
+	const auto data = *reinterpret_cast<const uint32_t*>(parameterData.data());
+	this->SetKBLed(data);
+}
+
+void Keyboard::SetTripleLedKB(uint8_t r, uint8_t g, uint8_t b, Zone zone) 
 {
 	if (zone == Zone::ALL)
 	{
@@ -36,6 +43,27 @@ void Keyboard::SetColour(uint8_t r, uint8_t g, uint8_t b, Zone zone)
 		const std::array<uint8_t, 4> parameterData{ g, r, b, 0xF0 + static_cast<uint16_t>(zone) };
 		const auto data = *reinterpret_cast<const uint32_t*>(parameterData.data());
 		this->SetKBLed(data);
+	}
+}
+
+void Keyboard::SetColour(uint8_t r, uint8_t g, uint8_t b, Zone zone)
+{
+	switch (m_kbType)
+	{
+	case KeyboardType::NONE:
+	case KeyboardType::PER_KEY:
+		return;
+
+	case KeyboardType::TRIPLE_ZONE:
+		this->SetTripleLedKB(r, g, b, zone);
+		break;
+
+	case KeyboardType::SINGLE_ZONE:
+		this->SetSingleLedKB(r, g, b);
+		break;
+
+	default:
+		break;
 	}
 }
 

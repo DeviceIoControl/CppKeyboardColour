@@ -28,6 +28,9 @@ private:
 	ScopedComPtr<IWbemClassObject> m_pClevoGetObject;
 	ScopedComPtr<IWbemClassObject> m_pDataParameter;
 
+	void SetSingleLedKB(uint8_t r, uint8_t g, uint8_t b);
+	void SetTripleLedKB(uint8_t r, uint8_t g, uint8_t b, Zone zone);
+
 	void SetKBLed(uint32_t data);
 
 	std::optional<uint32_t> GetDeviceID() const;
