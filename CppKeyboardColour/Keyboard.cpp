@@ -54,7 +54,13 @@ void Keyboard::Animate(IAnimation& animation)
 	{
 		if (auto frame = animation.GetFrame(i))
 		{
-			SetColour(frame->colour[2], frame->colour[1], frame->colour[0], frame->zone);
+			this->SetColour(
+				frame->colour[INDEX_COLOUR_RED], 
+				frame->colour[INDEX_COLOUR_GREEN], 
+				frame->colour[INDEX_COLOUR_BLUE], 
+				frame->zone
+			);
+
 			Sleep(frame->ms_time);
 		}
 	}

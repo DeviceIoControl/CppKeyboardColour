@@ -31,5 +31,5 @@ public:
 	~KeyboardCommunicatorFactory() = default;
 
 private:
-	std::unordered_map<uint32_t, IKeyboardCommunicatorPtr> m_kbCommunicatorMap;
+	std::unordered_map<uint32_t, IKeyboardCommunicatorPtr> m_kbCommunicatorMap{};
 };
