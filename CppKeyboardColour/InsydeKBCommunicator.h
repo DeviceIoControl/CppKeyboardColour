@@ -18,7 +18,7 @@ public:
 		m_pfnWriteAppSettings = reinterpret_cast<Detail::T_WriteAppSettings>(GetProcAddress(m_hInsydeDHCU, "WriteAppSettings"));
 	}
 
-	bool SetKeyboardColour(Zone zone, Colour colour) override 
+	bool SetKeyboardColour(Zone zone, const Colour& colour) override 
 	{
 		if (zone == Zone::ALL) 
 		{
@@ -44,7 +44,14 @@ public:
 		return false;
 	} 
 
-	~InsydeKBCommunicator() = default;
+	~InsydeKBCommunicator() override
+	{
+		if (IS_HANDLE_VALID(m_hInsydeDHCU)) 
+		{
+			FreeLibrary(m_hInsydeDHCU);
+			m_pfnWriteAppSettings = nullptr;
+		}
+	}
 
 private:
 	HMODULE m_hInsydeDHCU = nullptr;

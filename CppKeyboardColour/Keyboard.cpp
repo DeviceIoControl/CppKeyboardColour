@@ -52,12 +52,12 @@ void Keyboard::Animate(IAnimation& animation)
 {
 	for (size_t i = 0; i < animation.Size(); ++i)
 	{
-		if (auto frame = animation.GetFrame(i))
+		if (const auto frame = animation.GetFrame(i))
 		{
 			this->SetColour(
-				frame->colour[INDEX_COLOUR_RED], 
-				frame->colour[INDEX_COLOUR_GREEN], 
-				frame->colour[INDEX_COLOUR_BLUE], 
+				frame->colour[INDEX_COLOUR_RED],
+				frame->colour[INDEX_COLOUR_GREEN],
+				frame->colour[INDEX_COLOUR_BLUE],
 				frame->zone
 			);
 

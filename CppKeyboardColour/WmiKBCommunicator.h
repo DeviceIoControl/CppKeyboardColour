@@ -21,7 +21,7 @@ public:
 		m_pDataParameter.Reset(pDataParameter);
 	}
 
-	bool SetKeyboardColour(Zone zone, Colour colour) override 
+	bool SetKeyboardColour(Zone zone, const Colour& colour) override 
 	{
 		if (zone == Zone::ALL)
 		{
@@ -62,8 +62,10 @@ public:
 		parameters.vt = VT_I4;
 		parameters.uintVal = data;
 
-		m_pDataParameter->Put((BSTR)L"Data", NULL, &parameters, CIM_UINT32);
+		const auto hr = m_pDataParameter->Put((BSTR)L"Data", NULL, &parameters, CIM_UINT32);
 		std::ignore = WMI::Get()->ExecuteMethod(CLEVO_WMI_INSTANCE_NAME, L"SetKBLED", m_pDataParameter.Get());
+
+		return SUCCEEDED(hr);
 	}
 
 	~WmiKBCommunicator() = default;
