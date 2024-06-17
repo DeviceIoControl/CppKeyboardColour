@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "ColourShiftAnimation.h"
 
-ColourShiftAnimation::ColourShiftAnimation() 
+ColourShiftAnimation::ColourShiftAnimation()
 {
 	uint8_t rgb[3][3] =
 	{

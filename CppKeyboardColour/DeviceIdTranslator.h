@@ -1,8 +1,8 @@
 #pragma once
 
 #include "stdafx.h"
-#include "IKeyboard.h"
 #include "DeviceIds.h"
+#include "KeyboardType.h"
 
 class DeviceIdTranslator
 {
@@ -16,7 +16,7 @@ public:
 			return KeyboardType::TRIPLE_ZONE;
 		}
 
-		if (IsSingleZoneKeyboard(deviceId)) 
+		if (IsSingleZoneKeyboard(deviceId))
 		{
 			return KeyboardType::SINGLE_ZONE;
 		}
@@ -27,7 +27,7 @@ public:
 	~DeviceIdTranslator() = default;
 
 private:
-	inline bool IsSingleZoneKeyboard(uint32_t deviceId) const 
+	inline bool IsSingleZoneKeyboard(uint32_t deviceId) const
 	{
 		static const std::set<uint32_t> g_singleZoneKeyboards = {
 			DEVICE_ID_NP50SXX

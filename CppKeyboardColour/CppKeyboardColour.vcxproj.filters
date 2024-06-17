@@ -72,13 +72,28 @@
     <ClInclude Include="IKeyboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DeviceIdTranslator.h">
+    <ClInclude Include="DeviceIdRetriever.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="KeyboardType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Animations.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InsydeKBCommunicator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IKeyboardCommunicator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WmiKBCommunicator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyboardCommunicatorFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceIdTranslator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

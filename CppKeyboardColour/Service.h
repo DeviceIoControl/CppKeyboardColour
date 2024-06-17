@@ -59,7 +59,7 @@ private:
 
 	static DWORD __stdcall ServiceControlDispatcher(DWORD dwControl, DWORD dwEventType, LPVOID lpEventData, LPVOID lpContext)
 	{
-		ServiceControlHandler* pThis =  static_cast<ServiceControlHandler*>(lpContext);
+		auto pThis =  static_cast<ServiceControlHandler*>(lpContext);
 
 		switch (dwControl)
 		{

@@ -4,9 +4,8 @@
 
 #include "IKeyboard.h"
 #include "IAnimation.h"
-#include "ScopedComPtr.h"
 #include "SystemAnimation.h"
-#include "DeviceIdTranslator.h"
+#include "IKeyboardCommunicator.h"
 
 class Keyboard 
 	: public IKeyboard
@@ -24,18 +23,7 @@ public:
 
 private:
 	KeyboardType m_kbType;
-	DeviceIdTranslator m_translator;
-	ScopedComPtr<IWbemClassObject> m_pClevoGetObject;
-	ScopedComPtr<IWbemClassObject> m_pDataParameter;
+	IKeyboardCommunicatorPtr m_ptrKbComms{};
 
-	void SetSingleLedKB(uint8_t r, uint8_t g, uint8_t b);
-	void SetTripleLedKB(uint8_t r, uint8_t g, uint8_t b, Zone zone);
-
-	void SetKBLed(uint32_t data);
-
-	std::optional<uint32_t> GetDeviceID() const;
-
-	static std::optional<uint32_t> DoGetDeviceID();
-
-	void DoAnimation(IAnimation& animation);
+	void Animate(IAnimation& animation);
 };

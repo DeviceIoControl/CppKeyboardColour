@@ -10,7 +10,7 @@ VOID WINAPI ServiceMain(DWORD dwNumberOfArgs, LPWSTR* lpServiceArguments)
 {
 	std::vector<std::wstring> serviceArguments(dwNumberOfArgs);
 
-	for (size_t i = 0; i < dwNumberOfArgs; ++i) 
+	for (size_t i = 0; i < dwNumberOfArgs; ++i)
 	{
 		serviceArguments[i].assign(lpServiceArguments[i]);
 	}
