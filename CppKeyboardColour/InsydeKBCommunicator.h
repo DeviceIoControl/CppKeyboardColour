@@ -1,3 +1,5 @@
+// Created by DeviceIoControl
+
 #pragma once
 
 #include "stdafx.h"
@@ -30,17 +32,11 @@ public:
 		// Found in CLEVO Control Center v6.053
 		const uint8_t mode = 8;
 
-		const std::array<uint8_t, 4> dchuData{
+		const std::array<uint8_t, 4> dchuData {
 			colour[INDEX_COLOUR_GREEN],
 			colour[INDEX_COLOUR_RED],
 			colour[INDEX_COLOUR_BLUE],
 			0xF0
-		};
-
-		const std::array<uint8_t, 3> appSettingsData{
-			colour[INDEX_COLOUR_RED],
-			colour[INDEX_COLOUR_GREEN],
-			colour[INDEX_COLOUR_BLUE]
 		};
 
 		m_pfnSetDCHU_Data(103, dchuData.data(), dchuData.size());

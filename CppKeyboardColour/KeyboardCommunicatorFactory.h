@@ -1,3 +1,5 @@
+// Created by DeviceIoControl
+
 #pragma once
 
 #include "stdafx.h"
@@ -7,20 +9,25 @@
 #include "WmiKBCommunicator.h"
 #include "InsydeKBCommunicator.h"
 
+#define KB_COMM_INDEX_WMI 0 
+#define KB_COMM_INDEX_INSYDE 1
+
 class KeyboardCommunicatorFactory 
 {
 public:
 	KeyboardCommunicatorFactory() 
 	{
-		m_kbCommunicatorMap[DEVICE_ID_P650RS_G] = std::make_shared<WmiKBCommunicator>();
-		m_kbCommunicatorMap[DEVICE_ID_NP50SXX] = std::make_shared<InsydeKBCommunicator>();
+		this->CreateKBCommunicators();
+		
+		m_deviceToKbCommMap[DEVICE_ID_P650RS_G] = m_kbComms[KB_COMM_INDEX_WMI];
+		m_deviceToKbCommMap[DEVICE_ID_NP50SXX] = m_kbComms[KB_COMM_INDEX_INSYDE];
 	}
 
 	IKeyboardCommunicatorPtr Create(uint32_t deviceId) 
 	{
-		auto kbCommIterator = m_kbCommunicatorMap.find(deviceId);
+		const auto kbCommIterator = m_deviceToKbCommMap.find(deviceId);
 
-		if (kbCommIterator != m_kbCommunicatorMap.cend()) 
+		if (kbCommIterator != m_deviceToKbCommMap.cend())
 		{
 			return kbCommIterator->second;
 		}
@@ -31,5 +38,12 @@ public:
 	~KeyboardCommunicatorFactory() = default;
 
 private:
-	std::unordered_map<uint32_t, IKeyboardCommunicatorPtr> m_kbCommunicatorMap{};
+	std::array<IKeyboardCommunicatorPtr, 2> m_kbComms{};
+	std::unordered_map<uint32_t, IKeyboardCommunicatorPtr> m_deviceToKbCommMap{};
+
+	void CreateKBCommunicators() 
+	{
+		m_kbComms[KB_COMM_INDEX_WMI] = std::make_shared<WmiKBCommunicator>();
+		m_kbComms[KB_COMM_INDEX_INSYDE] = std::make_shared<InsydeKBCommunicator>();
+	}
 };
