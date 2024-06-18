@@ -16,26 +16,38 @@ public:
 	InsydeKBCommunicator()
 	{
 		m_hInsydeDHCU = LoadLibraryW(L"InsydeDCHU.dll");
-		m_pfnKBProc = reinterpret_cast<Detail::T_SetDCHU_Data>(GetProcAddress(m_hInsydeDHCU, "SetDCHU_Data"));
+		m_pfnSetDCHU_Data = reinterpret_cast<Detail::T_SetDCHU_Data>(GetProcAddress(m_hInsydeDHCU, "SetDCHU_Data"));
+		m_pfnWriteAppSettings = reinterpret_cast<Detail::T_WriteAppSettings>(GetProcAddress(m_hInsydeDHCU, "WriteAppSettings"));
 	}
 
 	bool SetKeyboardColour(Zone zone, const Colour& colour) override
 	{
-		// Found in CLEVO Control Center v6.053
-		for (int i = 1; i < 4; ++i)
+		if (zone != Zone::ALL) 
 		{
-			const std::array<uint8_t, 4> parameterData
-			{
-				colour[INDEX_COLOUR_GREEN],
-				colour[INDEX_COLOUR_RED],
-				colour[INDEX_COLOUR_BLUE],
-				0xF0 + i
-			};
-
-			m_pfnKBProc(103, parameterData.data(), parameterData.size());
+			return false;
 		}
 
-		return false;
+		// Found in CLEVO Control Center v6.053
+		const uint8_t mode = 8;
+
+		const std::array<uint8_t, 4> dchuData{
+			colour[INDEX_COLOUR_GREEN],
+			colour[INDEX_COLOUR_RED],
+			colour[INDEX_COLOUR_BLUE],
+			0xF0
+		};
+
+		const std::array<uint8_t, 3> appSettingsData{
+			colour[INDEX_COLOUR_RED],
+			colour[INDEX_COLOUR_GREEN],
+			colour[INDEX_COLOUR_BLUE]
+		};
+
+		m_pfnSetDCHU_Data(103, dchuData.data(), dchuData.size());
+		m_pfnWriteAppSettings(2, 81, colour.size(), colour.data());
+		m_pfnWriteAppSettings(2, 32, 1, &mode);
+
+		return true;
 	}
 
 	// Unsupported for now.
@@ -49,11 +61,13 @@ public:
 		if (IS_HANDLE_VALID(m_hInsydeDHCU))
 		{
 			FreeLibrary(m_hInsydeDHCU);
-			m_pfnKBProc = nullptr;
+			m_pfnSetDCHU_Data = nullptr;
+			m_pfnWriteAppSettings = nullptr;
 		}
 	}
 
 private:
 	HMODULE m_hInsydeDHCU = nullptr;
-	Detail::T_SetDCHU_Data m_pfnKBProc = nullptr;
+	Detail::T_SetDCHU_Data m_pfnSetDCHU_Data = nullptr;
+	Detail::T_WriteAppSettings m_pfnWriteAppSettings = nullptr;
 };
