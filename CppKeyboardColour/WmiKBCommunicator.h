@@ -9,7 +9,7 @@
 
 #define CLEVO_WMI_INSTANCE_NAME L"CLEVO_GET.InstanceName='ACPI\\PNP0C14\\0_0'"
 
-class WmiKBCommunicator 
+class WmiKBCommunicator
 	: public IKeyboardCommunicator
 {
 public:

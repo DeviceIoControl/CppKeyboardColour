@@ -11,10 +11,15 @@ class DeviceIdRetriever
 public:
 	DeviceIdRetriever() = default;
 
-	uint32_t GetDeviceID() 
+	// IMPORTANT: Hard-coded until we have a stable method of retrieving this.
+	uint32_t GetDeviceID()
 	{
 		return DEVICE_ID_NP50SXX;
-	} 
+		// return DEVICE_ID_P650RS_G;
+
+		// For debugging purposes only.
+		// return DEVICE_ID_FAKE;
+	}
 
 	~DeviceIdRetriever() = default;
 

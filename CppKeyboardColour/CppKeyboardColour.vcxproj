@@ -158,6 +158,7 @@
     <ClInclude Include="ColourShiftAnimation.h" />
     <ClInclude Include="DeviceIds.h" />
     <ClInclude Include="DeviceIdTranslator.h" />
+    <ClInclude Include="FakeKeyboardCommunicator.h" />
     <ClInclude Include="FrameCollection.h" />
     <ClInclude Include="Colour.h" />
     <ClInclude Include="Frame.h" />

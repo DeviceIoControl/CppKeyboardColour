@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "BreatheAnimation.h"
 
-constexpr size_t STEPS = 50.0f;
+constexpr size_t STEPS = 75.0f;
 constexpr float MATH_PI = 3.14159f;
 
 BreatheAnimation::BreatheAnimation()
@@ -39,8 +39,10 @@ void BreatheAnimation::GeneratePhase1()
 	{
 		Colour colour{};
 		
-		// FIXME: atan2 can result in values above 1.0f which causes theme inconsistencies.
-		colour[INDEX_COLOUR_RED] = 255 * std::atan2((180.0f / STEPS) * i, 180.0f / MATH_PI);
+		const auto val = (180.0f / STEPS) * i;
+
+		// Generate a sine wave for a breathing effect.
+		colour[INDEX_COLOUR_RED] = 255 * std::sin(val * (MATH_PI / 180.0f));
 		colour[INDEX_COLOUR_GREEN] = 0;
 		colour[INDEX_COLOUR_BLUE] = 0;
 
@@ -53,11 +55,12 @@ void BreatheAnimation::GeneratePhase2()
 	for (size_t i = 0; i < STEPS; ++i)
 	{
 		Colour colour{};
+		const auto val = (180.0f / STEPS) * i;
 
 		colour[INDEX_COLOUR_RED] = 0;
 
-		// FIXME: atan2 can result in values above 1.0f which causes theme inconsistencies.
-		colour[INDEX_COLOUR_GREEN] = 255 * std::atan2((180.0f / STEPS) * i, 180.0f / MATH_PI);
+		// Generate a sine wave for a breathing effect.
+		colour[INDEX_COLOUR_GREEN] = 255 * std::sin(val * (MATH_PI / 180.0f));
 		colour[INDEX_COLOUR_BLUE] = 0;
 
 		m_frames.AddFrame(Zone::ALL, colour, 175);
@@ -70,11 +73,13 @@ void BreatheAnimation::GeneratePhase3()
 	{
 		Colour colour{};
 
+		const auto val = (180.0f / STEPS) * i;
+
 		colour[INDEX_COLOUR_RED] = 0;
 		colour[INDEX_COLOUR_GREEN] = 0;
 
-		// FIXME: atan2 can result in values above 1.0f which causes theme inconsistencies.
-		colour[INDEX_COLOUR_BLUE] = 255 * std::atan2((180.0f / STEPS) * i, 180.0f / MATH_PI);
+		// Generate a sine wave for a breathing effect.
+		colour[INDEX_COLOUR_BLUE] = 255 * std::sin(val * (MATH_PI / 180.0f));
 
 		m_frames.AddFrame(Zone::ALL, colour, 175);
 	}
