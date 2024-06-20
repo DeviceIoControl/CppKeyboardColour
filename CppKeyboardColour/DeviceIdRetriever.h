@@ -15,7 +15,7 @@ public:
 	uint32_t GetDeviceID()
 	{
 		return DEVICE_ID_NP50SXX;
-		// return DEVICE_ID_P650RS_G;
+		//return DEVICE_ID_P650RS_G;
 
 		// For debugging purposes only.
 		// return DEVICE_ID_FAKE;

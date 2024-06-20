@@ -3,8 +3,9 @@
 #include "stdafx.h"
 #include "BreatheAnimation.h"
 
-constexpr size_t STEPS = 75.0f;
+constexpr size_t STEPS = 40.0f;
 constexpr float MATH_PI = 3.14159f;
+constexpr size_t FRAME_DURATION_MS = 50;
 
 BreatheAnimation::BreatheAnimation()
 {
@@ -46,7 +47,7 @@ void BreatheAnimation::GeneratePhase1()
 		colour[INDEX_COLOUR_GREEN] = 0;
 		colour[INDEX_COLOUR_BLUE] = 0;
 
-		m_frames.AddFrame(Zone::ALL, colour, 175);
+		m_frames.AddFrame(Zone::ALL, colour, FRAME_DURATION_MS);
 	}
 }
 
@@ -63,7 +64,7 @@ void BreatheAnimation::GeneratePhase2()
 		colour[INDEX_COLOUR_GREEN] = 255 * std::sin(val * (MATH_PI / 180.0f));
 		colour[INDEX_COLOUR_BLUE] = 0;
 
-		m_frames.AddFrame(Zone::ALL, colour, 175);
+		m_frames.AddFrame(Zone::ALL, colour, FRAME_DURATION_MS);
 	}
 }
 
@@ -81,6 +82,6 @@ void BreatheAnimation::GeneratePhase3()
 		// Generate a sine wave for a breathing effect.
 		colour[INDEX_COLOUR_BLUE] = 255 * std::sin(val * (MATH_PI / 180.0f));
 
-		m_frames.AddFrame(Zone::ALL, colour, 175);
+		m_frames.AddFrame(Zone::ALL, colour, FRAME_DURATION_MS);
 	}
 }
