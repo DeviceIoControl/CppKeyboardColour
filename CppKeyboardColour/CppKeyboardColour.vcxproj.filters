@@ -99,6 +99,12 @@
     <ClInclude Include="FakeKeyboardCommunicator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BreatheAnimationNewColours.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MathConstants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -120,6 +126,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BreatheAnimation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BreatheAnimationNewColours.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

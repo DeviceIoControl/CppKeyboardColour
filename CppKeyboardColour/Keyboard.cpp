@@ -55,8 +55,8 @@ void Keyboard::Animate(IAnimation& animation)
 		if (const auto frame = animation.GetFrame(i))
 		{
 			this->SetColour(
-				frame->colour[INDEX_COLOUR_RED],
-				frame->colour[INDEX_COLOUR_GREEN],
+				frame->colour[INDEX_COLOUR_RED], 
+				frame->colour[INDEX_COLOUR_GREEN], 
 				frame->colour[INDEX_COLOUR_BLUE],
 				frame->zone
 			);

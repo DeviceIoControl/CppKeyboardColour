@@ -155,6 +155,7 @@
   <ItemGroup>
     <ClInclude Include="Animations.h" />
     <ClInclude Include="BreatheAnimation.h" />
+    <ClInclude Include="BreatheAnimationNewColours.h" />
     <ClInclude Include="ColourShiftAnimation.h" />
     <ClInclude Include="DeviceIds.h" />
     <ClInclude Include="DeviceIdTranslator.h" />
@@ -170,6 +171,7 @@
     <ClInclude Include="InsydeKBCommunicator.h" />
     <ClInclude Include="KeyboardCommunicatorFactory.h" />
     <ClInclude Include="KeyboardType.h" />
+    <ClInclude Include="MathConstants.h" />
     <ClInclude Include="NamedPipe.h" />
     <ClInclude Include="ScopedComPtr.h" />
     <ClInclude Include="Service.h" />
@@ -184,6 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BreatheAnimation.cpp" />
+    <ClCompile Include="BreatheAnimationNewColours.cpp" />
     <ClCompile Include="ColourShiftAnimation.cpp" />
     <ClCompile Include="FrameCollection.cpp" />
     <ClCompile Include="CppKeyboardColour.cpp" />

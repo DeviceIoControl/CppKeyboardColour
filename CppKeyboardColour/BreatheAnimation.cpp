@@ -1,10 +1,10 @@
 // Created by DeviceIoControl
 
 #include "stdafx.h"
+#include "MathConstants.h"
 #include "BreatheAnimation.h"
 
 constexpr size_t STEPS = 40.0f;
-constexpr float MATH_PI = 3.14159f;
 constexpr size_t FRAME_DURATION_MS = 25;
 
 BreatheAnimation::BreatheAnimation()

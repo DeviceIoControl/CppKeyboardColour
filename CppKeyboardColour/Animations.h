@@ -6,3 +6,4 @@
 
 #include "BreatheAnimation.h"
 #include "ColourShiftAnimation.h"
+#include "BreatheAnimationNewColours.h"

@@ -5,7 +5,7 @@
 #include "Frame.h"
 #include "FrameCollection.h"
 #include "IAnimation.h"
-#include "DeviceIdTranslator.h"
+
 
 class BreatheAnimation 
 	: public IAnimation

@@ -31,19 +31,19 @@ public:
 private:
 	inline bool IsSingleZoneKeyboard(uint32_t deviceId) const
 	{
-		static const std::set<uint32_t> g_singleZoneKeyboards = {
+		static const std::set<uint32_t> s_singleZoneKeyboards = {
 			DEVICE_ID_NP50SXX
 		};
 
-		return g_singleZoneKeyboards.find(deviceId) != g_singleZoneKeyboards.cend();
+		return s_singleZoneKeyboards.find(deviceId) != s_singleZoneKeyboards.cend();
 	}
 
 	inline bool IsTripleZoneKeyboard(uint32_t deviceId) const
 	{
-		static const std::set<uint32_t> g_tripleZoneKeyboards = {
+		static const std::set<uint32_t> s_tripleZoneKeyboards = {
 			DEVICE_ID_P650RS_G
 		};
 
-		return g_tripleZoneKeyboards.find(deviceId) != g_tripleZoneKeyboards.cend();
+		return s_tripleZoneKeyboards.find(deviceId) != s_tripleZoneKeyboards.cend();
 	}
 };
