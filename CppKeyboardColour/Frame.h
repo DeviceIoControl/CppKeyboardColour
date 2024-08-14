@@ -7,7 +7,7 @@
 
 struct Frame
 {
-	Frame(Zone activeZone, Colour zoneColour, uint32_t msTime) 
+	Frame(Zone activeZone, const Colour& zoneColour, uint32_t msTime) 
 		: zone(activeZone), colour(zoneColour), ms_time(msTime)
 	{
 	}

@@ -3,7 +3,6 @@
 // Created by DeviceIoControl
 
 #include "stdafx.h"
-#include "IKeyboard.h"
 #include "DeviceIds.h"
 
 class DeviceIdRetriever

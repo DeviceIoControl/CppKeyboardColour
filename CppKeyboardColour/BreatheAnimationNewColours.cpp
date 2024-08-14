@@ -33,6 +33,9 @@ BreatheAnimationNewColours::BreatheAnimationNewColours()
 	// Breathe white
 	GenerateBreathe(CreateColour(255, 255, 255), STEPS, FRAME_DURATION_MS);
 
+	// Breathe blue
+	GenerateBreathe(CreateColour(0, 0, 255), STEPS, FRAME_DURATION_MS);
+
 	// Breathe brown
 	GenerateBreathe(CreateColour(255, 120, 120), STEPS, FRAME_DURATION_MS);
 }
@@ -73,11 +76,11 @@ void BreatheAnimationNewColours::GenerateBreathe(const Colour& targetColour, uin
 	for (size_t i = 0; i < steps; ++i) 
 	{
 		Colour currentColour{};
+		const auto channelBrightness = (180.0f / steps) * i;
 
-		for (size_t channel = 0; channel < targetColour.size(); ++channel) 
+		for (size_t channel = 0; channel < targetColour.size(); ++channel)
 		{
-			const auto channelPercent = (180.0f / steps) * i;
-			currentColour[channel] = targetColour[channel] * std::sin(channelPercent * (MATH_PI / 180.0f));
+			currentColour[channel] = targetColour[channel] * std::sin(channelBrightness * (MATH_PI / 180.0f));
 		}
 
 		Frame frame(Zone::ALL, currentColour, stepTimeMs);
