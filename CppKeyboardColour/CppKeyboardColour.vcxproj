@@ -163,6 +163,7 @@
     <ClInclude Include="ColourFactory.h" />
     <ClInclude Include="ColourShiftAnimation.h" />
     <ClInclude Include="ColourTransformAnimation.h" />
+    <ClInclude Include="CommandLine.h" />
     <ClInclude Include="DeviceIds.h" />
     <ClInclude Include="DeviceIdTranslator.h" />
     <ClInclude Include="FakeKeyboardCommunicator.h" />
