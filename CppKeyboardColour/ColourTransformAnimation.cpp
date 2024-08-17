@@ -1,17 +1,25 @@
 #include "stdafx.h"
+#include "ColourFactory.h"
 #include "ColourTransformAnimation.h"
-
+ 
 constexpr size_t STEPS = 40.0f;
 constexpr size_t FRAME_DURATION_MS = 25;
 
 ColourTransformAnimation::ColourTransformAnimation()
 {
-	const auto red = CreateColour(255, 0, 0);
-	const auto green = CreateColour(0, 255, 0);
-	const auto blue = CreateColour(0, 0, 255);
+	ColourFactory factory{};
 
+	const auto red = factory.Create(255, 0, 0);
+	const auto green = factory.Create(0, 255, 0);
+	const auto blue = factory.Create(0, 0, 255);
+
+	// Transform Red -> Green
 	this->GenerateColourTransform(red, green, STEPS, FRAME_DURATION_MS);
+
+	// Transform Green -> Blue
 	this->GenerateColourTransform(green, blue, STEPS, FRAME_DURATION_MS);
+
+	// Transform Blue -> Red
 	this->GenerateColourTransform(blue, red, STEPS, FRAME_DURATION_MS);
 }
 
@@ -33,17 +41,6 @@ bool ColourTransformAnimation::IsSupportedKB(KeyboardType kbType) const
 uint32_t ColourTransformAnimation::Size() const 
 {
 	return m_frames.Size();
-}
-
-Colour ColourTransformAnimation::CreateColour(uint8_t r, uint8_t g, uint8_t b) const
-{
-	Colour colour{};
-
-	colour[INDEX_COLOUR_RED] = r;
-	colour[INDEX_COLOUR_GREEN] = g;
-	colour[INDEX_COLOUR_BLUE] = b;
-
-	return colour;
 }
 
 size_t ColourTransformAnimation::CalculateDifference(size_t a, size_t b) const

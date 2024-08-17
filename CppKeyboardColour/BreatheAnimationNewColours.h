@@ -25,6 +25,5 @@ private:
 
 	void AddFrame(const Frame& frame) override;
 
-	Colour CreateColour(uint8_t red, uint8_t green, uint8_t blue);
 	void GenerateBreathe(const Colour& targetColour, uint32_t steps, uint32_t stepTimeMs);
 };

@@ -160,6 +160,7 @@
     <ClInclude Include="Animations.h" />
     <ClInclude Include="BreatheAnimation.h" />
     <ClInclude Include="BreatheAnimationNewColours.h" />
+    <ClInclude Include="ColourFactory.h" />
     <ClInclude Include="ColourShiftAnimation.h" />
     <ClInclude Include="ColourTransformAnimation.h" />
     <ClInclude Include="DeviceIds.h" />
@@ -178,6 +179,7 @@
     <ClInclude Include="KeyboardType.h" />
     <ClInclude Include="MathConstants.h" />
     <ClInclude Include="NamedPipe.h" />
+    <ClInclude Include="PulsatingBlinkAnimation.h" />
     <ClInclude Include="ScopedComPtr.h" />
     <ClInclude Include="Service.h" />
     <ClInclude Include="ServiceMain.h" />
@@ -199,6 +201,7 @@
     <ClCompile Include="Keyboard.cpp">
       <FileType>CppCode</FileType>
     </ClCompile>
+    <ClCompile Include="PulsatingBlinkAnimation.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

@@ -24,8 +24,6 @@ private:
 
 	FrameCollection m_frames{};
 
-	Colour CreateColour(uint8_t r, uint8_t g, uint8_t b) const;
-
 	size_t CalculateDifference(size_t a, size_t b) const;
 
 	void GenerateColourTransform(const Colour& startColour, const Colour& endColour, uint32_t steps, uint32_t stepTimeMs);

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "MathConstants.h"
 #include "BreatheAnimationNewColours.h"
+#include "ColourFactory.h"
 
 //
 // rgb(255 255, 0) yellow
@@ -18,26 +19,28 @@ constexpr size_t FRAME_DURATION_MS = 25;
 
 BreatheAnimationNewColours::BreatheAnimationNewColours() 
 {
+	ColourFactory factory{};
+	
 	// Breathe yellow
-	GenerateBreathe(CreateColour(255, 255, 0), STEPS, FRAME_DURATION_MS);
+	GenerateBreathe(factory.Create(255, 255, 0), STEPS, FRAME_DURATION_MS);
 
 	// Breathe red
-	GenerateBreathe(CreateColour(255, 0, 0), STEPS, FRAME_DURATION_MS);
+	GenerateBreathe(factory.Create(255, 0, 0), STEPS, FRAME_DURATION_MS);
 
 	// Breathe purple
-	GenerateBreathe(CreateColour(255, 0, 255), STEPS, FRAME_DURATION_MS);
+	GenerateBreathe(factory.Create(255, 0, 255), STEPS, FRAME_DURATION_MS);
 
 	// Breathe green
-	GenerateBreathe(CreateColour(0, 255, 0), STEPS, FRAME_DURATION_MS);
+	GenerateBreathe(factory.Create(0, 255, 0), STEPS, FRAME_DURATION_MS);
 
 	// Breathe white
-	GenerateBreathe(CreateColour(255, 255, 255), STEPS, FRAME_DURATION_MS);
+	GenerateBreathe(factory.Create(255, 255, 255), STEPS, FRAME_DURATION_MS);
 
 	// Breathe blue
-	GenerateBreathe(CreateColour(0, 0, 255), STEPS, FRAME_DURATION_MS);
+	GenerateBreathe(factory.Create(0, 0, 255), STEPS, FRAME_DURATION_MS);
 
 	// Breathe brown
-	GenerateBreathe(CreateColour(255, 120, 120), STEPS, FRAME_DURATION_MS);
+	GenerateBreathe(factory.Create(255, 120, 120), STEPS, FRAME_DURATION_MS);
 }
 
 std::optional<Frame> BreatheAnimationNewColours::GetFrame(uint32_t idx) 
@@ -58,17 +61,6 @@ uint32_t BreatheAnimationNewColours::Size() const
 void BreatheAnimationNewColours::AddFrame(const Frame& frame)
 {
 	m_frames.AddFrame(frame);
-}
-
-Colour BreatheAnimationNewColours::CreateColour(uint8_t red, uint8_t green, uint8_t blue) 
-{
-	Colour colour{};
-
-	colour[INDEX_COLOUR_RED] = red;
-	colour[INDEX_COLOUR_GREEN] = green;
-	colour[INDEX_COLOUR_BLUE] = blue;
-
-	return colour;
 }
 
 void BreatheAnimationNewColours::GenerateBreathe(const Colour& targetColour, uint32_t steps, uint32_t stepTimeMs)
