@@ -26,6 +26,4 @@ public:
 	}
 
 	~FakeKeyboardCommunicator() override = default;
-
-private:
 };

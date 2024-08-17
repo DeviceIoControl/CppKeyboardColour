@@ -23,4 +23,12 @@ public:
 	~DeviceIdRetriever() = default;
 
 private:
+
+	HRESULT LoadKeyboardDeviceComInterface()
+	{
+		// ICppKeyboardDevice* pKbDevice = nullptr;
+		// CoCreateInstance(__uuidof(CppKeyboardDevice), nullptr, CLSCTX::CLSCTX_LOCAL_SERVER, __uuidof(ICppKeyboardDevice), &pKbDevice);
+		return S_OK;
+	}
+
 };

@@ -7,6 +7,7 @@
 #include "ScopedComPtr.h"
 #include "IKeyboardCommunicator.h"
 
+#define CLEVO_WMI_OBJECT_NAME L"CLEVO_GET"
 #define CLEVO_WMI_KB_FUNCTION_NAME L"SetKBLED"
 #define CLEVO_WMI_INSTANCE_NAME L"CLEVO_GET.InstanceName='ACPI\\PNP0C14\\0_0'"
 
@@ -16,7 +17,7 @@ class WmiKBCommunicator
 public:
 	WmiKBCommunicator()
 	{
-		m_pClevoGetObject = WMI::Get()->GetWbemClassObject(L"CLEVO_GET");
+		m_pClevoGetObject = WMI::Get()->GetWbemClassObject(CLEVO_WMI_OBJECT_NAME);
 
 		IWbemClassObject* pDataParameter = nullptr;
 		m_pClevoGetObject->GetMethod(CLEVO_WMI_KB_FUNCTION_NAME, NULL, &pDataParameter, nullptr);
