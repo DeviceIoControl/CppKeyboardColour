@@ -15,6 +15,11 @@ ColourTransformAnimation::ColourTransformAnimation()
 	this->GenerateColourTransform(blue, red, STEPS, FRAME_DURATION_MS);
 }
 
+void ColourTransformAnimation::AddFrame(const Frame& frame) 
+{
+	return m_frames.AddFrame(frame);
+}
+
 std::optional<Frame> ColourTransformAnimation::GetFrame(uint32_t idx)
 {
 	return m_frames.GetFrame(idx);

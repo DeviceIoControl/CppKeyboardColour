@@ -19,6 +19,9 @@ public:
 	~ColourTransformAnimation() override = default;
 
 private:
+
+	void AddFrame(const Frame& frame) override;
+
 	FrameCollection m_frames{};
 
 	Colour CreateColour(uint8_t r, uint8_t g, uint8_t b) const;
