@@ -19,6 +19,8 @@ This is a cleaner, more organized, and efficient version of the initial program.
 
 ⚠️ **Warning:** The predefined fading theme may utilize **15% to 20% of CPU** at certain times. This will be optimized in future updates.
 
+⚠️ **Warning (2):** Ensure that the **InsydeDHCU.dll** file is in the same directory as `KBInsydeColours.exe` if you're using a **Single-Zone** keyboard.
+
 ---
 
 ## 🔧 Functional Commands
@@ -43,7 +45,7 @@ Navigate to the folder containing the executable files (e.g., `CppKeyboardColour
   ```bash
   .\KBInsydeColours.exe theme colourshift
   ```
-  🔄 Alternates colors for **RGB** keyboards (designed for 3-zone keyboards).
+  🔄 Alternates colors for **RGB** keyboards (designed for 3-zone keyboards, but compatible with 1-zone as well).
 
 - **New Colour Breathe:**  
   ```bash
@@ -76,7 +78,9 @@ Navigate to the folder containing the executable files (e.g., `CppKeyboardColour
    - Search for "Command Prompt" in the Windows search bar.
    - Right-click and select **Run as Administrator**.
 
-3. Run the desired command using the syntax:
+3. **Ensure that the **InsydeDHCU.dll** file is in the same directory as `KBInsydeColours.exe` if you're using a **Single-Zone** keyboard**.
+
+4. Run the desired command using the syntax:
    ```
    .\KBInsydeColours.exe theme [themeName]
    ```
@@ -93,6 +97,7 @@ To activate the breathing effect, run:
 
 - **Compatible CLEVO keyboards:**
   - **RGB 1-zone** or **3-zone** lighting.
+  - For **1-zone keyboards**, the **InsydeDHCU.dll** file must be in the same directory as `KBInsydeColours.exe`.
 - **Administrator Permissions:** Ensure the program is run as administrator to avoid WMI failures.
 
 ---
