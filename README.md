@@ -78,7 +78,7 @@ Navigate to the folder containing the executable files (e.g., `CppKeyboardColour
    - Search for "Command Prompt" in the Windows search bar.
    - Right-click and select **Run as Administrator**.
 
-3. **Ensure that the **InsydeDHCU.dll** file is in the same directory as `KBInsydeColours.exe` if you're using a **Single-Zone** keyboard**.
+3. **Again, be sure that the **InsydeDHCU.dll** file is in the same directory as `KBInsydeColours.exe` if you're using a **Single-Zone** keyboard**.
 
 4. Run the desired command using the syntax:
    ```
