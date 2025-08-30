@@ -8,7 +8,7 @@
 
 namespace Detail 
 {
-	using T_GetProductID = DWORD(*__stdcall)();
+	using T_GetProductID_PCI = DWORD(*__stdcall)();
 } // namespace Detail
 
 class DeviceIdRetriever
@@ -17,12 +17,19 @@ public:
 	DeviceIdRetriever() 
 	{
 		m_hGetProductDLL = LoadGetProductDLL();
-		m_pfnGetProductID = reinterpret_cast<Detail::T_GetProductID>(GetProcAddress(m_hGetProductDLL, "GetProductID"));
+		m_pfnGetProductID = reinterpret_cast<Detail::T_GetProductID_PCI>(GetProcAddress(m_hGetProductDLL, "GetProductID_PCI"));
 	}
 
 	uint32_t GetDeviceID() const
 	{
-		return m_pfnGetProductID ? m_pfnGetProductID() : 0xFFFFFFFF;
+		if (m_pfnGetProductID) 
+		{ 
+			// Call this function on a seperate thread to avoid causing COM issues on our thread
+			// as this DLL (GetProductID64!GetProductID_PCI specifically) is buggy.
+			return std::async(std::launch::async, DoGetProductID, m_pfnGetProductID).get();
+		}
+
+		return 0xFFFFFFFF;
 	}
 
 	~DeviceIdRetriever() 
@@ -33,7 +40,17 @@ public:
 
 private:
 	HMODULE m_hGetProductDLL = nullptr;
-	Detail::T_GetProductID m_pfnGetProductID = nullptr;
+	Detail::T_GetProductID_PCI m_pfnGetProductID = nullptr;
+
+	// NOTE: GetProductID64 (A.K.A GetProductdll.dll) is buggy and unintializes COM multiples times,
+	// even though only one call to CoInitialize succeeds.
+	static uint32_t DoGetProductID(const Detail::T_GetProductID_PCI& fnGetProductID) 
+	{
+		CoInitializeEx(nullptr, COINIT::COINIT_APARTMENTTHREADED);
+		CoInitializeEx(nullptr, COINIT::COINIT_APARTMENTTHREADED);
+
+		return fnGetProductID();
+	}
 
 	HMODULE LoadGetProductDLL()
 	{
