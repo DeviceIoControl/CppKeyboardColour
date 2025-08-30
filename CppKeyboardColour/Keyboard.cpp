@@ -11,7 +11,7 @@ Keyboard::Keyboard()
 	DeviceIdRetriever devIdRetriever{};
 	const auto deviceId = devIdRetriever.GetDeviceID();
 
-	std::cout << "Detected Device ID: " << deviceId << "\n";
+	std::cout << "Detected Device ID: 0x" << (void*)deviceId << "\n";
 
 	auto pDevIdTranslator = std::make_unique<DeviceIdTranslator>();
 	m_kbType = pDevIdTranslator->TranslateToKBType(deviceId);
