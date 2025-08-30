@@ -13,7 +13,7 @@ struct KB_PROPERTIES
 	KBCommunicatorType kbCommunicatorType;
 };
 
-// NOTE: Add more Device IDs as more keyboard support is requested.
+// NOTE: Add more Device IDs as more keyboards become supported.
 class DeviceIdTranslator 
 	: public IDeviceIdTranslator
 {

@@ -54,6 +54,14 @@ private:
 
 	HMODULE LoadGetProductDLL()
 	{
-		return LoadLibraryW(GET_PRODUCT_DLL);
+		auto const hModule = LoadLibraryW(GET_PRODUCT_DLL);
+
+		if (!hModule || hModule == INVALID_HANDLE_VALUE)
+		{
+			std::wcout << L"Cannot load " << GET_PRODUCT_DLL << L". Please ensure the DLL is within the same directory!\n";
+			std::exit(STATUS_DLL_NOT_FOUND);
+		}
+
+		return hModule;
 	}
 };

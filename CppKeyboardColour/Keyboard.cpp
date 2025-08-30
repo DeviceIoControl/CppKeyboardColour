@@ -76,6 +76,8 @@ void Keyboard::PlayAnimation(IAnimation& animation, bool bShouldLoop /*= true */
 		return;
 	}
 
+	std::wcout << L"Playing " << animation.GetName() << L" animation...\n";
+
 	do
 	{
 		this->Animate(animation);

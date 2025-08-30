@@ -5,6 +5,8 @@
 #include "stdafx.h"
 #include "IKeyboardCommunicator.h"
 
+#define INSYDE_DLL L"InsydeDCHU.dll"
+
 namespace Detail
 {
 	using T_SetDCHU_Data = DWORD(__stdcall*)(DWORD command, const UINT8* buffer, DWORD length);
@@ -17,7 +19,6 @@ class InsydeKBCommunicator
 public:
 	InsydeKBCommunicator()
 	{
-		m_hInsydeDHCU = LoadLibraryW(L"InsydeDCHU.dll");
 		m_pfnSetDCHU_Data = reinterpret_cast<Detail::T_SetDCHU_Data>(GetProcAddress(m_hInsydeDHCU, "SetDCHU_Data"));
 		m_pfnWriteAppSettings = reinterpret_cast<Detail::T_WriteAppSettings>(GetProcAddress(m_hInsydeDHCU, "WriteAppSettings"));
 	}
@@ -50,6 +51,19 @@ public:
 	bool SendKeyboardData(uint32_t data) override
 	{
 		return false;
+	}
+
+	HMODULE LoadInsydeDCHU_DLL() 
+	{
+		auto const hModule = LoadLibraryW(INSYDE_DLL);
+
+		if (!hModule || hModule == INVALID_HANDLE_VALUE)
+		{
+			std::wcout << L"Cannot load " << INSYDE_DLL << L". Please ensure the DLL is within the same directory!\n";
+			std::exit(STATUS_DLL_NOT_FOUND);
+		}
+
+		return hModule;
 	}
 
 	~InsydeKBCommunicator() override
