@@ -1,3 +1,5 @@
+// Created by DeviceIoControl
+
 #include "stdafx.h"
 #include "ColourFactory.h"
 #include "ColourTransformAnimation.h"

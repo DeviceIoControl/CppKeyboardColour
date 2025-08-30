@@ -1,3 +1,5 @@
+// Created by DeviceIoControl
+
 #include "stdafx.h"
 #include "PulsatingBlinkAnimation.h"
 #include "ColourFactory.h"
