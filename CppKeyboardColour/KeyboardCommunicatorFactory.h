@@ -4,7 +4,6 @@
 
 #include "stdafx.h"
 #include "xstl.h"
-#include "DeviceIds.h"
 #include "IKeyboardCommunicator.h"
 
 #include "WmiKBCommunicator.h"
@@ -19,7 +18,6 @@ public:
 	KeyboardCommunicatorFactory(std::unique_ptr<IDeviceIdTranslator> pDeviceIdTranslator)
 		: m_pDeviceIdTranslator(std::move(pDeviceIdTranslator))
 	{
-		this->InitialiseKBCommunicators();
 	}
 
 	IKeyboardCommunicatorPtr Create(uint32_t deviceId)
@@ -29,20 +27,24 @@ public:
 			return nullptr;
 		}
 
-		return m_kbComms[xstd::to_underlying(m_pDeviceIdTranslator->DeviceIdToKBCommunicatorType(deviceId))];
+		switch (m_pDeviceIdTranslator->DeviceIdToKBCommunicatorType(deviceId)) 
+		{
+		case KBCommunicatorType::None:
+			return nullptr;
+
+		case KBCommunicatorType::Fake:
+			return std::make_shared<FakeKeyboardCommunicator>();
+
+		case KBCommunicatorType::Wmi:
+			return std::make_shared<WmiKBCommunicator>();
+
+		case KBCommunicatorType::Insyde:
+			return std::make_shared<InsydeKBCommunicator>();
+		}
 	}
 	
 	~KeyboardCommunicatorFactory() = default;
 
 private:
-	std::array<IKeyboardCommunicatorPtr, 4> m_kbComms{};
 	std::unique_ptr<IDeviceIdTranslator> m_pDeviceIdTranslator{};
-	
-	void InitialiseKBCommunicators()
-	{
-		m_kbComms[xstd::to_underlying(KBCommunicatorType::None)] = nullptr;
-		m_kbComms[xstd::to_underlying(KBCommunicatorType::Wmi)] = std::make_shared<WmiKBCommunicator>();
-		m_kbComms[xstd::to_underlying(KBCommunicatorType::Insyde)] = std::make_shared<InsydeKBCommunicator>();
-		m_kbComms[xstd::to_underlying(KBCommunicatorType::Fake)] = std::make_shared<FakeKeyboardCommunicator>();
-	}
 };
