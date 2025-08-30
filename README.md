@@ -45,7 +45,7 @@ Navigate to the folder containing the executable files (e.g., `CppKeyboardColour
   ```bash
   .\CLEVO_KeyboardColour.exe theme colourshift
   ```
-  🔄 Alternates colors for **RGB** keyboards (designed for 3-zone keyboards, but compatible with 1-zone as well).
+  🔄 Alternates colors for **RGB** keyboards (designed for 3-zone keyboards only!).
 
 - **Fresh Breathe:**  
   ```bash
