@@ -7,6 +7,9 @@
 class IAnimation 
 {
 public:
+
+	virtual std::wstring GetName() const = 0;
+
 	virtual std::optional<Frame> GetFrame(uint32_t idx) = 0;
 
 	virtual bool IsSupportedKB(KeyboardType kbType) const = 0;

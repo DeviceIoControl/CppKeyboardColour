@@ -5,45 +5,45 @@
 #include "stdafx.h"
 #include "DeviceIds.h"
 #include "KeyboardType.h"
+#include "IDeviceIdTranslator.h"
 
-class DeviceIdTranslator
+struct KB_PROPERTIES
+{
+	KeyboardType kbType;
+	KBCommunicatorType kbCommunicatorType;
+};
+
+// NOTE: Add more Device IDs as more keyboard support is requested.
+class DeviceIdTranslator 
+	: public IDeviceIdTranslator
 {
 public:
-	DeviceIdTranslator() = default;
-
-	KeyboardType TranslateToKBType(uint32_t deviceId) const
+	DeviceIdTranslator() 
 	{
-		if (IsTripleZoneKeyboard(deviceId))
-		{
-			return KeyboardType::TRIPLE_ZONE;
-		}
+		m_deviceIdToKBProps[DEVICE_ID_NP50SXX].kbType = KeyboardType::SINGLE_ZONE;
+		m_deviceIdToKBProps[DEVICE_ID_NP50SXX].kbCommunicatorType = KBCommunicatorType::Insyde;
 
-		if (IsSingleZoneKeyboard(deviceId))
-		{
-			return KeyboardType::SINGLE_ZONE;
-		}
+		m_deviceIdToKBProps[DEVICE_ID_P650RS_G].kbType = KeyboardType::TRIPLE_ZONE;
+		m_deviceIdToKBProps[DEVICE_ID_P650RS_G].kbCommunicatorType = KBCommunicatorType::Wmi;
 
-		return KeyboardType::NONE;
+		m_deviceIdToKBProps[DEVICE_ID_FAKE].kbType = KeyboardType::TRIPLE_ZONE;
+		m_deviceIdToKBProps[DEVICE_ID_FAKE].kbCommunicatorType = KBCommunicatorType::Fake;
 	}
 
-	~DeviceIdTranslator() = default;
+	KeyboardType TranslateToKBType(uint32_t deviceId) const override
+	{
+		auto const result = m_deviceIdToKBProps.find(deviceId);
+		return (result != m_deviceIdToKBProps.cend()) ? result->second.kbType : KeyboardType::NONE;
+	}
+
+	KBCommunicatorType DeviceIdToKBCommunicatorType(uint32_t deviceId) const override
+	{
+		auto const result = m_deviceIdToKBProps.find(deviceId);
+		return (result != m_deviceIdToKBProps.cend()) ? result->second.kbCommunicatorType : KBCommunicatorType::None;
+	}
+
+	~DeviceIdTranslator() override = default;
 
 private:
-	inline bool IsSingleZoneKeyboard(uint32_t deviceId) const
-	{
-		static const std::set<uint32_t> s_singleZoneKeyboards = {
-			DEVICE_ID_NP50SXX
-		};
-
-		return s_singleZoneKeyboards.find(deviceId) != s_singleZoneKeyboards.cend();
-	}
-
-	inline bool IsTripleZoneKeyboard(uint32_t deviceId) const
-	{
-		static const std::set<uint32_t> s_tripleZoneKeyboards = {
-			DEVICE_ID_P650RS_G
-		};
-
-		return s_tripleZoneKeyboards.find(deviceId) != s_tripleZoneKeyboards.cend();
-	}
+	std::map<uint32_t, KB_PROPERTIES> m_deviceIdToKBProps{};
 };

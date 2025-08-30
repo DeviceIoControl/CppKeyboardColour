@@ -171,6 +171,7 @@
     <ClInclude Include="Colour.h" />
     <ClInclude Include="Frame.h" />
     <ClInclude Include="IAnimation.h" />
+    <ClInclude Include="IDeviceIdTranslator.h" />
     <ClInclude Include="IKeyboard.h" />
     <ClInclude Include="IKeyboardCommunicator.h" />
     <ClInclude Include="Keyboard.h" />
@@ -190,6 +191,7 @@
     <ClInclude Include="Test.h" />
     <ClInclude Include="WbemService.h" />
     <ClInclude Include="WmiKBCommunicator.h" />
+    <ClInclude Include="xstl.h" />
     <ClInclude Include="Zone.h" />
   </ItemGroup>
   <ItemGroup>

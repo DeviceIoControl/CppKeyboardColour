@@ -13,6 +13,8 @@ class ColourShiftAnimation
 public:
 	ColourShiftAnimation();
 
+	std::wstring GetName() const override;
+
 	std::optional<Frame> GetFrame(uint32_t idx) override;
 
 	// This animation requires 3-Zone keyboards.

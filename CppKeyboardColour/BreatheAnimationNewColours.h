@@ -6,11 +6,13 @@
 #include "IAnimation.h"
 #include "FrameCollection.h"
 
-class BreatheAnimationNewColours 
+class FreshBreatheAnimation 
 	: public IAnimation
 {
 public:
-	BreatheAnimationNewColours();
+	FreshBreatheAnimation();
+
+	std::wstring GetName() const override;
 
 	std::optional<Frame> GetFrame(uint32_t idx) override;
 
@@ -18,7 +20,7 @@ public:
 
 	uint32_t Size() const override;
 
-	~BreatheAnimationNewColours() override = default;
+	~FreshBreatheAnimation() override = default;
 
 private:
 	FrameCollection m_frames;

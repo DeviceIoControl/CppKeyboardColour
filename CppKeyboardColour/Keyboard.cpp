@@ -9,12 +9,14 @@
 Keyboard::Keyboard()
 {
 	DeviceIdRetriever devIdRetriever{};
-	DeviceIdTranslator devIdTranslator{};
-	KeyboardCommunicatorFactory kbCommFactory{};
-
 	const auto deviceId = devIdRetriever.GetDeviceID();
 
-	m_kbType = devIdTranslator.TranslateToKBType(deviceId);
+	std::cout << "Detected Device ID: " << deviceId << "\n";
+
+	auto pDevIdTranslator = std::make_unique<DeviceIdTranslator>();
+	m_kbType = pDevIdTranslator->TranslateToKBType(deviceId);
+
+	KeyboardCommunicatorFactory kbCommFactory(std::move(pDevIdTranslator));
 	m_ptrKbComms = kbCommFactory.Create(deviceId);
 }
 
@@ -55,8 +57,8 @@ void Keyboard::Animate(IAnimation& animation)
 		if (const auto frame = animation.GetFrame(i))
 		{
 			this->SetColour(
-				frame->colour[INDEX_COLOUR_RED], 
-				frame->colour[INDEX_COLOUR_GREEN], 
+				frame->colour[INDEX_COLOUR_RED],
+				frame->colour[INDEX_COLOUR_GREEN],
 				frame->colour[INDEX_COLOUR_BLUE],
 				frame->zone
 			);
@@ -66,14 +68,17 @@ void Keyboard::Animate(IAnimation& animation)
 	}
 }
 
-void Keyboard::PlayAnimation(IAnimation& animation, bool bShouldLoop /*= true*/)
+void Keyboard::PlayAnimation(IAnimation& animation, bool bShouldLoop /*= true */)
 {
-	if (animation.IsSupportedKB(this->GetKBType()))
+	if (!animation.IsSupportedKB(this->GetKBType()))
 	{
-		do
-		{
-			this->Animate(animation);
-
-		} while (bShouldLoop);
+		std::wcout << animation.GetName() << L" animation is not supported on this keyboard.\n";
+		return;
 	}
+
+	do
+	{
+		this->Animate(animation);
+
+	} while (bShouldLoop);
 }

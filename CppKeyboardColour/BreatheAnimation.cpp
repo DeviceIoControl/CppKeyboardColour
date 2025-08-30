@@ -14,6 +14,11 @@ BreatheAnimation::BreatheAnimation()
 	this->GeneratePhase3();
 }
 
+std::wstring BreatheAnimation::GetName() const
+{
+	return L"Breathe";
+}
+
 void BreatheAnimation::AddFrame(const Frame& frame)
 {
 	m_frames.AddFrame(frame);

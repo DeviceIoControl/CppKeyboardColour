@@ -3,32 +3,40 @@
 // Created by DeviceIoControl
 
 #include "stdafx.h"
-#include "DeviceIds.h"
+
+#define GET_PRODUCT_DLL L"GetProductID64.dll"
+
+namespace Detail 
+{
+	using T_GetProductID = DWORD(*__stdcall)();
+} // namespace Detail
 
 class DeviceIdRetriever
 {
 public:
-	DeviceIdRetriever() = default;
-
-	// IMPORTANT: Hard-coded until we have a stable method of retrieving this.
-	uint32_t GetDeviceID()
+	DeviceIdRetriever() 
 	{
-		return DEVICE_ID_NP50SXX;
-		//return DEVICE_ID_P650RS_G;
-
-		// For debugging purposes only.
-		// return DEVICE_ID_FAKE;
+		m_hGetProductDLL = LoadGetProductDLL();
+		m_pfnGetProductID = reinterpret_cast<Detail::T_GetProductID>(GetProcAddress(m_hGetProductDLL, "GetProductID"));
 	}
 
-	~DeviceIdRetriever() = default;
+	uint32_t GetDeviceID() const
+	{
+		return m_pfnGetProductID ? m_pfnGetProductID() : 0xFFFFFFFF;
+	}
+
+	~DeviceIdRetriever() 
+	{
+		m_pfnGetProductID = nullptr;
+		FreeLibrary(m_hGetProductDLL);
+	}
 
 private:
+	HMODULE m_hGetProductDLL = nullptr;
+	Detail::T_GetProductID m_pfnGetProductID = nullptr;
 
-	HRESULT LoadKeyboardDeviceComInterface()
+	HMODULE LoadGetProductDLL()
 	{
-		// ICppKeyboardDevice* pKbDevice = nullptr;
-		// CoCreateInstance(__uuidof(CppKeyboardDevice), nullptr, CLSCTX::CLSCTX_LOCAL_SERVER, __uuidof(ICppKeyboardDevice), &pKbDevice);
-		return S_OK;
+		return LoadLibraryW(GET_PRODUCT_DLL);
 	}
-
 };

@@ -24,6 +24,11 @@ PulsatingBlinkAnimation::PulsatingBlinkAnimation()
 	this->GenerateBlink(rosePink, BLINK_TIME_MS);
 }
 
+std::wstring PulsatingBlinkAnimation::GetName() const 
+{
+	return L"Pulsating Blink";
+}
+
 std::optional<Frame> PulsatingBlinkAnimation::GetFrame(uint32_t idx)
 {
 	return m_frames.GetFrame(idx);

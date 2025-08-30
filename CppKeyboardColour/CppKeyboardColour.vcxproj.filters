@@ -117,6 +117,12 @@
     <ClInclude Include="CommandLine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="xstl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDeviceIdTranslator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

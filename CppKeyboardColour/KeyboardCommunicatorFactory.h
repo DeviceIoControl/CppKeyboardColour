@@ -3,6 +3,7 @@
 #pragma once
 
 #include "stdafx.h"
+#include "xstl.h"
 #include "DeviceIds.h"
 #include "IKeyboardCommunicator.h"
 
@@ -10,44 +11,37 @@
 #include "InsydeKBCommunicator.h"
 #include "FakeKeyboardCommunicator.h"
 
-#define KB_COMM_INDEX_FAKE 0
-#define KB_COMM_INDEX_WMI 1
-#define KB_COMM_INDEX_INSYDE 2
+#include "IDeviceIdTranslator.h"
 
 class KeyboardCommunicatorFactory 
 {
 public:
-	KeyboardCommunicatorFactory() 
+	KeyboardCommunicatorFactory(std::unique_ptr<IDeviceIdTranslator> pDeviceIdTranslator)
+		: m_pDeviceIdTranslator(std::move(pDeviceIdTranslator))
 	{
-		this->CreateKBCommunicators();
-		
-		m_deviceToKbCommMap[DEVICE_ID_FAKE] = m_kbComms[KB_COMM_INDEX_FAKE];
-		m_deviceToKbCommMap[DEVICE_ID_P650RS_G] = m_kbComms[KB_COMM_INDEX_WMI];
-		m_deviceToKbCommMap[DEVICE_ID_NP50SXX] = m_kbComms[KB_COMM_INDEX_INSYDE];
 	}
 
 	IKeyboardCommunicatorPtr Create(uint32_t deviceId)
 	{
-		const auto kbCommIterator = m_deviceToKbCommMap.find(deviceId);
-
-		if (kbCommIterator != m_deviceToKbCommMap.cend())
+		if (!m_pDeviceIdTranslator) 
 		{
-			return kbCommIterator->second;
+			return nullptr;
 		}
 
-		return nullptr;
+		return m_kbComms[xstd::to_underlying(m_pDeviceIdTranslator->DeviceIdToKBCommunicatorType(deviceId))];
 	}
 	
 	~KeyboardCommunicatorFactory() = default;
 
 private:
-	std::array<IKeyboardCommunicatorPtr, 3> m_kbComms{};
-	std::unordered_map<uint32_t, IKeyboardCommunicatorPtr> m_deviceToKbCommMap{};
-
+	std::array<IKeyboardCommunicatorPtr, 4> m_kbComms{};
+	std::unique_ptr<IDeviceIdTranslator> m_pDeviceIdTranslator{};
+	
 	void CreateKBCommunicators()
 	{
-		m_kbComms[KB_COMM_INDEX_WMI] = std::make_shared<WmiKBCommunicator>();
-		m_kbComms[KB_COMM_INDEX_INSYDE] = std::make_shared<InsydeKBCommunicator>();
-		m_kbComms[KB_COMM_INDEX_FAKE] = std::make_shared<FakeKeyboardCommunicator>();
+		m_kbComms[xstd::to_underlying(KBCommunicatorType::None)] = nullptr;
+		m_kbComms[xstd::to_underlying(KBCommunicatorType::Wmi)] = std::make_shared<WmiKBCommunicator>();
+		m_kbComms[xstd::to_underlying(KBCommunicatorType::Insyde)] = std::make_shared<InsydeKBCommunicator>();
+		m_kbComms[xstd::to_underlying(KBCommunicatorType::Fake)] = std::make_shared<FakeKeyboardCommunicator>();
 	}
 };

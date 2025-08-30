@@ -25,6 +25,11 @@ ColourShiftAnimation::ColourShiftAnimation()
 	this->GenerateDelayFrame(frame3.value());
 }
 
+std::wstring ColourShiftAnimation::GetName() const
+{
+	return L"Colour Shift";
+}
+
 void ColourShiftAnimation::AddFrame(const Frame& frame) 
 {
 	m_frames.AddFrame(frame);

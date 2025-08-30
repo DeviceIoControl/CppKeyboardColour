@@ -17,7 +17,7 @@
 constexpr size_t STEPS = 40.0f;
 constexpr size_t FRAME_DURATION_MS = 25;
 
-BreatheAnimationNewColours::BreatheAnimationNewColours() 
+FreshBreatheAnimation::FreshBreatheAnimation()
 {
 	ColourFactory factory{};
 	
@@ -43,27 +43,32 @@ BreatheAnimationNewColours::BreatheAnimationNewColours()
 	GenerateBreathe(factory.Create(255, 120, 120), STEPS, FRAME_DURATION_MS);
 }
 
-std::optional<Frame> BreatheAnimationNewColours::GetFrame(uint32_t idx) 
+std::wstring FreshBreatheAnimation::GetName() const
+{
+	return L"Fresh Breathe";
+}
+
+std::optional<Frame> FreshBreatheAnimation::GetFrame(uint32_t idx)
 {
 	return m_frames.GetFrame(idx);
 }
 
-bool BreatheAnimationNewColours::IsSupportedKB(KeyboardType kbType) const 
+bool FreshBreatheAnimation::IsSupportedKB(KeyboardType kbType) const
 {
 	return (kbType != KeyboardType::PER_KEY && kbType != KeyboardType::NONE);
 }
 
-uint32_t BreatheAnimationNewColours::Size() const 
+uint32_t FreshBreatheAnimation::Size() const
 {
 	return m_frames.Size();
 }
 
-void BreatheAnimationNewColours::AddFrame(const Frame& frame)
+void FreshBreatheAnimation::AddFrame(const Frame& frame)
 {
 	m_frames.AddFrame(frame);
 }
 
-void BreatheAnimationNewColours::GenerateBreathe(const Colour& targetColour, uint32_t steps, uint32_t stepTimeMs)
+void FreshBreatheAnimation::GenerateBreathe(const Colour& targetColour, uint32_t steps, uint32_t stepTimeMs)
 {
 	for (size_t i = 0; i < steps; ++i) 
 	{

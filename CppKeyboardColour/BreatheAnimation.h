@@ -13,6 +13,8 @@ class BreatheAnimation
 public:
 	BreatheAnimation();
 
+	std::wstring GetName() const override;
+
 	std::optional<Frame> GetFrame(uint32_t idx) override;
 
 	bool IsSupportedKB(KeyboardType kbType) const override;
