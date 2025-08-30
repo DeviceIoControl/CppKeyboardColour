@@ -19,6 +19,8 @@ class InsydeKBCommunicator
 public:
 	InsydeKBCommunicator()
 	{
+		m_hInsydeDHCU = LoadInsydeDCHU_DLL();
+
 		m_pfnSetDCHU_Data = reinterpret_cast<Detail::T_SetDCHU_Data>(GetProcAddress(m_hInsydeDHCU, "SetDCHU_Data"));
 		m_pfnWriteAppSettings = reinterpret_cast<Detail::T_WriteAppSettings>(GetProcAddress(m_hInsydeDHCU, "WriteAppSettings"));
 	}
