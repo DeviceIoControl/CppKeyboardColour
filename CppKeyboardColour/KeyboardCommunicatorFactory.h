@@ -19,6 +19,7 @@ public:
 	KeyboardCommunicatorFactory(std::unique_ptr<IDeviceIdTranslator> pDeviceIdTranslator)
 		: m_pDeviceIdTranslator(std::move(pDeviceIdTranslator))
 	{
+		this->InitialiseKBCommunicators();
 	}
 
 	IKeyboardCommunicatorPtr Create(uint32_t deviceId)
@@ -37,7 +38,7 @@ private:
 	std::array<IKeyboardCommunicatorPtr, 4> m_kbComms{};
 	std::unique_ptr<IDeviceIdTranslator> m_pDeviceIdTranslator{};
 	
-	void CreateKBCommunicators()
+	void InitialiseKBCommunicators()
 	{
 		m_kbComms[xstd::to_underlying(KBCommunicatorType::None)] = nullptr;
 		m_kbComms[xstd::to_underlying(KBCommunicatorType::Wmi)] = std::make_shared<WmiKBCommunicator>();
