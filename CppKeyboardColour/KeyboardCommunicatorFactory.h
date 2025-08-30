@@ -29,9 +29,6 @@ public:
 
 		switch (m_pDeviceIdTranslator->DeviceIdToKBCommunicatorType(deviceId)) 
 		{
-		case KBCommunicatorType::None:
-			return nullptr;
-
 		case KBCommunicatorType::Fake:
 			return std::make_shared<FakeKeyboardCommunicator>();
 
@@ -41,6 +38,8 @@ public:
 		case KBCommunicatorType::Insyde:
 			return std::make_shared<InsydeKBCommunicator>();
 		}
+
+		return nullptr;
 	}
 	
 	~KeyboardCommunicatorFactory() = default;
