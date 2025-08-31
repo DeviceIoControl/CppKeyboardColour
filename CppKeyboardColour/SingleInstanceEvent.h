@@ -2,12 +2,11 @@
 
 #include "stdafx.h"
 
+#define SINGLE_INSTANCE_NAME L"Global\\CLEVO_KBC_INSTANCE"
+
 bool IsSingleInstance() 
 {
-	HANDLE hInstance = CreateEventExW(nullptr, L"Global\\CLEVO_KBC_INSTANCE", CREATE_EVENT_INITIAL_SET, EVENT_ALL_ACCESS);
-	auto const bIsSingleInstance = (GetLastError() == ERROR_ALREADY_EXISTS) ? false : true;
-
-	CloseHandle(hInstance);
-
-	return bIsSingleInstance;
+	// NOTE: Do not close this handle. We want to leak this as it will last the entirely of the programs lifetime.
+	HANDLE hInstance = CreateEventExW(nullptr, SINGLE_INSTANCE_NAME, CREATE_EVENT_INITIAL_SET, EVENT_ALL_ACCESS);
+	return !(GetLastError() == ERROR_ALREADY_EXISTS);
 }
