@@ -28,7 +28,7 @@ void Keyboard::SetColour(uint8_t r, uint8_t g, uint8_t b, Zone zone)
 	colour[INDEX_COLOUR_GREEN] = g;
 	colour[INDEX_COLOUR_BLUE] = b;
 
-	m_ptrKbComms->SetKeyboardColour(zone, colour);
+	m_ptrKbComms->SetKBColour(zone, colour);
 }
 
 KeyboardType Keyboard::GetKBType() const
@@ -36,18 +36,19 @@ KeyboardType Keyboard::GetKBType() const
 	return m_kbType;
 };
 
-void Keyboard::SysAnimation(SystemAnimation animation)
+void Keyboard::SendCode(uint32_t animation)
 {
-	switch (animation)
-	{
-	case SystemAnimation::KB_MODE_OFF:
-		return this->SetColour(0x00, 0x00, 0x00, Zone::ALL);
+	m_ptrKbComms->SendKBCode(static_cast<uint32_t>(animation));
+}
 
-	case SystemAnimation::KB_MODE_STANDARD:
-		return this->SetColour(0x00, 0x00, 0xFF, Zone::ALL);
-	}
+void Keyboard::SetBacklightOff()
+{
+	this->SetColour(0x00, 0x00, 0x00, Zone::ALL);
+}
 
-	m_ptrKbComms->SendKeyboardData(static_cast<uint32_t>(animation));
+void Keyboard::SetBacklightOn()
+{
+	this->SetColour(0x00, 0x00, 0xFF, Zone::ALL);
 }
 
 void Keyboard::Animate(IAnimation& animation)

@@ -10,9 +10,9 @@ class FakeKeyboardCommunicator
 public:
 	FakeKeyboardCommunicator() = default;
 
-	bool SendKeyboardData(uint32_t data) override;
+	bool SendKBCode(uint32_t code) override;
 
-	bool SetKeyboardColour(Zone zone, const Colour& colour) override;
+	bool SetKBColour(Zone zone, const Colour& colour) override;
 
 	~FakeKeyboardCommunicator() override = default;
 };

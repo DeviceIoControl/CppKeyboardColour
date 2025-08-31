@@ -10,12 +10,10 @@ class WmiKBCommunicator
 {
 public:
 	WmiKBCommunicator();
-
-	bool SetKeyboardColour(Zone zone, const Colour& colour) override;
-
-	bool SendKeyboardData(uint32_t data) override;
-
 	~WmiKBCommunicator() = default;
+
+	bool SetKBColour(Zone zone, const Colour& colour) override;
+	bool SendKBCode(uint32_t code) override;
 
 private:
 	ScopedComPtr<IWbemClassObject> m_pDataParameter;

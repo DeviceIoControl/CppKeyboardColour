@@ -10,8 +10,8 @@
 class IKeyboardCommunicator
 {
 public:
-	virtual bool SendKeyboardData(uint32_t data) = 0;
-	virtual bool SetKeyboardColour(Zone zone, const Colour& colour) = 0;
+	virtual bool SendKBCode(uint32_t code) = 0;
+	virtual bool SetKBColour(Zone zone, const Colour& colour) = 0;
 
 	virtual ~IKeyboardCommunicator() = default;
 };

@@ -80,7 +80,7 @@ void ColourTransformAnimation::GenerateColourTransform(const Colour& startColour
 			currentColour[channel] = endColour[channel];
 		}
 
-		Frame currentFrame(Zone::ALL, currentColour, stepTimeMs);
+		const Frame currentFrame(Zone::ALL, currentColour, stepTimeMs);
 		m_frames.AddFrame(currentFrame);
 	}
 }

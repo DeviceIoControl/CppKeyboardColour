@@ -35,6 +35,19 @@ Navigate to the folder containing the executable files (e.g., `CppKeyboardColour
 ```
 
 ### 🎨 Supported Themes:
+
+- **Turn Backlight Off:**  
+  ```bash
+  .\CLEVO_KeyboardColour.exe theme off
+  ```
+  🖤 Turns off the keyboard backlight.
+
+**Default Backlight:**
+  ```bash
+  .\CLEVO_KeyboardColour.exe theme default
+  ```
+  💙 Enables the default keyboard backlight colour (Solid Blue).
+
 - **Breathing Effect:**  
   ```bash
   .\CLEVO_KeyboardColour.exe theme breathe
@@ -51,7 +64,7 @@ Navigate to the folder containing the executable files (e.g., `CppKeyboardColour
   ```bash
   .\CLEVO_KeyboardColour.exe theme freshbreathe
   ```
-  🌀 A custom theme designed for **@mehrshad315**, featuring an additional blue tone.
+  🌀 A custom theme designed by **@mehrshad315**, featuring an additional blue tone.
 
 - **Colour Transform (Rainbow Sweep):**  
   ```bash

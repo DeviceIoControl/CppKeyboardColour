@@ -13,7 +13,7 @@ InsydeKBCommunicator::InsydeKBCommunicator()
 	m_pfnWriteAppSettings = reinterpret_cast<Detail::T_WriteAppSettings>(GetProcAddress(m_hInsydeDHCU, "WriteAppSettings"));
 }
 
-bool InsydeKBCommunicator::SetKeyboardColour(Zone zone, const Colour& colour) 
+bool InsydeKBCommunicator::SetKBColour(Zone zone, const Colour& colour) 
 {
 	if (zone != Zone::ALL)
 	{
@@ -38,7 +38,7 @@ bool InsydeKBCommunicator::SetKeyboardColour(Zone zone, const Colour& colour)
 }
 
 // Unsupported for now.
-bool InsydeKBCommunicator::SendKeyboardData(uint32_t data)
+bool InsydeKBCommunicator::SendKBCode(uint32_t /* code */)
 {
 	return false;
 }

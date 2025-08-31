@@ -15,13 +15,12 @@ class InsydeKBCommunicator
 {
 public:
 	InsydeKBCommunicator();
+	~InsydeKBCommunicator() override;
 
-	bool SetKeyboardColour(Zone zone, const Colour& colour) override;
+	bool SetKBColour(Zone zone, const Colour& colour) override;
 
 	// Unsupported for now.
-	bool SendKeyboardData(uint32_t data) override;
-
-	~InsydeKBCommunicator() override;
+	bool SendKBCode(uint32_t data) override;
 
 private:
 	HMODULE m_hInsydeDHCU = nullptr;

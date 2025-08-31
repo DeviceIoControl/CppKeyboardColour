@@ -18,7 +18,7 @@ WmiKBCommunicator::WmiKBCommunicator()
 	m_pDataParameter.Reset(pDataParameter);
 }
 
-bool WmiKBCommunicator::SetKeyboardColour(Zone zone, const Colour& colour)
+bool WmiKBCommunicator::SetKBColour(Zone zone, const Colour& colour)
 {
 	if (zone == Zone::ALL)
 	{
@@ -32,7 +32,7 @@ bool WmiKBCommunicator::SetKeyboardColour(Zone zone, const Colour& colour)
 				0xF0 + i
 			};
 
-			this->SendKeyboardData(*reinterpret_cast<const uint32_t*>(parameterData.data()));
+			this->SendKBCode(*reinterpret_cast<const uint32_t*>(parameterData.data()));
 		}
 
 		return true;
@@ -47,17 +47,17 @@ bool WmiKBCommunicator::SetKeyboardColour(Zone zone, const Colour& colour)
 			0xF0 + static_cast<uint16_t>(zone)
 		};
 
-		return this->SendKeyboardData(*reinterpret_cast<const uint32_t*>(parameterData.data()));
+		return this->SendKBCode(*reinterpret_cast<const uint32_t*>(parameterData.data()));
 	}
 
 	return false;
 }
 
-bool WmiKBCommunicator::SendKeyboardData(uint32_t data)
+bool WmiKBCommunicator::SendKBCode(uint32_t code)
 {
 	VARIANT parameters = { 0 };
 	parameters.vt = VT_I4;
-	parameters.uintVal = data;
+	parameters.uintVal = code;
 
 	const auto hr = m_pDataParameter->Put((BSTR)L"Data", NULL, &parameters, CIM_UINT32);
 	std::ignore = WMI::Get()->ExecuteMethod(CLEVO_WMI_INSTANCE_NAME, CLEVO_WMI_KB_FUNCTION_NAME, m_pDataParameter.Get());
