@@ -36,13 +36,13 @@ Navigate to the folder containing the executable files (e.g., `CppKeyboardColour
 
 ### 🎨 Supported Themes:
 
-**Turn Backlight Off:**  
+- **Turn Backlight Off:**  
   ```bash
   .\CLEVO_KeyboardColour.exe theme off
   ```
   🖤 Turns off the keyboard backlight.
 
-**Default Backlight:**
+- **Default Backlight:**
   ```bash
   .\CLEVO_KeyboardColour.exe theme default
   ```
