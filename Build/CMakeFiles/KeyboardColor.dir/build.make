@@ -161,6 +161,7 @@ KeyboardColor.exe: CMakeFiles/KeyboardColor.dir/build.make
 KeyboardColor.exe: D:/Qt/6.9.2/mingw_64/lib/libQt6Widgets.a
 KeyboardColor.exe: D:/Qt/6.9.2/mingw_64/lib/libQt6Gui.a
 KeyboardColor.exe: D:/Qt/6.9.2/mingw_64/lib/libQt6Core.a
+KeyboardColor.exe: D:/Qt/6.9.2/mingw_64/lib/libQt6EntryPoint.a
 KeyboardColor.exe: CMakeFiles/KeyboardColor.dir/linkLibs.rsp
 KeyboardColor.exe: CMakeFiles/KeyboardColor.dir/objects1.rsp
 KeyboardColor.exe: CMakeFiles/KeyboardColor.dir/link.txt

@@ -36,6 +36,9 @@
 			"D:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeFindDependencyMacro.cmake",
 			"D:/Qt/6.9.2/mingw_64/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake",
 			"D:/Qt/6.9.2/mingw_64/lib/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake",
+			"D:/Qt/6.9.2/mingw_64/lib/cmake/Qt6EntryPointPrivate/Qt6EntryPointPrivateTargets.cmake",
+			"D:/Qt/6.9.2/mingw_64/lib/cmake/Qt6EntryPointPrivate/Qt6EntryPointPrivateConfig.cmake",
+			"D:/Qt/6.9.2/mingw_64/lib/cmake/Qt6Core/Qt6CoreDependencies.cmake",
 			"D:/Qt/6.9.2/mingw_64/lib/cmake/Qt6Gui/Qt6GuiTargets.cmake",
 			"D:/Qt/6.9.2/mingw_64/lib/cmake/Qt6Gui/Qt6GuiConfig.cmake"
 		],
@@ -47,7 +50,7 @@
 			{
 				"command" : 3,
 				"file" : 1,
-				"line" : 24,
+				"line" : 22,
 				"parent" : 0
 			},
 			{
@@ -71,13 +74,13 @@
 			{
 				"command" : 4,
 				"file" : 1,
-				"line" : 32,
+				"line" : 28,
 				"parent" : 0
 			},
 			{
 				"command" : 7,
 				"file" : 1,
-				"line" : 13,
+				"line" : 12,
 				"parent" : 0
 			},
 			{
@@ -165,6 +168,60 @@
 				"parent" : 21
 			},
 			{
+				"command" : 6,
+				"file" : 6,
+				"line" : 45,
+				"parent" : 19
+			},
+			{
+				"file" : 12,
+				"parent" : 23
+			},
+			{
+				"command" : 9,
+				"file" : 12,
+				"line" : 46,
+				"parent" : 24
+			},
+			{
+				"command" : 8,
+				"file" : 8,
+				"line" : 142,
+				"parent" : 25
+			},
+			{
+				"command" : 7,
+				"file" : 7,
+				"line" : 76,
+				"parent" : 26
+			},
+			{
+				"file" : 11,
+				"parent" : 27
+			},
+			{
+				"command" : 6,
+				"file" : 11,
+				"line" : 55,
+				"parent" : 28
+			},
+			{
+				"file" : 10,
+				"parent" : 29
+			},
+			{
+				"command" : 5,
+				"file" : 10,
+				"line" : 61,
+				"parent" : 30
+			},
+			{
+				"command" : 5,
+				"file" : 10,
+				"line" : 83,
+				"parent" : 30
+			},
+			{
 				"command" : 8,
 				"file" : 8,
 				"line" : 142,
@@ -174,27 +231,27 @@
 				"command" : 7,
 				"file" : 7,
 				"line" : 76,
-				"parent" : 23
+				"parent" : 33
 			},
 			{
-				"file" : 11,
-				"parent" : 24
+				"file" : 14,
+				"parent" : 34
 			},
 			{
 				"command" : 6,
-				"file" : 11,
+				"file" : 14,
 				"line" : 55,
-				"parent" : 25
+				"parent" : 35
 			},
 			{
-				"file" : 10,
-				"parent" : 26
+				"file" : 13,
+				"parent" : 36
 			},
 			{
 				"command" : 5,
-				"file" : 10,
+				"file" : 13,
 				"line" : 61,
-				"parent" : 27
+				"parent" : 37
 			}
 		]
 	},
@@ -220,6 +277,10 @@
 				{
 					"backtrace" : 5,
 					"define" : "QT_GUI_LIB"
+				},
+				{
+					"backtrace" : 13,
+					"define" : "QT_NEEDS_QMAIN"
 				},
 				{
 					"backtrace" : 5,
@@ -304,11 +365,11 @@
 	"dependencies" : 
 	[
 		{
-			"id" : "KeyboardColor_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
-		},
-		{
 			"backtrace" : 0,
 			"id" : "KeyboardColor_autogen::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "KeyboardColor_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
 		}
 	],
 	"id" : "KeyboardColor::@6890427a1f51a3e7e1df",
@@ -321,7 +382,7 @@
 				"role" : "flags"
 			},
 			{
-				"fragment" : "",
+				"fragment" : "-mwindows",
 				"role" : "flags"
 			},
 			{
@@ -350,22 +411,37 @@
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 28,
+				"backtrace" : 31,
+				"fragment" : "-lmingw32",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 31,
+				"fragment" : "D:\\Qt\\6.9.2\\mingw_64\\lib\\libQt6EntryPoint.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 32,
+				"fragment" : "-lshell32",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 38,
 				"fragment" : "-ld3d11",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 28,
+				"backtrace" : 38,
 				"fragment" : "-ldxgi",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 28,
+				"backtrace" : 38,
 				"fragment" : "-ldxguid",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 28,
+				"backtrace" : 38,
 				"fragment" : "-ld3d12",
 				"role" : "libraries"
 			},
