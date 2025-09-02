@@ -202,6 +202,14 @@ KeyboardColor_autogen/mocs_compilation.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\KeyboardColor.dir\build.make CMakeFiles/KeyboardColor.dir/KeyboardColor_autogen/mocs_compilation.cpp.s
 .PHONY : KeyboardColor_autogen/mocs_compilation.cpp.s
 
+appicon.obj: appicon.rc.obj
+.PHONY : appicon.obj
+
+# target to build an object file
+appicon.rc.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\KeyboardColor.dir\build.make CMakeFiles/KeyboardColor.dir/appicon.rc.obj
+.PHONY : appicon.rc.obj
+
 keyboardcoulour.obj: keyboardcoulour.cpp.obj
 .PHONY : keyboardcoulour.obj
 
@@ -267,6 +275,7 @@ help:
 	@echo ... KeyboardColor_autogen/mocs_compilation.obj
 	@echo ... KeyboardColor_autogen/mocs_compilation.i
 	@echo ... KeyboardColor_autogen/mocs_compilation.s
+	@echo ... appicon.obj
 	@echo ... keyboardcoulour.obj
 	@echo ... keyboardcoulour.i
 	@echo ... keyboardcoulour.s

@@ -16,6 +16,7 @@ set(PROJECT_SOURCES
     keyboardcoulour.cpp
     keyboardcoulour.h
     keyboardcoulour.ui
+    appicon.rc
 )
 
 
@@ -28,7 +29,7 @@ qt_add_executable(KeyboardColor
 target_link_libraries(KeyboardColor PRIVATE Qt6::Widgets)
 
 
-set(ICON_FILE_NAME "votre_logo.ico") 
+set(ICON_FILE_NAME "favicon.ico") 
 set_target_properties(KeyboardColor PROPERTIES
     WIN32_EXECUTABLE ON
     WIN32_ICON "${ICON_FILE_NAME}"

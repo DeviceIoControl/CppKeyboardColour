@@ -50,7 +50,7 @@
 			{
 				"command" : 3,
 				"file" : 1,
-				"line" : 22,
+				"line" : 23,
 				"parent" : 0
 			},
 			{
@@ -74,7 +74,7 @@
 			{
 				"command" : 4,
 				"file" : 1,
-				"line" : 28,
+				"line" : 29,
 				"parent" : 0
 			},
 			{
@@ -358,7 +358,93 @@
 				0,
 				1,
 				2,
-				8
+				9
+			]
+		},
+		{
+			"defines" : 
+			[
+				{
+					"backtrace" : 13,
+					"define" : "MINGW_HAS_SECURE_API=1"
+				},
+				{
+					"backtrace" : 13,
+					"define" : "QT_CORE_LIB"
+				},
+				{
+					"backtrace" : 5,
+					"define" : "QT_GUI_LIB"
+				},
+				{
+					"backtrace" : 13,
+					"define" : "QT_NEEDS_QMAIN"
+				},
+				{
+					"backtrace" : 5,
+					"define" : "QT_WIDGETS_LIB"
+				},
+				{
+					"backtrace" : 13,
+					"define" : "UNICODE"
+				},
+				{
+					"backtrace" : 13,
+					"define" : "WIN32"
+				},
+				{
+					"backtrace" : 13,
+					"define" : "WIN64"
+				},
+				{
+					"backtrace" : 13,
+					"define" : "_ENABLE_EXTENDED_ALIGNED_STORAGE"
+				},
+				{
+					"backtrace" : 13,
+					"define" : "_UNICODE"
+				},
+				{
+					"backtrace" : 13,
+					"define" : "_WIN64"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 0,
+					"path" : "C:/Programmation/Git/CppKeyboardColour/Build/KeyboardColor_autogen/include"
+				},
+				{
+					"backtrace" : 13,
+					"isSystem" : true,
+					"path" : "D:/Qt/6.9.2/mingw_64/include/QtCore"
+				},
+				{
+					"backtrace" : 13,
+					"isSystem" : true,
+					"path" : "D:/Qt/6.9.2/mingw_64/include"
+				},
+				{
+					"backtrace" : 13,
+					"isSystem" : true,
+					"path" : "D:/Qt/6.9.2/mingw_64/mkspecs/win32-g++"
+				},
+				{
+					"backtrace" : 5,
+					"isSystem" : true,
+					"path" : "D:/Qt/6.9.2/mingw_64/include/QtWidgets"
+				},
+				{
+					"backtrace" : 5,
+					"isSystem" : true,
+					"path" : "D:/Qt/6.9.2/mingw_64/include/QtGui"
+				}
+			],
+			"language" : "RC",
+			"sourceIndexes" : 
+			[
+				5
 			]
 		}
 	],
@@ -468,7 +554,8 @@
 				0,
 				1,
 				2,
-				8
+				5,
+				9
 			]
 		},
 		{
@@ -476,7 +563,7 @@
 			"sourceIndexes" : 
 			[
 				3,
-				6
+				7
 			]
 		},
 		{
@@ -484,16 +571,16 @@
 			"sourceIndexes" : 
 			[
 				4,
-				5,
-				7
+				6,
+				8
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				9,
-				10
+				10,
+				11
 			]
 		}
 	],
@@ -527,6 +614,12 @@
 			"backtrace" : 4,
 			"path" : "keyboardcoulour.ui",
 			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 1,
+			"path" : "appicon.rc",
+			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 4,

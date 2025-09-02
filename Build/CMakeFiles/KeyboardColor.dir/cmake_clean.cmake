@@ -6,6 +6,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/KeyboardColor.dir/KeyboardColor_autogen/EWIEGA46WW/qrc_resources.cpp.obj.d"
   "CMakeFiles/KeyboardColor.dir/KeyboardColor_autogen/mocs_compilation.cpp.obj"
   "CMakeFiles/KeyboardColor.dir/KeyboardColor_autogen/mocs_compilation.cpp.obj.d"
+  "CMakeFiles/KeyboardColor.dir/appicon.rc.obj"
   "CMakeFiles/KeyboardColor.dir/keyboardcoulour.cpp.obj"
   "CMakeFiles/KeyboardColor.dir/keyboardcoulour.cpp.obj.d"
   "CMakeFiles/KeyboardColor.dir/main.cpp.obj"
@@ -20,6 +21,6 @@ file(REMOVE_RECURSE
 )
 
 # Per-language clean rules from dependency scanning.
-foreach(lang CXX)
+foreach(lang CXX RC)
   include(CMakeFiles/KeyboardColor.dir/cmake_clean_${lang}.cmake OPTIONAL)
 endforeach()
