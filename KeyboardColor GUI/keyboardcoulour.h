@@ -2,6 +2,8 @@
 #define KEYBOARDCOULOUR_H
 #include <QProcess>
 #include <QMainWindow>
+#include <QSystemTrayIcon>
+#include <QCloseEvent>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -25,7 +27,11 @@ class KeyboardCoulour : public QMainWindow
         void changeAnimation(QString);
         ~KeyboardCoulour();
 
+    protected:
+    void closeEvent(QCloseEvent *event) override;
+
     private:
+        QSystemTrayIcon *trayIcon;
         QProcess *process;
         Ui::KeyboardCoulour *ui;
         QString animation;

@@ -10,6 +10,29 @@ KeyboardCoulour::KeyboardCoulour(QWidget *parent)
 {
     this->process = new QProcess(this);
     ui->setupUi(this);
+
+
+    trayIcon = new QSystemTrayIcon(this);
+    trayIcon->setIcon(QIcon(":/icons/favicon.ico")); 
+    trayIcon->setToolTip("KeyboardColor");
+
+    QMenu *trayMenu = new QMenu(this);
+    QAction *restoreAction = new QAction("Ouvrir", this);
+    QAction *quitAction = new QAction("Quitter", this);
+    connect(restoreAction, &QAction::triggered, this, &QWidget::showNormal);
+    connect(quitAction, &QAction::triggered, qApp, &QCoreApplication::quit);
+
+    trayMenu->addAction(restoreAction);
+    trayMenu->addAction(quitAction);
+    trayIcon->setContextMenu(trayMenu);
+
+    connect(trayIcon, &QSystemTrayIcon::activated, this, [this](QSystemTrayIcon::ActivationReason reason) {
+        if (reason == QSystemTrayIcon::DoubleClick) {
+            this->showNormal();
+        }
+    });
+
+    trayIcon->show();
 //  QtAwesome* awesome = new QtAwesome(this);
 //  awesome->initFontAwesome();
 
@@ -120,6 +143,11 @@ void KeyboardCoulour::setBreathe()
     ui->breathePushButton->setEnabled(false);
     ui->breathePushButton->setStyleSheet("background-color: gray;");
     return;
+}
+void KeyboardCoulour::closeEvent(QCloseEvent *event)
+{
+    this->hide();
+    event->ignore();
 }
 KeyboardCoulour::~KeyboardCoulour()
 {

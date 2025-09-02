@@ -7,7 +7,11 @@
 	"CROSS_CONFIG" : false,
 	"GENERATOR" : "MinGW Makefiles",
 	"INCLUDE_DIR" : "C:/Programmation/Git/CppKeyboardColour/Build/KeyboardColor_autogen/include",
-	"INPUTS" : [ "C:/Programmation/Git/CppKeyboardColour/KeyboardColor GUI/logo2.png" ],
+	"INPUTS" : 
+	[
+		"C:/Programmation/Git/CppKeyboardColour/KeyboardColor GUI/favicon.ico",
+		"C:/Programmation/Git/CppKeyboardColour/KeyboardColor GUI/logo2.png"
+	],
 	"LOCK_FILE" : "C:/Programmation/Git/CppKeyboardColour/Build/CMakeFiles/KeyboardColor_autogen.dir/AutoRcc_resources_EWIEGA46WW_Lock.lock",
 	"MULTI_CONFIG" : false,
 	"OPTIONS" : [ "--no-zstd", "-name", "resources" ],

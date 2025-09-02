@@ -77,6 +77,7 @@ KeyboardColor_autogen/timestamp: CMakeFiles/KeyboardColor.dir/compiler_depend.ts
 
 KeyboardColor_autogen/EWIEGA46WW/qrc_resources.cpp: C:/Programmation/Git/CppKeyboardColour/KeyboardColor\ GUI/resources.qrc
 KeyboardColor_autogen/EWIEGA46WW/qrc_resources.cpp: CMakeFiles/KeyboardColor_autogen.dir/AutoRcc_resources_EWIEGA46WW_Info.json
+KeyboardColor_autogen/EWIEGA46WW/qrc_resources.cpp: C:/Programmation/Git/CppKeyboardColour/KeyboardColor\ GUI/favicon.ico
 KeyboardColor_autogen/EWIEGA46WW/qrc_resources.cpp: C:/Programmation/Git/CppKeyboardColour/KeyboardColor\ GUI/logo2.png
 KeyboardColor_autogen/EWIEGA46WW/qrc_resources.cpp: D:/Qt/6.9.2/mingw_64/bin/rcc.exe
 KeyboardColor_autogen/EWIEGA46WW/qrc_resources.cpp: D:/Qt/6.9.2/mingw_64/bin/rcc.exe
