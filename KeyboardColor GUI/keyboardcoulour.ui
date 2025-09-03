@@ -172,17 +172,34 @@
          </item>
          <item>
           <widget class="QPushButton" name="stopPushButton">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>70</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">padding: 5px 8px;
+width : 80px;
+margin-left : 30px</string>
+           </property>
            <property name="text">
             <string>Stop</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="runPushButton">
-           <property name="text">
-            <string>Run</string>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Orientation::Horizontal</enum>
            </property>
-          </widget>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
          </item>
         </layout>
        </item>

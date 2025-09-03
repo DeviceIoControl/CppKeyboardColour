@@ -11,7 +11,6 @@ KeyboardCoulour::KeyboardCoulour(QWidget *parent)
     this->process = new QProcess(this);
     ui->setupUi(this);
 
-
     trayIcon = new QSystemTrayIcon(this);
     trayIcon->setIcon(QIcon(":/icons/favicon.ico")); 
     trayIcon->setToolTip("KeyboardColor");
@@ -43,9 +42,9 @@ KeyboardCoulour::KeyboardCoulour(QWidget *parent)
 
     connect(ui->breathePushButton, &QPushButton::clicked, this, &KeyboardCoulour::setBreathe);
     connect(ui->colourTfPushButton, &QPushButton::clicked, this, &KeyboardCoulour::setColourTF);
-    connect(ui->runPushButton, &QPushButton::clicked, this, &KeyboardCoulour::setAnimation);
     connect(ui->stopPushButton, &QPushButton::clicked, this, &KeyboardCoulour::stopAnimation);
     connect(ui->staticPushButton, &QPushButton::clicked, this, &KeyboardCoulour::setStatic);
+    setColourTF();
     this->setWindowIcon(QIcon(":icons/logo2.png"));
 }
 
@@ -113,6 +112,7 @@ void KeyboardCoulour::setColourTF()
     ui->staticPushButton->setEnabled(true);
     ui->colourTfPushButton->setEnabled(false);
     ui->colourTfPushButton->setStyleSheet("background-color: gray;");
+    setAnimation();
     return;
 }
 void KeyboardCoulour::setStatic()
@@ -142,6 +142,7 @@ void KeyboardCoulour::setBreathe()
     ui->colourTfPushButton->setStyleSheet("background-color: #22223b;");
     ui->breathePushButton->setEnabled(false);
     ui->breathePushButton->setStyleSheet("background-color: gray;");
+    setAnimation();
     return;
 }
 void KeyboardCoulour::closeEvent(QCloseEvent *event)

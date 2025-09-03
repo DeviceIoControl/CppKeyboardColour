@@ -39,7 +39,7 @@ public:
     QLabel *effectsLabel;
     QSpacerItem *horizontalSpacer;
     QPushButton *stopPushButton;
-    QPushButton *runPushButton;
+    QSpacerItem *horizontalSpacer_2;
     QGridLayout *animationsGrid;
     QPushButton *breathePushButton;
     QPushButton *colourTfPushButton;
@@ -152,13 +152,16 @@ public:
 
         stopPushButton = new QPushButton(mainContent);
         stopPushButton->setObjectName("stopPushButton");
+        stopPushButton->setMaximumSize(QSize(16777215, 70));
+        stopPushButton->setStyleSheet(QString::fromUtf8("padding: 5px 8px;\n"
+"width : 80px;\n"
+"margin-left : 30px"));
 
         headerLayout->addWidget(stopPushButton);
 
-        runPushButton = new QPushButton(mainContent);
-        runPushButton->setObjectName("runPushButton");
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
 
-        headerLayout->addWidget(runPushButton);
+        headerLayout->addItem(horizontalSpacer_2);
 
 
         verticalLayout_2->addLayout(headerLayout);
@@ -211,7 +214,6 @@ public:
         appTitleLabel->setText(QCoreApplication::translate("KeyboardCoulour", "Keyboard Colour", nullptr));
         effectsLabel->setText(QCoreApplication::translate("KeyboardCoulour", "Lighting Effects", nullptr));
         stopPushButton->setText(QCoreApplication::translate("KeyboardCoulour", "Stop", nullptr));
-        runPushButton->setText(QCoreApplication::translate("KeyboardCoulour", "Run", nullptr));
         breathePushButton->setText(QCoreApplication::translate("KeyboardCoulour", "Breathe", nullptr));
         colourTfPushButton->setText(QCoreApplication::translate("KeyboardCoulour", "Coulour Transform", nullptr));
         staticPushButton->setText(QCoreApplication::translate("KeyboardCoulour", "Static Colours", nullptr));
