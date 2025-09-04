@@ -4,7 +4,6 @@
 
 #include "IKeyboard.h"
 #include "IAnimation.h"
-#include "SystemAnimation.h"
 #include "IKeyboardCommunicator.h"
 
 class Keyboard 
