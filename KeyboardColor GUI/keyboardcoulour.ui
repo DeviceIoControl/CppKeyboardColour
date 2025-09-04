@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>KeyboardCoulour</class>
+ <widget class="QMainWindow" name="KeyboardCoulour">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1164</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Keyboard Colour Controller</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+   /* Variables de style */
+   QWidget#centralwidget {
+       background-color: #1a1a2e;
+       color: #e0e0f0;
+   }
+   
+   /* Styles des boutons d'animation (cartes) */
+   QPushButton {
+       background-color: #22223b;
+       border: 2px solid transparent;
+       border-radius: 15px;
+       padding: 30px;
+       color: #e0e0f0;
+       font-family: 'Verdana';
+       font-weight: 600;
+       text-align: center;
+   }
+   QPushButton:hover {
+       border: 2px solid #e94560;
+   }
+   QPushButton:checked {
+       border: 2px solid #007bff;
+   }
+   
+   /* Styles des boutons d'action */
+   QPushButton#runPushButton {
+       background-color: #2ecc71;
+       color: white;
+       font-size: 16px;
+       border-radius: 8px;
+       padding: 10px 20px;
+   }
+   QPushButton#stopPushButton {
+       background-color: #e74c3c;
+       color: white;
+       font-size: 16px;
+       border-radius: 8px;
+       padding: 10px 20px;
+   }
+
+   /* Style du QLabel (titre) */
+   QLabel {
+       font: 24pt &quot;Verdana&quot;;
+       font-weight: 600;
+       color: #e94560;
+   }
+   
+   /* Style de la barre latérale */
+   QWidget#sidebar {
+       background-color: #22223b;
+       border-right: 1px solid #3b3a4d;
+   }
+   </string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <widget class="QWidget" name="sidebar" native="true">
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="leftMargin">
+        <number>30</number>
+       </property>
+       <property name="topMargin">
+        <number>30</number>
+       </property>
+       <property name="rightMargin">
+        <number>30</number>
+       </property>
+       <property name="bottomMargin">
+        <number>30</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="appTitleLabel">
+         <property name="text">
+          <string>Keyboard Colour</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="mainContent" native="true">
+      <property name="styleSheet">
+       <string notr="true">padding: 40px;</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="spacing">
+        <number>40</number>
+       </property>
+       <property name="leftMargin">
+        <number>40</number>
+       </property>
+       <property name="topMargin">
+        <number>40</number>
+       </property>
+       <property name="rightMargin">
+        <number>40</number>
+       </property>
+       <property name="bottomMargin">
+        <number>40</number>
+       </property>
+       <item>
+        <layout class="QHBoxLayout" name="headerLayout">
+         <item>
+          <widget class="QLabel" name="effectsLabel">
+           <property name="styleSheet">
+            <string notr="true">font-size: 1.6rem; font-weight: 600; color: #e0e0f0;</string>
+           </property>
+           <property name="text">
+            <string>Lighting Effects</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Orientation::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="stopPushButton">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>70</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">padding: 5px 8px;
+width : 80px;
+margin-left : 30px</string>
+           </property>
+           <property name="text">
+            <string>Stop</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Orientation::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QGridLayout" name="animationsGrid">
+         <property name="spacing">
+          <number>20</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="QPushButton" name="breathePushButton">
+           <property name="text">
+            <string>Breathe</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QPushButton" name="colourTfPushButton">
+           <property name="text">
+            <string>Coulour Transform</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QPushButton" name="staticPushButton">
+           <property name="text">
+            <string>Static Colours</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1164</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

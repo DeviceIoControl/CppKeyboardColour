@@ -1,0 +1,22 @@
+{
+	"BUILD_DIR" : "C:/Programmation/Qt/KeyboardColor/build/Desktop_Qt_6_9_2_MinGW_64_bit-Release/KeyboardColor_autogen",
+	"CMAKE_BINARY_DIR" : "C:/Programmation/Qt/KeyboardColor/build/Desktop_Qt_6_9_2_MinGW_64_bit-Release",
+	"CMAKE_CURRENT_BINARY_DIR" : "C:/Programmation/Qt/KeyboardColor/build/Desktop_Qt_6_9_2_MinGW_64_bit-Release",
+	"CMAKE_CURRENT_SOURCE_DIR" : "C:/Programmation/Qt/KeyboardColor",
+	"CMAKE_SOURCE_DIR" : "C:/Programmation/Qt/KeyboardColor",
+	"CROSS_CONFIG" : false,
+	"GENERATOR" : "Ninja",
+	"INCLUDE_DIR" : "C:/Programmation/Qt/KeyboardColor/build/Desktop_Qt_6_9_2_MinGW_64_bit-Release/KeyboardColor_autogen/include",
+	"INPUTS" : [ "C:/Programmation/Qt/KeyboardColor/logo2.png" ],
+	"LOCK_FILE" : "C:/Programmation/Qt/KeyboardColor/build/Desktop_Qt_6_9_2_MinGW_64_bit-Release/CMakeFiles/KeyboardColor_autogen.dir/AutoRcc_resources_EWIEGA46WW_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "--no-zstd", "-name", "resources" ],
+	"OUTPUT_CHECKSUM" : "EWIEGA46WW",
+	"OUTPUT_NAME" : "qrc_resources.cpp",
+	"RCC_EXECUTABLE" : "D:/Qt/6.9.2/mingw_64/bin/rcc.exe",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "C:/Programmation/Qt/KeyboardColor/build/Desktop_Qt_6_9_2_MinGW_64_bit-Release/CMakeFiles/KeyboardColor_autogen.dir/AutoRcc_resources_EWIEGA46WW_Used.txt",
+	"SOURCE" : "C:/Programmation/Qt/KeyboardColor/resources.qrc",
+	"USE_BETTER_GRAPH" : true,
+	"VERBOSITY" : 0
+}
