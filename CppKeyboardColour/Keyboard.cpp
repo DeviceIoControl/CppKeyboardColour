@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "Keyboard.h"
+#include "ColourFactory.h"
 #include "DeviceIdRetriever.h"
 #include "DeviceIdTranslator.h"
 #include "KeyboardCommunicatorFactory.h"
@@ -22,13 +23,8 @@ Keyboard::Keyboard()
 
 void Keyboard::SetColour(uint8_t r, uint8_t g, uint8_t b, Zone zone)
 {
-	Colour colour{};
-
-	colour[INDEX_COLOUR_RED] = r;
-	colour[INDEX_COLOUR_GREEN] = g;
-	colour[INDEX_COLOUR_BLUE] = b;
-
-	m_ptrKbComms->SetKBColour(zone, colour);
+	ColourFactory factory{};
+	m_ptrKbComms->SetKBColour(zone, factory.Create(r, g, b));
 }
 
 KeyboardType Keyboard::GetKBType() const
@@ -36,9 +32,9 @@ KeyboardType Keyboard::GetKBType() const
 	return m_kbType;
 };
 
-void Keyboard::SendCode(uint32_t animation)
+void Keyboard::SendCode(uint32_t code)
 {
-	m_ptrKbComms->SendKBCode(static_cast<uint32_t>(animation));
+	m_ptrKbComms->SendKBCode(code);
 }
 
 void Keyboard::SetBacklightOff()
@@ -69,7 +65,7 @@ void Keyboard::Animate(IAnimation& animation)
 	}
 }
 
-void Keyboard::PlayAnimation(IAnimation& animation, bool bShouldLoop /*= true */)
+void Keyboard::PlayAnimation(IAnimation& animation, bool bShouldLoop /* = true */)
 {
 	if (!animation.IsSupportedKB(this->GetKBType()))
 	{
