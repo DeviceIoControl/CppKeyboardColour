@@ -1,0 +1,20 @@
+# ninja log v6
+62	303	7783876167134352	KeyboardColor_autogen/timestamp	ec9ad3e5ea193e65
+3045	3250	7783876196961137	KeyboardColor.exe	9eebd5f742e86128
+336	504	7783875948283637	C:/Programmation/Qt/KeyboardColor/build/Desktop_Qt_6_9_2_MinGW_64_bit-Release/KeyboardColor_autogen/EWIEGA46WW/qrc_resources.cpp	8a1828ce185d09bc
+1006	3235	7783852466322124	CMakeFiles/KeyboardColor.dir/main.cpp.obj	6f94b9225d15c44c
+62	303	7783876167134352	KeyboardColor_autogen/mocs_compilation.cpp	ec9ad3e5ea193e65
+304	3044	7783876169557520	CMakeFiles/KeyboardColor.dir/keyboardcoulour.cpp.obj	691626bb47f74a8b
+62	303	7783876167134352	C:/Programmation/Qt/KeyboardColor/build/Desktop_Qt_6_9_2_MinGW_64_bit-Release/KeyboardColor_autogen/timestamp	ec9ad3e5ea193e65
+62	303	7783876167134352	C:/Programmation/Qt/KeyboardColor/build/Desktop_Qt_6_9_2_MinGW_64_bit-Release/KeyboardColor_autogen/mocs_compilation.cpp	ec9ad3e5ea193e65
+1000	3150	7783852466252075	CMakeFiles/KeyboardColor.dir/KeyboardColor_autogen/mocs_compilation.cpp.obj	d44387de9cba0fda
+46	1091	7783881693095035	build.ninja	d887ef9d5ed43679
+336	504	7783875948283637	KeyboardColor_autogen/EWIEGA46WW/qrc_resources.cpp	8a1828ce185d09bc
+513	925	7783875948570875	CMakeFiles/KeyboardColor.dir/KeyboardColor_autogen/EWIEGA46WW/qrc_resources.cpp.obj	ff67cca0acc24194
+7	1023	7783881693095035	build.ninja	d887ef9d5ed43679
+27	305	7783881694840498	KeyboardColor_autogen/timestamp	ec9ad3e5ea193e65
+27	305	7783881694840498	KeyboardColor_autogen/mocs_compilation.cpp	ec9ad3e5ea193e65
+27	305	7783881694840498	C:/Programmation/Qt/KeyboardColor/build/Desktop_Qt_6_9_2_MinGW_64_bit-Release/KeyboardColor_autogen/timestamp	ec9ad3e5ea193e65
+27	305	7783881694840498	C:/Programmation/Qt/KeyboardColor/build/Desktop_Qt_6_9_2_MinGW_64_bit-Release/KeyboardColor_autogen/mocs_compilation.cpp	ec9ad3e5ea193e65
+306	3497	7783881697639258	CMakeFiles/KeyboardColor.dir/keyboardcoulour.cpp.obj	691626bb47f74a8b
+3497	3719	7783881729546639	KeyboardColor.exe	9eebd5f742e86128
