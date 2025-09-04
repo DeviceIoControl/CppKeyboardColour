@@ -7,8 +7,6 @@
 // In-built keyboard animations.
 enum class SystemAnimation : uint32_t
 {
-	KB_MODE_OFF = 0xFFFFFFFE,
-	KB_MODE_STANDARD = 0xEFFFFFFF,
 	KB_MODE_WAVE = 0xB0000000, // Works but has side-effects.
 	KB_MODE_CYCLE = 0x33010000,
 	KB_MODE_DANCE = 0x80000000,

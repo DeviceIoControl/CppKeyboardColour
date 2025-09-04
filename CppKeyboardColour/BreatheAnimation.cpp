@@ -43,15 +43,11 @@ void BreatheAnimation::GeneratePhase1()
 {
 	for (size_t i = 0; i < STEPS; ++i)
 	{
-		Colour colour{};
-		
-		const auto val = (180.0f / STEPS) * i;
+		const auto currentStep = (180.0f / STEPS) * i;
 
 		// Generate a sine wave for a breathing effect.
-		colour[INDEX_COLOUR_RED] = 255 * std::sin(val * (MATH_PI / 180.0f));
-		colour[INDEX_COLOUR_GREEN] = 0;
-		colour[INDEX_COLOUR_BLUE] = 0;
-
+		const auto colour  = m_factory.Create(255 * std::sin(currentStep * (MATH_PI / 180.0f)), 0 ,0);
+		
 		m_frames.AddFrame(Zone::ALL, colour, FRAME_DURATION_MS);
 	}
 }
@@ -60,14 +56,11 @@ void BreatheAnimation::GeneratePhase2()
 {
 	for (size_t i = 0; i < STEPS; ++i)
 	{
-		Colour colour{};
-		const auto val = (180.0f / STEPS) * i;
+		const auto currentStep = (180.0f / STEPS) * i;
 
 		// Generate a sine wave for a breathing effect.
-		colour[INDEX_COLOUR_GREEN] = 255 * std::sin(val * (MATH_PI / 180.0f));
-		colour[INDEX_COLOUR_RED] = 0;
-		colour[INDEX_COLOUR_BLUE] = 0;
-
+		const auto colour = m_factory.Create(0, 255 * std::sin(currentStep * (MATH_PI / 180.0f)), 0);
+	
 		m_frames.AddFrame(Zone::ALL, colour, FRAME_DURATION_MS);
 	}
 }
@@ -76,14 +69,9 @@ void BreatheAnimation::GeneratePhase3()
 {
 	for (size_t i = 0; i < STEPS; ++i)
 	{
-		Colour colour{};
+		const auto currentStep = (180.0f / STEPS) * i;
 
-		const auto val = (180.0f / STEPS) * i;
-
-		// Generate a sine wave for a breathing effect.
-		colour[INDEX_COLOUR_BLUE] = 255 * std::sin(val * (MATH_PI / 180.0f));
-		colour[INDEX_COLOUR_RED] = 0;
-		colour[INDEX_COLOUR_GREEN] = 0;
+		const auto colour = m_factory.Create(0, 0, 255 * std::sin(currentStep * (MATH_PI / 180.0f)));
 
 		m_frames.AddFrame(Zone::ALL, colour, FRAME_DURATION_MS);
 	}

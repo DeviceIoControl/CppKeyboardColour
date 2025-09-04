@@ -4,7 +4,7 @@
 #include "ColourFactory.h"
 #include "ColourTransformAnimation.h"
  
-constexpr size_t STEPS = 40.0f;
+constexpr size_t STEPS = 40;
 constexpr size_t FRAME_DURATION_MS = 25;
 
 ColourTransformAnimation::ColourTransformAnimation()
