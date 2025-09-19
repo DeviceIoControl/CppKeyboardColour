@@ -1,0 +1,26 @@
+[
+{
+  "directory": "C:/Programmation/Git/CppKeyboardColour/Build",
+  "command": "D:\\Qt\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 @CMakeFiles/KeyboardColor.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\KeyboardColor.dir\\KeyboardColor_autogen\\mocs_compilation.cpp.obj -c C:\\Programmation\\Git\\CppKeyboardColour\\Build\\KeyboardColor_autogen\\mocs_compilation.cpp",
+  "file": "C:/Programmation/Git/CppKeyboardColour/Build/KeyboardColor_autogen/mocs_compilation.cpp",
+  "output": "CMakeFiles/KeyboardColor.dir/KeyboardColor_autogen/mocs_compilation.cpp.obj"
+},
+{
+  "directory": "C:/Programmation/Git/CppKeyboardColour/Build",
+  "command": "D:\\Qt\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 @CMakeFiles/KeyboardColor.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\KeyboardColor.dir\\main.cpp.obj -c \"C:\\Programmation\\Git\\CppKeyboardColour\\KeyboardColor GUI\\main.cpp\"",
+  "file": "C:/Programmation/Git/CppKeyboardColour/KeyboardColor GUI/main.cpp",
+  "output": "CMakeFiles/KeyboardColor.dir/main.cpp.obj"
+},
+{
+  "directory": "C:/Programmation/Git/CppKeyboardColour/Build",
+  "command": "D:\\Qt\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 @CMakeFiles/KeyboardColor.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\KeyboardColor.dir\\keyboardcoulour.cpp.obj -c \"C:\\Programmation\\Git\\CppKeyboardColour\\KeyboardColor GUI\\keyboardcoulour.cpp\"",
+  "file": "C:/Programmation/Git/CppKeyboardColour/KeyboardColor GUI/keyboardcoulour.cpp",
+  "output": "CMakeFiles/KeyboardColor.dir/keyboardcoulour.cpp.obj"
+},
+{
+  "directory": "C:/Programmation/Git/CppKeyboardColour/Build",
+  "command": "D:\\Qt\\Tools\\mingw1310_64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 @CMakeFiles/KeyboardColor.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\KeyboardColor.dir\\KeyboardColor_autogen\\EWIEGA46WW\\qrc_resources.cpp.obj -c C:\\Programmation\\Git\\CppKeyboardColour\\Build\\KeyboardColor_autogen\\EWIEGA46WW\\qrc_resources.cpp",
+  "file": "C:/Programmation/Git/CppKeyboardColour/Build/KeyboardColor_autogen/EWIEGA46WW/qrc_resources.cpp",
+  "output": "CMakeFiles/KeyboardColor.dir/KeyboardColor_autogen/EWIEGA46WW/qrc_resources.cpp.obj"
+}
+]

@@ -1,0 +1,9 @@
+// Created by DeviceIoControl
+
+#pragma once
+
+#include "stdafx.h"
+
+#define DEVICE_ID_P650RS_G 0x00006A01
+#define DEVICE_ID_NP50RXX 0x0000A550
+#define DEVICE_ID_FAKE 0x12345678
