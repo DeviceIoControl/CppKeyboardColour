@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>KeyboardCoulour</class>
+ <widget class="QMainWindow" name="KeyboardCoulour">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1164</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Keyboard Colour Controller</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">
+   /* Variables de style */
+   QWidget#centralwidget {
+        background-color: #1a1a2e;
+        color: #e0e0f0;
+   }
+   
+   /* Styles des boutons d'animation (cartes) */
+   QPushButton {
+        background-color: #22223b;
+        border: 2px solid transparent;
+        border-radius: 15px;
+        padding: 30px;
+        color: #e0e0f0;
+        font-family: 'Verdana';
+        font-weight: 600;
+        text-align: center;
+   }
+   QPushButton:hover {
+        border: 2px solid #e94560;
+   }
+   QPushButton:checked {
+        border: 2px solid #007bff;
+   }
+   
+   /* Styles des boutons d'action */
+   QPushButton#runPushButton {
+        background-color: #2ecc71;
+        color: white;
+        font-size: 16px;
+        border-radius: 8px;
+        padding: 10px 20px;
+   }
+   QPushButton#stopPushButton {
+        background-color: #e74c3c;
+        color: white;
+        font-size: 16px;
+        border-radius: 8px;
+        padding: 10px 20px;
+   }
+
+   /* Style du QLabel (titre) */
+   QLabel {
+        font: 24pt &quot;Verdana&quot;;
+        font-weight: 600;
+        color: #e94560;
+   }
+   
+   /* Style de la barre latérale */
+   QWidget#sidebar {
+        background-color: #22223b;
+        border-right: 1px solid #3b3a4d;
+   }
+
+   /* Style des boutons de couleur */
+   .colorButton {
+       min-width: 50px;
+       min-height: 50px;
+       max-width: 50px;
+       max-height: 50px;
+       border-radius: 25px;
+       padding: 0;
+   }
+   /* Styles des couleurs individuelles */
+   QPushButton#redPushButton { background-color: rgb(255, 0, 0); }
+   QPushButton#greenPushButton { background-color: rgb(0, 255, 0); }
+   QPushButton#bluePushButton { background-color: rgb(0, 0, 255); }
+   QPushButton#yellowPushButton { background-color: rgb(255, 255, 0); }
+   QPushButton#cyanPushButton { background-color: rgb(0, 255, 255); }
+   QPushButton#magentaPushButton { background-color: rgb(255, 0, 255); }
+   QPushButton#whitePushButton { background-color: rgb(255, 255, 255); }
+   QPushButton#blackPushButton { background-color: rgb(0, 0, 0); }
+   QPushButton#orangePushButton { background-color: rgb(255, 165, 0); }
+   QPushButton#purplePushButton { background-color: rgb(128, 0, 128); }
+   QPushButton#pinkPushButton { background-color: rgb(255, 192, 203); }
+   QPushButton#brownPushButton { background-color: rgb(165, 42, 42); }
+   QPushButton#grayPushButton { background-color: rgb(128, 128, 128); }
+   QPushButton#limePushButton { background-color: rgb(50, 205, 50); }
+   QPushButton#goldPushButton { background-color: rgb(255, 215, 0); }
+   QPushButton#silverPushButton { background-color: rgb(192, 192, 192); }
