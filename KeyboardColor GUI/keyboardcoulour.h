@@ -20,6 +20,7 @@ class KeyboardCoulour : public QMainWindow
     public:
         KeyboardCoulour(QWidget *parent = nullptr);
         void setBreathe();
+        void setColour(QString colour);
         void setColourTF();
         void setStatic();
         void setAnimation();
@@ -35,5 +36,6 @@ class KeyboardCoulour : public QMainWindow
         QProcess *process;
         Ui::KeyboardCoulour *ui;
         QString animation;
+        QString colour;
 };
 #endif // KEYBOARDCOULOUR_H

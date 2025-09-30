@@ -21,6 +21,7 @@ KeyboardCoulour::KeyboardCoulour(QWidget *parent)
     connect(restoreAction, &QAction::triggered, this, &QWidget::showNormal);
     connect(quitAction, &QAction::triggered, qApp, &QCoreApplication::quit);
 
+
     trayMenu->addAction(restoreAction);
     trayMenu->addAction(quitAction);
     trayIcon->setContextMenu(trayMenu);
@@ -40,12 +41,33 @@ KeyboardCoulour::KeyboardCoulour(QWidget *parent)
 //  ui->runPushButton->setIcon(awesome->icon(fa::playcircle));
 //  ui->stopPushButton->setIcon(awesome->icon(fa::stopcircle));
 
+    connect(ui->redPushButton, &QPushButton::clicked, this, [this]() {
+        setColour("red");
+    });
+
+    connect(ui->bluePushButton, &QPushButton::clicked, this, [this]() {
+        setColour("blue");
+    });
+
+    connect(ui->greenPushButton, &QPushButton::clicked, this, [this]() {
+        setColour("green");
+    });
+    connect(ui->cyanPushButton, &QPushButton::clicked, this, [this]() {
+        setColour("cyan");
+    });
+    connect(ui->grayPushButton, &QPushButton::clicked, this, [this]() {
+        setColour("gray");
+    });
+    connect(ui->greenPushButton, &QPushButton::clicked, this, [this]() {
+        setColour("green");
+    });
     connect(ui->breathePushButton, &QPushButton::clicked, this, &KeyboardCoulour::setBreathe);
     connect(ui->colourTfPushButton, &QPushButton::clicked, this, &KeyboardCoulour::setColourTF);
     connect(ui->stopPushButton, &QPushButton::clicked, this, &KeyboardCoulour::stopAnimation);
     connect(ui->staticPushButton, &QPushButton::clicked, this, &KeyboardCoulour::setStatic);
     setColourTF();
     this->setWindowIcon(QIcon(":icons/logo2.png"));
+    this->colour = "none";
 }
 
 
@@ -80,13 +102,19 @@ void KeyboardCoulour::setAnimation()
         qDebug() << "Error : " << this->process->errorString();
     }
 }
-
+void KeyboardCoulour::setColour(QString colour){
+    ui->breathePushButton->setStyleSheet("background-color: #22223b;");
+    ui->breathePushButton->setEnabled(true);
+    this->colour = "red";
+    ui->selectedColorLabel->setText("Couleur s\303\251lectionn\303\251e : " + colour);
+    this->animation = "singlecolour " + colour;
+}
 void KeyboardCoulour::stopAnimation()
 {
     if (this->process->state() == QProcess::Running) {
         ui->staticPushButton->setStyleSheet("background-color : #22223b");
         ui->staticPushButton->setEnabled(true);
-
+        this->colour = "none";
         ui->colourTfPushButton->setStyleSheet("background-color : #22223b");
         ui->colourTfPushButton->setEnabled(true);
 
@@ -106,6 +134,7 @@ void KeyboardCoulour::changeAnimation(QString animation)
 void KeyboardCoulour::setColourTF()
 {
     this->animation = "colourtransform";
+    this->colour == "none";
     ui->breathePushButton->setEnabled(true);
     ui->breathePushButton->setStyleSheet("background-color: #22223b;");
     ui->staticPushButton->setStyleSheet("background-color : #22223b");
@@ -118,6 +147,7 @@ void KeyboardCoulour::setColourTF()
 void KeyboardCoulour::setStatic()
 {
 
+    this->colour == "none";
     if (this->process->state() == QProcess::Running) {
         ui->colourTfPushButton->setEnabled(true);
         ui->breathePushButton->setEnabled(true);
@@ -135,16 +165,22 @@ void KeyboardCoulour::setStatic()
 }
 void KeyboardCoulour::setBreathe()
 {
-    this->animation = "freshbreathe";
+    if (this->colour != "none" || !this->colour.isEmpty()){
+        this->animation = "singlebreathe "+ this->colour;
+    }
+    else{
+        this->animation = "freshbreathe";
+        ui->breathePushButton->setEnabled(false);
+        ui->breathePushButton->setStyleSheet("background-color: gray;");
+    }
     ui->staticPushButton->setStyleSheet("background-color : #22223b");
     ui->staticPushButton->setEnabled(true);
     ui->colourTfPushButton->setEnabled(true);
     ui->colourTfPushButton->setStyleSheet("background-color: #22223b;");
-    ui->breathePushButton->setEnabled(false);
-    ui->breathePushButton->setStyleSheet("background-color: gray;");
     setAnimation();
     return;
 }
+
 void KeyboardCoulour::closeEvent(QCloseEvent *event)
 {
     this->hide();

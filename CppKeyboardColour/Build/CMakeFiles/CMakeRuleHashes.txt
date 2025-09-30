@@ -1,4 +1,0 @@
-# Hashes of file build rules.
-48fd4040aa8da1ae59aa993e927b3bfe CMakeFiles/KeyboardColor_autogen
-bba4fe067f78f794a6f91300d42b6ac5 KeyboardColor_autogen/EWIEGA46WW/qrc_resources.cpp
-af9c2d1f5df4a7bff0041145f9791018 KeyboardColor_autogen/timestamp

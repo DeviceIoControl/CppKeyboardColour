@@ -79,8 +79,8 @@ clean: CMakeFiles/KeyboardColor_autogen.dir/clean
 # Target rules for target CMakeFiles/KeyboardColor.dir
 
 # All Build rule for target.
-CMakeFiles/KeyboardColor.dir/all: CMakeFiles/KeyboardColor_autogen_timestamp_deps.dir/all
 CMakeFiles/KeyboardColor.dir/all: CMakeFiles/KeyboardColor_autogen.dir/all
+CMakeFiles/KeyboardColor.dir/all: CMakeFiles/KeyboardColor_autogen_timestamp_deps.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\KeyboardColor.dir\build.make CMakeFiles/KeyboardColor.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\KeyboardColor.dir\build.make CMakeFiles/KeyboardColor.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\Programmation\Git\CppKeyboardColour\Build\CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Built target KeyboardColor"
