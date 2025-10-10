@@ -126,9 +126,9 @@ To launch the graphical interface, run:
 ```
 
 **GUI Preview :**
-![Screenshot of the KeyboardColor GUI](screenshots/screenshot1.png)
-![Screenshot of the KeyboardColor GUI](screenshots/screenshot2.png)
-![Screenshot of the KeyboardColor GUI](screenshots/screenshot3.png)
+![Screenshot of the KeyboardColor GUI](gui_screenshots/screenshot1.png)
+![Screenshot of the KeyboardColor GUI](gui_screenshots/screenshot2.png)
+![Screenshot of the KeyboardColor GUI](gui_screenshots/screenshot3.png)
 
 
 
