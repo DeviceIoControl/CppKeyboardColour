@@ -95,16 +95,15 @@ Navigate to the folder containing the executable files (e.g., `CppKeyboardColour
   .\CLEVO_KeyboardColour.exe theme blink
   ```
   ✨ Makes the keyboard lights blink in a pulsating pattern.
-- **Single Breathe Effect (New):**  
-  ```bash   
+- **Single Breathe Effect (New):**
+```bash   
   .\CLEVO_KeyboardColour.exe theme singlebreathe [color]   
-  ```
-  🔵 Enables a breathing effect using a single custom color. Replace [color] with the name if your chosen color  (e.g., 
-  ```bash
-    .\CLEVO_KeyboardColour.exe theme singlebreathe blue 
-  ```
-  for blue
-).
+```
+  🔵 Enables a breathing effect using a single custom color. Replace [color] with the name if your chosen color  (e.g.,
+  ``` .\CLEVO_KeyboardColour.exe theme singlebreathe blue ```
+    for blue
+  ).
+
 ---
 
 ## 🛠️ How to Use
@@ -125,7 +124,15 @@ To launch the graphical interface, run:
 ```Bash
 .\KeyboardColor.exe
 ```
-5. Run the desired command using the syntax:
+
+**GUI Preview :**
+![Screenshot of the KeyboardColor GUI](screenshots/screenshot1.png)
+![Screenshot of the KeyboardColor GUI](screenshots/screenshot2.png)
+![Screenshot of the KeyboardColor GUI](screenshots/screenshot3.png)
+
+
+
+5. Option 2 Run the desired command using the syntax:
    ```
    .\CLEVO_KeyboardColour.exe theme [themeName]
    ```
