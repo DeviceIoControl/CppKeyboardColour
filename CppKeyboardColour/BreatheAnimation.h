@@ -4,7 +4,6 @@
 
 #include "Frame.h"
 #include "FrameCollection.h"
-#include "ColourFactory.h"
 #include "IAnimation.h"
 
 
@@ -29,9 +28,9 @@ protected:
 
 private:
 	FrameCollection m_frames;
-	ColourFactory m_factory{};
 	
 	void GeneratePhase1();
 	void GeneratePhase2();
 	void GeneratePhase3();
+	void GeneratePhase4();
 };

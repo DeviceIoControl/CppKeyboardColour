@@ -160,7 +160,7 @@
   <ItemGroup>
     <ClInclude Include="Animations.h" />
     <ClInclude Include="BreatheAnimation.h" />
-    <ClInclude Include="FreshBreatheAnimation.h" />
+    <ClInclude Include="BreatheAnimationNewColours.h" />
     <ClInclude Include="ColourFactory.h" />
     <ClInclude Include="ColourShiftAnimation.h" />
     <ClInclude Include="ColourTransformAnimation.h" />
@@ -181,33 +181,35 @@
     <ClInclude Include="KeyboardCommunicatorFactory.h" />
     <ClInclude Include="KeyboardType.h" />
     <ClInclude Include="MathConstants.h" />
+    <ClInclude Include="NamedPipe.h" />
     <ClInclude Include="PulsatingBlinkAnimation.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="ScopedComPtr.h" />
-    <ClInclude Include="SingleInstanceEvent.h" />
+    <ClInclude Include="Service.h" />
+    <ClInclude Include="ServiceMain.h" />
+    <ClInclude Include="SingleColourBreatheAnimation.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="SystemAnimation.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Test.h" />
     <ClInclude Include="WbemService.h" />
     <ClInclude Include="WmiKBCommunicator.h" />
+    <ClInclude Include="xstl.h" />
     <ClInclude Include="Zone.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BreatheAnimation.cpp" />
-    <ClCompile Include="FreshBreatheAnimation.cpp" />
+    <ClCompile Include="BreatheAnimationNewColours.cpp" />
     <ClCompile Include="ColourFactory.cpp" />
     <ClCompile Include="ColourShiftAnimation.cpp" />
     <ClCompile Include="ColourTransformAnimation.cpp" />
-    <ClCompile Include="CommandLine.cpp" />
-    <ClCompile Include="DeviceIdRetriever.cpp" />
-    <ClCompile Include="FakeKeyboardCommunicator.cpp" />
     <ClCompile Include="FrameCollection.cpp" />
     <ClCompile Include="CppKeyboardColour.cpp" />
-    <ClCompile Include="InsydeKBCommunicator.cpp" />
     <ClCompile Include="Keyboard.cpp">
       <FileType>CppCode</FileType>
     </ClCompile>
-    <ClCompile Include="KeyboardCommunicatorFactory.cpp" />
     <ClCompile Include="PulsatingBlinkAnimation.cpp" />
+    <ClCompile Include="SingleColourBreatheAnimation.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -215,7 +217,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="WbemService.cpp" />
-    <ClCompile Include="WmiKBCommunicator.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="CppKeyboardColour.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,0 +1,11 @@
+{
+    "cmake.sourceDirectory": "C:/Programmation/Git/CppKeyboardColour/KeyboardColor GUI",
+    "cmake.configureSettings": {
+        "CMAKE_PREFIX_PATH": "D:/Qt/6.9.2/mingw_64"
+    },
+    "files.associations": {
+        "*.dbclient-js": "javascript",
+        "*.ejs": "html",
+        "qprocess": "cpp"
+    }
+}

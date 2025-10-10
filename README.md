@@ -14,12 +14,30 @@ This is a cleaner, more organized, and efficient version of the initial program.
 - **Predefined Animated Effects:**
   - 🌈 **Fading Colors:** Smooth color transitions (predefined themes).
   - 🎥 **Optimized Animations:** Enhanced visual effects using animation objects.
+- **New Graphical User Interface (GUI):**
+  - Simplifies control with **buttons and a color picker**.
+  - Includes the **new 'Single Breathe' animation** with custom color selection.
 
 ⚠️ **Important Note:** Ensure you run this program **as an administrator**, as Windows Management Instrumentation (WMI) requires administrative privileges to function properly.
 
 ⚠️ **Warning:** The predefined fading theme may utilize **15% to 20% of CPU** at certain times. This will be optimized in future updates.
 
 ⚠️ **Warning (2):** Ensure that the **InsydeDHCU.dll** file is in the same directory as `CLEVO_KeyboardColour.exe` if you're using a **Single-Zone** keyboard.
+
+---
+
+## 🖥️ New: Graphical User Interface (GUI)
+
+The program now includes a dedicated **Graphical User Interface (GUI)** named `KeyboardColor.exe` for simplified control, eliminating the need to use the command line for basic features.
+
+### ✨ GUI Features
+
+The GUI offers a simplified way to manage your keyboard lighting:
+
+* **Animation Selection:** Easily switch between the **Breathe** and **Colour Transform** modes using dedicated buttons.
+* **New Single Breathe Mode:** Perform a smooth breathing animation using **one user-selected custom color**.
+* **Color Picker:** A graphical tool is available to select the custom color for the **Single Breathe** mode.
+* **Color Enhancements:** All newly added colors for the `colourtransform` and `freshbreathe` effects are available.
 
 ---
 
@@ -77,6 +95,14 @@ Navigate to the folder containing the executable files (e.g., `CppKeyboardColour
   .\CLEVO_KeyboardColour.exe theme blink
   ```
   ✨ Makes the keyboard lights blink in a pulsating pattern.
+- **Single Breathe Effect (New):**
+```bash   
+  .\CLEVO_KeyboardColour.exe theme singlebreathe [color]   
+```
+  🔵 Enables a breathing effect using a single custom color. Replace [color] with the name if your chosen color  (e.g.,
+  ``` .\CLEVO_KeyboardColour.exe theme singlebreathe blue ```
+    for blue
+  ).
 
 ---
 
@@ -93,16 +119,31 @@ Navigate to the folder containing the executable files (e.g., `CppKeyboardColour
 
 3. **Again, be sure that the **InsydeDHCU.dll** file is in the same directory as `CLEVO_KeyboardColour.exe` if you're using a **Single-Zone** keyboard**.
 
-4. Run the desired command using the syntax:
+4. Option 1: Using the GUI (Recommended)
+To launch the graphical interface, run:
+```Bash
+.\KeyboardColor.exe
+```
+
+**GUI Preview :**
+![Screenshot of the KeyboardColor GUI](gui_screenshots/screenshot1.png)
+![Screenshot of the KeyboardColor GUI](gui_screenshots/screenshot2.png)
+![Screenshot of the KeyboardColor GUI](gui_screenshots/screenshot3.png)
+
+
+
+5. Option 2 Run the desired command using the syntax:
    ```
    .\CLEVO_KeyboardColour.exe theme [themeName]
    ```
-
+ 
 Example:  
 To activate the breathing effect, run:
 ```bash
 .\CLEVO_KeyboardColour.exe theme breathe
 ```
+
+---
 
 ---
 
