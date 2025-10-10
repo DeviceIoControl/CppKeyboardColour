@@ -1,6 +1,5 @@
 *pch
 .vscode
-*x64
 *pch
 Build/x64
 .vs

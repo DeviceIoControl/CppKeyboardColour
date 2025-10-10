@@ -1,3 +1,5 @@
+//Created by BenRango
+
 #include <windows.h>
 #include <QApplication>
 #include <QMessageBox>

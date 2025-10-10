@@ -2,7 +2,6 @@
 
 #include "stdafx.h"
 #include "Keyboard.h"
-#include "ColourFactory.h"
 #include "DeviceIdRetriever.h"
 #include "DeviceIdTranslator.h"
 #include "KeyboardCommunicatorFactory.h"
@@ -23,8 +22,13 @@ Keyboard::Keyboard()
 
 void Keyboard::SetColour(uint8_t r, uint8_t g, uint8_t b, Zone zone)
 {
-	ColourFactory factory{};
-	m_ptrKbComms->SetKBColour(zone, factory.Create(r, g, b));
+	Colour colour{};
+
+	colour[INDEX_COLOUR_RED] = r;
+	colour[INDEX_COLOUR_GREEN] = g;
+	colour[INDEX_COLOUR_BLUE] = b;
+
+	m_ptrKbComms->SetKeyboardColour(zone, colour);
 }
 
 KeyboardType Keyboard::GetKBType() const
@@ -32,19 +36,18 @@ KeyboardType Keyboard::GetKBType() const
 	return m_kbType;
 };
 
-void Keyboard::SendCode(uint32_t code)
+void Keyboard::SysAnimation(SystemAnimation animation)
 {
-	m_ptrKbComms->SendKBCode(code);
-}
+	switch (animation)
+	{
+	case SystemAnimation::KB_MODE_OFF:
+		return this->SetColour(0x00, 0x00, 0x00, Zone::ALL);
 
-void Keyboard::SetBacklightOff()
-{
-	this->SetColour(0x00, 0x00, 0x00, Zone::ALL);
-}
+	case SystemAnimation::KB_MODE_STANDARD:
+		return this->SetColour(0x00, 0x00, 0xFF, Zone::ALL);
+	}
 
-void Keyboard::SetBacklightOn()
-{
-	this->SetColour(0x00, 0x00, 0xFF, Zone::ALL);
+	m_ptrKbComms->SendKeyboardData(static_cast<uint32_t>(animation));
 }
 
 void Keyboard::Animate(IAnimation& animation)
@@ -65,7 +68,7 @@ void Keyboard::Animate(IAnimation& animation)
 	}
 }
 
-void Keyboard::PlayAnimation(IAnimation& animation, bool bShouldLoop /* = true */)
+void Keyboard::PlayAnimation(IAnimation& animation, bool bShouldLoop /*= true */)
 {
 	if (!animation.IsSupportedKB(this->GetKBType()))
 	{

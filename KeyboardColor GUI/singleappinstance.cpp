@@ -1,3 +1,5 @@
+//Created by BenRango
+
 #include "singleappinstance.h"
 #include <QHostAddress>
 #include <QCoreApplication>

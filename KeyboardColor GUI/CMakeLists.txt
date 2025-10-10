@@ -1,3 +1,5 @@
+#//Created by BenRango
+
 cmake_minimum_required(VERSION 3.16)
 
 project(KeyboardColor VERSION 0.1 LANGUAGES CXX)
@@ -16,6 +18,7 @@ set(PROJECT_SOURCES
     keyboardcoulour.cpp
     keyboardcoulour.h
     keyboardcoulour.ui
+    ui_keyboardcoulour.h
     appicon.rc
 )
 

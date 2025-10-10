@@ -1,3 +1,5 @@
+//Created by BenRango
+
 #ifndef KEYBOARDCOULOUR_H
 #define KEYBOARDCOULOUR_H
 #include <QProcess>

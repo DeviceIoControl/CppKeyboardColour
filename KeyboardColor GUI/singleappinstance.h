@@ -1,3 +1,5 @@
+//Created by BenRango
+
 #ifndef SINGLEAPPINSTANCE_H
 #define SINGLEAPPINSTANCE_H
 

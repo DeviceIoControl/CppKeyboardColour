@@ -1,9 +1,11 @@
+//Created by BenRango
+
 #include "keyboardcoulour.h"
-#include "./ui_keyboardcoulour.h"
+#include "ui_keyboardcoulour.h"
 #include <QDir>
 #include <QIcon>
 #include <filesystem>
-//#include <QtAwesome.h>
+
 KeyboardCoulour::KeyboardCoulour(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::KeyboardCoulour)

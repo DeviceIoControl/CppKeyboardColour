@@ -45,10 +45,22 @@
     <ClInclude Include="WbemService.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ServiceMain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="IAnimation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ColourShiftAnimation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NamedPipe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Service.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DeviceIds.h">
@@ -87,7 +99,7 @@
     <ClInclude Include="FakeKeyboardCommunicator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FreshBreatheAnimation.h">
+    <ClInclude Include="BreatheAnimationNewColours.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MathConstants.h">
@@ -105,10 +117,10 @@
     <ClInclude Include="CommandLine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IDeviceIdTranslator.h">
+    <ClInclude Include="xstl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SingleInstanceEvent.h">
+    <ClInclude Include="IDeviceIdTranslator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -134,34 +146,13 @@
     <ClCompile Include="BreatheAnimation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FreshBreatheAnimation.cpp">
+    <ClCompile Include="BreatheAnimationNewColours.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ColourTransformAnimation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PulsatingBlinkAnimation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DeviceIdRetriever.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="KeyboardCommunicatorFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FakeKeyboardCommunicator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WmiKBCommunicator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CommandLine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ColourFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InsydeKBCommunicator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
