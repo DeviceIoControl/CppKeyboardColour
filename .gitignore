@@ -8,10 +8,12 @@ Build/x64
 Build/.cmake/
 Build/.qt
 Build/Build/
+KeyboardColor GUI/build
 **generic
 **/iconengine
 **/imageformat
 **/networkinformation
+CppKeyboardColour/x64
 **/platforms
 **/styles
 **/CMakeFiles
