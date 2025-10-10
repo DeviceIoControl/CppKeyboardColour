@@ -1,5 +1,0 @@
-C:/Programmation/Git/CppKeyboardColour/Build/CMakeFiles/KeyboardColor.dir
-C:/Programmation/Git/CppKeyboardColour/Build/CMakeFiles/edit_cache.dir
-C:/Programmation/Git/CppKeyboardColour/Build/CMakeFiles/rebuild_cache.dir
-C:/Programmation/Git/CppKeyboardColour/Build/CMakeFiles/KeyboardColor_autogen_timestamp_deps.dir
-C:/Programmation/Git/CppKeyboardColour/Build/CMakeFiles/KeyboardColor_autogen.dir
