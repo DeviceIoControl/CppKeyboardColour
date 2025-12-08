@@ -23,6 +23,9 @@ public:
 		m_deviceIdToKBProps[DEVICE_ID_NP50RXX].kbType = KeyboardType::SINGLE_ZONE;
 		m_deviceIdToKBProps[DEVICE_ID_NP50RXX].kbCommunicatorType = KBCommunicatorType::Insyde;
 
+		m_deviceIdToKBProps[DEVICE_ID_NH70XX].kbType = KeyboardType::SINGLE_ZONE;
+		m_deviceIdToKBProps[DEVICE_ID_NH70XX].kbCommunicatorType = KBCommunicatorType::Insyde;
+
 		m_deviceIdToKBProps[DEVICE_ID_P650RS_G].kbType = KeyboardType::TRIPLE_ZONE;
 		m_deviceIdToKBProps[DEVICE_ID_P650RS_G].kbCommunicatorType = KBCommunicatorType::Wmi;
 
