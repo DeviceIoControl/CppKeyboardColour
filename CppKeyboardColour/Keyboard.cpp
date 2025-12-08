@@ -7,6 +7,8 @@
 #include "DeviceIdTranslator.h"
 #include "KeyboardCommunicatorFactory.h"
 
+#define STATUS_NOT_IMPLEMENTED 0xC0000002
+
 Keyboard::Keyboard()
 {
 	DeviceIdRetriever devIdRetriever{};
@@ -16,6 +18,12 @@ Keyboard::Keyboard()
 
 	auto pDevIdTranslator = std::make_unique<DeviceIdTranslator>();
 	m_kbType = pDevIdTranslator->TranslateToKBType(deviceId);
+
+	if (m_kbType == KeyboardType::NONE)
+	{
+		std::cout << "This system is not supported.\n\n Please request for support at the following URL: https://github.com/DeviceIoControl/CppKeyboardColour/issues/new.\n";
+		std::exit(STATUS_NOT_IMPLEMENTED);
+	}
 
 	KeyboardCommunicatorFactory kbCommFactory(std::move(pDevIdTranslator));
 	m_ptrKbComms = kbCommFactory.Create(deviceId);
@@ -69,7 +77,7 @@ void Keyboard::PlayAnimation(IAnimation& animation, bool bShouldLoop /* = true *
 {
 	if (!animation.IsSupportedKB(this->GetKBType()))
 	{
-		std::wcout << animation.GetName() << L" animation is not supported on this keyboard.\n";
+		std::wcout << animation.GetName() << L" animation is not supported on this system.\n";
 		return;
 	}
 
