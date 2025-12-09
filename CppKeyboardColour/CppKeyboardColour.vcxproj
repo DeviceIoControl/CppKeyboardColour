@@ -179,6 +179,7 @@
     <ClInclude Include="DeviceIdRetriever.h" />
     <ClInclude Include="InsydeKBCommunicator.h" />
     <ClInclude Include="KeyboardCommunicatorFactory.h" />
+    <ClInclude Include="KeyboardFactory.h" />
     <ClInclude Include="KeyboardType.h" />
     <ClInclude Include="MathConstants.h" />
     <ClInclude Include="PulsatingBlinkAnimation.h" />
@@ -207,6 +208,7 @@
       <FileType>CppCode</FileType>
     </ClCompile>
     <ClCompile Include="KeyboardCommunicatorFactory.cpp" />
+    <ClCompile Include="KeyboardFactory.cpp" />
     <ClCompile Include="PulsatingBlinkAnimation.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

@@ -3,30 +3,11 @@
 #include "stdafx.h"
 #include "Keyboard.h"
 #include "ColourFactory.h"
-#include "DeviceIdRetriever.h"
-#include "DeviceIdTranslator.h"
-#include "KeyboardCommunicatorFactory.h"
 
-#define STATUS_NOT_IMPLEMENTED 0xC0000002
-
-Keyboard::Keyboard()
+Keyboard::Keyboard(KeyboardType kbType, IKeyboardCommunicatorPtr ptrKbComms)
+	: m_kbType(kbType),
+	m_ptrKbComms(std::move(ptrKbComms))
 {
-	DeviceIdRetriever devIdRetriever{};
-	const auto deviceId = devIdRetriever.GetDeviceID();
-
-	std::cout << "Detected Device ID: 0x" << (void*)deviceId << "\n";
-
-	auto pDevIdTranslator = std::make_unique<DeviceIdTranslator>();
-	m_kbType = pDevIdTranslator->TranslateToKBType(deviceId);
-
-	if (m_kbType == KeyboardType::NONE)
-	{
-		std::cout << "This system is not supported.\n\n Please request for support at the following URL: https://github.com/DeviceIoControl/CppKeyboardColour/issues/new.\n";
-		std::exit(STATUS_NOT_IMPLEMENTED);
-	}
-
-	KeyboardCommunicatorFactory kbCommFactory(std::move(pDevIdTranslator));
-	m_ptrKbComms = kbCommFactory.Create(deviceId);
 }
 
 void Keyboard::SetColour(uint8_t r, uint8_t g, uint8_t b, Zone zone)

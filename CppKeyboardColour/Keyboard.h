@@ -4,14 +4,13 @@
 
 #include "IKeyboard.h"
 #include "IAnimation.h"
-#include "SystemAnimation.h"
 #include "IKeyboardCommunicator.h"
 
 class Keyboard 
 	: public IKeyboard
 {
 public:
-	Keyboard();
+	Keyboard(KeyboardType kbType, IKeyboardCommunicatorPtr ptrKbComms);
 
 	void SendCode(uint32_t code) override;
 	void SetColour(uint8_t r, uint8_t g, uint8_t b, Zone zone) override;
