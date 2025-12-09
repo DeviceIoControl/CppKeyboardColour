@@ -19,7 +19,7 @@ This is a cleaner, more organized, and efficient version of the initial program.
 
 ⚠️ **Warning:** The predefined fading theme may utilize **15% to 20% of CPU** at certain times. This will be optimized in future updates.
 
-⚠️ **Warning (2):** Ensure that the **InsydeDHCU.dll** file is in the same directory as `CLEVO_KeyboardColour.exe` if you're using a **Single-Zone** keyboard.
+⚠️ **Warning (2):** Ensure that the **InsydeDCHU.dll** file is in the same directory as `CLEVO_KeyboardColour.exe` if you're using a **Single-Zone** keyboard.
 
 ---
 
