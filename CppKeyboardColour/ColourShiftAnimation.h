@@ -5,7 +5,6 @@
 #include "IAnimation.h"
 #include "KeyboardType.h"
 #include "FrameCollection.h"
-#include "DeviceIdTranslator.h"
 
 class ColourShiftAnimation 
 	: public IAnimation

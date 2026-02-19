@@ -21,7 +21,6 @@ std::unique_ptr<IKeyboard> KeyboardFactory::Create() const
 	}
 
 	KeyboardCommunicatorFactory kbCommFactory(std::move(ptrDevIdTranslator));
-	auto ptrKbComms = kbCommFactory.Create(deviceId);
 
-	return std::make_unique<Keyboard>(kbType, std::move(ptrKbComms));
+	return std::make_unique<Keyboard>(kbType, kbCommFactory.Create(deviceId));
 }

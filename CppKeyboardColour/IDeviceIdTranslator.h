@@ -11,5 +11,5 @@ public:
 	virtual ~IDeviceIdTranslator() = default;
 
 	virtual KeyboardType TranslateToKBType(uint32_t deviceId) const = 0;
-	virtual KBCommunicatorType DeviceIdToKBCommunicatorType(uint32_t deviceId) const = 0;
+	virtual KBCommunicatorType TranslateToKBCommType(uint32_t deviceId) const = 0;
 };

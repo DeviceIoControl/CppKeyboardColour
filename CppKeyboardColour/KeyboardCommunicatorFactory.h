@@ -9,7 +9,7 @@ class KeyboardCommunicatorFactory
 public:
 	KeyboardCommunicatorFactory(std::unique_ptr<IDeviceIdTranslator> pDeviceIdTranslator);
 
-	IKeyboardCommunicatorPtr Create(uint32_t deviceId);
+	IKeyboardCommunicatorPtr Create(uint32_t deviceId) const;
 
 	~KeyboardCommunicatorFactory() = default;
 

@@ -1,9 +1,11 @@
 // Created by DeviceIoControl
 
 #include "stdafx.h"
+#include "DeviceIds.h"
 #include "DeviceIdRetriever.h"
 
-DeviceIdRetriever::DeviceIdRetriever()
+DeviceIdRetriever::DeviceIdRetriever(bool useFakeDeviceId /*= false*/) 
+	: m_useFakeDeviceId(useFakeDeviceId)
 {
 	m_hGetProductDLL = LoadGetProductDLL();
 	m_pfnGetProductID = reinterpret_cast<Detail::T_GetProductID_PCI>(GetProcAddress(m_hGetProductDLL, "GetProductID_PCI"));
@@ -11,18 +13,19 @@ DeviceIdRetriever::DeviceIdRetriever()
 
 uint32_t DeviceIdRetriever::GetDeviceID() const
 {
-	if (m_pfnGetProductID)
+	if (m_pfnGetProductID && !m_useFakeDeviceId)
 	{
 		// Call this function on a seperate thread to avoid causing COM issues on our thread
 		// as this DLL (GetProductID64!GetProductID_PCI specifically) is buggy.
 		return std::async(std::launch::async, DoGetProductID, m_pfnGetProductID).get();
 	}
 
-	return 0xFFFFFFFF;
+	return m_useFakeDeviceId ? DEVICE_ID_FAKE : 0xFFFFFFFF;
 }
 
 DeviceIdRetriever::~DeviceIdRetriever()
 {
+	m_useFakeDeviceId = false;
 	m_pfnGetProductID = nullptr;
 	FreeLibrary(m_hGetProductDLL);
 }

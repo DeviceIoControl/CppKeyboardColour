@@ -7,7 +7,6 @@
 #include "ColourFactory.h"
 #include "IAnimation.h"
 
-
 class BreatheAnimation 
 	: public IAnimation
 {

@@ -194,6 +194,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BreatheAnimation.cpp" />
+    <ClCompile Include="DeviceIdTranslator.cpp" />
     <ClCompile Include="FreshBreatheAnimation.cpp" />
     <ClCompile Include="ColourFactory.cpp" />
     <ClCompile Include="ColourShiftAnimation.cpp" />

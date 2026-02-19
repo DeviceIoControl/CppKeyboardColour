@@ -15,5 +15,9 @@ public:
 	~KeyboardFactory() = default;
 
 private:
-	DeviceIdRetriever m_deviceIdRetriever{};
+#ifdef FAKE_KEYBOARD
+	DeviceIdRetriever m_deviceIdRetriever{ true };
+#else
+	DeviceIdRetriever m_deviceIdRetriever{ false };
+#endif
 };

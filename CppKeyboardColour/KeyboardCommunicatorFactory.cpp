@@ -12,14 +12,14 @@ KeyboardCommunicatorFactory::KeyboardCommunicatorFactory(std::unique_ptr<IDevice
 {
 }
 
-IKeyboardCommunicatorPtr KeyboardCommunicatorFactory::Create(uint32_t deviceId)
+IKeyboardCommunicatorPtr KeyboardCommunicatorFactory::Create(uint32_t deviceId) const
 {
 	if (!m_pDeviceIdTranslator)
 	{
 		return nullptr;
 	}
 
-	switch (m_pDeviceIdTranslator->DeviceIdToKBCommunicatorType(deviceId))
+	switch (m_pDeviceIdTranslator->TranslateToKBCommType(deviceId))
 	{
 	case KBCommunicatorType::Fake:
 		return std::make_shared<FakeKeyboardCommunicator>();
