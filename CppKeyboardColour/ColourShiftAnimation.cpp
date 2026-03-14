@@ -1,6 +1,7 @@
 // Created by DeviceIoControl
 
 #include "stdafx.h"
+#include "ColourFactory.h"
 #include "ColourShiftAnimation.h"
 
 ColourShiftAnimation::ColourShiftAnimation()
@@ -51,16 +52,16 @@ uint32_t ColourShiftAnimation::Size() const
 }
 
 void ColourShiftAnimation::GeneratePhase1(uint8_t(&rgb)[3][3])
-{
+{	
 	for (int i = 0; i < 0xFF; ++i)
 	{
 		for (int y = 0; y < 3; ++y)
 		{
-			Colour zoneColour{};
-
-			zoneColour[INDEX_COLOUR_RED] = rgb[y][INDEX_COLOUR_RED];
-			zoneColour[INDEX_COLOUR_GREEN] = rgb[y][INDEX_COLOUR_GREEN];
-			zoneColour[INDEX_COLOUR_BLUE] = rgb[y][INDEX_COLOUR_BLUE];
+			auto const zoneColour = m_factory.Create(
+				rgb[y][INDEX_COLOUR_RED], 
+				rgb[y][INDEX_COLOUR_GREEN], 
+				rgb[y][INDEX_COLOUR_BLUE]
+			);
 
 			m_frames.AddFrame((Zone)y, zoneColour, 0);
 
@@ -76,10 +77,11 @@ void ColourShiftAnimation::GeneratePhase2(uint8_t(&rgb)[3][3])
 	{
 		for (int y = 0; y < 3; ++y)
 		{
-			Colour zoneColour{};
-			zoneColour[INDEX_COLOUR_RED] = rgb[y][INDEX_COLOUR_RED];
-			zoneColour[INDEX_COLOUR_GREEN] = rgb[y][INDEX_COLOUR_GREEN];
-			zoneColour[INDEX_COLOUR_BLUE] = rgb[y][INDEX_COLOUR_BLUE];
+			auto const zoneColour = m_factory.Create(
+				rgb[y][INDEX_COLOUR_RED],
+				rgb[y][INDEX_COLOUR_GREEN],
+				rgb[y][INDEX_COLOUR_BLUE]
+			);
 
 			m_frames.AddFrame((Zone)y, zoneColour, 0);
 
@@ -89,17 +91,17 @@ void ColourShiftAnimation::GeneratePhase2(uint8_t(&rgb)[3][3])
 	}
 }
 
-void  ColourShiftAnimation::GeneratePhase3(uint8_t(&rgb)[3][3])
+void ColourShiftAnimation::GeneratePhase3(uint8_t(&rgb)[3][3])
 {
 	for (int i = 0; i < 0xFF; ++i)
 	{
 		for (int y = 0; y < 3; ++y)
 		{
-			Colour zoneColour{};
-
-			zoneColour[INDEX_COLOUR_RED] = rgb[y][INDEX_COLOUR_RED];
-			zoneColour[INDEX_COLOUR_GREEN] = rgb[y][INDEX_COLOUR_GREEN];
-			zoneColour[INDEX_COLOUR_BLUE] = rgb[y][INDEX_COLOUR_BLUE];
+			auto const zoneColour = m_factory.Create(
+				rgb[y][INDEX_COLOUR_RED],
+				rgb[y][INDEX_COLOUR_GREEN],
+				rgb[y][INDEX_COLOUR_BLUE]
+			);
 
 			m_frames.AddFrame((Zone)y, zoneColour, 0);
 

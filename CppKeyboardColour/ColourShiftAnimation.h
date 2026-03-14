@@ -28,6 +28,7 @@ protected:
 
 private:
 	FrameCollection m_frames;
+	ColourFactory m_factory{};
 	
 	void GeneratePhase1(uint8_t(&rgb)[3][3]);
 	void GeneratePhase2(uint8_t(&rgb)[3][3]);
