@@ -33,6 +33,9 @@ void DeviceIdTranslator::InitializeSingleZoneKBs()
 	m_deviceIdToKBProps[DEVICE_ID_NKNP50XX].kbType = KeyboardType::SINGLE_ZONE;
 	m_deviceIdToKBProps[DEVICE_ID_NKNP50XX].kbCommsType = KBCommunicatorType::Insyde;
 
+	m_deviceIdToKBProps[DEVICE_ID_PC50DXX].kbType = KeyboardType::SINGLE_ZONE;
+	m_deviceIdToKBProps[DEVICE_ID_PC50DXX].kbCommsType = KBCommunicatorType::Insyde;
+
 	// m_deviceIdToKBProps[DEVICE_ID_NH77XX].kbType = KeyboardType::SINGLE_ZONE;
 	// m_deviceIdToKBProps[DEVICE_ID_NH77XX].kbCommsType = KBCommunicatorType::Insyde;
 }

@@ -9,4 +9,5 @@
 #define DEVICE_ID_NH70XX 0x00005015
 // #define DEVICE_ID_NH77XX - User did not respond with appropriate information.
 #define DEVICE_ID_NKNP50XX 0x0000866D
+#define DEVICE_ID_PC50DXX 0x000025A1
 #define DEVICE_ID_FAKE 0x12345678

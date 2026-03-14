@@ -2,7 +2,7 @@
 
 **A C++ version of the original "keyboard-colour-program" developed in C#.**
 
-This is a cleaner, more organized, and efficient version of the initial program. It is designed to provide enhanced features for customizing CLEVO keyboards with **RGB** lighting, supporting both **3-zone** and **1-zone** keyboards. The program also includes a variety of animated effects to enhance your keyboard’s visual experience.
+This is a cleaner, more organized, and efficient version of the initial program. It is designed to provide enhanced features for customizing CLEVO keyboards with **RGB** lighting, supporting both **1-zone** and **3-zone** keyboards. The program also includes a variety of animated effects to enhance your keyboard’s visual experience.
 
 ---
 
@@ -15,11 +15,13 @@ This is a cleaner, more organized, and efficient version of the initial program.
   - 🌈 **Fading Colors:** Smooth color transitions (predefined themes).
   - 🎥 **Optimized Animations:** Enhanced visual effects using animation objects.
 
-⚠️ **Important Note:** Ensure you run this program **as an administrator**, as Windows Management Instrumentation (WMI) requires administrative privileges to function properly.
+⚠️ **Important Note:** This application requests for **Administrator privileges**. Please ensure you accept the Windows UAC prompt, as Windows Management Instrumentation (WMI) requires this to function correctly.
 
-⚠️ **Warning:** The predefined fading theme may utilize **15% to 20% of CPU** at certain times. This will be optimized in future updates.
+⚠️ **Warning:** Certain themes may utilize **~15% of CPU** at certain times.
 
-⚠️ **Warning (2):** Ensure that the **InsydeDCHU.dll** file is in the same directory as `CLEVO_KeyboardColour.exe` if you're using a **Single-Zone** keyboard.
+⚠️ **Warning (2):** Please ensure that the **InsydeDCHU.dll** file is in the same directory as `CLEVO_KeyboardColour.exe` if you're using a **Single-Zone** keyboard.
+
+⚠️ **Warning (3):** Some anti-virus products may incorrectly flag this application as a **virus** and quarantine the program. If this happens, **please add the application to the AV exclusion list**.
 
 ---
 
@@ -28,7 +30,7 @@ This is a cleaner, more organized, and efficient version of the initial program.
 The following commands are supported and can be executed via the **Command Prompt**.
 
 ### 🖥️ General Syntax:
-Navigate to the folder containing the executable files (e.g., `CppKeyboardColour/Build/`) and run the commands in **administrator mode**. To execute the `.exe` files, prepend the `.\` before the command.
+Extract the program zip and run the commands **as an administrator**. To execute the `.exe` files, prepend the `.\` before the command.
 
 ```bash
 .\CLEVO_KeyboardColour.exe theme [themeName]
@@ -82,10 +84,7 @@ Navigate to the folder containing the executable files (e.g., `CppKeyboardColour
 
 ## 🛠️ How to Use
 
-1. Navigate to the folder containing the executable files:
-   ```
-   CppKeyboardColour/Build/
-   ```
+1. Download the release which contains the version of the program that supports your system.
 
 2. Open a **Command Prompt** in Administrator mode:
    - Search for "Command Prompt" in the Windows search bar.
@@ -111,7 +110,7 @@ To activate the breathing effect, run:
 - **Compatible CLEVO keyboards:**
   - **RGB 1-zone** or **3-zone** lighting.
   - For **1-zone keyboards**, the **InsydeDHCU.dll** file must be in the same directory as `CLEVO_KeyboardColour.exe`.
-- **Administrator Permissions:** Ensure the program is run as administrator to avoid WMI failures.
+- **Administrator Permissions:** This program requests for administrator privileges. Please ensure you accept the Windows UAC prompt to avoid WMI failures.
 
 ---
 
