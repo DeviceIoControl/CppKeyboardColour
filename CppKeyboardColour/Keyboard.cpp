@@ -2,7 +2,6 @@
 
 #include "stdafx.h"
 #include "Keyboard.h"
-#include "ColourFactory.h"
 
 Keyboard::Keyboard(KeyboardType kbType, IKeyboardCommunicatorPtr ptrKbComms)
 	: m_kbType(kbType),
@@ -12,8 +11,7 @@ Keyboard::Keyboard(KeyboardType kbType, IKeyboardCommunicatorPtr ptrKbComms)
 
 void Keyboard::SetColour(uint8_t r, uint8_t g, uint8_t b, Zone zone)
 {
-	ColourFactory factory{};
-	m_ptrKbComms->SetKBColour(zone, factory.Create(r, g, b));
+	m_ptrKbComms->SetKBColour(zone, m_colourFactory.Create(r, g, b));
 }
 
 KeyboardType Keyboard::GetKBType() const
@@ -49,7 +47,7 @@ void Keyboard::Animate(IAnimation& animation)
 				frame->zone
 			);
 
-			Sleep(frame->ms_time);
+			std::this_thread::sleep_for(std::chrono::milliseconds(frame->ms_time));
 		}
 	}
 }

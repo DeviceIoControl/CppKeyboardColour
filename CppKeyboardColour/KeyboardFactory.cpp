@@ -20,7 +20,7 @@ std::unique_ptr<IKeyboard> KeyboardFactory::Create() const
 		return nullptr;
 	}
 
-	KeyboardCommunicatorFactory kbCommFactory(std::move(ptrDevIdTranslator));
+	KeyboardCommunicatorFactory const kbCommFactory(std::move(ptrDevIdTranslator));
 
 	return std::make_unique<Keyboard>(kbType, kbCommFactory.Create(deviceId));
 }

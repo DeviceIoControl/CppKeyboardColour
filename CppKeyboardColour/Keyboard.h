@@ -4,6 +4,7 @@
 
 #include "IKeyboard.h"
 #include "IAnimation.h"
+#include "ColourFactory.h"
 #include "IKeyboardCommunicator.h"
 
 class Keyboard 
@@ -26,6 +27,7 @@ public:
 
 private:
 	KeyboardType m_kbType;
+	ColourFactory m_colourFactory{};
 	IKeyboardCommunicatorPtr m_ptrKbComms{};
 
 	void Animate(IAnimation& animation);

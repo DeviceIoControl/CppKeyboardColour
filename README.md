@@ -21,7 +21,7 @@ This is a cleaner, more organized, and efficient version of the initial program.
 
 ⚠️ **Warning (2):** Please ensure that the **InsydeDCHU.dll** file is in the same directory as `CLEVO_KeyboardColour.exe` if you're using a **Single-Zone** keyboard.
 
-⚠️ **Warning (3):** Some anti-virus products may incorrectly flag this application as a **virus** and quarantine the program. If this happens, **please add the application to the AV exclusion list**.
+⚠️ **Warning (3):** Some anti-virus products may incorrectly flag this application as **malware** and quarantine the program. If this happens, **please add the application to the AV exclusion list**.
 
 ---
 
@@ -54,7 +54,7 @@ Extract the program zip and run the commands **as an administrator**. To execute
   ```bash
   .\CLEVO_KeyboardColour.exe theme breathe
   ```
-  🌬️ Enables a breathing effect (smooth pulsing transitions between colors).
+  🌬️ Enables a breathing effect (smooth inhale/exhale transition pattern between colors).
 
 - **Colourshift:**  
   ```bash
@@ -80,6 +80,12 @@ Extract the program zip and run the commands **as an administrator**. To execute
   ```
   ✨ Makes the keyboard lights blink in a pulsating pattern.
 
+- **Heartbeat (Double Pulsating Blink):**  
+  ```bash
+  .\CLEVO_KeyboardColour.exe theme heartbeat
+  ```
+  💖 Makes the keyboard lights pulse red in a heartbeat pulse pattern.
+
 ---
 
 ## 🛠️ How to Use
@@ -102,6 +108,13 @@ To activate the breathing effect, run:
 ```bash
 .\CLEVO_KeyboardColour.exe theme breathe
 ```
+
+To trial the breathing effect, run:
+```bash
+.\CLEVO_KeyboardColour.exe trial_theme breathe
+```
+
+NOTE: This will run the theme once, and stop. Use this command line if you want to experiment with the available themes.
 
 ---
 

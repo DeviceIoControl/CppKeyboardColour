@@ -38,7 +38,6 @@ public:
 
 	uint32_t Size() const override;
 	
-
 private:
 	FrameCollection m_frames{};
 

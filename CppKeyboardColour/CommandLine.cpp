@@ -21,3 +21,23 @@
 		return _wcsicmp(cmdLine.c_str(), toFind.c_str()) == 0;
 		}) != cmdlines.cend();
 }
+
+/* static */ bool CommandLine::ExclusiveContains(const std::vector<std::wstring>& toFind, const std::vector<std::wstring>& cmdlines) 
+{
+	bool isFound = false;
+
+	for (auto const& current : toFind)
+	{
+		if (isFound && CommandLine::Contains(current, cmdlines))
+		{
+			return false;
+		}
+
+		if (!isFound && CommandLine::Contains(current, cmdlines)) 
+		{
+			isFound = true;
+		}
+	}
+
+	return isFound;
+}

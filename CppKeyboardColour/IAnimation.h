@@ -9,7 +9,6 @@
 class IAnimation 
 {
 public:
-
 	virtual std::wstring GetName() const = 0;
 
 	virtual std::optional<Frame> GetFrame(uint32_t idx) = 0;

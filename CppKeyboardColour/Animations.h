@@ -9,3 +9,4 @@
 #include "FreshBreatheAnimation.h"
 #include "ColourTransformAnimation.h"
 #include "PulsatingBlinkAnimation.h"
+#include "HeartbeatAnimation.h"
