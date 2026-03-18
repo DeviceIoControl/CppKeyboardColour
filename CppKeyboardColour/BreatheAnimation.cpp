@@ -71,6 +71,7 @@ void BreatheAnimation::GeneratePhase3()
 	{
 		const auto currentStep = (180.0f / STEPS) * i;
 
+		// Generate a sine wave for a breathing effect.
 		const auto colour = m_factory.Create(0, 0, 255 * std::sin(currentStep * (MATH_PI / 180.0f)));
 
 		m_frames.AddFrame(Zone::ALL, colour, FRAME_DURATION_MS);

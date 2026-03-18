@@ -18,4 +18,6 @@ public:
 private:
 	ScopedComPtr<IWbemClassObject> m_pDataParameter;
 	ScopedComPtr<IWbemClassObject> m_pClevoGetObject;
+
+	bool SetKBZoneColour(Zone zone, const Colour& colour);
 };

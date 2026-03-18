@@ -20,37 +20,38 @@ WmiKBCommunicator::WmiKBCommunicator()
 
 bool WmiKBCommunicator::SetKBColour(Zone zone, const Colour& colour)
 {
+	if (zone > Zone::ALL)
+	{
+		return false;
+	}
+
 	if (zone == Zone::ALL)
 	{
-		for (int i = 0; i < 3; ++i)
+		for (auto const currentZone : { Zone::LEFT, Zone::MID, Zone::RIGHT })
 		{
-			const std::array<uint8_t, 4> parameterData
+			if (!this->SetKBZoneColour(currentZone, colour))
 			{
-				colour[INDEX_COLOUR_GREEN],
-				colour[INDEX_COLOUR_RED],
-				colour[INDEX_COLOUR_BLUE],
-				0xF0 + i
-			};
-
-			this->SendKBCode(*reinterpret_cast<const uint32_t*>(parameterData.data()));
+				return false;
+			}
 		}
 
 		return true;
 	}
-	else
+
+	return this->SetKBZoneColour(zone, colour);
+}
+
+bool WmiKBCommunicator::SetKBZoneColour(Zone zone, const Colour& colour)
+{
+	const std::array<uint8_t, 4> parameterData
 	{
-		const std::array<uint8_t, 4> parameterData
-		{
-			colour[INDEX_COLOUR_GREEN],
-			colour[INDEX_COLOUR_RED],
-			colour[INDEX_COLOUR_BLUE],
-			0xF0 + static_cast<uint16_t>(zone)
-		};
+		colour[INDEX_COLOUR_GREEN],
+		colour[INDEX_COLOUR_RED],
+		colour[INDEX_COLOUR_BLUE],
+		0xF0 + static_cast<uint16_t>(zone)
+	};
 
-		return this->SendKBCode(*reinterpret_cast<const uint32_t*>(parameterData.data()));
-	}
-
-	return false;
+	return this->SendKBCode(*reinterpret_cast<const uint32_t*>(parameterData.data()));
 }
 
 bool WmiKBCommunicator::SendKBCode(uint32_t code)

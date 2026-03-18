@@ -63,7 +63,7 @@ void ColourTransformAnimation::GenerateColourTransform(const Colour& startColour
 
 		for (size_t channel = 0; channel < startColour.size(); ++channel)
 		{
-			size_t difference = CalculateDifference(startColour[channel], endColour[channel]);
+			size_t const difference = CalculateDifference(startColour[channel], endColour[channel]);
 
 			if (startColour[channel] < endColour[channel])
 			{

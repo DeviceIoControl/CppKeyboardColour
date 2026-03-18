@@ -19,7 +19,7 @@ public:
 	// Turns the keyboard backlight to its default colour (which is blue for all CLEVO laptops)
 	void SetBacklightOn() override;
 	void SetBacklightOff() override;
-	void PlayAnimation(IAnimation& animation, bool bShouldLoop = true) override;
+	void PlayAnimation(IAnimation& animation, bool bShouldLoop) override;
 
 	KeyboardType GetKBType() const;
 

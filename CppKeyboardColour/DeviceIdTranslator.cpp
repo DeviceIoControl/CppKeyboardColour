@@ -24,20 +24,17 @@ KBCommunicatorType DeviceIdTranslator::TranslateToKBCommType(uint32_t deviceId) 
 
 void DeviceIdTranslator::InitializeSingleZoneKBs()
 {
-	m_deviceIdToKBProps[DEVICE_ID_NP50RXX].kbType = KeyboardType::SINGLE_ZONE;
-	m_deviceIdToKBProps[DEVICE_ID_NP50RXX].kbCommsType = KBCommunicatorType::Insyde;
+	std::array<uint32_t, 4> constexpr singleZoneDeviceIds
+	{
+		DEVICE_ID_NP50RXX, DEVICE_ID_NH70XX, DEVICE_ID_NKNP50XX,
+		DEVICE_ID_PC50DXX // DEVICE_ID_NH77XX
+	};
 
-	m_deviceIdToKBProps[DEVICE_ID_NH70XX].kbType = KeyboardType::SINGLE_ZONE;
-	m_deviceIdToKBProps[DEVICE_ID_NH70XX].kbCommsType = KBCommunicatorType::Insyde;
-
-	m_deviceIdToKBProps[DEVICE_ID_NKNP50XX].kbType = KeyboardType::SINGLE_ZONE;
-	m_deviceIdToKBProps[DEVICE_ID_NKNP50XX].kbCommsType = KBCommunicatorType::Insyde;
-
-	m_deviceIdToKBProps[DEVICE_ID_PC50DXX].kbType = KeyboardType::SINGLE_ZONE;
-	m_deviceIdToKBProps[DEVICE_ID_PC50DXX].kbCommsType = KBCommunicatorType::Insyde;
-
-	// m_deviceIdToKBProps[DEVICE_ID_NH77XX].kbType = KeyboardType::SINGLE_ZONE;
-	// m_deviceIdToKBProps[DEVICE_ID_NH77XX].kbCommsType = KBCommunicatorType::Insyde;
+	for (auto const currentDeviceId : singleZoneDeviceIds)
+	{
+		m_deviceIdToKBProps[currentDeviceId].kbType = KeyboardType::SINGLE_ZONE;
+		m_deviceIdToKBProps[currentDeviceId].kbCommsType = KBCommunicatorType::Insyde;
+	}
 }
 
 void DeviceIdTranslator::InitializeTripleZoneKBs()

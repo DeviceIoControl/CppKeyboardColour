@@ -3,6 +3,8 @@
 #include "stdafx.h"
 #include "Keyboard.h"
 
+using millisec = std::chrono::milliseconds;
+
 Keyboard::Keyboard(KeyboardType kbType, IKeyboardCommunicatorPtr ptrKbComms)
 	: m_kbType(kbType),
 	m_ptrKbComms(std::move(ptrKbComms))
@@ -47,12 +49,12 @@ void Keyboard::Animate(IAnimation& animation)
 				frame->zone
 			);
 
-			std::this_thread::sleep_for(std::chrono::milliseconds(frame->ms_time));
+			std::this_thread::sleep_for(millisec(frame->ms_time));
 		}
 	}
 }
 
-void Keyboard::PlayAnimation(IAnimation& animation, bool bShouldLoop /* = true */)
+void Keyboard::PlayAnimation(IAnimation& animation, bool bShouldLoop)
 {
 	if (!animation.IsSupportedKB(this->GetKBType()))
 	{

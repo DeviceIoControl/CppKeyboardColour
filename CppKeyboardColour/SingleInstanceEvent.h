@@ -1,7 +1,6 @@
 // Created by DeviceIoControl
 
 #pragma once
-
 #include "stdafx.h"
 
 #define SINGLE_INSTANCE_NAME L"Global\\CLEVO_KBC_INSTANCE"
