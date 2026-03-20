@@ -98,7 +98,7 @@ Extract the program zip and run the commands **as an administrator**. To execute
   ```bash
   .\CLEVO_KeyboardColour.exe inbuilt KB_MODE_BREATHE
   ```
-  🌬️ Enables a breathing effect (smooth inhale/exhale pattern on a single colour).
+  🌬️ Enables a breathing effect (Smooth inhale/exhale pattern on a single colour).
 
 - **Wave Effect:**  
   ```bash
@@ -166,7 +166,9 @@ To activate the inbuilt 'Wave' effect, run:
 ```
 NOTE: This command does not support the `--once` argument.
 
-⚠️ **Warning:** This will use the themes that are programmed directly into your system, thus application has no control over the colours these inbuilt themes use.
+⚠️ **Warning:** This will use the themes that are programmed directly into your system, thus this application has no control over the colours these inbuilt themes use.
+
+⚠️ **Warning (2):** This is supported on 3-Zone keyboard ONLY.
 
 
 To turn off the keyboard backlight, run:
