@@ -33,8 +33,9 @@ The following commands are supported and can be executed via the **Command Promp
 Extract the program zip and run the commands **as an administrator**. To execute the `.exe` files, prepend the `.\` before the command.
 
 ```bash
-.\CLEVO_KeyboardColour.exe theme [themeName]
+.\CLEVO_KeyboardColour.exe theme/inbuilt/backlight [argument]
 ```
+---
 
 ### ⌨️ Backlight Operations: 
 
