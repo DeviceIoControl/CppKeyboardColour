@@ -36,19 +36,23 @@ Extract the program zip and run the commands **as an administrator**. To execute
 .\CLEVO_KeyboardColour.exe theme [themeName]
 ```
 
-### 🎨 Supported Themes:
+### ⌨️ Backlight Operations: 
 
 - **Turn Backlight Off:**  
   ```bash
-  .\CLEVO_KeyboardColour.exe theme off
+  .\CLEVO_KeyboardColour.exe backlight off
   ```
   🖤 Turns off the keyboard backlight.
 
 - **Default Backlight:**
   ```bash
-  .\CLEVO_KeyboardColour.exe theme default
+  .\CLEVO_KeyboardColour.exe backlight on
   ```
   💙 Enables the default keyboard backlight colour (Solid Blue).
+
+---
+
+### 🎨 Supported Animations:
 
 - **Breathing Effect:**  
   ```bash
@@ -84,7 +88,47 @@ Extract the program zip and run the commands **as an administrator**. To execute
   ```bash
   .\CLEVO_KeyboardColour.exe theme heartbeat
   ```
-  💖 Makes the keyboard lights pulse red in a heartbeat pulse pattern.
+  💖 Makes the keyboard lights pulse red in a heartbeat pattern.
+
+---
+
+### ⚙️ Inbuilt Themes (3-Zone Keyboards ONLY):
+
+- **Breathing Effect:**  
+  ```bash
+  .\CLEVO_KeyboardColour.exe inbuilt KB_MODE_BREATHE
+  ```
+  🌬️ Enables a breathing effect (smooth inhale/exhale pattern on a single colour).
+
+- **Wave Effect:**  
+  ```bash
+  .\CLEVO_KeyboardColour.exe inbuilt KB_MODE_WAVE
+  ```
+  🌊 Enables a colour wave effect (Various colours transition from Left -> Mid -> Right zone of the keyboard).
+
+- **Cycle Effect:**  
+  ```bash
+  .\CLEVO_KeyboardColour.exe inbuilt KB_MODE_CYCLE
+  ```
+  🔄 Enables a breathing effect with various colour (Smooth inhale/exhale pattern over various colours).
+
+- **Dance Effect:**  
+  ```bash
+  .\CLEVO_KeyboardColour.exe inbuilt KB_MODE_DANCE
+  ```
+  🕺 Enables a flashy side-to-side dancing effect with various colours.
+
+- **Flash Effect:**  
+  ```bash
+  .\CLEVO_KeyboardColour.exe inbuilt KB_MODE_FLASH
+  ```
+  🔦 Makes the entire keyboard blink in various colours.
+
+- **Tempo Effect:**  
+  ```bash
+  .\CLEVO_KeyboardColour.exe inbuilt KB_MODE_TEMPO
+  ```
+  🎶 Makes the keyboard lights 'dance' to the tempo of the music being played on the system (Keyboard tempo accuracy may vary on your system).
 
 ---
 
@@ -100,21 +144,36 @@ Extract the program zip and run the commands **as an administrator**. To execute
 
 4. Run the desired command using the syntax:
    ```
-   .\CLEVO_KeyboardColour.exe theme [themeName]
+   .\CLEVO_KeyboardColour.exe theme/inbuilt/backlight [argument]
    ```
 
 Example:  
-To activate the breathing effect, run:
+To activate the 'breathing' effect, run:
 ```bash
 .\CLEVO_KeyboardColour.exe theme breathe
 ```
 
-To trial the breathing effect, run:
+To activate an effect for a single iteration, add the `--once` argument:
 ```bash
-.\CLEVO_KeyboardColour.exe trial_theme breathe
+.\CLEVO_KeyboardColour.exe theme breathe --once
 ```
-
 NOTE: This will run the theme once, and stop. Use this command line if you want to experiment with the available themes.
+
+
+To activate the inbuilt 'Wave' effect, run:
+```bash
+.\CLEVO_KeyboardColour.exe inbuilt KB_MODE_WAVE
+```
+NOTE: This command does not support the `--once` argument.
+
+⚠️ **Warning:** This will use the themes that are programmed directly into your system, thus application has no control over the colours these inbuilt themes use.
+
+
+To turn off the keyboard backlight, run:
+```bash
+.\CLEVO_KeyboardColour.exe backlight off
+```
+NOTE: This command does not support the `--once` argument.
 
 ---
 

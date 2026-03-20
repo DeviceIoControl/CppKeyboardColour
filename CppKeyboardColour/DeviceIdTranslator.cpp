@@ -24,10 +24,10 @@ KBCommunicatorType DeviceIdTranslator::TranslateToKBCommType(uint32_t deviceId) 
 
 void DeviceIdTranslator::InitializeSingleZoneKBs()
 {
-	std::array<uint32_t, 4> constexpr singleZoneDeviceIds
+	std::array<uint32_t, 5> constexpr singleZoneDeviceIds
 	{
 		DEVICE_ID_NP50RXX, DEVICE_ID_NH70XX, DEVICE_ID_NKNP50XX,
-		DEVICE_ID_PC50DXX // DEVICE_ID_NH77XX
+		DEVICE_ID_PC50DXX, DEVICE_ID_A715XX // DEVICE_ID_NH77XX
 	};
 
 	for (auto const currentDeviceId : singleZoneDeviceIds)

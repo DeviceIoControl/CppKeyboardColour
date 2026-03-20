@@ -40,6 +40,7 @@ bool InsydeKBCommunicator::SetKBColour(Zone zone, const Colour& colour)
 // Unsupported for now.
 bool InsydeKBCommunicator::SendKBCode(uint32_t /* code */)
 {
+	std::cout << "This system does not support this operation.\n";
 	return false;
 }
 
