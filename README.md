@@ -17,7 +17,7 @@ This is a cleaner, more organized, and efficient version of the initial program.
 
 ⚠️ **Important Note:** This application requests for **Administrator privileges**. Please ensure you accept the Windows UAC prompt, as Windows Management Instrumentation (WMI) requires this to function correctly.
 
-⚠️ **Warning:** Certain themes may utilize **~15% of CPU** at certain times.
+⚠️ **Warning (1):** Certain themes may utilize **~15% of CPU** at certain times.
 
 ⚠️ **Warning (2):** Please ensure that the **InsydeDCHU.dll** file is in the same directory as `CLEVO_KeyboardColour.exe` if you're using a **Single-Zone** keyboard.
 
@@ -148,7 +148,9 @@ Extract the program zip and run the commands **as an administrator**. To execute
    .\CLEVO_KeyboardColour.exe theme/inbuilt/backlight [argument]
    ```
 
-Example:  
+---
+
+### Examples:
 To activate the 'breathing' effect, run:
 ```bash
 .\CLEVO_KeyboardColour.exe theme breathe
@@ -167,7 +169,7 @@ To activate the inbuilt 'Wave' effect, run:
 ```
 NOTE: This command does not support the `--once` argument.
 
-⚠️ **Warning:** This will use the themes that are programmed directly into your system, thus this application has no control over the colours these inbuilt themes use.
+⚠️ **Warning (1):** This will use the themes that are programmed directly into your system, thus this application has no control over the colours these inbuilt themes use.
 
 ⚠️ **Warning (2):** This is supported on 3-Zone keyboard ONLY.
 

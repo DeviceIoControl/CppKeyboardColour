@@ -30,9 +30,9 @@ bool InsydeKBCommunicator::SetKBColour(Zone zone, const Colour& colour)
 		0xF0
 	};
 
-	m_pfnSetDCHU_Data(103, dchuData.data(), dchuData.size());
-	m_pfnWriteAppSettings(2, 81, colour.size(), colour.data());
-	m_pfnWriteAppSettings(2, 32, 1, &mode);
+	m_pfnSetDCHU_Data(0x67, dchuData.data(), dchuData.size());
+	m_pfnWriteAppSettings(2, 0x51, colour.size(), colour.data());
+	m_pfnWriteAppSettings(2, 0x20, 1, &mode);
 
 	return true;
 }

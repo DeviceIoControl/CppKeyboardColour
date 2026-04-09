@@ -82,7 +82,7 @@ void FreshBreatheAnimation::GenerateBreathe(const Colour& targetColour, uint32_t
 			currentColour[channel] = targetColour[channel] * std::sin(channelBrightness * (MATH_PI / 180.0f));
 		}
 
-		Frame frame(Zone::ALL, currentColour, stepTimeMs);
+		Frame const frame(Zone::ALL, currentColour, stepTimeMs);
 
 		this->AddFrame(frame);
 	}

@@ -2,7 +2,6 @@
 
 #include "stdafx.h"
 #include "WmiKBCommunicator.h"
-#include "WbemService.h"
 
 #define CLEVO_WMI_OBJECT_NAME L"CLEVO_GET"
 #define CLEVO_WMI_KB_FUNCTION_NAME L"SetKBLED"
@@ -10,7 +9,7 @@
 
 WmiKBCommunicator::WmiKBCommunicator()
 {
-	m_pClevoGetObject = WMI::Get()->GetWbemClassObject(CLEVO_WMI_OBJECT_NAME);
+	m_pClevoGetObject = m_wbemService.GetWbemClassObject(CLEVO_WMI_OBJECT_NAME);
 
 	IWbemClassObject* pDataParameter = nullptr;
 	m_pClevoGetObject->GetMethod(CLEVO_WMI_KB_FUNCTION_NAME, NULL, &pDataParameter, nullptr);
@@ -61,7 +60,7 @@ bool WmiKBCommunicator::SendKBCode(uint32_t code)
 	parameters.uintVal = code;
 
 	const auto hr = m_pDataParameter->Put((BSTR)L"Data", NULL, &parameters, CIM_UINT32);
-	std::ignore = WMI::Get()->ExecuteMethod(CLEVO_WMI_INSTANCE_NAME, CLEVO_WMI_KB_FUNCTION_NAME, m_pDataParameter.Get());
+	std::ignore = m_wbemService.ExecuteMethod(CLEVO_WMI_INSTANCE_NAME, CLEVO_WMI_KB_FUNCTION_NAME, m_pDataParameter.Get());
 
 	return SUCCEEDED(hr);
 }

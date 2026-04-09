@@ -4,6 +4,7 @@
 
 #include "ScopedComPtr.h"
 #include "IKeyboardCommunicator.h"
+#include "WbemService.h"
 
 class WmiKBCommunicator
 	: public IKeyboardCommunicator
@@ -16,6 +17,7 @@ public:
 	bool SendKBCode(uint32_t code) override;
 
 private:
+	WbemService m_wbemService{};
 	ScopedComPtr<IWbemClassObject> m_pDataParameter;
 	ScopedComPtr<IWbemClassObject> m_pClevoGetObject;
 
