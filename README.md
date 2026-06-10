@@ -14,6 +14,7 @@ This is a cleaner, more organized, and efficient version of the initial program.
 - **Predefined Animated Effects:**
   - 🌈 **Fading Colors:** Smooth color transitions (predefined themes).
   - 🎥 **Optimized Animations:** Enhanced visual effects using animation objects.
+  - ⏱️ **Custom Speed:** Change the speed to make an animation faster or slower.
 
 ⚠️ **Important Note:** This application requests for **Administrator privileges**. Please ensure you accept the Windows UAC prompt, as Windows Management Instrumentation (WMI) requires this to function correctly.
 
@@ -33,7 +34,7 @@ The following commands are supported and can be executed via the **Command Promp
 Extract the program zip and run the commands **as an administrator**. To execute the `.exe` files, prepend the `.\` before the command.
 
 ```bash
-.\CLEVO_KeyboardColour.exe theme/inbuilt/backlight [argument]
+.\CLEVO_KeyboardColour.exe theme/inbuilt/backlight [argument] -speed [speed]
 ```
 ---
 
@@ -133,6 +134,25 @@ Extract the program zip and run the commands **as an administrator**. To execute
 
 ---
 
+### ⏱️ Custom Speed:
+
+- **Slower**  
+  ```bash
+  .\CLEVO_KeyboardColour.exe theme colourtransform -speed 50
+  ```
+  🌈 Creates a slow rainbow sweep effect with smooth transitions at 50% speed.
+
+- **Faster**  
+  ```bash
+  .\CLEVO_KeyboardColour.exe theme colourtransform -speed 200
+  ```
+  🌈 Creates a fast rainbow sweep effect with smooth transitions at 200% speed.
+
+
+**Setting speed is not required. You can leave it out, and it will default to the standard speed.**
+
+---
+
 ## 🛠️ How to Use
 
 1. Download the release which contains the version of the program that supports your system.
@@ -145,7 +165,7 @@ Extract the program zip and run the commands **as an administrator**. To execute
 
 4. Run the desired command using the syntax:
    ```
-   .\CLEVO_KeyboardColour.exe theme/inbuilt/backlight [argument]
+   .\CLEVO_KeyboardColour.exe theme/inbuilt/backlight [argument] -speed [speed]
    ```
 
 ---
