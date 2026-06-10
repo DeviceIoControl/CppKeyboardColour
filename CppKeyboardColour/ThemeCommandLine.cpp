@@ -109,3 +109,17 @@ std::unique_ptr<IAnimation> ProcessThemeCommandLine(const std::vector<std::wstri
 
 	return nullptr;
 }
+
+float ProcessSpeedCommandLine(const std::vector<std::wstring>& cmdLines)
+{
+    for (size_t i = 0; i < cmdLines.size(); ++i)
+    {
+        if (cmdLines[i] == L"-speed" && i + 1 < cmdLines.size())
+        {
+            int percent = std::stoi(cmdLines[i + 1]);
+            if (percent <= 0) percent = 100;
+            return static_cast<float>(percent) / 100.0f;
+        }
+    }
+    return 1.0f; // normal speed
+}

@@ -36,16 +36,24 @@ void Keyboard::SetBacklightOn()
 	this->SetColour(0x00, 0x00, 0xFF, Zone::ALL);
 }
 
+void Keyboard::SetSpeedFactor(float factor)
+{
+    m_speedFactor = factor;
+}
+
 void Keyboard::Animate(IAnimation& animation)
 {
-	for (size_t i = 0; i < animation.Size(); ++i)
-	{
-		if (const auto frame = animation.GetFrame(i))
-		{
-			m_ptrKbComms->SetKBColour(frame->zone, frame->colour);
-			std::this_thread::sleep_for(millisec(frame->ms_time));
-		}
-	}
+    for (size_t i = 0; i < animation.Size(); ++i)
+    {
+        if (const auto frame = animation.GetFrame(i))
+        {
+            m_ptrKbComms->SetKBColour(frame->zone, frame->colour);
+            // MODIFIED: apply speed factor to the sleep duration
+            uint32_t sleepMs = static_cast<uint32_t>(frame->ms_time / m_speedFactor);
+            if (sleepMs < 1) sleepMs = 1;
+            std::this_thread::sleep_for(millisec(sleepMs));
+        }
+    }
 }
 
 void Keyboard::PlayAnimation(IAnimation& animation, bool bShouldLoop)

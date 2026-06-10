@@ -23,12 +23,16 @@ public:
 
 	KeyboardType GetKBType() const;
 
+	void SetSpeedFactor(float factor) override;
+
 	~Keyboard() = default;
 
 private:
 	KeyboardType m_kbType;
 	ColourFactory m_colourFactory{};
 	IKeyboardCommunicatorPtr m_ptrKbComms{};
+
+	float m_speedFactor = 1.0f;
 
 	void Animate(IAnimation& animation);
 };
