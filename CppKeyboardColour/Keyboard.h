@@ -23,7 +23,7 @@ public:
 
 	KeyboardType GetKBType() const;
 
-	void SetSpeedFactor(float factor) override;
+	bool SetSpeedFactor(float factor) override;
 
 	~Keyboard() = default;
 

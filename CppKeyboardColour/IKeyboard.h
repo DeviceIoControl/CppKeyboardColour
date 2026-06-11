@@ -16,7 +16,7 @@ public:
 	virtual void PlayAnimation(IAnimation& animation, bool bShouldLoop) = 0;
 	virtual KeyboardType GetKBType() const = 0;
 
-	virtual void SetSpeedFactor(float factor) = 0;
+	virtual bool SetSpeedFactor(float factor) = 0;
 
     virtual ~IKeyboard() = default;
 };
