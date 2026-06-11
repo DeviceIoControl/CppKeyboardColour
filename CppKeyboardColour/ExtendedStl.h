@@ -23,4 +23,17 @@ namespace xstd
 	{
 		return static_cast<std::underlying_type_t<_Ty>>(value);
 	}
+
+	inline std::optional<int32_t> stoi(const std::wstring& input) 
+	{
+		try
+		{
+			return std::stoi(input);
+		}
+		catch (...) 
+		{
+			return std::nullopt;
+		}
+	}
+
 } // namespace xstd

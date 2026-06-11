@@ -164,6 +164,7 @@
   <ItemGroup>
     <ClInclude Include="Animations.h" />
     <ClInclude Include="BreatheAnimation.h" />
+    <ClInclude Include="ConsoleUtils.h" />
     <ClInclude Include="ExtendedStl.h" />
     <ClInclude Include="FreshBreatheAnimation.h" />
     <ClInclude Include="ColourFactory.h" />
@@ -186,6 +187,7 @@
     <ClInclude Include="InsydeKBCommunicator.h" />
     <ClInclude Include="KeyboardCommunicatorFactory.h" />
     <ClInclude Include="KeyboardFactory.h" />
+    <ClInclude Include="KeyboardOperationsHandler.h" />
     <ClInclude Include="KeyboardType.h" />
     <ClInclude Include="MathConstants.h" />
     <ClInclude Include="PulsatingBlinkAnimation.h" />
@@ -202,6 +204,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BreatheAnimation.cpp" />
+    <ClCompile Include="ConsoleUtils.cpp" />
     <ClCompile Include="DeviceIdTranslator.cpp" />
     <ClCompile Include="FreshBreatheAnimation.cpp" />
     <ClCompile Include="ColourFactory.cpp" />
@@ -219,6 +222,7 @@
     </ClCompile>
     <ClCompile Include="KeyboardCommunicatorFactory.cpp" />
     <ClCompile Include="KeyboardFactory.cpp" />
+    <ClCompile Include="KeyboardOperationsHandler.cpp" />
     <ClCompile Include="PulsatingBlinkAnimation.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

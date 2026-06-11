@@ -49,7 +49,7 @@
 	std::vector<std::wstring> followingCmds{};
 	auto const _toFind = xstd::to_lower_case(toFind);
 
-	for (auto const& currentCmd : cmdLines) 
+	for (auto const& currentCmd : cmdLines)
 	{
 		if (!foundCommand && currentCmd == _toFind)
 		{

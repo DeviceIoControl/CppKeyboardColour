@@ -29,7 +29,7 @@ BacklightType ProcessBacklightCommandLine(const std::vector<std::wstring>& cmdLi
 {
 	auto const ourCmds = CommandLine::GetCommandsAfter(L"backlight", cmdLines);
 
-	if (ourCmds.empty()) 
+	if (ourCmds.empty())
 	{
 		return BacklightType::Invalid;
 	}
@@ -74,7 +74,7 @@ std::unique_ptr<IAnimation> ProcessThemeCommandLine(const std::vector<std::wstri
 {
 	auto const ourCmds = CommandLine::GetCommandsAfter(L"theme", cmdLines);
 
-	if (ourCmds.empty()) 
+	if (ourCmds.empty())
 	{
 		std::cout << "Invalid theme command.\n";
 		return nullptr;
@@ -108,4 +108,14 @@ std::unique_ptr<IAnimation> ProcessThemeCommandLine(const std::vector<std::wstri
 	std::cout << "Invalid animation name was provided!\n";
 
 	return nullptr;
+}
+
+float ProcessSpeedCommandLine(const std::vector<std::wstring>& cmdLines)
+{
+	if (auto const afterCmdLine = CommandLine::GetCommandsAfter(L"-speed", cmdLines); !afterCmdLine.empty())
+	{
+		return xstd::stoi(afterCmdLine[0]).value_or(1.0f) / 100.0f;
+	}
+
+	return 1.0f; // normal speed
 }

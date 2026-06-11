@@ -20,6 +20,7 @@ public:
 	void SetBacklightOn() override;
 	void SetBacklightOff() override;
 	void PlayAnimation(IAnimation& animation, bool bShouldLoop) override;
+	bool SetSpeedFactor(float factor) override;
 
 	KeyboardType GetKBType() const;
 
@@ -29,6 +30,8 @@ private:
 	KeyboardType m_kbType;
 	ColourFactory m_colourFactory{};
 	IKeyboardCommunicatorPtr m_ptrKbComms{};
+
+	float m_speedFactor = 1.0f;
 
 	void Animate(IAnimation& animation);
 };
