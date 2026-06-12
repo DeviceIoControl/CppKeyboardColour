@@ -30,7 +30,7 @@ namespace xstd
 		{
 			return std::stoi(input);
 		}
-		catch (...) 
+		catch (...)
 		{
 			return std::nullopt;
 		}

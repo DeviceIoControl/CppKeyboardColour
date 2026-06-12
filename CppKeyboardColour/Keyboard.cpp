@@ -36,9 +36,9 @@ void Keyboard::SetBacklightOn()
 	this->SetColour(0x00, 0x00, 0xFF, Zone::ALL);
 }
 
-bool Keyboard::SetSpeedFactor(float factor) 
+bool Keyboard::SetSpeedFactor(float factor)
 {
-	if ((factor > 0.01f) && (factor < 2.5f))
+	if ((factor >= 0.01f) && (factor <= 2.5f))
 	{
 		m_speedFactor = factor;
 		return true;

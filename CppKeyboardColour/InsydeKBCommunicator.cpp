@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "InsydeKBCommunicator.h"
+#include "ConsoleUtils.h"
 
 #define INSYDE_DLL L"InsydeDCHU.dll"
 
@@ -61,6 +62,7 @@ HMODULE InsydeKBCommunicator::LoadInsydeDCHU_DLL() const
 	if (!hModule || hModule == INVALID_HANDLE_VALUE)
 	{
 		std::wcout << L"Cannot load " << INSYDE_DLL << L". Please ensure the DLL is within the same directory!\n";
+		WaitForEnterIfNeeded();
 		std::exit(STATUS_DLL_NOT_FOUND);
 	}
 
