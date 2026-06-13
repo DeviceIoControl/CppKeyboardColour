@@ -18,6 +18,11 @@ void FrameCollection::AddFrame(Zone activeZone, Colour zoneColour, uint32_t msTi
 	m_frames.emplace_back(activeZone, zoneColour, msTime);
 }
 
+void FrameCollection::AddFrames(const FrameCollection& frames)
+{
+	std::copy(frames.m_frames.cbegin(), frames.m_frames.cend(), std::back_inserter(m_frames));
+}
+
 std::optional<Frame> FrameCollection::GetFrame(uint32_t idx)
 {
 	return (m_frames.size() >= idx) ? std::make_optional(m_frames[idx]) : std::nullopt;

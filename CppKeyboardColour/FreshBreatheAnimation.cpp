@@ -72,18 +72,6 @@ void FreshBreatheAnimation::AddFrame(const Frame& frame)
 
 void FreshBreatheAnimation::GenerateBreathe(const Colour& targetColour, uint32_t steps, uint32_t stepTimeMs)
 {
-	for (size_t i = 0; i < steps; ++i) 
-	{
-		Colour currentColour{};
-		const auto channelBrightness = (180.0f / steps) * i;
-
-		for (size_t channel = 0; channel < targetColour.size(); ++channel)
-		{
-			currentColour[channel] = targetColour[channel] * std::sin(channelBrightness * (MATH_PI / 180.0f));
-		}
-
-		Frame const frame(Zone::ALL, currentColour, stepTimeMs);
-
-		this->AddFrame(frame);
-	}
+	auto const patternFrames = m_patternGenerator.GenerateBreathe(targetColour, steps, stepTimeMs);
+	m_frames.AddFrames(patternFrames);
 }

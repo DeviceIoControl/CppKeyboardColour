@@ -1,8 +1,10 @@
 // Created by DeviceIoControl
 
 #include "stdafx.h"
-#include "CommandLine.h"
 #include "ThemeCommandLine.h"
+
+#include "Animations.h"
+#include "CommandLine.h"
 #include "SystemAnimationTranslator.h"
 
 ThemeFlags ProcessCmdThemeFlags(const std::vector<std::wstring>& cmdLines)
@@ -104,6 +106,14 @@ std::unique_ptr<IAnimation> ProcessThemeCommandLine(const std::vector<std::wstri
 	{
 		return std::make_unique<HeartbeatAnimation>();
 	}
+	else if (CommandLine::Contains(L"sakuratransform", ourCmds))
+	{
+		return std::make_unique<SakuraTransformAnimation>();
+	}
+	else if (CommandLine::Contains(L"pinkbreathe", ourCmds)) 
+	{
+		return std::make_unique<PinkBreatheAnimation>();
+	}
 
 	std::cout << "Invalid animation name was provided!\n";
 
@@ -112,10 +122,10 @@ std::unique_ptr<IAnimation> ProcessThemeCommandLine(const std::vector<std::wstri
 
 float ProcessSpeedCommandLine(const std::vector<std::wstring>& cmdLines)
 {
-	if (auto const afterCmdLine = CommandLine::GetCommandsAfter(L"-speed", cmdLines); !afterCmdLine.empty())
+	if (auto const afterCmdLine = CommandLine::GetCommandsAfter(L"--speed", cmdLines); !afterCmdLine.empty())
 	{
 		return xstd::stoi(afterCmdLine[0]).value_or(1.0f) / 100.0f;
 	}
 
-	return 1.0f; // normal speed
+	return 1.0f; // default speed
 }

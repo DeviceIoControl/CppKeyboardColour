@@ -13,7 +13,7 @@
 
 int wmain(int argc, const wchar_t* argv[])
 {
-	std::cout << "CLEVO Keyboard Colours Tool 1.26.0612 - Created by DeviceIoControl.\n\n";
+	std::cout << "CLEVO Keyboard Colours Tool 1.26.0613 - Created by DeviceIoControl.\n\n";
 
 	if (!IsSingleInstance())
 	{
@@ -36,7 +36,7 @@ int wmain(int argc, const wchar_t* argv[])
 
 	if (!CommandLine::ExclusiveContains({ L"theme", L"inbuilt", L"backlight" }, cmdLines))
 	{
-		std::cout << "Invalid command line. Command is: CLEVO_KeyboardColour.exe theme/inbuilt/backlight <themeName> [--once]\n";
+		std::cout << "Invalid command line. Command is: CLEVO_KeyboardColour.exe theme/inbuilt/backlight <themeName> [--once] [--speed] <speed>\n";
 		WaitForEnterIfNeeded();
 		return ERROR_INVALID_PARAMETER;
 	}

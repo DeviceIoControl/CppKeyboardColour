@@ -1,17 +1,27 @@
 // Created by DeviceIoControl
 
 #include "stdafx.h"
-#include "MathConstants.h"
 #include "BreatheAnimation.h"
+#include "ColourFactory.h"
 
 constexpr size_t STEPS = 40.0f;
 constexpr size_t FRAME_DURATION_MS = 25;
 
 BreatheAnimation::BreatheAnimation()
 {
-	this->GeneratePhase1();
-	this->GeneratePhase2();
-	this->GeneratePhase3();
+	ColourFactory factory{};
+
+	auto const red = factory.Create(255, 0, 0);
+	auto const green = factory.Create(255, 0, 0);
+	auto const blue = factory.Create(255, 0, 0);
+
+	auto const redBreathePattern = m_patternGenerator.GenerateBreathe(red, STEPS, FRAME_DURATION_MS);
+	auto const greenBreathePattern = m_patternGenerator.GenerateBreathe(green, STEPS, FRAME_DURATION_MS);
+	auto const blueBreathePattern = m_patternGenerator.GenerateBreathe(blue, STEPS, FRAME_DURATION_MS);
+
+	m_frames.AddFrames(redBreathePattern);
+	m_frames.AddFrames(greenBreathePattern);
+	m_frames.AddFrames(blueBreathePattern);
 }
 
 std::wstring BreatheAnimation::GetName() const
@@ -37,43 +47,4 @@ bool BreatheAnimation::IsSupportedKB(KeyboardType kbType) const
 uint32_t BreatheAnimation::Size() const 
 {
 	return m_frames.Size();
-}
-
-void BreatheAnimation::GeneratePhase1()
-{
-	for (size_t i = 0; i < STEPS; ++i)
-	{
-		const auto currentStep = (180.0f / STEPS) * i;
-
-		// Generate a sine wave for a breathing effect.
-		const auto colour  = m_factory.Create(255 * std::sin(currentStep * (MATH_PI / 180.0f)), 0 ,0);
-		
-		m_frames.AddFrame(Zone::ALL, colour, FRAME_DURATION_MS);
-	}
-}
-
-void BreatheAnimation::GeneratePhase2()
-{
-	for (size_t i = 0; i < STEPS; ++i)
-	{
-		const auto currentStep = (180.0f / STEPS) * i;
-
-		// Generate a sine wave for a breathing effect.
-		const auto colour = m_factory.Create(0, 255 * std::sin(currentStep * (MATH_PI / 180.0f)), 0);
-	
-		m_frames.AddFrame(Zone::ALL, colour, FRAME_DURATION_MS);
-	}
-}
-
-void BreatheAnimation::GeneratePhase3()
-{
-	for (size_t i = 0; i < STEPS; ++i)
-	{
-		const auto currentStep = (180.0f / STEPS) * i;
-
-		// Generate a sine wave for a breathing effect.
-		const auto colour = m_factory.Create(0, 0, 255 * std::sin(currentStep * (MATH_PI / 180.0f)));
-
-		m_frames.AddFrame(Zone::ALL, colour, FRAME_DURATION_MS);
-	}
 }

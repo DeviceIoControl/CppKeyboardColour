@@ -1,7 +1,7 @@
 // Created by DeviceIoControl
 
 #pragma once
-#include "Animations.h"
+#include "IAnimation.h"
 #include "SystemAnimation.h"
 
 enum class ThemeFlags

@@ -5,6 +5,7 @@
 #include "Frame.h"
 #include "IAnimation.h"
 #include "FrameCollection.h"
+#include "FramePatternGenerator.h"
 
 class FreshBreatheAnimation 
 	: public IAnimation
@@ -24,6 +25,7 @@ public:
 
 private:
 	FrameCollection m_frames;
+	FramePatternGenerator m_patternGenerator{};
 
 	void AddFrame(const Frame& frame) override;
 

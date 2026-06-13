@@ -4,6 +4,7 @@
 
 #include "IAnimation.h"
 #include "FrameCollection.h"
+#include "FramePatternGenerator.h"
 #include "Colour.h"
 
 class ColourTransformAnimation  
@@ -23,12 +24,8 @@ public:
 	~ColourTransformAnimation() override = default;
 
 private:
+	FrameCollection m_frames{};
+	FramePatternGenerator m_patternGenerator{};
 
 	void AddFrame(const Frame& frame) override;
-
-	FrameCollection m_frames{};
-
-	size_t CalculateDifference(size_t a, size_t b) const;
-
-	void GenerateColourTransform(const Colour& startColour, const Colour& endColour, uint32_t steps, uint32_t stepTimeMs);
 };

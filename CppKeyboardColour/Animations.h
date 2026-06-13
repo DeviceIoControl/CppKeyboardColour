@@ -10,3 +10,5 @@
 #include "ColourTransformAnimation.h"
 #include "PulsatingBlinkAnimation.h"
 #include "HeartbeatAnimation.h"
+#include "SakuraTransformAnimation.h"
+#include "PinkBreatheAnimation.h"

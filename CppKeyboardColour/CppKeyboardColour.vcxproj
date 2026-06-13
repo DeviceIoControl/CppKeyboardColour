@@ -166,6 +166,7 @@
     <ClInclude Include="BreatheAnimation.h" />
     <ClInclude Include="ConsoleUtils.h" />
     <ClInclude Include="ExtendedStl.h" />
+    <ClInclude Include="FramePatternGenerator.h" />
     <ClInclude Include="FreshBreatheAnimation.h" />
     <ClInclude Include="ColourFactory.h" />
     <ClInclude Include="ColourShiftAnimation.h" />
@@ -190,7 +191,9 @@
     <ClInclude Include="KeyboardOperationsHandler.h" />
     <ClInclude Include="KeyboardType.h" />
     <ClInclude Include="MathConstants.h" />
+    <ClInclude Include="PinkBreatheAnimation.h" />
     <ClInclude Include="PulsatingBlinkAnimation.h" />
+    <ClInclude Include="SakuraTransformAnimation.h" />
     <ClInclude Include="ScopedComPtr.h" />
     <ClInclude Include="SingleInstanceEvent.h" />
     <ClInclude Include="stdafx.h" />
@@ -206,6 +209,7 @@
     <ClCompile Include="BreatheAnimation.cpp" />
     <ClCompile Include="ConsoleUtils.cpp" />
     <ClCompile Include="DeviceIdTranslator.cpp" />
+    <ClCompile Include="FramePatternGenerator.cpp" />
     <ClCompile Include="FreshBreatheAnimation.cpp" />
     <ClCompile Include="ColourFactory.cpp" />
     <ClCompile Include="ColourShiftAnimation.cpp" />
@@ -223,7 +227,9 @@
     <ClCompile Include="KeyboardCommunicatorFactory.cpp" />
     <ClCompile Include="KeyboardFactory.cpp" />
     <ClCompile Include="KeyboardOperationsHandler.cpp" />
+    <ClCompile Include="PinkBreatheAnimation.cpp" />
     <ClCompile Include="PulsatingBlinkAnimation.cpp" />
+    <ClCompile Include="SakuraTransformAnimation.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
