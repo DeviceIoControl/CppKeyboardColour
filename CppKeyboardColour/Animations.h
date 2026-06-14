@@ -12,3 +12,4 @@
 #include "HeartbeatAnimation.h"
 #include "SakuraTransformAnimation.h"
 #include "PinkBreatheAnimation.h"
+#include "SakuraLavenderAnimation.h"

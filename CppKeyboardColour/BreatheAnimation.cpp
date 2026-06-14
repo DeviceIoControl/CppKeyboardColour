@@ -12,8 +12,8 @@ BreatheAnimation::BreatheAnimation()
 	ColourFactory factory{};
 
 	auto const red = factory.Create(255, 0, 0);
-	auto const green = factory.Create(255, 0, 0);
-	auto const blue = factory.Create(255, 0, 0);
+	auto const green = factory.Create(0, 255, 0);
+	auto const blue = factory.Create(0, 0, 255);
 
 	auto const redBreathePattern = m_patternGenerator.GenerateBreathe(red, STEPS, FRAME_DURATION_MS);
 	auto const greenBreathePattern = m_patternGenerator.GenerateBreathe(green, STEPS, FRAME_DURATION_MS);

@@ -6,11 +6,11 @@
 #include "FrameCollection.h"
 #include "FramePatternGenerator.h"
 
-class SakuraTransformAnimation 
+class SakuraLavenderAnimation
 	: public IAnimation
 {
 public:
-	SakuraTransformAnimation();
+	SakuraLavenderAnimation();
 
 	std::wstring GetName() const override;
 
@@ -20,7 +20,7 @@ public:
 
 	uint32_t Size() const override;
 
-	~SakuraTransformAnimation() override = default;
+	~SakuraLavenderAnimation() override = default;
 
 protected:
 	void AddFrame(const Frame& frame) override;

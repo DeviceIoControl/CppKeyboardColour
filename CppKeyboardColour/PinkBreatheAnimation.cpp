@@ -1,3 +1,5 @@
+// Created by DeviceIoControl
+
 #include "stdafx.h"
 #include "PinkBreatheAnimation.h"
 #include "ColourFactory.h"
@@ -6,7 +8,7 @@ PinkBreatheAnimation::PinkBreatheAnimation()
 {
 	ColourFactory factory{};
 
-	auto const pink = factory.Create(255, 160, 190);
+	auto const pink = factory.Create(255, 30, 190);
 	auto const ascendPattern = m_patternGenerator.GenerateAscendingPattern(pink, 100, 20);
 
 	Frame const pinkFrame(Zone::ALL, pink, 4000);

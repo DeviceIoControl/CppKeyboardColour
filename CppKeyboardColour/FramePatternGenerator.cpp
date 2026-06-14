@@ -1,3 +1,5 @@
+// Created by DeviceIoControl
+
 #include "stdafx.h"
 #include "FramePatternGenerator.h"
 #include "MathConstants.h"

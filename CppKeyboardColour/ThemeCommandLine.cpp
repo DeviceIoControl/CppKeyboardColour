@@ -114,6 +114,10 @@ std::unique_ptr<IAnimation> ProcessThemeCommandLine(const std::vector<std::wstri
 	{
 		return std::make_unique<PinkBreatheAnimation>();
 	}
+	else if (CommandLine::Contains(L"sakuralavender", ourCmds)) 
+	{
+		return std::make_unique<SakuraLavenderAnimation>();
+	}
 
 	std::cout << "Invalid animation name was provided!\n";
 

@@ -1,3 +1,5 @@
+// Created by DeviceIoControl
+
 #include "stdafx.h"
 #include "SakuraTransformAnimation.h"
 #include "ColourFactory.h"
@@ -5,13 +7,19 @@
 #define STEPS 150
 #define STEP_DURATION_MS 20
 
+//
+// Sakura Pink: RGB(255,30,197)
+// Rose Pink: RGB(255, 30, 185)
+// Soft Lavender: RGB(210, 30, 255)
+//
+
 SakuraTransformAnimation::SakuraTransformAnimation() 
 {
 	ColourFactory factory{};
 
-	auto const sakuraPink = factory.Create(255, 183, 197);
-	auto const rosePink = factory.Create(255, 160, 190);
-	auto const softLavender = factory.Create(220, 190, 255);
+	auto const sakuraPink = factory.Create(255, 80, 197);
+	auto const rosePink = factory.Create(255, 80, 185);
+	auto const softLavender = factory.Create(180, 80, 255);
 
 	// Transition Sakura Pink to Rose Pink
 	auto const sakuraToRose = m_patternGenerator.GenerateColourTransform(sakuraPink, rosePink, STEPS, STEP_DURATION_MS);
