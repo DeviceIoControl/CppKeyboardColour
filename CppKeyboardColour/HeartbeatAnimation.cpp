@@ -6,7 +6,7 @@
 
 HeartbeatAnimation::HeartbeatAnimation()
 {
-	ColourFactory factory{};
+	ColourFactory const factory{};
 
 	auto const pulseColour = factory.Create(255, 0, 0);
 
@@ -35,19 +35,6 @@ uint32_t HeartbeatAnimation::Size() const
 
 void HeartbeatAnimation::GeneratePulse(const Colour& targetColour, uint32_t beatTimeMs)
 {
-	Colour blankColour{};
-
-	ColourFactory factory{};
-
-	auto const firstPulseColour = factory.Create(
-		static_cast<uint8_t>(targetColour[INDEX_COLOUR_RED] * 0.33f),
-		static_cast<uint8_t>(targetColour[INDEX_COLOUR_GREEN] * 0.33f),
-		static_cast<uint8_t>(targetColour[INDEX_COLOUR_BLUE] * 0.33f)
-	);
-
-	m_frames.AddFrame(Zone::ALL, blankColour, 1250); // Blank Frame
-	m_frames.AddFrame(Zone::ALL, firstPulseColour, beatTimeMs); // 1st pulse
-	m_frames.AddFrame(Zone::ALL, blankColour, beatTimeMs / 2); // Blank frame
-	m_frames.AddFrame(Zone::ALL, targetColour, beatTimeMs); // 2nd pulse
-	m_frames.AddFrame(Zone::ALL, blankColour, beatTimeMs / 2); // Blank frame
+	auto const pulsePattern = m_patternGenerator.GeneratePulse(targetColour, beatTimeMs);
+	m_frames.AddFrames(pulsePattern);
 }

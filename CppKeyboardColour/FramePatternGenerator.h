@@ -12,6 +12,8 @@ public:
 	FrameCollection GenerateColourTransform(const Colour& startColour, const Colour& endColour, uint32_t steps, uint32_t stepTimeMs);
 	FrameCollection GenerateAscendingPattern(const Colour& targetColour, uint32_t steps, uint32_t stepTimeMs);
 	FrameCollection GenerateDescendingPattern(const Colour& startColour, uint32_t steps, uint32_t stepTimeMs);
+	FrameCollection GenerateBlink(const Colour& targetColour, uint32_t blinkTimeMs);
+	FrameCollection GeneratePulse(const Colour& targetColour, uint32_t beatTimeMs);
 
 	~FramePatternGenerator() = default;
 

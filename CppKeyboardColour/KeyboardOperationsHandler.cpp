@@ -57,7 +57,14 @@ DWORD DoKeyboardOperation(IKeyboard* pKeyboard, const std::vector<std::wstring>&
 	if (userColour.has_value())
 	{
 		std::cout << "Setting user provided colour...\n";
-		pKeyboard->SetColour(userColour->at(0), userColour->at(1), userColour->at(2), Zone::ALL);
+
+		pKeyboard->SetColour(
+			userColour->at(INDEX_COLOUR_RED),
+			userColour->at(INDEX_COLOUR_GREEN),
+			userColour->at(INDEX_COLOUR_BLUE),
+			Zone::ALL
+		);
+
 		return 0;
 	}
 
@@ -70,7 +77,7 @@ DWORD DoKeyboardOperation(IKeyboard* pKeyboard, const std::vector<std::wstring>&
 	
 	if (pAnimation)
 	{
-		// "-speed" command-line is only valid with an animation.
+		// "--speed" command-line is only valid with an animation.
 		auto const speedFactor = ProcessSpeedCommandLine(cmdLines);
 		
 		if (!pKeyboard->SetSpeedFactor(speedFactor))

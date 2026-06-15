@@ -24,14 +24,14 @@ KBCommunicatorType DeviceIdTranslator::TranslateToKBCommType(uint32_t deviceId) 
 
 void DeviceIdTranslator::InitializeSingleZoneKBs()
 {
-	std::array<uint32_t, 7> constexpr singleZoneDeviceIds
+	std::array<uint32_t, 7> constexpr SINGLE_ZONE_DEVICE_IDS
 	{
 		DEVICE_ID_NP50RXX, DEVICE_ID_NH70XX, DEVICE_ID_NKNP50XX,
 		DEVICE_ID_PC50DXX, DEVICE_ID_A715XX, DEVICE_ID_NP50SXX,
-		DEVICE_ID_CV15SX //, DEVICE_ID_NH77XX
+		DEVICE_ID_CV15XX //, DEVICE_ID_NH77XX
 	};
 
-	for (auto const currentDeviceId : singleZoneDeviceIds)
+	for (auto const currentDeviceId : SINGLE_ZONE_DEVICE_IDS)
 	{
 		m_deviceIdToKBProps[currentDeviceId].kbType = KeyboardType::SINGLE_ZONE;
 		m_deviceIdToKBProps[currentDeviceId].kbCommsType = KBCommunicatorType::Insyde;

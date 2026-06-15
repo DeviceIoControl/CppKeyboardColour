@@ -108,8 +108,5 @@ void ColourShiftAnimation::GeneratePhase3(uint8_t(&rgb)[3][3])
 
 void ColourShiftAnimation::GenerateDelayFrame(const Frame& frame)
 {
-	Frame intermediateFrame(frame);
-	intermediateFrame.ms_time = 5000;
-
-	m_frames.AddFrame(intermediateFrame);
+	m_frames.AddFrame(frame.zone, frame.colour, 5000);
 }

@@ -13,12 +13,12 @@
 
 PulsatingBlinkAnimation::PulsatingBlinkAnimation()
 {
-	ColourFactory factory{};
+	ColourFactory const factory{};
 
-	const auto skyBlue = factory.Create(135, 206, 235);
-	const auto forestGreen = factory.Create(34, 139, 34);
-	const auto sunsetOrange = factory.Create(255, 69, 0);
-	const auto rosePink = factory.Create(255, 102, 204);
+	auto const skyBlue = factory.Create(135, 206, 235);
+	auto const forestGreen = factory.Create(34, 139, 34);
+	auto const sunsetOrange = factory.Create(255, 69, 0);
+	auto const rosePink = factory.Create(255, 102, 204);
 
 	this->GenerateBlink(skyBlue, BLINK_TIME_MS);
 	this->GenerateBlink(forestGreen, BLINK_TIME_MS);
@@ -46,14 +46,8 @@ uint32_t PulsatingBlinkAnimation::Size() const
 	return m_frames.Size();
 }
 
-void PulsatingBlinkAnimation::GenerateBlink(const Colour& targetColour, uint32_t blinkTimeMs)
+void PulsatingBlinkAnimation::GenerateBlink(const Colour& colour, uint32_t blinkTimeMs)
 {
-	Colour blankColour{};
-
-	Frame blankFame(Zone::ALL, blankColour, 1000);
-	Frame colourFrame(Zone::ALL, targetColour, blinkTimeMs);
-
-	m_frames.AddFrame(blankFame);
-	m_frames.AddFrame(colourFrame);
-	m_frames.AddFrame(blankFame);
+	auto const blinkPattern = m_patternGenerator.GenerateBlink(colour, blinkTimeMs);
+	m_frames.AddFrames(blinkPattern);
 }

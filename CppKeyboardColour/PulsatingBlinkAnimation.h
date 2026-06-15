@@ -5,6 +5,7 @@
 #include "Colour.h"
 #include "IAnimation.h"
 #include "FrameCollection.h"
+#include "FramePatternGenerator.h"
 
 //
 // Effect Name: Pulsating Blink
@@ -28,7 +29,6 @@ class PulsatingBlinkAnimation
 {
 public:
 	PulsatingBlinkAnimation();
-	~PulsatingBlinkAnimation() = default;
 
 	std::wstring GetName() const override;
 
@@ -37,9 +37,12 @@ public:
 	bool IsSupportedKB(KeyboardType kbType) const override;
 
 	uint32_t Size() const override;
+
+	~PulsatingBlinkAnimation() override = default;
 	
 private:
 	FrameCollection m_frames{};
+	FramePatternGenerator m_patternGenerator{};
 
-	void GenerateBlink(const Colour& targetColour, uint32_t blinkTimeMs);
+	void GenerateBlink(const Colour& colour, uint32_t blinkTimeMs);
 };

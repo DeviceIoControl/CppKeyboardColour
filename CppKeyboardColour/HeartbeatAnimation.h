@@ -4,13 +4,13 @@
 
 #include "FrameCollection.h"
 #include "IAnimation.h"
+#include "FramePatternGenerator.h"
 
 class HeartbeatAnimation
 	: public IAnimation
 {
 public:
 	HeartbeatAnimation();
-	~HeartbeatAnimation() override = default;
 
 	std::wstring GetName() const override;
 
@@ -20,8 +20,11 @@ public:
 
 	uint32_t Size() const override;
 
+	~HeartbeatAnimation() override = default;
+
 private:
 	FrameCollection m_frames{};
+	FramePatternGenerator m_patternGenerator{};
 
 	void GeneratePulse(const Colour& targetColour, uint32_t beatTimeMs);
 };

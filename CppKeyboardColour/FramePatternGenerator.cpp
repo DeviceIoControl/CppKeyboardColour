@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "FramePatternGenerator.h"
+#include "ColourFactory.h"
 #include "MathConstants.h"
 
 size_t FramePatternGenerator::CalculateDifference(size_t a, size_t b) const
@@ -98,6 +99,39 @@ FrameCollection FramePatternGenerator::GenerateColourTransform(const Colour& sta
 
 		frames.AddFrame(Zone::ALL, currentColour, stepTimeMs);
 	}
+
+	return frames;
+}
+
+FrameCollection FramePatternGenerator::GenerateBlink(const Colour& targetColour, uint32_t blinkTimeMs) 
+{
+	FrameCollection frames{};
+	Colour const blankColour{};
+
+	frames.AddFrame(Zone::ALL, blankColour, 1000);
+	frames.AddFrame(Zone::ALL, targetColour, blinkTimeMs);
+	frames.AddFrame(Zone::ALL, blankColour, 1000);
+
+	return frames;
+}
+
+FrameCollection FramePatternGenerator::GeneratePulse(const Colour& targetColour, uint32_t beatTimeMs) 
+{
+	Colour blankColour{};
+	ColourFactory factory{};
+	FrameCollection frames{};
+
+	auto const firstPulseColour = factory.Create(
+		static_cast<uint8_t>(targetColour[INDEX_COLOUR_RED] * 0.33f),
+		static_cast<uint8_t>(targetColour[INDEX_COLOUR_GREEN] * 0.33f),
+		static_cast<uint8_t>(targetColour[INDEX_COLOUR_BLUE] * 0.33f)
+	);
+
+	frames.AddFrame(Zone::ALL, blankColour, 1250); // Blank Frame
+	frames.AddFrame(Zone::ALL, firstPulseColour, beatTimeMs); // 1st pulse
+	frames.AddFrame(Zone::ALL, blankColour, beatTimeMs / 2); // Blank frame
+	frames.AddFrame(Zone::ALL, targetColour, beatTimeMs); // 2nd pulse
+	frames.AddFrame(Zone::ALL, blankColour, beatTimeMs / 2); // Blank frame
 
 	return frames;
 }
