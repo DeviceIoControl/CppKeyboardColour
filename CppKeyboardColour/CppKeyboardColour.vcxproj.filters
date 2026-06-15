@@ -141,7 +141,10 @@
     <ClInclude Include="PinkBreatheAnimation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SakuraLavenderAnimation.h">
+    <ClInclude Include="SunsetBreatheAnimation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SakuraSunsetAnimation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -227,7 +230,10 @@
     <ClCompile Include="PinkBreatheAnimation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SakuraLavenderAnimation.cpp">
+    <ClCompile Include="SunsetBreatheAnimation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SakuraSunsetAnimation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

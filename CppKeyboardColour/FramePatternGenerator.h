@@ -6,7 +6,7 @@
 class FramePatternGenerator
 {
 public:
-	FramePatternGenerator();
+	FramePatternGenerator() = default;
 
 	FrameCollection GenerateBreathe(const Colour& targetColour, uint32_t steps, uint32_t stepTimeMs);
 	FrameCollection GenerateColourTransform(const Colour& startColour, const Colour& endColour, uint32_t steps, uint32_t stepTimeMs);

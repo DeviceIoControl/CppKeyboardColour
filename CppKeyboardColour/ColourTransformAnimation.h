@@ -26,6 +26,4 @@ public:
 private:
 	FrameCollection m_frames{};
 	FramePatternGenerator m_patternGenerator{};
-
-	void AddFrame(const Frame& frame) override;
 };

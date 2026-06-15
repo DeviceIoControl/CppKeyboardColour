@@ -4,69 +4,59 @@
 #include "SakuraTransformAnimation.h"
 #include "ColourFactory.h"
 
-#define STEPS 150
-#define STEP_DURATION_MS 20
+constexpr size_t FRAMES = 40;
+constexpr size_t FRAME_DURATION_MS = 50;
+constexpr size_t COLOUR_DURATION_MS = 3000;
 
 //
-// Sakura Pink: RGB(255,30,197)
-// Rose Pink: RGB(255, 30, 185)
-// Soft Lavender: RGB(210, 30, 255)
+// 0xff6ea8 (255, 110, 168) - Sakura Pink
+// 0xff5f95 (255, 95, 149) - Sunset Pink
+// 0xdc46dc (220, 70, 220) - Pink Violet
+// 0xff6ea8 (255, 110, 168) - Sakura Pink
+//
+// 0xff6ea8 -> 0xff5f95 -> 0xdc46dc -> 0xff6ea8
 //
 
-SakuraTransformAnimation::SakuraTransformAnimation() 
+SakuraTransformAnimation::SakuraTransformAnimation()
 {
-	ColourFactory factory{};
+	ColourFactory const factory{};
 
-	auto const sakuraPink = factory.Create(255, 80, 197);
-	auto const rosePink = factory.Create(255, 80, 185);
-	auto const softLavender = factory.Create(180, 80, 255);
+	auto const sakuraPink = factory.Create(255, 110, 168);
+	auto const sunsetPink = factory.Create(255, 95, 149);
+	auto const pinkViolet = factory.Create(220, 70, 220);
 
-	// Transition Sakura Pink to Rose Pink
-	auto const sakuraToRose = m_patternGenerator.GenerateColourTransform(sakuraPink, rosePink, STEPS, STEP_DURATION_MS);
-	m_frames.AddFrames(sakuraToRose);
+	auto const sakuraToSunset = m_patternGenerator.GenerateColourTransform(sakuraPink, sunsetPink, FRAMES, FRAME_DURATION_MS);
+	m_frames.AddFrames(sakuraToSunset);
 
-	// Wait 2 seconds
-	Frame const roseFrame(Zone::ALL, rosePink, 2000);
-	m_frames.AddFrame(roseFrame);
+	m_frames.AddFrame(Zone::ALL, sunsetPink, COLOUR_DURATION_MS);
 
-	// Transition from Rose Pink to Soft Lavendar
-	auto const roseToLavender = m_patternGenerator.GenerateColourTransform(rosePink, softLavender, STEPS, STEP_DURATION_MS);
-	m_frames.AddFrames(roseToLavender);
+	auto const sunsetToViolet = m_patternGenerator.GenerateColourTransform(sunsetPink, pinkViolet, FRAMES, FRAME_DURATION_MS);
+	m_frames.AddFrames(sunsetToViolet);
 
-	// Wait 2 seconds
-	Frame const lavendarFrame(Zone::ALL, softLavender, 2000);
-	m_frames.AddFrame(lavendarFrame);
+	m_frames.AddFrame(Zone::ALL, pinkViolet, COLOUR_DURATION_MS);
 
-	// Cycle back to Sakura Pink
-	auto const lavenderToSakura = m_patternGenerator.GenerateColourTransform(softLavender, sakuraPink, STEPS, STEP_DURATION_MS);
-	m_frames.AddFrames(lavenderToSakura);
+	auto const violetToSakura = m_patternGenerator.GenerateColourTransform(pinkViolet, sakuraPink, FRAMES, FRAME_DURATION_MS);
+	m_frames.AddFrames(violetToSakura);
 
-	// Wait 2 seconds
-	Frame const sakuraFrame(Zone::ALL, sakuraPink, 2000);
-	m_frames.AddFrame(sakuraFrame);
+	m_frames.AddFrame(Zone::ALL, sakuraPink, COLOUR_DURATION_MS);
 }
 
-std::wstring SakuraTransformAnimation::GetName() const 
+std::wstring SakuraTransformAnimation::GetName() const
 {
 	return L"Sakura Transform";
 }
 
-std::optional<Frame> SakuraTransformAnimation::GetFrame(uint32_t idx) 
+std::optional<Frame> SakuraTransformAnimation::GetFrame(uint32_t idx)
 {
 	return m_frames.GetFrame(idx);
 }
 
-bool SakuraTransformAnimation::IsSupportedKB(KeyboardType kbType) const 
+bool SakuraTransformAnimation::IsSupportedKB(KeyboardType kbType) const
 {
 	return kbType != KeyboardType::PER_KEY && kbType != KeyboardType::NONE;
 }
 
-uint32_t SakuraTransformAnimation::Size() const 
+uint32_t SakuraTransformAnimation::Size() const
 {
 	return m_frames.Size();
-}
-
-void SakuraTransformAnimation::AddFrame(const Frame& frame) 
-{
-	m_frames.AddFrame(frame);
 }

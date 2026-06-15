@@ -31,11 +31,6 @@ std::wstring ColourShiftAnimation::GetName() const
 	return L"Colour Shift";
 }
 
-void ColourShiftAnimation::AddFrame(const Frame& frame) 
-{
-	m_frames.AddFrame(frame);
-}
-
 std::optional<Frame> ColourShiftAnimation::GetFrame(uint32_t idx) 
 {
 	return m_frames.GetFrame(idx);

@@ -41,7 +41,5 @@ public:
 private:
 	FrameCollection m_frames{};
 
-	void AddFrame(const Frame& frame) override;
-
 	void GenerateBlink(const Colour& targetColour, uint32_t blinkTimeMs);
 };

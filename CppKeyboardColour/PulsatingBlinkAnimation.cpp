@@ -46,11 +46,6 @@ uint32_t PulsatingBlinkAnimation::Size() const
 	return m_frames.Size();
 }
 
-void PulsatingBlinkAnimation::AddFrame(const Frame& frame)
-{
-	m_frames.AddFrame(frame);
-}
-
 void PulsatingBlinkAnimation::GenerateBlink(const Colour& targetColour, uint32_t blinkTimeMs)
 {
 	Colour blankColour{};

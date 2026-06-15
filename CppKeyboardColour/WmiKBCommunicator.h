@@ -3,6 +3,7 @@
 #pragma once
 
 #include "ScopedComPtr.h"
+#include "FakeKeyboardCommunicator.h"
 #include "IKeyboardCommunicator.h"
 #include "WbemService.h"
 

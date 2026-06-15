@@ -9,7 +9,8 @@ enum class ThemeFlags
 	FlagInvalid,
 	Animation,
 	InBuilt,
-	Backlight
+	Backlight,
+	UserColour
 };
 
 enum class BacklightType
@@ -23,4 +24,5 @@ ThemeFlags ProcessCmdThemeFlags(const std::vector<std::wstring>& cmdLines);
 BacklightType ProcessBacklightCommandLine(const std::vector<std::wstring>& cmdLines);
 SystemAnimation ProcessSystemAnimationCommandLine(const std::vector<std::wstring>& cmdLines);
 std::unique_ptr<IAnimation> ProcessThemeCommandLine(const std::vector<std::wstring>& cmdLines);
+std::optional<Colour> ProcessColourCommandLine(const std::vector<std::wstring>& cmdLines);
 float ProcessSpeedCommandLine(const std::vector<std::wstring>& cmdLines);

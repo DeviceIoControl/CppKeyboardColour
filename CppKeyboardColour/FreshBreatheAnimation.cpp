@@ -65,11 +65,6 @@ uint32_t FreshBreatheAnimation::Size() const
 	return m_frames.Size();
 }
 
-void FreshBreatheAnimation::AddFrame(const Frame& frame)
-{
-	m_frames.AddFrame(frame);
-}
-
 void FreshBreatheAnimation::GenerateBreathe(const Colour& targetColour, uint32_t steps, uint32_t stepTimeMs)
 {
 	auto const patternFrames = m_patternGenerator.GenerateBreathe(targetColour, steps, stepTimeMs);

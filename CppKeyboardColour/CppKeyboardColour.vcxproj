@@ -193,7 +193,8 @@
     <ClInclude Include="MathConstants.h" />
     <ClInclude Include="PinkBreatheAnimation.h" />
     <ClInclude Include="PulsatingBlinkAnimation.h" />
-    <ClInclude Include="SakuraLavenderAnimation.h" />
+    <ClInclude Include="SunsetBreatheAnimation.h" />
+    <ClInclude Include="SakuraSunsetAnimation.h" />
     <ClInclude Include="SakuraTransformAnimation.h" />
     <ClInclude Include="ScopedComPtr.h" />
     <ClInclude Include="SingleInstanceEvent.h" />
@@ -230,7 +231,8 @@
     <ClCompile Include="KeyboardOperationsHandler.cpp" />
     <ClCompile Include="PinkBreatheAnimation.cpp" />
     <ClCompile Include="PulsatingBlinkAnimation.cpp" />
-    <ClCompile Include="SakuraLavenderAnimation.cpp" />
+    <ClCompile Include="SunsetBreatheAnimation.cpp" />
+    <ClCompile Include="SakuraSunsetAnimation.cpp" />
     <ClCompile Include="SakuraTransformAnimation.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

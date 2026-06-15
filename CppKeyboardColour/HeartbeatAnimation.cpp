@@ -33,11 +33,6 @@ uint32_t HeartbeatAnimation::Size() const
 	return m_frames.Size();
 }
 
-void HeartbeatAnimation::AddFrame(const Frame& frame)
-{
-	m_frames.AddFrame(frame);
-}
-
 void HeartbeatAnimation::GeneratePulse(const Colour& targetColour, uint32_t beatTimeMs)
 {
 	Colour blankColour{};
@@ -50,14 +45,9 @@ void HeartbeatAnimation::GeneratePulse(const Colour& targetColour, uint32_t beat
 		static_cast<uint8_t>(targetColour[INDEX_COLOUR_BLUE] * 0.33f)
 	);
 
-	Frame blankFame(Zone::ALL, blankColour, 1250);
-	Frame interBlankFame(Zone::ALL, blankColour, beatTimeMs / 2);
-	Frame firstPulse(Zone::ALL, firstPulseColour, beatTimeMs);
-	Frame secondPulse(Zone::ALL, targetColour, beatTimeMs);
-
-	this->AddFrame(blankFame);
-	this->AddFrame(firstPulse);
-	this->AddFrame(interBlankFame);
-	this->AddFrame(secondPulse);
-	this->AddFrame(interBlankFame);
+	m_frames.AddFrame(Zone::ALL, blankColour, 1250); // Blank Frame
+	m_frames.AddFrame(Zone::ALL, firstPulseColour, beatTimeMs); // 1st pulse
+	m_frames.AddFrame(Zone::ALL, blankColour, beatTimeMs / 2); // Blank frame
+	m_frames.AddFrame(Zone::ALL, targetColour, beatTimeMs); // 2nd pulse
+	m_frames.AddFrame(Zone::ALL, blankColour, beatTimeMs / 2); // Blank frame
 }

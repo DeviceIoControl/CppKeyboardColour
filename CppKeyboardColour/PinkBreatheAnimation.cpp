@@ -4,19 +4,20 @@
 #include "PinkBreatheAnimation.h"
 #include "ColourFactory.h"
 
+constexpr size_t FRAMES = 50;
+constexpr size_t FRAME_DURATION_MS = 40;
+
 PinkBreatheAnimation::PinkBreatheAnimation() 
 {
 	ColourFactory factory{};
 
-	auto const pink = factory.Create(255, 30, 190);
-	auto const ascendPattern = m_patternGenerator.GenerateAscendingPattern(pink, 100, 20);
+	auto const pink = factory.Create(255, 110, 168);
 
-	Frame const pinkFrame(Zone::ALL, pink, 4000);
-
-	auto const descendPattern = m_patternGenerator.GenerateDescendingPattern(pink, 100, 20);
+	auto const ascendPattern = m_patternGenerator.GenerateAscendingPattern(pink, FRAMES, FRAME_DURATION_MS);
+	auto const descendPattern = m_patternGenerator.GenerateDescendingPattern(pink, FRAMES, FRAME_DURATION_MS);
 
 	m_frames.AddFrames(ascendPattern);
-	m_frames.AddFrame(pinkFrame);
+	m_frames.AddFrame(Zone::ALL, pink, 4000);
 	m_frames.AddFrames(descendPattern);
 }
 
@@ -38,9 +39,4 @@ bool PinkBreatheAnimation::IsSupportedKB(KeyboardType kbType) const
 uint32_t PinkBreatheAnimation::Size() const 
 {
 	return m_frames.Size();
-}
-
-void PinkBreatheAnimation::AddFrame(const Frame& frame) 
-{
-	m_frames.AddFrame(frame);
 }

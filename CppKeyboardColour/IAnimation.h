@@ -18,7 +18,4 @@ public:
 	virtual uint32_t Size() const = 0;
 
 	virtual ~IAnimation() = default;
-
-protected:
-	virtual void AddFrame(const Frame& frame) = 0;
 };

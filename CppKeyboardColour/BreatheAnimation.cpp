@@ -29,11 +29,6 @@ std::wstring BreatheAnimation::GetName() const
 	return L"Breathe";
 }
 
-void BreatheAnimation::AddFrame(const Frame& frame)
-{
-	m_frames.AddFrame(frame);
-}
-
 std::optional<Frame> BreatheAnimation::GetFrame(uint32_t idx) 
 {
 	return m_frames.GetFrame(idx);

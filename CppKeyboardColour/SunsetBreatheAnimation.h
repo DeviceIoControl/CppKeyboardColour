@@ -6,11 +6,11 @@
 #include "FrameCollection.h"
 #include "FramePatternGenerator.h"
 
-class PinkBreatheAnimation 
+class SunsetBreatheAnimation
 	: public IAnimation
 {
 public:
-	PinkBreatheAnimation();
+	SunsetBreatheAnimation();
 
 	std::wstring GetName() const override;
 
@@ -20,8 +20,8 @@ public:
 
 	uint32_t Size() const override;
 
-	~PinkBreatheAnimation() override = default;
-
+	~SunsetBreatheAnimation() override = default;
+	
 private:
 	FrameCollection m_frames{};
 	FramePatternGenerator m_patternGenerator{};

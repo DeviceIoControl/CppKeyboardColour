@@ -4,10 +4,6 @@
 #include "FramePatternGenerator.h"
 #include "MathConstants.h"
 
-FramePatternGenerator::FramePatternGenerator()
-{
-}
-
 size_t FramePatternGenerator::CalculateDifference(size_t a, size_t b) const
 {
 	return std::max(a, b) - std::min(a, b);
@@ -27,8 +23,7 @@ FrameCollection FramePatternGenerator::GenerateAscendingPattern(const Colour& ta
 			currentColour[channel] = targetColour[channel] * std::sin(channelBrightness * (MATH_PI / 180.0f));
 		}
 
-		Frame const frame(Zone::ALL, currentColour, stepTimeMs);
-		frames.AddFrame(frame);
+		frames.AddFrame(Zone::ALL, currentColour, stepTimeMs);
 	}
 
 	return frames;
@@ -48,8 +43,7 @@ FrameCollection FramePatternGenerator::GenerateDescendingPattern(const Colour& s
 			currentColour[channel] = startColour[channel] * std::sin(channelBrightness * (MATH_PI / 180.0f));
 		}
 
-		Frame const frame(Zone::ALL, currentColour, stepTimeMs);
-		frames.AddFrame(frame);
+		frames.AddFrame(Zone::ALL, currentColour, stepTimeMs);
 	}
 
 	return frames;
@@ -69,8 +63,7 @@ FrameCollection FramePatternGenerator::GenerateBreathe(const Colour& targetColou
 			currentColour[channel] = targetColour[channel] * std::sin(channelBrightness * (MATH_PI / 180.0f));
 		}
 
-		Frame const frame(Zone::ALL, currentColour, stepTimeMs);
-		frames.AddFrame(frame);
+		frames.AddFrame(Zone::ALL, currentColour, stepTimeMs);
 	}
 
 	return frames;
@@ -103,8 +96,7 @@ FrameCollection FramePatternGenerator::GenerateColourTransform(const Colour& sta
 			currentColour[channel] = endColour[channel];
 		}
 
-		const Frame currentFrame(Zone::ALL, currentColour, stepTimeMs);
-		frames.AddFrame(currentFrame);
+		frames.AddFrame(Zone::ALL, currentColour, stepTimeMs);
 	}
 
 	return frames;

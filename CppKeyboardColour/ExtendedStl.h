@@ -24,11 +24,11 @@ namespace xstd
 		return static_cast<std::underlying_type_t<_Ty>>(value);
 	}
 
-	inline std::optional<int32_t> stoi(const std::wstring& input) 
+	inline std::optional<uint32_t> stoi(const std::wstring& input, int32_t base = 10) 
 	{
 		try
 		{
-			return std::stoi(input);
+			return std::stoul(input, nullptr, base);
 		}
 		catch (...)
 		{

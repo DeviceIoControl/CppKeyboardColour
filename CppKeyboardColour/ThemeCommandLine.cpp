@@ -24,6 +24,11 @@ ThemeFlags ProcessCmdThemeFlags(const std::vector<std::wstring>& cmdLines)
 		return ThemeFlags::Backlight;
 	}
 
+	if (CommandLine::Contains(L"colour", cmdLines)) 
+	{
+		return ThemeFlags::UserColour;
+	}
+
 	return ThemeFlags::FlagInvalid;
 }
 
@@ -114,14 +119,32 @@ std::unique_ptr<IAnimation> ProcessThemeCommandLine(const std::vector<std::wstri
 	{
 		return std::make_unique<PinkBreatheAnimation>();
 	}
-	else if (CommandLine::Contains(L"sakuralavender", ourCmds)) 
+	else if (CommandLine::Contains(L"sunsetbreathe", ourCmds)) 
 	{
-		return std::make_unique<SakuraLavenderAnimation>();
+		return std::make_unique<SunsetBreatheAnimation>();
+	}
+	else if (CommandLine::Contains(L"sakurasunset", ourCmds)) 
+	{
+		return std::make_unique<SakuraSunsetAnimation>();
 	}
 
 	std::cout << "Invalid animation name was provided!\n";
 
 	return nullptr;
+}
+
+std::optional<Colour> ProcessColourCommandLine(const std::vector<std::wstring>& cmdLines)
+{
+	if (auto const afterCmdLine = CommandLine::GetCommandsAfter(L"colour", cmdLines); !afterCmdLine.empty()) 
+	{
+		if (auto const parsedColour = xstd::stoi(afterCmdLine[0], 16))
+		{
+			ColourFactory factory{};
+			return factory.Create(parsedColour.value());
+		}
+	}
+
+	return std::nullopt;
 }
 
 float ProcessSpeedCommandLine(const std::vector<std::wstring>& cmdLines)

@@ -27,7 +27,5 @@ private:
 	FrameCollection m_frames;
 	FramePatternGenerator m_patternGenerator{};
 
-	void AddFrame(const Frame& frame) override;
-
 	void GenerateBreathe(const Colour& targetColour, uint32_t steps, uint32_t stepTimeMs);
 };

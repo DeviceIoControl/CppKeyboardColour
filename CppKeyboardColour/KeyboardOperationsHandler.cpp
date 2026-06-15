@@ -8,6 +8,7 @@
 
 DWORD DoKeyboardOperation(IKeyboard* pKeyboard, const std::vector<std::wstring>& cmdLines)
 {
+	std::optional<Colour> userColour{};
 	std::unique_ptr<IAnimation> pAnimation{};
 	auto backlight = BacklightType::Invalid;
 	auto sysAnimation = SystemAnimation::KB_MODE_CUSTOM;
@@ -26,11 +27,15 @@ DWORD DoKeyboardOperation(IKeyboard* pKeyboard, const std::vector<std::wstring>&
 		backlight = ProcessBacklightCommandLine(cmdLines);
 		break;
 
+	case ThemeFlags::UserColour:
+		userColour = ProcessColourCommandLine(cmdLines);
+		break;
+
 		// The above code logic should ensure that we NEVER reach here.
 	default:
 		return ERROR_FAIL_FAST_EXCEPTION;
 	}
-
+	
 	if (backlight != BacklightType::Invalid)
 	{
 		switch (backlight)
@@ -49,13 +54,20 @@ DWORD DoKeyboardOperation(IKeyboard* pKeyboard, const std::vector<std::wstring>&
 		return 0;
 	}
 
+	if (userColour.has_value())
+	{
+		std::cout << "Setting user provided colour...\n";
+		pKeyboard->SetColour(userColour->at(0), userColour->at(1), userColour->at(2), Zone::ALL);
+		return 0;
+	}
+
 	if (sysAnimation != SystemAnimation::KB_MODE_CUSTOM)
 	{
 		std::cout << "Playing Inbuilt Keyboard animation...\n";
 		pKeyboard->SendCode(xstd::to_underlying(sysAnimation));
 		return 0;
 	}
-
+	
 	if (pAnimation)
 	{
 		// "-speed" command-line is only valid with an animation.

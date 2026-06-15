@@ -22,9 +22,6 @@ public:
 
 	~SakuraTransformAnimation() override = default;
 
-protected:
-	void AddFrame(const Frame& frame) override;
-
 private:
 	FrameCollection m_frames{};
 	FramePatternGenerator m_patternGenerator{};

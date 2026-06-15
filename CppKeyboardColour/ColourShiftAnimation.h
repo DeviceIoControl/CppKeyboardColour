@@ -24,9 +24,6 @@ public:
 
 	~ColourShiftAnimation() override = default;
 
-protected:
-	void AddFrame(const Frame& frame) override;
-
 private:
 	FrameCollection m_frames;
 	ColourFactory m_factory{};

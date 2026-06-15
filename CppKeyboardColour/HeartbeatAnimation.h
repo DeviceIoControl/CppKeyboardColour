@@ -23,7 +23,5 @@ public:
 private:
 	FrameCollection m_frames{};
 
-	void AddFrame(const Frame& frame) override;
-
 	void GeneratePulse(const Colour& targetColour, uint32_t beatTimeMs);
 };

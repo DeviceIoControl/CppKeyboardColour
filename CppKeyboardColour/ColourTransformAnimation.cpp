@@ -21,18 +21,13 @@ ColourTransformAnimation::ColourTransformAnimation()
 	auto const greenToBlue = m_patternGenerator.GenerateColourTransform(green, blue, STEPS, FRAME_DURATION_MS);
 	m_frames.AddFrames(greenToBlue);
 
-	auto const blueToRed = m_patternGenerator.GenerateColourTransform(green, blue, STEPS, FRAME_DURATION_MS);
+	auto const blueToRed = m_patternGenerator.GenerateColourTransform(blue, red, STEPS, FRAME_DURATION_MS);
 	m_frames.AddFrames(blueToRed);
 }
 
 std::wstring ColourTransformAnimation::GetName() const 
 {
 	return L"Colour Transform";
-}
-
-void ColourTransformAnimation::AddFrame(const Frame& frame) 
-{
-	return m_frames.AddFrame(frame);
 }
 
 std::optional<Frame> ColourTransformAnimation::GetFrame(uint32_t idx)
