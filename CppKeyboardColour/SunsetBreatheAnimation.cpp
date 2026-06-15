@@ -9,12 +9,16 @@ constexpr size_t FRAME_DURATION_MS = 40;
 
 SunsetBreatheAnimation::SunsetBreatheAnimation()
 {
-	ColourFactory const factory{};
+	ColourFactory factory{};
 
 	auto const sunsetPink = factory.Create(255, 95, 149);
-	
-	auto const sunsetBreathe = m_patternGenerator.GenerateBreathe(sunsetPink, FRAMES, FRAME_DURATION_MS);
-	m_frames.AddFrames(sunsetBreathe);
+
+	auto const ascendPattern = m_patternGenerator.GenerateAscendingPattern(sunsetPink, FRAMES, FRAME_DURATION_MS);
+	auto const descendPattern = m_patternGenerator.GenerateDescendingPattern(sunsetPink, FRAMES, FRAME_DURATION_MS);
+
+	m_frames.AddFrames(ascendPattern);
+	m_frames.AddFrame(Zone::ALL, sunsetPink, 4000);
+	m_frames.AddFrames(descendPattern);
 }
 
 std::wstring SunsetBreatheAnimation::GetName() const
@@ -24,7 +28,7 @@ std::wstring SunsetBreatheAnimation::GetName() const
 
 std::optional<Frame> SunsetBreatheAnimation::GetFrame(uint32_t idx)
 {
-	return m_frames.GetFrame(0);
+	return m_frames.GetFrame(idx);
 }
 
 bool SunsetBreatheAnimation::IsSupportedKB(KeyboardType kbType) const
