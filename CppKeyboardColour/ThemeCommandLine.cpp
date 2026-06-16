@@ -24,7 +24,7 @@ ThemeFlags ProcessCmdThemeFlags(const std::vector<std::wstring>& cmdLines)
 		return ThemeFlags::Backlight;
 	}
 
-	if (CommandLine::Contains(L"colour", cmdLines)) 
+	if (CommandLine::Contains(L"colour", cmdLines))
 	{
 		return ThemeFlags::UserColour;
 	}
@@ -120,15 +120,15 @@ std::unique_ptr<IAnimation> ProcessThemeCommandLine(const std::vector<std::wstri
 	{
 		return std::make_unique<SakuraTransformAnimation>();
 	}
-	else if (CommandLine::Contains(L"pinkbreathe", ourCmds)) 
+	else if (CommandLine::Contains(L"pinkbreathe", ourCmds))
 	{
 		return std::make_unique<PinkBreatheAnimation>();
 	}
-	else if (CommandLine::Contains(L"sunsetbreathe", ourCmds)) 
+	else if (CommandLine::Contains(L"sunsetbreathe", ourCmds))
 	{
 		return std::make_unique<SunsetBreatheAnimation>();
 	}
-	else if (CommandLine::Contains(L"sakurasunset", ourCmds)) 
+	else if (CommandLine::Contains(L"sakurasunset", ourCmds))
 	{
 		return std::make_unique<SakuraSunsetAnimation>();
 	}
@@ -140,7 +140,7 @@ std::unique_ptr<IAnimation> ProcessThemeCommandLine(const std::vector<std::wstri
 
 std::optional<Colour> ProcessColourCommandLine(const std::vector<std::wstring>& cmdLines)
 {
-	if (auto const afterCmdLine = CommandLine::GetCommandsAfter(L"colour", cmdLines); !afterCmdLine.empty()) 
+	if (auto const afterCmdLine = CommandLine::GetCommandsAfter(L"colour", cmdLines); !afterCmdLine.empty())
 	{
 		if (auto const parsedColour = xstd::stoi(afterCmdLine[0], 16))
 		{
@@ -165,14 +165,13 @@ std::optional<Colours> ProcessColoursCommandLine(const std::vector<std::wstring>
 			return std::nullopt;
 		}
 
-		Colours colours{};
-
 		ColourFactory factory{};
-		colours[0] = factory.Create(leftZoneColour.value());
-		colours[1] = factory.Create(midZoneColour.value());
-		colours[2] = factory.Create(rightZoneColour.value());
 
-		return colours;
+		return Colours {
+			factory.Create(leftZoneColour.value()),
+			factory.Create(midZoneColour.value()),
+			factory.Create(rightZoneColour.value())
+		};
 	}
 
 	return std::nullopt;

@@ -129,7 +129,7 @@ Extract the program zip and run the commands **as an administrator**. To execute
   ```
   💖 Makes the keyboard lights pulse red in a heartbeat pattern.
 
-- **Sakura Transform (Pink & Volet colour sweep):**  
+- **Sakura Transform (Pink & Violet colour sweep):**
   ```bash
   .\CLEVO_KeyboardColour.exe theme sakuratranform
   ```

@@ -126,36 +126,40 @@ static DWORD DoKeyboardUserColour3Operation(IKeyboard* pKeyboard, std::optional<
 DWORD DoKeyboardOperation(IKeyboard* pKeyboard, const std::vector<std::wstring>& cmdLines)
 {
 	// pKeyboard will always be valid before reaching here, so no need to check the pointer again.
-
-	std::optional<Colour> userColour{};
-	std::optional<Colours> userColours{};
-	std::unique_ptr<IAnimation> pAnimation{};
-	auto backlight = BacklightType::Invalid;
-	auto sysAnimation = SystemAnimation::KB_MODE_CUSTOM;
-
+	
 	switch (ProcessCmdThemeFlags(cmdLines))
 	{
 	case ThemeFlags::Animation:
-		pAnimation = ProcessThemeCommandLine(cmdLines);
+	{
+		auto pAnimation = ProcessThemeCommandLine(cmdLines);
 		return DoKeyboardThemeOperation(pKeyboard, std::move(pAnimation), cmdLines);
+	}
 
 	case ThemeFlags::InBuilt:
-		sysAnimation = ProcessSystemAnimationCommandLine(cmdLines);
+	{
+		auto const sysAnimation = ProcessSystemAnimationCommandLine(cmdLines);
 		return DoKeyboardSystemAnimationOperation(pKeyboard, sysAnimation);
+	}
 
 	case ThemeFlags::Backlight:
-		backlight = ProcessBacklightCommandLine(cmdLines);
+	{
+		auto const backlight = ProcessBacklightCommandLine(cmdLines);
 		return DoKeyboardBacklightOperation(pKeyboard, backlight);
+	}
 
 	case ThemeFlags::UserColour:
-		userColour = ProcessColourCommandLine(cmdLines);
+	{
+		auto const userColour = ProcessColourCommandLine(cmdLines);
 		return DoKeyboardUserColourOperation(pKeyboard, userColour);
+	}
 
 	case ThemeFlags::UserColour3:
-		userColours = ProcessColoursCommandLine(cmdLines);
+	{
+		auto const userColours = ProcessColoursCommandLine(cmdLines);
 		return DoKeyboardUserColour3Operation(pKeyboard, userColours);
+	}
 
-		// The above code logic should ensure that we NEVER reach here.
+	// The above code logic should ensure that we NEVER reach here.
 	default:
 		return ERROR_FAIL_FAST_EXCEPTION;
 	}
