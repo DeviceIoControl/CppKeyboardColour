@@ -144,7 +144,7 @@ DWORD DoKeyboardOperation(IKeyboard* pKeyboard, const std::vector<std::wstring>&
 		userColours = ProcessColoursCommandLine(cmdLines);
 		return DoKeyboardUserColour3Operation(pKeyboard, userColours);
 
-			// The above code logic should ensure that we NEVER reach here.
+		// The above code logic should ensure that we NEVER reach here.
 	default:
 		return ERROR_FAIL_FAST_EXCEPTION;
 	}
