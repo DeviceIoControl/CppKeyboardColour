@@ -13,7 +13,7 @@
 
 int wmain(int argc, const wchar_t* argv[])
 {
-	std::cout << "CLEVO Keyboard Colours Tool 1.26.XXXX (Test Build) - Created by DeviceIoControl.\n\n";
+	std::cout << "CLEVO Keyboard Colours Tool 1.26.0616 - Created by DeviceIoControl.\n\n";
 
 	if (!IsSingleInstance())
 	{
