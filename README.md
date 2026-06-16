@@ -135,12 +135,19 @@ Extract the program zip and run the commands **as an administrator**. To execute
   ```
   🩷 💙 Makes the keyboard lights sweep through various shades of Pink & Violet.
 
-  - **Sakura Sunset (Pink colour sweep):**  
+- **Sakura Sunset (Pink colour sweep):**
   ```bash
   .\CLEVO_KeyboardColour.exe theme sakurasunset
   ```
   🩷 Makes the keyboard lights transition through Sakura Pink & Sunset Pink colours.
-  - **Pink Breathe:**  
+
+- **Sunset Breathe:**  
+  ```bash
+  .\CLEVO_KeyboardColour.exe theme sunsetbreathe
+  ```
+  🌅 Enables a Sunset Pink breathing effect (smooth inhale/exhale transition pattern).
+
+- **Pink Breathe:**  
   ```bash
   .\CLEVO_KeyboardColour.exe theme pinkbreathe
   ```
