@@ -58,7 +58,7 @@ Extract the program zip and run the commands **as an administrator**. To execute
 
 ---
 
-### ⌨️ Custom Colour Operations: 
+### ⌨️ Custom Colour Operations:
 
 - **Set backlight colour to Red:**  
   ```bash
@@ -86,7 +86,7 @@ Extract the program zip and run the commands **as an administrator**. To execute
 
 - **Set RGB colour to individual zones (3-Zone keyboards ONLY):**
   ```bash
-  .\CLEVO_KeyboardColour.exe **colours** 0xff0000 0x00ff00 0x0000ff
+  .\CLEVO_KeyboardColour.exe colours 0xff0000 0x00ff00 0x0000ff
   ```
   🌈 Sets the Left zone to Red, the middle zone to Green and right zone to Blue on the keyboard (3-Zone keyboards ONLY)
 ---
