@@ -34,7 +34,7 @@ The following commands are supported and can be executed via the **Command Promp
 Extract the program zip and run the commands **as an administrator**. To execute the `.exe` files, prepend the `.\` before the command.
 
 ```bash
-.\CLEVO_KeyboardColour.exe theme [theme] -speed [speed]
+.\CLEVO_KeyboardColour.exe theme [theme] --speed [speed]
 .\CLEVO_KeyboardColour.exe inbuilt [theme] (3-Zone keyboards only)
 .\CLEVO_KeyboardColour.exe backlight [on/off]
 .\CLEVO_KeyboardColour.exe colour [hexColour]
@@ -196,15 +196,15 @@ Extract the program zip and run the commands **as an administrator**. To execute
 
 ### ⏱️ Custom Speed:
 
-- **Slower**  
+- **Slower**
   ```bash
-  .\CLEVO_KeyboardColour.exe theme colourtransform -speed 50
+  .\CLEVO_KeyboardColour.exe theme colourtransform --speed 50
   ```
   🌈 Creates a slow rainbow sweep effect with smooth transitions at 50% speed.
 
 - **Faster**  
   ```bash
-  .\CLEVO_KeyboardColour.exe theme colourtransform -speed 200
+  .\CLEVO_KeyboardColour.exe theme colourtransform --speed 200
   ```
   🌈 Creates a fast rainbow sweep effect with smooth transitions at 200% speed.
 
@@ -225,7 +225,7 @@ Extract the program zip and run the commands **as an administrator**. To execute
 
 4. Run the desired command using the syntax:
    ```
-   .\CLEVO_KeyboardColour.exe theme/inbuilt/backlight/colour/colours [argument] -speed [speed]
+   .\CLEVO_KeyboardColour.exe theme/inbuilt/backlight/colour/colours [argument] [--speed <speed>]
    ```
 
 ---
