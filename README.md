@@ -34,7 +34,11 @@ The following commands are supported and can be executed via the **Command Promp
 Extract the program zip and run the commands **as an administrator**. To execute the `.exe` files, prepend the `.\` before the command.
 
 ```bash
-.\CLEVO_KeyboardColour.exe theme/inbuilt/backlight [argument] -speed [speed]
+.\CLEVO_KeyboardColour.exe theme [theme] -speed [speed]
+.\CLEVO_KeyboardColour.exe inbuilt [theme] (3-Zone keyboards only)
+.\CLEVO_KeyboardColour.exe backlight [on/off]
+.\CLEVO_KeyboardColour.exe colour [hexColour]
+.\CLEVO_KeyboardColour.exe colours [hexColour] [hexColour] [hexColour] (3-Zone keyboards only)
 ```
 ---
 
@@ -52,6 +56,39 @@ Extract the program zip and run the commands **as an administrator**. To execute
   ```
   💙 Enables the default keyboard backlight colour (Solid Blue).
 
+---
+
+### ⌨️ Custom Colour Operations: 
+
+- **Set backlight colour to Red:**  
+  ```bash
+  .\CLEVO_KeyboardColour.exe colour 0xff0000
+  ```
+  ❤️ Turns the keyboard backlight Red.
+
+- **Set backlight colour to Green:**
+  ```bash
+  .\CLEVO_KeyboardColour.exe colour 0x00ff00
+  ```
+  💚 Turns the keyboard backlight Green.
+
+- **Set backlight colour to Blue:**  
+  ```bash
+  .\CLEVO_KeyboardColour.exe colour 0x0000ff
+  ```
+  💙 Turns the keyboard backlight Blue.
+
+- **Set backlight colour to custom "Sakura Pink":**  
+  ```bash
+  .\CLEVO_KeyboardColour.exe colour 0xff6ea8
+  ```
+  🩷 Turns the keyboard backlight "Sakura Pink".
+
+- **Set RGB colour to individual zones (3-Zone keyboards ONLY):**
+  ```bash
+  .\CLEVO_KeyboardColour.exe **colours** 0xff0000 0x00ff00 0x0000ff
+  ```
+  🌈 Sets the Left zone to Red, the middle zone to Green and right zone to Blue on the keyboard (3-Zone keyboards ONLY)
 ---
 
 ### 🎨 Supported Animations:
@@ -92,6 +129,22 @@ Extract the program zip and run the commands **as an administrator**. To execute
   ```
   💖 Makes the keyboard lights pulse red in a heartbeat pattern.
 
+- **Sakura Transform (Pink & Volet colour sweep):**  
+  ```bash
+  .\CLEVO_KeyboardColour.exe theme sakuratranform
+  ```
+  💖 Makes the keyboard lights sweep through various shades of Pink & Violet.
+
+  - **Sakura Sunset (Pink colour sweep):**  
+  ```bash
+  .\CLEVO_KeyboardColour.exe theme sakurasunset
+  ```
+  💖 Makes the keyboard lights transition through Sakura Pink & Sunset Pink colours.
+  - **Pink Breathe:**  
+  ```bash
+  .\CLEVO_KeyboardColour.exe theme pinkbreathe
+  ```
+  💖 Enables a Pink breathing effect (smooth inhale/exhale transition pattern).
 ---
 
 ### ⚙️ Inbuilt Themes (3-Zone Keyboards ONLY):
@@ -165,7 +218,7 @@ Extract the program zip and run the commands **as an administrator**. To execute
 
 4. Run the desired command using the syntax:
    ```
-   .\CLEVO_KeyboardColour.exe theme/inbuilt/backlight [argument] -speed [speed]
+   .\CLEVO_KeyboardColour.exe theme/inbuilt/backlight/colour/colours [argument] -speed [speed]
    ```
 
 ---

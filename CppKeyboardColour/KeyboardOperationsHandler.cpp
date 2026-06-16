@@ -90,8 +90,19 @@ static DWORD DoKeyboardUserColourOperation(IKeyboard* pKeyboard, std::optional<C
 
 static DWORD DoKeyboardUserColour3Operation(IKeyboard* pKeyboard, std::optional<Colours> colours)
 {
+	// Somewhat unsafe, but pKeyboard should be valid before we get here.
+
+	if (pKeyboard->GetKBType() != KeyboardType::TRIPLE_ZONE)
+	{
+		std::cout << "This operation is not supported on this keyboard type.\n";
+		WaitForEnterIfNeeded();
+		return 0;
+	}
+
 	if (!colours.has_value() || colours->size() != 3)
 	{
+		std::cout << "Invalid argument: Must be 3 hexadecimal colours specified.\n";
+		WaitForEnterIfNeeded();
 		return ERROR_INVALID_PARAMETER;
 	}
 
