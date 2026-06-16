@@ -29,6 +29,11 @@ ThemeFlags ProcessCmdThemeFlags(const std::vector<std::wstring>& cmdLines)
 		return ThemeFlags::UserColour;
 	}
 
+	if (CommandLine::Contains(L"colours", cmdLines))
+	{
+		return ThemeFlags::UserColour3;
+	}
+
 	return ThemeFlags::FlagInvalid;
 }
 
@@ -142,6 +147,32 @@ std::optional<Colour> ProcessColourCommandLine(const std::vector<std::wstring>& 
 			ColourFactory factory{};
 			return factory.Create(parsedColour.value());
 		}
+	}
+
+	return std::nullopt;
+}
+
+std::optional<Colours> ProcessColoursCommandLine(const std::vector<std::wstring>& cmdLines)
+{
+	if (auto const afterCmdLine = CommandLine::GetCommandsAfter(L"colours", cmdLines); !afterCmdLine.empty())
+	{
+		auto const leftZoneColour = xstd::stoi(afterCmdLine[0], 16);
+		auto const midZoneColour = xstd::stoi(afterCmdLine[1], 16);
+		auto const rightZoneColour = xstd::stoi(afterCmdLine[2], 16);
+
+		if (!leftZoneColour.has_value() || !midZoneColour.has_value() || !rightZoneColour.has_value())
+		{
+			return std::nullopt;
+		}
+
+		Colours colours{};
+
+		ColourFactory factory{};
+		colours[0] = factory.Create(leftZoneColour.value());
+		colours[1] = factory.Create(midZoneColour.value());
+		colours[2] = factory.Create(rightZoneColour.value());
+
+		return colours;
 	}
 
 	return std::nullopt;

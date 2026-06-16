@@ -10,3 +10,4 @@
 #define INDEX_COLOUR_BLUE 2
 
 using Colour = std::array<uint8_t, 3>;
+using Colours = std::array<Colour, 3>;
