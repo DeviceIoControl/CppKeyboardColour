@@ -16,7 +16,7 @@ This is a cleaner, more organized, and efficient version of the initial program.
   - 🎥 **Optimized Animations:** Enhanced visual effects using animation objects.
   - ⏱️ **Custom Speed:** Change the speed to make an animation faster or slower.
   
-  - **Note:** If you wish to run this program on startup (in the background), please run the "Scripts\RegisterClevoKbOnBoot.cmd" script **AS ADMINISTRATOR** and follow it's instructions. (Please use Scripts\UnregisterClevoKbOnBoot.cmd to stop running at startup) -- Also ensure you have confirmed your theme of choice prior to running the script and adjust the command line in "Scripts\StartClevoKB.cmd" to the requested theme.
+- **Note:** If you wish to run this program on startup (in the background), please run the "Scripts\RegisterClevoKbOnBoot.cmd" script **AS ADMINISTRATOR** and follow it's instructions. (Please use Scripts\UnregisterClevoKbOnBoot.cmd to stop running at startup) -- Also ensure you have confirmed your theme of choice prior to running the script and adjust the command line in "Scripts\StartClevoKB.cmd" to the requested theme.
 
 ⚠️ **Important Note:** This application requests for **Administrator privileges**. Please ensure you accept the Windows UAC prompt, as Windows Management Instrumentation (WMI) requires this to function correctly.
 
@@ -223,7 +223,7 @@ Extract the program zip and run the commands **as an administrator**. To execute
    - Search for "Command Prompt" in the Windows search bar.
    - Right-click and select **Run as Administrator**.
 
-3. **Again, be sure that the **InsydeDHCU.dll** file is in the same directory as `CLEVO_KeyboardColour.exe` if you're using a **Single-Zone** keyboard**.
+3. **Again, be sure that the **InsydeDCHU.dll** file is in the same directory as `CLEVO_KeyboardColour.exe` if you're using a **Single-Zone** keyboard**.
 
 4. Run the desired command using the syntax:
    ```
@@ -251,7 +251,7 @@ To activate the inbuilt 'Wave' effect, run:
 ```
 NOTE: This command does not support the `--once` argument.
 
-⚠️ **Warning (1):** This will use the themes that are programmed directly into your system, thus this application has no control over the colours these inbuilt themes use.
+⚠️ **Warning (1):** This will use the system's inbuilt themes, thus this application has no control over these types of themes.
 
 ⚠️ **Warning (2):** This is supported on 3-Zone keyboard ONLY.
 
@@ -268,14 +268,14 @@ NOTE: This command does not support the `--once` argument.
 
 - **Compatible CLEVO keyboards:**
   - **RGB 1-zone** or **3-zone** lighting.
-  - For **1-zone keyboards**, the **InsydeDHCU.dll** file must be in the same directory as `CLEVO_KeyboardColour.exe`.
+  - For **1-zone keyboards**, the **InsydeDCHU.dll** file must be in the same directory as `CLEVO_KeyboardColour.exe`.
 - **Administrator Permissions:** This program requests for administrator privileges. Please ensure you accept the Windows UAC prompt to avoid WMI failures.
 
 ---
 
 ## 📌 Final Notes
 
-- This is an initial version of the program, and more features (including better optimization for 1-zone keyboards) will be added in future updates.
 - Feedback, suggestions, and contributions are highly appreciated to help improve the project.
+- Found an issue or a bug? Please report it [here](https://github.com/DeviceIoControl/CppKeyboardColour/issues).
 
 ---
