@@ -72,15 +72,23 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)Build\Bin\$(Configuration)\$(Platform)</OutDir>
+    <IntDir>$(SolutionDir)Build\Inter\$(Configuration)\$(Platform)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)Build\Bin\$(Configuration)\$(Platform)</OutDir>
+    <IntDir>$(SolutionDir)Build\Inter\$(Configuration)\$(Platform)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)Build\Bin\$(Configuration)\$(Platform)</OutDir>
+    <IntDir>$(SolutionDir)Build\Inter\$(Configuration)\$(Platform)</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)Build\Bin\$(Configuration)\$(Platform)</OutDir>
+    <IntDir>$(SolutionDir)Build\Inter\$(Configuration)\$(Platform)</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -162,6 +170,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AnimationFactory.h" />
     <ClInclude Include="Animations.h" />
     <ClInclude Include="BreatheAnimation.h" />
     <ClInclude Include="ConsoleUtils.h" />
@@ -208,6 +217,7 @@
     <ClInclude Include="Zone.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AnimationFactory.cpp" />
     <ClCompile Include="BreatheAnimation.cpp" />
     <ClCompile Include="ConsoleUtils.cpp" />
     <ClCompile Include="DeviceIdTranslator.cpp" />

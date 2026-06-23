@@ -53,6 +53,7 @@ static DWORD DoKeyboardThemeOperation(IKeyboard* pKeyboard, std::unique_ptr<IAni
 
 	auto const bShouldLoop = !CommandLine::Contains(L"--once", cmdLines);
 	pKeyboard->PlayAnimation(*pAnimation, bShouldLoop);
+
 	return 0;
 }
 
@@ -88,7 +89,7 @@ static DWORD DoKeyboardUserColourOperation(IKeyboard* pKeyboard, std::optional<C
 	return 0;
 }
 
-static DWORD DoKeyboardUserColour3Operation(IKeyboard* pKeyboard, std::optional<Colours> colours)
+static DWORD DoKeyboardUserColour3Operation(IKeyboard* pKeyboard, const std::optional<Colours>& colours)
 {
 	// Somewhat unsafe, but pKeyboard should be valid before we get here.
 

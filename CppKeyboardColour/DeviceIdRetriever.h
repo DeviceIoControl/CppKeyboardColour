@@ -1,6 +1,6 @@
-#pragma once
-
 // Created by DeviceIoControl
+
+#pragma once
 
 #define GET_PRODUCT_DLL L"GetProductID64.dll"
 

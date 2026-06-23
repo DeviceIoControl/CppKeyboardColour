@@ -15,6 +15,8 @@ This is a cleaner, more organized, and efficient version of the initial program.
   - 🌈 **Fading Colors:** Smooth color transitions (predefined themes).
   - 🎥 **Optimized Animations:** Enhanced visual effects using animation objects.
   - ⏱️ **Custom Speed:** Change the speed to make an animation faster or slower.
+  
+  - **Note:** If you wish to run this program on startup (in the background), please run the "Scripts\RegisterClevoKbOnBoot.cmd" script **AS ADMINISTRATOR** and follow it's instructions. (Please use Scripts\UnregisterClevoKbOnBoot.cmd to stop running at startup) -- Also ensure you have confirmed your theme of choice prior to running the script and adjust the command line in "Scripts\StartClevoKB.cmd" to the requested theme.
 
 ⚠️ **Important Note:** This application requests for **Administrator privileges**. Please ensure you accept the Windows UAC prompt, as Windows Management Instrumentation (WMI) requires this to function correctly.
 

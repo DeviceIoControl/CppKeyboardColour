@@ -3,8 +3,9 @@
 #include "stdafx.h"
 #include "ThemeCommandLine.h"
 
-#include "Animations.h"
 #include "CommandLine.h"
+#include "ColourFactory.h"
+#include "AnimationFactory.h"
 #include "SystemAnimationTranslator.h"
 
 ThemeFlags ProcessCmdThemeFlags(const std::vector<std::wstring>& cmdLines)
@@ -92,45 +93,11 @@ std::unique_ptr<IAnimation> ProcessThemeCommandLine(const std::vector<std::wstri
 		return nullptr;
 	}
 
-	if (CommandLine::Contains(L"breathe", ourCmds))
+	AnimationFactory const factory{};
+
+	if (auto pAnimation = factory.Create(ourCmds[0])) 
 	{
-		return std::make_unique<BreatheAnimation>();
-	}
-	else if (CommandLine::Contains(L"colourshift", ourCmds))
-	{
-		return std::make_unique<ColourShiftAnimation>();
-	}
-	else if (CommandLine::Contains(L"freshbreathe", ourCmds))
-	{
-		return std::make_unique<FreshBreatheAnimation>();
-	}
-	else if (CommandLine::Contains(L"colourtransform", ourCmds))
-	{
-		return std::make_unique<ColourTransformAnimation>();
-	}
-	else if (CommandLine::Contains(L"blink", ourCmds))
-	{
-		return std::make_unique<PulsatingBlinkAnimation>();
-	}
-	else if (CommandLine::Contains(L"heartbeat", ourCmds))
-	{
-		return std::make_unique<HeartbeatAnimation>();
-	}
-	else if (CommandLine::Contains(L"sakuratransform", ourCmds))
-	{
-		return std::make_unique<SakuraTransformAnimation>();
-	}
-	else if (CommandLine::Contains(L"pinkbreathe", ourCmds))
-	{
-		return std::make_unique<PinkBreatheAnimation>();
-	}
-	else if (CommandLine::Contains(L"sunsetbreathe", ourCmds))
-	{
-		return std::make_unique<SunsetBreatheAnimation>();
-	}
-	else if (CommandLine::Contains(L"sakurasunset", ourCmds))
-	{
-		return std::make_unique<SakuraSunsetAnimation>();
+		return pAnimation;
 	}
 
 	std::cout << "Invalid animation name was provided!\n";

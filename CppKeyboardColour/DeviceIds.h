@@ -10,6 +10,7 @@
 #define DEVICE_ID_NH70XX 0x00005015
 #define DEVICE_ID_A715XX 0x0000A554
 #define DEVICE_ID_CV15XX 0x00000157
+#define DEVICE_ID_NP60SXX 0x0000A553
 
 // #define DEVICE_ID_NH77XX - User did not respond with the appropriate information.
 
