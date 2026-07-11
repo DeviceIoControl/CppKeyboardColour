@@ -7,19 +7,19 @@
 #include "InsydeKBCommunicator.h"
 #include "FakeKeyboardCommunicator.h"
 
-KeyboardCommunicatorFactory::KeyboardCommunicatorFactory(std::unique_ptr<IDeviceIdTranslator> pDeviceIdTranslator)
-	: m_pDeviceIdTranslator(std::move(pDeviceIdTranslator))
+KeyboardCommunicatorFactory::KeyboardCommunicatorFactory(std::shared_ptr<IKeyboardDevice> pKBDevice)
+	: m_pKBDevice(std::move(pKBDevice))
 {
 }
 
-IKeyboardCommunicatorPtr KeyboardCommunicatorFactory::Create(uint32_t deviceId) const
+std::shared_ptr<IKeyboardCommunicator> KeyboardCommunicatorFactory::Create() const
 {
-	if (!m_pDeviceIdTranslator)
+	if (!m_pKBDevice)
 	{
 		return nullptr;
 	}
 
-	switch (m_pDeviceIdTranslator->TranslateToKBCommType(deviceId))
+	switch (m_pKBDevice->GetKBCommunicatorType())
 	{
 	case KBCommunicatorType::Fake:
 		return std::make_shared<FakeKeyboardCommunicator>();

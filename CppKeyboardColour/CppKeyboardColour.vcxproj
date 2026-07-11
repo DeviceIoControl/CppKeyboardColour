@@ -72,23 +72,23 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)Build\Bin\$(Configuration)\$(Platform)</OutDir>
-    <IntDir>$(SolutionDir)Build\Inter\$(Configuration)\$(Platform)</IntDir>
+    <OutDir>$(SolutionDir)Build\Bin\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)Build\Inter\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)Build\Bin\$(Configuration)\$(Platform)</OutDir>
-    <IntDir>$(SolutionDir)Build\Inter\$(Configuration)\$(Platform)</IntDir>
+    <OutDir>$(SolutionDir)Build\Bin\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)Build\Inter\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)Build\Bin\$(Configuration)\$(Platform)</OutDir>
-    <IntDir>$(SolutionDir)Build\Inter\$(Configuration)\$(Platform)</IntDir>
+    <OutDir>$(SolutionDir)Build\Bin\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)Build\Inter\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)Build\Bin\$(Configuration)\$(Platform)</OutDir>
-    <IntDir>$(SolutionDir)Build\Inter\$(Configuration)\$(Platform)</IntDir>
+    <OutDir>$(SolutionDir)Build\Bin\$(Configuration)\$(Platform)\</OutDir>
+    <IntDir>$(SolutionDir)Build\Inter\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -182,20 +182,20 @@
     <ClInclude Include="ColourTransformAnimation.h" />
     <ClInclude Include="CommandLine.h" />
     <ClInclude Include="DeviceIds.h" />
-    <ClInclude Include="DeviceIdTranslator.h" />
     <ClInclude Include="FakeKeyboardCommunicator.h" />
     <ClInclude Include="FrameCollection.h" />
     <ClInclude Include="Colour.h" />
     <ClInclude Include="Frame.h" />
     <ClInclude Include="HeartbeatAnimation.h" />
     <ClInclude Include="IAnimation.h" />
-    <ClInclude Include="IDeviceIdTranslator.h" />
+    <ClInclude Include="IKeyboardDevice.h" />
     <ClInclude Include="IKeyboard.h" />
     <ClInclude Include="IKeyboardCommunicator.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="DeviceIdRetriever.h" />
     <ClInclude Include="InsydeKBCommunicator.h" />
     <ClInclude Include="KeyboardCommunicatorFactory.h" />
+    <ClInclude Include="KeyboardDevice.h" />
     <ClInclude Include="KeyboardFactory.h" />
     <ClInclude Include="KeyboardOperationsHandler.h" />
     <ClInclude Include="KeyboardType.h" />
@@ -220,7 +220,6 @@
     <ClCompile Include="AnimationFactory.cpp" />
     <ClCompile Include="BreatheAnimation.cpp" />
     <ClCompile Include="ConsoleUtils.cpp" />
-    <ClCompile Include="DeviceIdTranslator.cpp" />
     <ClCompile Include="FramePatternGenerator.cpp" />
     <ClCompile Include="FreshBreatheAnimation.cpp" />
     <ClCompile Include="ColourFactory.cpp" />
@@ -237,6 +236,7 @@
       <FileType>CppCode</FileType>
     </ClCompile>
     <ClCompile Include="KeyboardCommunicatorFactory.cpp" />
+    <ClCompile Include="KeyboardDevice.cpp" />
     <ClCompile Include="KeyboardFactory.cpp" />
     <ClCompile Include="KeyboardOperationsHandler.cpp" />
     <ClCompile Include="PinkBreatheAnimation.cpp" />

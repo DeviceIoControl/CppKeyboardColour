@@ -81,9 +81,6 @@
     <ClInclude Include="KeyboardCommunicatorFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DeviceIdTranslator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="FakeKeyboardCommunicator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -105,7 +102,7 @@
     <ClInclude Include="CommandLine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IDeviceIdTranslator.h">
+    <ClInclude Include="IKeyboardDevice.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SingleInstanceEvent.h">
@@ -148,6 +145,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AnimationFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyboardDevice.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -206,9 +206,6 @@
     <ClCompile Include="KeyboardFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DeviceIdTranslator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="HeartbeatAnimation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -240,6 +237,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AnimationFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyboardDevice.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

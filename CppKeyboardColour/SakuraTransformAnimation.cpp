@@ -53,7 +53,7 @@ std::optional<Frame> SakuraTransformAnimation::GetFrame(uint32_t idx)
 
 bool SakuraTransformAnimation::IsSupportedKB(KeyboardType kbType) const
 {
-	return kbType != KeyboardType::PER_KEY && kbType != KeyboardType::NONE;
+	return kbType != KeyboardType::TRIPLE_ZONE_LIGHTBAR && kbType != KeyboardType::NONE;
 }
 
 uint32_t SakuraTransformAnimation::Size() const

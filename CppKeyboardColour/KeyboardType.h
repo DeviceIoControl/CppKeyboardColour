@@ -9,7 +9,7 @@ enum class KeyboardType : uint16_t
 	NONE,
 	TRIPLE_ZONE,
 	SINGLE_ZONE,
-	PER_KEY,
+	TRIPLE_ZONE_LIGHTBAR,
 };
 
 enum class KBCommunicatorType : uint16_t

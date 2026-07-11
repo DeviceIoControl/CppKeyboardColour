@@ -8,34 +8,34 @@
 #include "AnimationFactory.h"
 #include "SystemAnimationTranslator.h"
 
-ThemeFlags ProcessCmdThemeFlags(const std::vector<std::wstring>& cmdLines)
+KeyboardOperation ProcessKeyboardCmdOperation(const std::vector<std::wstring>& cmdLines)
 {
 	if (CommandLine::Contains(L"inbuilt", cmdLines))
 	{
-		return ThemeFlags::InBuilt;
+		return KeyboardOperation::InBuilt;
 	}
 
 	if (CommandLine::Contains(L"theme", cmdLines))
 	{
-		return ThemeFlags::Animation;
+		return KeyboardOperation::Animation;
 	}
 
 	if (CommandLine::Contains(L"backlight", cmdLines))
 	{
-		return ThemeFlags::Backlight;
+		return KeyboardOperation::Backlight;
 	}
 
 	if (CommandLine::Contains(L"colour", cmdLines))
 	{
-		return ThemeFlags::UserColour;
+		return KeyboardOperation::UserColour;
 	}
 
 	if (CommandLine::Contains(L"colours", cmdLines))
 	{
-		return ThemeFlags::UserColour3;
+		return KeyboardOperation::UserColour3;
 	}
 
-	return ThemeFlags::FlagInvalid;
+	return KeyboardOperation::FlagInvalid;
 }
 
 BacklightType ProcessBacklightCommandLine(const std::vector<std::wstring>& cmdLines)

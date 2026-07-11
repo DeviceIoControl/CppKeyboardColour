@@ -1,18 +1,18 @@
 // Created by DeviceIoControl
 #pragma once
 
+#include "IKeyboardDevice.h"
 #include "IKeyboardCommunicator.h"
-#include "IDeviceIdTranslator.h"
 
 class KeyboardCommunicatorFactory 
 {
 public:
-	KeyboardCommunicatorFactory(std::unique_ptr<IDeviceIdTranslator> pDeviceIdTranslator);
+	KeyboardCommunicatorFactory(std::shared_ptr<IKeyboardDevice> pKBDevice);
 
-	IKeyboardCommunicatorPtr Create(uint32_t deviceId) const;
+	std::shared_ptr<IKeyboardCommunicator> Create() const;
 
 	~KeyboardCommunicatorFactory() = default;
 
 private:
-	std::unique_ptr<IDeviceIdTranslator> m_pDeviceIdTranslator{};
+	std::shared_ptr<IKeyboardDevice> m_pKBDevice{};
 };

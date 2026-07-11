@@ -5,9 +5,9 @@
 
 using millisec = std::chrono::milliseconds;
 
-Keyboard::Keyboard(KeyboardType kbType, IKeyboardCommunicatorPtr ptrKbComms)
-	: m_kbType(kbType),
-	m_ptrKbComms(std::move(ptrKbComms))
+Keyboard::Keyboard(std::shared_ptr<IKeyboardDevice> pKBDevice, std::shared_ptr<IKeyboardCommunicator> pKbComms)
+	: m_pKBDevice(std::move(pKBDevice)),
+	m_ptrKbComms(std::move(pKbComms))
 {
 }
 
@@ -18,7 +18,7 @@ void Keyboard::SetColour(uint8_t r, uint8_t g, uint8_t b, Zone zone)
 
 KeyboardType Keyboard::GetKBType() const
 {
-	return m_kbType;
+	return m_pKBDevice->GetKeyboardType();
 };
 
 void Keyboard::SendCode(uint32_t code)

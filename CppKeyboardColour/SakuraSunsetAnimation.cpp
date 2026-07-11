@@ -38,7 +38,7 @@ std::optional<Frame> SakuraSunsetAnimation::GetFrame(uint32_t idx)
 
 bool SakuraSunsetAnimation::IsSupportedKB(KeyboardType kbType) const
 {
-	return kbType != KeyboardType::PER_KEY && kbType != KeyboardType::NONE;
+	return kbType != KeyboardType::TRIPLE_ZONE_LIGHTBAR && kbType != KeyboardType::NONE;
 }
 
 uint32_t SakuraSunsetAnimation::Size() const

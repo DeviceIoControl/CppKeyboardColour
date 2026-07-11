@@ -41,7 +41,7 @@ static DWORD DoKeyboardThemeOperation(IKeyboard* pKeyboard, std::unique_ptr<IAni
 
 	if (!pKeyboard->SetSpeedFactor(speedFactor))
 	{
-		std::cout << "Speed value out of range (1-250). Animation will not play.\n";
+		std::cout << "Speed value out of range (1-250). Animation will not be played.\n";
 		WaitForEnterIfNeeded();
 		return ERROR_INVALID_PARAMETER;
 	}
@@ -128,33 +128,33 @@ DWORD DoKeyboardOperation(IKeyboard* pKeyboard, const std::vector<std::wstring>&
 {
 	// pKeyboard will always be valid before reaching here, so no need to check the pointer again.
 	
-	switch (ProcessCmdThemeFlags(cmdLines))
+	switch (ProcessKeyboardCmdOperation(cmdLines))
 	{
-	case ThemeFlags::Animation:
+	case KeyboardOperation::Animation:
 	{
 		auto pAnimation = ProcessThemeCommandLine(cmdLines);
 		return DoKeyboardThemeOperation(pKeyboard, std::move(pAnimation), cmdLines);
 	}
 
-	case ThemeFlags::InBuilt:
+	case KeyboardOperation::InBuilt:
 	{
 		auto const sysAnimation = ProcessSystemAnimationCommandLine(cmdLines);
 		return DoKeyboardSystemAnimationOperation(pKeyboard, sysAnimation);
 	}
 
-	case ThemeFlags::Backlight:
+	case KeyboardOperation::Backlight:
 	{
 		auto const backlight = ProcessBacklightCommandLine(cmdLines);
 		return DoKeyboardBacklightOperation(pKeyboard, backlight);
 	}
 
-	case ThemeFlags::UserColour:
+	case KeyboardOperation::UserColour:
 	{
 		auto const userColour = ProcessColourCommandLine(cmdLines);
 		return DoKeyboardUserColourOperation(pKeyboard, userColour);
 	}
 
-	case ThemeFlags::UserColour3:
+	case KeyboardOperation::UserColour3:
 	{
 		auto const userColours = ProcessColoursCommandLine(cmdLines);
 		return DoKeyboardUserColour3Operation(pKeyboard, userColours);

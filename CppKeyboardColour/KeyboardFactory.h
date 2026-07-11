@@ -3,21 +3,17 @@
 #pragma once
 
 #include "IKeyboard.h"
-#include "DeviceIdRetriever.h"
+#include "IKeyboardDevice.h"
 
 class KeyboardFactory 
 {
 public:
-	KeyboardFactory() = default;
+	KeyboardFactory(bool fakeKeyboard = false);
 
 	std::unique_ptr<IKeyboard> Create() const;
 
 	~KeyboardFactory() = default;
 
 private:
-#ifdef FAKE_KEYBOARD
-	DeviceIdRetriever m_deviceIdRetriever{ true };
-#else
-	DeviceIdRetriever m_deviceIdRetriever{ false };
-#endif
+	std::shared_ptr<IKeyboardDevice> m_pKBDevice;
 };

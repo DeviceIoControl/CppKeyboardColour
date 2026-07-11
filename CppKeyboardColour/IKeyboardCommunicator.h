@@ -3,7 +3,6 @@
 #pragma once
 
 #include "stdafx.h"
-
 #include "Zone.h"
 #include "Colour.h"
 
@@ -15,5 +14,3 @@ public:
 
 	virtual ~IKeyboardCommunicator() = default;
 };
-
-using IKeyboardCommunicatorPtr = std::shared_ptr<IKeyboardCommunicator>;

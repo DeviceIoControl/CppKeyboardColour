@@ -32,8 +32,8 @@ DeviceIdRetriever::~DeviceIdRetriever()
 
 /* static */ uint32_t DeviceIdRetriever::DoGetProductID(const Detail::T_GetProductID_PCI& fnGetProductID)
 {
-	CoInitializeEx(nullptr, COINIT::COINIT_APARTMENTTHREADED);
-	CoInitializeEx(nullptr, COINIT::COINIT_APARTMENTTHREADED);
+	std::ignore = CoInitializeEx(nullptr, COINIT::COINIT_APARTMENTTHREADED);
+	std::ignore = CoInitializeEx(nullptr, COINIT::COINIT_APARTMENTTHREADED);
 
 	return fnGetProductID();
 }
