@@ -22,7 +22,6 @@ namespace
 			return _Ostr << "Triple Zone (with Lightbar)";
 		}
 
-		// We should never reach here.
 		return _Ostr << "Not supported";
 	}
 
@@ -35,6 +34,11 @@ KeyboardFactory::KeyboardFactory(bool fakeKeyboard /*= false*/)
 
 std::unique_ptr<IKeyboard> KeyboardFactory::Create() const 
 {
+	if (!m_pKBDevice) 
+	{
+		return nullptr;
+	}
+
 	auto const deviceId = m_pKBDevice->GetDeviceId();
 	const auto kbType = m_pKBDevice->GetKeyboardType();
 

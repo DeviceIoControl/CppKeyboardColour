@@ -17,7 +17,7 @@ class KeyboardDevice
 {
 public:
 	KeyboardDevice(bool fakeDevice = false);
-	~KeyboardDevice() = default;
+	~KeyboardDevice() override = default;
 
 	uint32_t GetDeviceId() const override;
 	KeyboardType GetKeyboardType() const override;

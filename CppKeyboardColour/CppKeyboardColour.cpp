@@ -22,8 +22,8 @@ int wmain(int argc, const wchar_t* argv[])
 		return ERROR_ALREADY_EXISTS;
 	}
 
-	KeyboardFactory kbFactory{};
-	auto ptrKeyboard = kbFactory.Create();
+	KeyboardFactory const kbFactory{};
+	auto const ptrKeyboard = kbFactory.Create();
 
 	if (!ptrKeyboard)
 	{
