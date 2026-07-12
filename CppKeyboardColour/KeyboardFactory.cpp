@@ -34,13 +34,13 @@ KeyboardFactory::KeyboardFactory(bool fakeKeyboard /*= false*/)
 
 std::unique_ptr<IKeyboard> KeyboardFactory::Create() const 
 {
-	if (!m_pKBDevice) 
+	if (!m_pKBDevice)
 	{
 		return nullptr;
 	}
 
 	auto const deviceId = m_pKBDevice->GetDeviceId();
-	const auto kbType = m_pKBDevice->GetKeyboardType();
+	auto const kbType = m_pKBDevice->GetKeyboardType();
 
 	std::cout << "Detected Device ID: 0x" << (void*)deviceId << "\n";
 	std::cout << "Keyboard Type: " << kbType << "\n";

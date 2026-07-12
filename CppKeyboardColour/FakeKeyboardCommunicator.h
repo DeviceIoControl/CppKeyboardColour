@@ -14,5 +14,7 @@ public:
 
 	bool SetKBColour(Zone zone, const Colour& colour) override;
 
+	bool SetLightbarColour(const Colour& colour) override;
+
 	~FakeKeyboardCommunicator() override = default;
 };

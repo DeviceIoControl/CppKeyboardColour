@@ -70,7 +70,7 @@ IWbemLocator* WbemService::CreateWbemLocator()
 	const auto hError = CoCreateInstance(__uuidof(WbemLocator), nullptr,
 		CLSCTX_INPROC_SERVER, IID_IWbemLocator, (void**)&pWbemLocator);
 
-	return pWbemLocator;
+	return SUCCEEDED(hError) ? pWbemLocator : nullptr;
 }
 
 IWbemServices* WbemService::CreateNativeWbemServices(const std::wstring& strNamespace)
@@ -81,5 +81,5 @@ IWbemServices* WbemService::CreateNativeWbemServices(const std::wstring& strName
 		(BSTR)strNamespace.c_str(), nullptr, nullptr, nullptr, NULL, nullptr, nullptr, &pWbemServices
 	);
 
-	return pWbemServices;
+	return SUCCEEDED(hError) ? pWbemServices : nullptr;
 }

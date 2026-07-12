@@ -34,5 +34,6 @@ private:
 	std::shared_ptr<IKeyboardDevice> m_pKBDevice{};
 	std::shared_ptr<IKeyboardCommunicator> m_ptrKbComms{};
 
+	void ApplyKBZoneColour(Zone zone, const Colour& colour);
 	void Animate(IAnimation& animation);
 };

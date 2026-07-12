@@ -12,14 +12,13 @@ namespace Detail
 class DeviceIdRetriever
 {
 public:
-	DeviceIdRetriever(bool useFakeDeviceId = false);
+	DeviceIdRetriever();
 
 	uint32_t GetDeviceID() const;
 
 	~DeviceIdRetriever();
 
 private:
-	bool m_useFakeDeviceId = false;
 	HMODULE m_hGetProductDLL = nullptr;
 	Detail::T_GetProductID_PCI m_pfnGetProductID = nullptr;
 

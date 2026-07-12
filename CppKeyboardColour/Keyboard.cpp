@@ -13,7 +13,7 @@ Keyboard::Keyboard(std::shared_ptr<IKeyboardDevice> pKBDevice, std::shared_ptr<I
 
 void Keyboard::SetColour(uint8_t r, uint8_t g, uint8_t b, Zone zone)
 {
-	m_ptrKbComms->SetKBColour(zone, m_colourFactory.Create(r, g, b));
+	this->ApplyKBZoneColour(zone, m_colourFactory.Create(r, g, b));
 }
 
 KeyboardType Keyboard::GetKBType() const
@@ -53,11 +53,22 @@ void Keyboard::Animate(IAnimation& animation)
 	{
 		if (const auto frame = animation.GetFrame(i))
 		{
-			m_ptrKbComms->SetKBColour(frame->zone, frame->colour);
+			this->ApplyKBZoneColour(frame->zone, frame->colour);
 			auto const frameSleep = static_cast<uint32_t>(frame->ms_time / m_speedFactor);
 			std::this_thread::sleep_for(millisec(frameSleep));
 		}
 	}
+}
+
+void Keyboard::ApplyKBZoneColour(Zone zone, const Colour& colour)
+{
+	if (zone == Zone::LIGHTBAR)
+	{
+		m_ptrKbComms->SetLightbarColour(colour);
+		return;
+	}
+
+	m_ptrKbComms->SetKBColour(zone, colour);
 }
 
 void Keyboard::PlayAnimation(IAnimation& animation, bool bShouldLoop)

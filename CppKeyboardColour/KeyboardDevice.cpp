@@ -5,17 +5,25 @@
 #include "DeviceIds.h"
 
 KeyboardDevice::KeyboardDevice(bool fakeDevice /*= false*/)
-	: m_pDevIdRetriever(std::make_unique<DeviceIdRetriever>(fakeDevice))
+	: m_useFakeDeviceId(fakeDevice),
+	m_pDevIdRetriever(std::make_unique<DeviceIdRetriever>())
 {
+	this->InitializeSingleZoneKBs();
+	this->InitializeTripleZoneKBs();
 }
 
 uint32_t KeyboardDevice::GetDeviceId() const 
 {
-	// We could cache this value, but this should only be called once anyways.
-	return m_pDevIdRetriever ? m_pDevIdRetriever->GetDeviceID() : 0xFFFFFFFF;
+	if (m_pDevIdRetriever && !m_useFakeDeviceId)
+	{
+		// We could cache this value, but this should only be called once anyways.
+		return m_pDevIdRetriever->GetDeviceID();
+	}
+
+	return m_useFakeDeviceId ? DEVICE_ID_FAKE : 0xFFFFFFFF;
 }
 
-KeyboardType KeyboardDevice::GetKeyboardType() const 
+KeyboardType KeyboardDevice::GetKeyboardType() const
 {
 	auto const result = m_deviceIdToKBProps.find(this->GetDeviceId());
 	return (result != m_deviceIdToKBProps.cend()) ? result->second.kbType : KeyboardType::NONE;

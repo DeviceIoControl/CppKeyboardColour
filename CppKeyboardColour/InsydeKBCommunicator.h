@@ -3,6 +3,7 @@
 #pragma once
 
 #include "IKeyboardCommunicator.h"
+#include "ColourFactory.h"
 
 namespace Detail
 {
@@ -22,7 +23,11 @@ public:
 	// Unsupported for now.
 	bool SendKBCode(uint32_t data) override;
 
+	// Unsupported.
+	bool SetLightbarColour(const Colour& colour) override;
+
 private:
+	ColourFactory m_colourFactory{};
 	HMODULE m_hInsydeDHCU = nullptr;
 	Detail::T_SetDCHU_Data m_pfnSetDCHU_Data = nullptr;
 	Detail::T_WriteAppSettings m_pfnWriteAppSettings = nullptr;

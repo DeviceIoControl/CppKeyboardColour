@@ -12,4 +12,5 @@ public:
 
 	Colour Create(uint8_t r, uint8_t g, uint8_t b) const;
 	Colour Create(uint32_t rgb) const;
+	uint32_t Create(const Colour& colour) const;
 };

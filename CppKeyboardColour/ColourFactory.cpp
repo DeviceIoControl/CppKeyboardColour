@@ -24,3 +24,8 @@ Colour ColourFactory::Create(uint32_t rgb) const
 
 	return colour;
 }
+
+uint32_t ColourFactory::Create(const Colour& colour) const
+{
+	return static_cast<uint32_t>((colour[INDEX_COLOUR_BLUE] << 16ul) | (colour[INDEX_COLOUR_RED] << 8ul) | colour[INDEX_COLOUR_GREEN]);
+}

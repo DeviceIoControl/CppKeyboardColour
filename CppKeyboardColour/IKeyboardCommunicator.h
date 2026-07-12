@@ -11,6 +11,7 @@ class IKeyboardCommunicator
 public:
 	virtual bool SendKBCode(uint32_t code) = 0;
 	virtual bool SetKBColour(Zone zone, const Colour& colour) = 0;
+	virtual bool SetLightbarColour(const Colour& colour) = 0;
 
 	virtual ~IKeyboardCommunicator() = default;
 };

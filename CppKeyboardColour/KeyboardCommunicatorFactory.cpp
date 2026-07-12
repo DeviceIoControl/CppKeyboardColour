@@ -19,13 +19,15 @@ std::shared_ptr<IKeyboardCommunicator> KeyboardCommunicatorFactory::Create() con
 		return nullptr;
 	}
 
+	auto const kbType = m_pKBDevice->GetKeyboardType();
+
 	switch (m_pKBDevice->GetKBCommunicatorType())
 	{
 	case KBCommunicatorType::Fake:
 		return std::make_shared<FakeKeyboardCommunicator>();
 
 	case KBCommunicatorType::Wmi:
-		return std::make_shared<WmiKBCommunicator>();
+		return std::make_shared<WmiKBCommunicator>(kbType);
 
 	case KBCommunicatorType::Insyde:
 		return std::make_shared<InsydeKBCommunicator>();

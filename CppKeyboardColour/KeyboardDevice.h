@@ -24,6 +24,7 @@ public:
 	KBCommunicatorType GetKBCommunicatorType() const override;
 
 private:
+	bool m_useFakeDeviceId = false;
 	std::unique_ptr<DeviceIdRetriever> m_pDevIdRetriever{};
 	std::map<uint32_t, KB_PROPERTIES> m_deviceIdToKBProps{};
 

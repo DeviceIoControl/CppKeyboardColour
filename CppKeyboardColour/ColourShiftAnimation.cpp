@@ -50,18 +50,18 @@ void ColourShiftAnimation::GeneratePhase1(uint8_t(&rgb)[3][3])
 {	
 	for (int i = 0; i < 0xFF; ++i)
 	{
-		for (int y = 0; y < 3; ++y)
+		for (auto const currentZone : { Zone::LEFT,  Zone::MID, Zone::RIGHT })
 		{
 			auto const zoneColour = m_factory.Create(
-				rgb[y][INDEX_COLOUR_RED], 
-				rgb[y][INDEX_COLOUR_GREEN], 
-				rgb[y][INDEX_COLOUR_BLUE]
+				rgb[ZoneToIndex(currentZone)][INDEX_COLOUR_RED],
+				rgb[ZoneToIndex(currentZone)][INDEX_COLOUR_GREEN],
+				rgb[ZoneToIndex(currentZone)][INDEX_COLOUR_BLUE]
 			);
 
-			m_frames.AddFrame((Zone)y, zoneColour, 0);
+			m_frames.AddFrame(currentZone, zoneColour, 0);
 
-			rgb[y][y]--;
-			rgb[y][(y + 2) % 3]++;
+			rgb[ZoneToIndex(currentZone)][ZoneToIndex(currentZone)]--;
+			rgb[ZoneToIndex(currentZone)][(ZoneToIndex(currentZone) + 2) % 3]++;
 		}
 	}
 }
@@ -70,18 +70,18 @@ void ColourShiftAnimation::GeneratePhase2(uint8_t(&rgb)[3][3])
 {
 	for (int i = 0; i < 0xFF; ++i)
 	{
-		for (int y = 0; y < 3; ++y)
+		for (auto const currentZone : { Zone::LEFT, Zone::MID, Zone::RIGHT })
 		{
 			auto const zoneColour = m_factory.Create(
-				rgb[y][INDEX_COLOUR_RED],
-				rgb[y][INDEX_COLOUR_GREEN],
-				rgb[y][INDEX_COLOUR_BLUE]
+				rgb[ZoneToIndex(currentZone)][INDEX_COLOUR_RED],
+				rgb[ZoneToIndex(currentZone)][INDEX_COLOUR_GREEN],
+				rgb[ZoneToIndex(currentZone)][INDEX_COLOUR_BLUE]
 			);
 
-			m_frames.AddFrame((Zone)y, zoneColour, 0);
+			m_frames.AddFrame(currentZone, zoneColour, 0);
 
-			rgb[y][(y + 2) % 3]--;
-			rgb[y][(y + 1) % 3]++;
+			rgb[ZoneToIndex(currentZone)][(ZoneToIndex(currentZone) + 2) % 3]--;
+			rgb[ZoneToIndex(currentZone)][(ZoneToIndex(currentZone) + 1) % 3]++;
 		}
 	}
 }
@@ -90,20 +90,25 @@ void ColourShiftAnimation::GeneratePhase3(uint8_t(&rgb)[3][3])
 {
 	for (int i = 0; i < 0xFF; ++i)
 	{
-		for (int y = 0; y < 3; ++y)
+		for (auto const currentZone : { Zone::LEFT, Zone::MID, Zone::RIGHT })
 		{
 			auto const zoneColour = m_factory.Create(
-				rgb[y][INDEX_COLOUR_RED],
-				rgb[y][INDEX_COLOUR_GREEN],
-				rgb[y][INDEX_COLOUR_BLUE]
+				rgb[ZoneToIndex(currentZone)][INDEX_COLOUR_RED],
+				rgb[ZoneToIndex(currentZone)][INDEX_COLOUR_GREEN],
+				rgb[ZoneToIndex(currentZone)][INDEX_COLOUR_BLUE]
 			);
 
-			m_frames.AddFrame((Zone)y, zoneColour, 0);
+			m_frames.AddFrame(currentZone, zoneColour, 0);
 
-			rgb[y][(y + 1) % 3]--;
-			rgb[y][y]++;
+			rgb[ZoneToIndex(currentZone)][(ZoneToIndex(currentZone) + 1) % 3]--;
+			rgb[ZoneToIndex(currentZone)][ZoneToIndex(currentZone)]++;
 		}
 	}
+}
+
+uint32_t ColourShiftAnimation::ZoneToIndex(Zone zone)
+{
+	return xstd::to_underlying(zone) - xstd::to_underlying(Zone::LEFT);
 }
 
 void ColourShiftAnimation::GenerateDelayFrame(const Frame& frame)

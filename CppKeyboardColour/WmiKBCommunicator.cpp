@@ -7,7 +7,8 @@
 #define CLEVO_WMI_KB_FUNCTION_NAME L"SetKBLED"
 #define CLEVO_WMI_INSTANCE_NAME L"CLEVO_GET.InstanceName='ACPI\\PNP0C14\\0_0'"
 
-WmiKBCommunicator::WmiKBCommunicator()
+WmiKBCommunicator::WmiKBCommunicator(KeyboardType kbType)
+	: m_kbType(kbType)
 {
 	m_pClevoGetObject = m_wbemService.GetWbemClassObject(CLEVO_WMI_OBJECT_NAME);
 
@@ -19,38 +20,48 @@ WmiKBCommunicator::WmiKBCommunicator()
 
 bool WmiKBCommunicator::SetKBColour(Zone zone, const Colour& colour)
 {
-	if (zone > Zone::ALL)
+	// Cannot set lightbar colour from here, that must be done in a seperate method.
+	if ((zone > Zone::ALL) || (zone == Zone::LIGHTBAR))
 	{
 		return false;
 	}
 
-	if (zone == Zone::ALL)
+	// Callers must always address "ALL" zones on a single-zone keyboard.
+	if (m_kbType == KeyboardType::SINGLE_ZONE && zone != Zone::ALL)
 	{
-		for (auto const currentZone : { Zone::LEFT, Zone::MID, Zone::RIGHT })
-		{
-			if (!this->SetKBZoneColour(currentZone, colour))
-			{
-				return false;
-			}
-		}
-
-		return true;
+		return false;
 	}
 
-	return this->SetKBZoneColour(zone, colour);
+	return (zone != Zone::ALL) ? this->SetKBZoneColour(zone, colour) : this->SetFullKBColour(colour);
 }
 
 bool WmiKBCommunicator::SetKBZoneColour(Zone zone, const Colour& colour)
 {
-	const std::array<uint8_t, 4> parameterData
-	{
-		colour[INDEX_COLOUR_GREEN],
-		colour[INDEX_COLOUR_RED],
-		colour[INDEX_COLOUR_BLUE],
-		0xF0 + static_cast<uint16_t>(zone)
-	};
+	auto const kbCode = xstd::to_underlying(zone) << 24ul | m_colourFactory.Create(colour);
+	return (zone != Zone::LIGHTBAR) ? this->SendKBCode(kbCode) : false;
+}
 
-	return this->SendKBCode(*reinterpret_cast<const uint32_t*>(parameterData.data()));
+bool WmiKBCommunicator::SetLightbarColour(const Colour& colour)
+{
+	auto const kbCode = xstd::to_underlying(Zone::LIGHTBAR) << 24ul | m_colourFactory.Create(colour);
+	return this->SendKBCode(kbCode);
+}
+
+bool WmiKBCommunicator::SetFullKBColour(const Colour& colour)
+{
+	if (m_kbType == KeyboardType::SINGLE_ZONE) 
+	{
+		// Left zone addresses the entire keyboard (Single-Zone).
+		return this->SetKBZoneColour(Zone::LEFT, colour);
+	}
+
+	for (auto const currentZone : { Zone::LEFT, Zone::MID, Zone::RIGHT })
+	{
+		// Not checking for success here as we don't gain anything by bailing out on failed calls.
+		std::ignore = this->SetKBZoneColour(currentZone, colour);
+	}
+
+	return true;
 }
 
 bool WmiKBCommunicator::SendKBCode(uint32_t code)

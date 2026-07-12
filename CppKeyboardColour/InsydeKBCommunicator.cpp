@@ -22,16 +22,10 @@ bool InsydeKBCommunicator::SetKBColour(Zone zone, const Colour& colour)
 	}
 
 	// Found in CLEVO Control Center v6.053
-	const uint8_t mode = 8;
+	uint8_t const mode = 8;
+	auto const dchuData = xstd::to_underlying(Zone::LEFT) << 24ul | m_colourFactory.Create(colour);
 
-	const std::array<uint8_t, 4> dchuData{
-		colour[INDEX_COLOUR_GREEN],
-		colour[INDEX_COLOUR_RED],
-		colour[INDEX_COLOUR_BLUE],
-		0xF0
-	};
-
-	m_pfnSetDCHU_Data(0x67, dchuData.data(), dchuData.size());
+	m_pfnSetDCHU_Data(0x67, reinterpret_cast<const uint8_t*>(&dchuData), sizeof(dchuData));
 	m_pfnWriteAppSettings(2, 0x51, colour.size(), colour.data());
 	m_pfnWriteAppSettings(2, 0x20, 1, &mode);
 
@@ -40,6 +34,13 @@ bool InsydeKBCommunicator::SetKBColour(Zone zone, const Colour& colour)
 
 // Unsupported for now.
 bool InsydeKBCommunicator::SendKBCode(uint32_t /* code */)
+{
+	std::cout << "This system does not support this operation.\n";
+	return false;
+}
+
+// Unsupported.
+bool InsydeKBCommunicator::SetLightbarColour(const Colour& /*colour*/) 
 {
 	std::cout << "This system does not support this operation.\n";
 	return false;
