@@ -24,14 +24,7 @@ bool InsydeDeviceChannel::SendCode(uint32_t code)
 	// Found in CLEVO Control Center v6.053
 	uint8_t const mode = 8;
 
-	const std::array<uint8_t, 4> dchuData{
-		(code & 0x0000ff00) >> 8,	// colour[INDEX_COLOUR_GREEN]
-		(code & 0x00ff0000) >> 16,	// colour[INDEX_COLOUR_RED]
-		(code & 0x000000ff),		// colour[INDEX_COLOUR_BLUE]
-		(code & 0xff000000) >> 24	// keyboard region
-	};
-
-	m_pfnSetDCHU_Data(0x67, dchuData.data(), sizeof(dchuData));
+	m_pfnSetDCHU_Data(0x67, reinterpret_cast<uint8_t*>(&code), sizeof(code));
 	m_pfnWriteAppSettings(2, 0x51, 3, reinterpret_cast<uint8_t*>(code) + 1);
 	m_pfnWriteAppSettings(2, 0x20, 1, &mode);
 

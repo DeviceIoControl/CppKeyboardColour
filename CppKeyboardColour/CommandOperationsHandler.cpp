@@ -1,14 +1,14 @@
 // Created by DeviceIoControl
 
 #include "stdafx.h"
-#include "KeyboardOperationsHandler.h"
+#include "CommandOperationsHandler.h"
 #include "ThemeCommandLine.h"
 #include "CommandLine.h"
 #include "ConsoleUtils.h"
 #include "Animator.h"
 #include "DeviceMask.h"
 
-static DWORD DoKeyboardBacklightOperation(std::unique_ptr<IHost> pHost, BacklightType backlight)
+static DWORD DoBacklightOperation(std::unique_ptr<IHost> pHost, BacklightType backlight)
 {
 	if (backlight == BacklightType::Invalid)
 	{
@@ -31,7 +31,7 @@ static DWORD DoKeyboardBacklightOperation(std::unique_ptr<IHost> pHost, Backligh
 	return 0;
 }
 
-static DWORD DoKeyboardThemeOperation(std::unique_ptr<IHost> pHost, std::unique_ptr<IAnimation> pAnimation, const std::vector<std::wstring>& cmdLines)
+static DWORD DoThemeOperation(std::unique_ptr<IHost> pHost, std::unique_ptr<IAnimation> pAnimation, const std::vector<std::wstring>& cmdLines)
 {
 	if (!pAnimation)
 	{
@@ -61,7 +61,7 @@ static DWORD DoKeyboardThemeOperation(std::unique_ptr<IHost> pHost, std::unique_
 	return 0;
 }
 
-static DWORD DoKeyboardSystemAnimationOperation(std::unique_ptr<IHost> pHost, SystemAnimation sysAnimation)
+static DWORD DoSystemAnimationOperation(std::unique_ptr<IHost> pHost, SystemAnimation sysAnimation)
 {
 	if (sysAnimation == SystemAnimation::KB_MODE_CUSTOM)
 	{
@@ -74,7 +74,7 @@ static DWORD DoKeyboardSystemAnimationOperation(std::unique_ptr<IHost> pHost, Sy
 	return 0;
 }
 
-static DWORD DoKeyboardUserColourOperation(std::unique_ptr<IHost> pHost, std::optional<Colour> colour)
+static DWORD DoUserColourOperation(std::unique_ptr<IHost> pHost, std::optional<Colour> colour)
 {
 	if (!colour.has_value())
 	{
@@ -87,7 +87,7 @@ static DWORD DoKeyboardUserColourOperation(std::unique_ptr<IHost> pHost, std::op
 	return 0;
 }
 
-static DWORD DoKeyboardUserColour3Operation(std::unique_ptr<IHost> pHost, const std::optional<Colours>& colours)
+static DWORD DoUserColour3Operation(std::unique_ptr<IHost> pHost, const std::optional<Colours>& colours)
 {
 	// Somewhat unsafe, but pHost should always be valid before we get here.
 
@@ -116,40 +116,40 @@ static DWORD DoKeyboardUserColour3Operation(std::unique_ptr<IHost> pHost, const 
 	return 0;
 }
 
-DWORD DoHostDeviceOperation(std::unique_ptr<IHost> pHost, const std::vector<std::wstring>& cmdLines)
+DWORD DoCommandOperation(std::unique_ptr<IHost> pHost, const std::vector<std::wstring>& cmdLines)
 {
 	// pHost will always be valid before reaching here, so no need to check the pointer again.
 	
-	switch (ProcessKeyboardCmdOperation(cmdLines))
+	switch (ProcessCmdOperation(cmdLines))
 	{
-	case KeyboardOperation::Animation:
+	case CmdOperation::Animation:
 	{
 		auto pAnimation = ProcessThemeCommandLine(cmdLines);
-		return DoKeyboardThemeOperation(std::move(pHost), std::move(pAnimation), cmdLines);
+		return DoThemeOperation(std::move(pHost), std::move(pAnimation), cmdLines);
 	}
 
-	case KeyboardOperation::InBuilt:
+	case CmdOperation::InBuilt:
 	{
 		auto const sysAnimation = ProcessSystemAnimationCommandLine(cmdLines);
-		return DoKeyboardSystemAnimationOperation(std::move(pHost), sysAnimation);
+		return DoSystemAnimationOperation(std::move(pHost), sysAnimation);
 	}
 
-	case KeyboardOperation::Backlight:
+	case CmdOperation::Backlight:
 	{
 		auto const backlight = ProcessBacklightCommandLine(cmdLines);
-		return DoKeyboardBacklightOperation(std::move(pHost), backlight);
+		return DoBacklightOperation(std::move(pHost), backlight);
 	}
 
-	case KeyboardOperation::UserColour:
+	case CmdOperation::UserColour:
 	{
 		auto const userColour = ProcessColourCommandLine(cmdLines);
-		return DoKeyboardUserColourOperation(std::move(pHost), userColour);
+		return DoUserColourOperation(std::move(pHost), userColour);
 	}
 
-	case KeyboardOperation::UserColour3:
+	case CmdOperation::UserColour3:
 	{
 		auto const userColours = ProcessColoursCommandLine(cmdLines);
-		return DoKeyboardUserColour3Operation(std::move(pHost), userColours);
+		return DoUserColour3Operation(std::move(pHost), userColours);
 	}
 
 	// The above code logic should ensure that we NEVER reach here.

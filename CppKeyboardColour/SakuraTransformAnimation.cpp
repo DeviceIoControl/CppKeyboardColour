@@ -53,7 +53,7 @@ std::optional<Frame> SakuraTransformAnimation::GetFrame(uint32_t idx)
 
 bool SakuraTransformAnimation::IsHostSupported(const IHost* pHost) const
 {
-	return pHost->GetKeyboardType() != KeyboardType::NONE;
+	return pHost->GetKeyboardType() != KeyboardType::PER_KEY && pHost->GetKeyboardType() != KeyboardType::NONE;
 }
 
 uint32_t SakuraTransformAnimation::Size() const

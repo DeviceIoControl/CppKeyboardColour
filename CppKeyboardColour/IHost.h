@@ -14,7 +14,7 @@ public:
 
 	virtual DeviceMask GetDevices() const = 0;
 	virtual KeyboardType GetKeyboardType() const = 0;
-	virtual uint32_t GetDeviceID() const = 0;
+	virtual uint32_t GetModelID() const = 0;
 	virtual bool SetKeyboardColour(Zone zone, const Colour& colour) = 0;
 	virtual bool SetLightbarColour(const Colour& colour) = 0;
 	virtual bool SetLogoColour(const Colour& colour) = 0;

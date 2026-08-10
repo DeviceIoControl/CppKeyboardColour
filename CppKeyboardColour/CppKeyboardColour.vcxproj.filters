@@ -111,7 +111,7 @@
     <ClInclude Include="ExtendedStl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="KeyboardOperationsHandler.h">
+    <ClInclude Include="CommandOperationsHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ConsoleUtils.h">
@@ -227,7 +227,7 @@
     <ClCompile Include="SystemAnimationTranslator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="KeyboardOperationsHandler.cpp">
+    <ClCompile Include="CommandOperationsHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ConsoleUtils.cpp">

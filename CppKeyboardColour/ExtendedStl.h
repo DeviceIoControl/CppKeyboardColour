@@ -40,12 +40,17 @@ namespace xstd
 
 } // namespace xstd
 
-inline DeviceMask operator&(DeviceMask a, DeviceMask b) 
+inline bool operator&(DeviceMask a, DeviceMask b) 
 {
-	return static_cast<DeviceMask>(xstd::to_underlying(a) & xstd::to_underlying(b));
+	return (xstd::to_underlying(a) & xstd::to_underlying(b)) != 0;
 }
 
 inline DeviceMask operator|(DeviceMask a, DeviceMask b)
+{
+	return static_cast<DeviceMask>(xstd::to_underlying(a) | xstd::to_underlying(b));
+}
+
+inline DeviceMask operator|=(DeviceMask a, DeviceMask b)
 {
 	return static_cast<DeviceMask>(xstd::to_underlying(a) | xstd::to_underlying(b));
 }

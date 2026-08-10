@@ -4,7 +4,7 @@
 #include "IAnimation.h"
 #include "SystemAnimation.h"
 
-enum class KeyboardOperation
+enum class CmdOperation
 {
 	FlagInvalid,
 	Animation,
@@ -21,7 +21,7 @@ enum class BacklightType
 	Invalid
 };
 
-KeyboardOperation ProcessKeyboardCmdOperation(const std::vector<std::wstring>& cmdLines);
+CmdOperation ProcessCmdOperation(const std::vector<std::wstring>& cmdLines);
 BacklightType ProcessBacklightCommandLine(const std::vector<std::wstring>& cmdLines);
 SystemAnimation ProcessSystemAnimationCommandLine(const std::vector<std::wstring>& cmdLines);
 std::unique_ptr<IAnimation> ProcessThemeCommandLine(const std::vector<std::wstring>& cmdLines);

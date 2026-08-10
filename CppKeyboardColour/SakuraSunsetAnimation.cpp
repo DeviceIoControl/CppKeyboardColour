@@ -38,7 +38,7 @@ std::optional<Frame> SakuraSunsetAnimation::GetFrame(uint32_t idx)
 
 bool SakuraSunsetAnimation::IsHostSupported(const IHost* pHost) const
 {
-	return pHost->GetKeyboardType() != KeyboardType::NONE;
+	return pHost->GetKeyboardType() != KeyboardType::PER_KEY && pHost->GetKeyboardType() != KeyboardType::NONE;
 }
 
 uint32_t SakuraSunsetAnimation::Size() const

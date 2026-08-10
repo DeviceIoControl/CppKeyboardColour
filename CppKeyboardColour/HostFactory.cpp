@@ -5,6 +5,51 @@
 #include "DeviceIds.h"
 #include "DeviceChannelFactory.h"
 
+namespace 
+{
+	std::ostream& operator<<(std::ostream& _Ostr, DeviceMask devices) 
+	{
+		if (!!(devices & DeviceMask::Keyboard)) 
+		{
+			_Ostr << "[Keyboard] ";
+		}
+
+		if (!!(devices & DeviceMask::Lightbar))
+		{
+			_Ostr << "[Lightbar] ";
+		}
+
+		if (!!(devices & DeviceMask::Logo))
+		{
+			_Ostr << "[Logo] ";
+		}
+
+		return _Ostr;
+	}
+
+
+	std::ostream& operator<<(std::ostream& _Ostr, KeyboardType kbType) 
+	{
+		switch (kbType) 
+		{
+		case KeyboardType::FAKE:
+			return _Ostr << "Fake";
+
+		case KeyboardType::SINGLE_ZONE:
+			return _Ostr << "Single Zone";
+
+		case KeyboardType::TRIPLE_ZONE:
+			return _Ostr << "Triple Zone";
+
+		case KeyboardType::PER_KEY:
+			return _Ostr << "Per-Key";
+		}
+
+		return _Ostr;
+	}
+
+} // namespace
+
 HostFactory::HostFactory(std::unique_ptr<DeviceIdRetriever> pDevIdRetriever)
 	: m_devIdRetriever(std::move(pDevIdRetriever))
 {
@@ -19,27 +64,33 @@ HostFactory::HostFactory()
 
 std::unique_ptr<Host> HostFactory::Create()
 {
-	// LIGHTBAR = 0xF3
 	auto const hostDevices = this->GetHostDevices(m_deviceId);
+
+	std::cout << "Detected Device ID: 0x" << (void*)m_deviceId << "\n";
+	std::cout << "Host Devices: " << hostDevices << "\n\n";
+
+	if (!!(hostDevices & DeviceMask::Keyboard))
+	{
+		std::cout << "Keyboard Type: " << this->GetKeyboardType(m_deviceId) << "\n";
+	}
+
 	auto const devices = this->CreateRequiredDevices(hostDevices);
 	return std::make_unique<Host>(m_deviceId, devices);
 }
 
 void HostFactory::InitializeHostDeviceProperties()
 {
-	InitializeSingleZoneKBs();
-	InitializeTripleZoneKBs();
-	InitializeTripleZoneKBsWithPeripherals();
+	this->InitializeSingleZoneKBs();
+	this->InitializeTripleZoneKBs();
+	this->InitializeTripleZoneKBsWithPeripherals();
 }
 
 bool HostFactory::InitializeDeviceFactory()
 {
-	m_deviceId = m_devIdRetriever->GetDeviceID();
-
 	DeviceChannelFactory devChannelFactory{};
-	auto pDevChannel = devChannelFactory.Create(this->GetDeviceChannelType(m_deviceId));
 
-	m_devFactory = std::make_unique<DeviceFactory>(std::move(pDevChannel));
+	m_deviceId = m_devIdRetriever->GetDeviceID();
+	m_devFactory = std::make_unique<DeviceFactory>(devChannelFactory.Create(this->GetDeviceChannelType(m_deviceId)));
 
 	return (m_deviceId && m_devFactory);
 }

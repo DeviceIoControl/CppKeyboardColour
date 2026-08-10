@@ -2,7 +2,6 @@
 
 #include "stdafx.h"
 #include "KeyboardDevice.h"
-#include "ExtendedStl.h"
 #include "DeviceMask.h"
 
 namespace

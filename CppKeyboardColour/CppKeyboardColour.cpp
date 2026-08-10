@@ -4,7 +4,7 @@
 #include "CommandLine.h"
 #include "HostFactory.h"
 #include "SingleInstanceEvent.h"
-#include "KeyboardOperationsHandler.h"
+#include "CommandOperationsHandler.h"
 #include "ConsoleUtils.h"
 
 #pragma warning(disable: 4995)
@@ -41,5 +41,5 @@ int wmain(int argc, const wchar_t* argv[])
 		return ERROR_INVALID_PARAMETER;
 	}
 
-	return DoHostDeviceOperation(std::move(pHost), cmdLines);
+	return DoCommandOperation(std::move(pHost), cmdLines);
 }

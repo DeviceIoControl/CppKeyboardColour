@@ -33,11 +33,9 @@ Host::Host(uint32_t modelId, const std::vector<std::shared_ptr<IDevice>>& device
 
 DeviceMask Host::GetDevices() const
 {
-	auto devices = (m_pKeyboard) ? xstd::to_underlying(DeviceMask::Keyboard) : xstd::to_underlying(DeviceMask::Unknown);
-	devices |= (m_pLightbar) ? xstd::to_underlying(DeviceMask::Lightbar) : xstd::to_underlying(DeviceMask::Unknown);
-	devices |= (m_pLogo) ? xstd::to_underlying(DeviceMask::Logo) : xstd::to_underlying(DeviceMask::Unknown);
-
-	return static_cast<DeviceMask>(devices);
+	return ((m_pKeyboard) ? DeviceMask::Keyboard : DeviceMask::Unknown)
+		| ((m_pLightbar) ? DeviceMask::Lightbar : DeviceMask::Unknown)
+		| ((m_pLogo) ? DeviceMask::Logo : DeviceMask::Unknown);
 }
 
 KeyboardType Host::GetKeyboardType() const
@@ -45,7 +43,7 @@ KeyboardType Host::GetKeyboardType() const
 	return m_pKeyboard ? static_cast<KeyboardType>(m_pKeyboard->Query(QueryType::KeyboardType)) : KeyboardType::NONE;
 }
 
-uint32_t Host::GetDeviceID() const
+uint32_t Host::GetModelID() const
 {
 	return m_modelId;
 }

@@ -6,7 +6,6 @@
 #include "Colour.h"
 #include "KeyboardType.h"
 #include "IDevice.h"
-#include "ExtendedStl.h"
 #include "IHost.h"
 #include "DeviceMask.h"
 
@@ -22,7 +21,7 @@ public:
 
 	KeyboardType GetKeyboardType() const override;
 
-	uint32_t GetDeviceID() const override;
+	uint32_t GetModelID() const override;
 
 	bool SetKeyboardColour(Zone zone, const Colour& colour) override;
 

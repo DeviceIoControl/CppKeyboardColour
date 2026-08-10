@@ -8,34 +8,34 @@
 #include "AnimationFactory.h"
 #include "SystemAnimationTranslator.h"
 
-KeyboardOperation ProcessKeyboardCmdOperation(const std::vector<std::wstring>& cmdLines)
+CmdOperation ProcessCmdOperation(const std::vector<std::wstring>& cmdLines)
 {
 	if (CommandLine::Contains(L"inbuilt", cmdLines))
 	{
-		return KeyboardOperation::InBuilt;
+		return CmdOperation::InBuilt;
 	}
 
 	if (CommandLine::Contains(L"theme", cmdLines))
 	{
-		return KeyboardOperation::Animation;
+		return CmdOperation::Animation;
 	}
 
 	if (CommandLine::Contains(L"backlight", cmdLines))
 	{
-		return KeyboardOperation::Backlight;
+		return CmdOperation::Backlight;
 	}
 
 	if (CommandLine::Contains(L"colour", cmdLines))
 	{
-		return KeyboardOperation::UserColour;
+		return CmdOperation::UserColour;
 	}
 
 	if (CommandLine::Contains(L"colours", cmdLines))
 	{
-		return KeyboardOperation::UserColour3;
+		return CmdOperation::UserColour3;
 	}
 
-	return KeyboardOperation::FlagInvalid;
+	return CmdOperation::FlagInvalid;
 }
 
 BacklightType ProcessBacklightCommandLine(const std::vector<std::wstring>& cmdLines)

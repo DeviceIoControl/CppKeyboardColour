@@ -200,7 +200,7 @@
     <ClInclude Include="InsydeDeviceChannel.h" />
     <ClInclude Include="DeviceChannelFactory.h" />
     <ClInclude Include="KeyboardDevice.h" />
-    <ClInclude Include="KeyboardOperationsHandler.h" />
+    <ClInclude Include="CommandOperationsHandler.h" />
     <ClInclude Include="KeyboardType.h" />
     <ClInclude Include="LightbarDevice.h" />
     <ClInclude Include="LogoDevice.h" />
@@ -243,7 +243,7 @@
     <ClCompile Include="InsydeDeviceChannel.cpp" />
     <ClCompile Include="DeviceChannelFactory.cpp" />
     <ClCompile Include="KeyboardDevice.cpp" />
-    <ClCompile Include="KeyboardOperationsHandler.cpp" />
+    <ClCompile Include="CommandOperationsHandler.cpp" />
     <ClCompile Include="LightbarDevice.cpp" />
     <ClCompile Include="LogoDevice.cpp" />
     <ClCompile Include="PinkBreatheAnimation.cpp" />
