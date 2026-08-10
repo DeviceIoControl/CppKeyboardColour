@@ -13,9 +13,9 @@ void FrameCollection::AddFrame(const Frame& frame)
 	m_frames.push_back(frame);
 }
 
-void FrameCollection::AddFrame(Zone activeZone, Colour zoneColour, uint32_t msTime)
+void FrameCollection::AddFrame(DeviceMask devices, Zone activeZone, Colour zoneColour, uint32_t msTime)
 {
-	m_frames.emplace_back(activeZone, zoneColour, msTime);
+	m_frames.emplace_back(devices, activeZone, zoneColour, msTime);
 }
 
 void FrameCollection::AddFrames(const FrameCollection& frames)

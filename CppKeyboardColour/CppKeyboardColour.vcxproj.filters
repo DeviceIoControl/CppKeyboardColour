@@ -21,9 +21,6 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Keyboard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="FrameCollection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -57,9 +54,6 @@
     <ClInclude Include="BreatheAnimation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IKeyboard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DeviceIdRetriever.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -69,19 +63,19 @@
     <ClInclude Include="Animations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InsydeKBCommunicator.h">
+    <ClInclude Include="InsydeDeviceChannel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IKeyboardCommunicator.h">
+    <ClInclude Include="IDeviceChannel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WmiKBCommunicator.h">
+    <ClInclude Include="WmiDeviceChannel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="KeyboardCommunicatorFactory.h">
+    <ClInclude Include="DeviceChannelFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FakeKeyboardCommunicator.h">
+    <ClInclude Include="FakeDeviceChannel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FreshBreatheAnimation.h">
@@ -102,13 +96,7 @@
     <ClInclude Include="CommandLine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IKeyboardDevice.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SingleInstanceEvent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyboardFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HeartbeatAnimation.h">
@@ -150,15 +138,42 @@
     <ClInclude Include="KeyboardDevice.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Host.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDevice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HostFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceChannelType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IHost.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DeviceMask.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LightbarDevice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LogoDevice.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CppKeyboardColour.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Keyboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FrameCollection.cpp">
@@ -185,13 +200,13 @@
     <ClCompile Include="DeviceIdRetriever.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="KeyboardCommunicatorFactory.cpp">
+    <ClCompile Include="DeviceChannelFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FakeKeyboardCommunicator.cpp">
+    <ClCompile Include="FakeDeviceChannel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WmiKBCommunicator.cpp">
+    <ClCompile Include="WmiDeviceChannel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CommandLine.cpp">
@@ -200,10 +215,7 @@
     <ClCompile Include="ColourFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="InsydeKBCommunicator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="KeyboardFactory.cpp">
+    <ClCompile Include="InsydeDeviceChannel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="HeartbeatAnimation.cpp">
@@ -240,6 +252,24 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="KeyboardDevice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Host.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HostFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LightbarDevice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DeviceFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LogoDevice.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -3,6 +3,8 @@
 #include "stdafx.h"
 #include "DeviceIdRetriever.h"
 
+#define GET_PRODUCT_DLL L"GetProductID64.dll"
+
 DeviceIdRetriever::DeviceIdRetriever() 
 {
 	m_hGetProductDLL = LoadGetProductDLL();

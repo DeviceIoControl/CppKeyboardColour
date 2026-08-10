@@ -2,8 +2,6 @@
 
 #pragma once
 
-#define GET_PRODUCT_DLL L"GetProductID64.dll"
-
 namespace Detail 
 {
 	using T_GetProductID_PCI = DWORD(*__stdcall)();

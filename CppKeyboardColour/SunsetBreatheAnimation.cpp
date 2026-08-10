@@ -13,11 +13,11 @@ SunsetBreatheAnimation::SunsetBreatheAnimation()
 
 	auto const sunsetPink = factory.Create(255, 95, 149);
 
-	auto const ascendPattern = m_patternGenerator.GenerateAscendingPattern(sunsetPink, FRAMES, FRAME_DURATION_MS);
-	auto const descendPattern = m_patternGenerator.GenerateDescendingPattern(sunsetPink, FRAMES, FRAME_DURATION_MS);
+	auto const ascendPattern = m_patternGenerator.GenerateAscendingPattern(DeviceMask::Keyboard, sunsetPink, FRAMES, FRAME_DURATION_MS);
+	auto const descendPattern = m_patternGenerator.GenerateDescendingPattern(DeviceMask::Keyboard, sunsetPink, FRAMES, FRAME_DURATION_MS);
 
 	m_frames.AddFrames(ascendPattern);
-	m_frames.AddFrame(Zone::ALL, sunsetPink, 4000);
+	m_frames.AddFrame(DeviceMask::Keyboard, Zone::ALL, sunsetPink, 4000);
 	m_frames.AddFrames(descendPattern);
 }
 
@@ -31,9 +31,9 @@ std::optional<Frame> SunsetBreatheAnimation::GetFrame(uint32_t idx)
 	return m_frames.GetFrame(idx);
 }
 
-bool SunsetBreatheAnimation::IsSupportedKB(KeyboardType kbType) const
+bool SunsetBreatheAnimation::IsHostSupported(const IHost* pHost) const
 {
-	return kbType != KeyboardType::TRIPLE_ZONE_LIGHTBAR && kbType != KeyboardType::NONE;
+	return pHost->GetKeyboardType() != KeyboardType::NONE;
 }
 
 uint32_t SunsetBreatheAnimation::Size() const

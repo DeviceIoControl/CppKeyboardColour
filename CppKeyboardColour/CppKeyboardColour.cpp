@@ -2,7 +2,7 @@
 
 #include "stdafx.h"
 #include "CommandLine.h"
-#include "KeyboardFactory.h"
+#include "HostFactory.h"
 #include "SingleInstanceEvent.h"
 #include "KeyboardOperationsHandler.h"
 #include "ConsoleUtils.h"
@@ -22,10 +22,10 @@ int wmain(int argc, const wchar_t* argv[])
 		return ERROR_ALREADY_EXISTS;
 	}
 
-	KeyboardFactory const kbFactory{};
-	auto const ptrKeyboard = kbFactory.Create();
+	HostFactory hostFactory{};
+	auto pHost = hostFactory.Create();
 
-	if (!ptrKeyboard)
+	if (!pHost)
 	{
 		std::cout << "This system is not supported.\n\n Please request for support using the following URL: https://github.com/DeviceIoControl/CppKeyboardColour/issues/new.\n";
 		WaitForEnterIfNeeded();
@@ -33,7 +33,7 @@ int wmain(int argc, const wchar_t* argv[])
 	}
 
 	const auto cmdLines = CommandLine::GetCommandLines(argc, argv);
-
+	 
 	if (!CommandLine::ExclusiveContains({ L"theme", L"inbuilt", L"backlight", L"colour", L"colours" }, cmdLines))
 	{
 		std::cout << "Invalid command line. Command is: CLEVO_KeyboardColour.exe theme/inbuilt/backlight/colour [<themeName>/<hexColour>] [--once] [--speed] <speed>\n";
@@ -41,5 +41,5 @@ int wmain(int argc, const wchar_t* argv[])
 		return ERROR_INVALID_PARAMETER;
 	}
 
-	return DoKeyboardOperation(ptrKeyboard.get(), cmdLines);
+	return DoHostDeviceOperation(std::move(pHost), cmdLines);
 }

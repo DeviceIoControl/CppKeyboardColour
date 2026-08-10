@@ -44,6 +44,7 @@ BacklightType ProcessBacklightCommandLine(const std::vector<std::wstring>& cmdLi
 
 	if (ourCmds.empty())
 	{
+		std::cout << "Invalid backlight operation command.\n";
 		return BacklightType::Invalid;
 	}
 
@@ -57,7 +58,7 @@ BacklightType ProcessBacklightCommandLine(const std::vector<std::wstring>& cmdLi
 		return BacklightType::Off;
 	}
 
-	std::cout << "Invalid backlight operation name was provided.\n";
+	std::cout << "Invalid backlight operation was provided.\n";
 
 	return BacklightType::Invalid;
 }

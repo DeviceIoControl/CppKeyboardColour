@@ -8,12 +8,12 @@ class FramePatternGenerator
 public:
 	FramePatternGenerator() = default;
 
-	FrameCollection GenerateBreathe(const Colour& targetColour, uint32_t steps, uint32_t stepTimeMs);
-	FrameCollection GenerateColourTransform(const Colour& startColour, const Colour& endColour, uint32_t steps, uint32_t stepTimeMs);
-	FrameCollection GenerateAscendingPattern(const Colour& targetColour, uint32_t steps, uint32_t stepTimeMs);
-	FrameCollection GenerateDescendingPattern(const Colour& startColour, uint32_t steps, uint32_t stepTimeMs);
-	FrameCollection GenerateBlink(const Colour& targetColour, uint32_t blinkTimeMs);
-	FrameCollection GeneratePulse(const Colour& targetColour, uint32_t beatTimeMs);
+	FrameCollection GenerateBreathe(DeviceMask devices, const Colour& targetColour, uint32_t steps, uint32_t stepTimeMs);
+	FrameCollection GenerateColourTransform(DeviceMask devices, const Colour& startColour, const Colour& endColour, uint32_t steps, uint32_t stepTimeMs);
+	FrameCollection GenerateAscendingPattern(DeviceMask devices, const Colour& targetColour, uint32_t steps, uint32_t stepTimeMs);
+	FrameCollection GenerateDescendingPattern(DeviceMask devices, const Colour& targetColour, uint32_t steps, uint32_t stepTimeMs);
+	FrameCollection GenerateBlink(DeviceMask devices, const Colour& targetColour, uint32_t blinkTimeMs);
+	FrameCollection GeneratePulse(DeviceMask devices, const Colour& targetColour, uint32_t beatTimeMs);
 
 	~FramePatternGenerator() = default;
 

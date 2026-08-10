@@ -172,8 +172,12 @@
   <ItemGroup>
     <ClInclude Include="AnimationFactory.h" />
     <ClInclude Include="Animations.h" />
+    <ClInclude Include="Animator.h" />
     <ClInclude Include="BreatheAnimation.h" />
     <ClInclude Include="ConsoleUtils.h" />
+    <ClInclude Include="DeviceChannelType.h" />
+    <ClInclude Include="DeviceFactory.h" />
+    <ClInclude Include="DeviceMask.h" />
     <ClInclude Include="ExtendedStl.h" />
     <ClInclude Include="FramePatternGenerator.h" />
     <ClInclude Include="FreshBreatheAnimation.h" />
@@ -182,23 +186,24 @@
     <ClInclude Include="ColourTransformAnimation.h" />
     <ClInclude Include="CommandLine.h" />
     <ClInclude Include="DeviceIds.h" />
-    <ClInclude Include="FakeKeyboardCommunicator.h" />
+    <ClInclude Include="FakeDeviceChannel.h" />
     <ClInclude Include="FrameCollection.h" />
     <ClInclude Include="Colour.h" />
     <ClInclude Include="Frame.h" />
     <ClInclude Include="HeartbeatAnimation.h" />
+    <ClInclude Include="Host.h" />
     <ClInclude Include="IAnimation.h" />
-    <ClInclude Include="IKeyboardDevice.h" />
-    <ClInclude Include="IKeyboard.h" />
-    <ClInclude Include="IKeyboardCommunicator.h" />
-    <ClInclude Include="Keyboard.h" />
+    <ClInclude Include="IDevice.h" />
+    <ClInclude Include="IHost.h" />
+    <ClInclude Include="IDeviceChannel.h" />
     <ClInclude Include="DeviceIdRetriever.h" />
-    <ClInclude Include="InsydeKBCommunicator.h" />
-    <ClInclude Include="KeyboardCommunicatorFactory.h" />
+    <ClInclude Include="InsydeDeviceChannel.h" />
+    <ClInclude Include="DeviceChannelFactory.h" />
     <ClInclude Include="KeyboardDevice.h" />
-    <ClInclude Include="KeyboardFactory.h" />
     <ClInclude Include="KeyboardOperationsHandler.h" />
     <ClInclude Include="KeyboardType.h" />
+    <ClInclude Include="LightbarDevice.h" />
+    <ClInclude Include="LogoDevice.h" />
     <ClInclude Include="MathConstants.h" />
     <ClInclude Include="PinkBreatheAnimation.h" />
     <ClInclude Include="PulsatingBlinkAnimation.h" />
@@ -213,13 +218,15 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ThemeCommandLine.h" />
     <ClInclude Include="WbemService.h" />
-    <ClInclude Include="WmiKBCommunicator.h" />
+    <ClInclude Include="WmiDeviceChannel.h" />
     <ClInclude Include="Zone.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimationFactory.cpp" />
+    <ClCompile Include="Animator.cpp" />
     <ClCompile Include="BreatheAnimation.cpp" />
     <ClCompile Include="ConsoleUtils.cpp" />
+    <ClCompile Include="DeviceFactory.cpp" />
     <ClCompile Include="FramePatternGenerator.cpp" />
     <ClCompile Include="FreshBreatheAnimation.cpp" />
     <ClCompile Include="ColourFactory.cpp" />
@@ -227,18 +234,18 @@
     <ClCompile Include="ColourTransformAnimation.cpp" />
     <ClCompile Include="CommandLine.cpp" />
     <ClCompile Include="DeviceIdRetriever.cpp" />
-    <ClCompile Include="FakeKeyboardCommunicator.cpp" />
+    <ClCompile Include="FakeDeviceChannel.cpp" />
     <ClCompile Include="FrameCollection.cpp" />
     <ClCompile Include="CppKeyboardColour.cpp" />
     <ClCompile Include="HeartbeatAnimation.cpp" />
-    <ClCompile Include="InsydeKBCommunicator.cpp" />
-    <ClCompile Include="Keyboard.cpp">
-      <FileType>CppCode</FileType>
-    </ClCompile>
-    <ClCompile Include="KeyboardCommunicatorFactory.cpp" />
+    <ClCompile Include="Host.cpp" />
+    <ClCompile Include="HostFactory.cpp" />
+    <ClCompile Include="InsydeDeviceChannel.cpp" />
+    <ClCompile Include="DeviceChannelFactory.cpp" />
     <ClCompile Include="KeyboardDevice.cpp" />
-    <ClCompile Include="KeyboardFactory.cpp" />
     <ClCompile Include="KeyboardOperationsHandler.cpp" />
+    <ClCompile Include="LightbarDevice.cpp" />
+    <ClCompile Include="LogoDevice.cpp" />
     <ClCompile Include="PinkBreatheAnimation.cpp" />
     <ClCompile Include="PulsatingBlinkAnimation.cpp" />
     <ClCompile Include="SunsetBreatheAnimation.cpp" />
@@ -253,7 +260,10 @@
     <ClCompile Include="SystemAnimationTranslator.cpp" />
     <ClCompile Include="ThemeCommandLine.cpp" />
     <ClCompile Include="WbemService.cpp" />
-    <ClCompile Include="WmiKBCommunicator.cpp" />
+    <ClCompile Include="WmiDeviceChannel.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="HostFactory.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -2,61 +2,98 @@
 
 #include "stdafx.h"
 #include "KeyboardDevice.h"
-#include "DeviceIds.h"
+#include "ExtendedStl.h"
+#include "DeviceMask.h"
 
-KeyboardDevice::KeyboardDevice(bool fakeDevice /*= false*/)
-	: m_useFakeDeviceId(fakeDevice),
-	m_pDevIdRetriever(std::make_unique<DeviceIdRetriever>())
+namespace
 {
-	this->InitializeSingleZoneKBs();
-	this->InitializeTripleZoneKBs();
-}
-
-uint32_t KeyboardDevice::GetDeviceId() const 
-{
-	if (m_pDevIdRetriever && !m_useFakeDeviceId)
+	std::ostream& operator<<(std::ostream& _Ostr, Zone zone)
 	{
-		// We could cache this value, but this should only be called once anyways.
-		return m_pDevIdRetriever->GetDeviceID();
+		switch (zone)
+		{
+		case Zone::LEFT:
+			return _Ostr << "Left";
+
+		case Zone::MID:
+			return _Ostr << "Middle";
+
+		case Zone::RIGHT:
+			return _Ostr << "Right";
+		}
 	}
 
-	return m_useFakeDeviceId ? DEVICE_ID_FAKE : 0xFFFFFFFF;
+} // namespace
+
+KeyboardDevice::KeyboardDevice(KeyboardType kbType, std::shared_ptr<IDeviceChannel> pDeviceChannel)
+	: m_kbType(kbType),
+	m_pDevChannel(std::move(pDeviceChannel))
+{
 }
 
-KeyboardType KeyboardDevice::GetKeyboardType() const
+bool KeyboardDevice::SetColour(Zone zone, const Colour& colour)
 {
-	auto const result = m_deviceIdToKBProps.find(this->GetDeviceId());
-	return (result != m_deviceIdToKBProps.cend()) ? result->second.kbType : KeyboardType::NONE;
-}
-
-KBCommunicatorType KeyboardDevice::GetKBCommunicatorType() const 
-{
-	auto const result = m_deviceIdToKBProps.find(this->GetDeviceId());
-	return (result != m_deviceIdToKBProps.cend()) ? result->second.kbCommsType : KBCommunicatorType::None;
-}
-
-void KeyboardDevice::InitializeSingleZoneKBs()
-{
-	std::array<uint32_t, 9> constexpr SINGLE_ZONE_DEVICE_IDS
+	// Callers must always address "ALL" zones on a single-zone keyboard.
+	if (m_kbType == KeyboardType::SINGLE_ZONE && zone != Zone::ALL)
 	{
-		DEVICE_ID_NP50RXX, DEVICE_ID_NH70XX, DEVICE_ID_NKNP50XX,
-		DEVICE_ID_PC50DXX, DEVICE_ID_A715XX, DEVICE_ID_NP50SXX,
-		DEVICE_ID_CV15XX, DEVICE_ID_NP60SXX, DEVICE_ID_V360ENXX
-		//, DEVICE_ID_NH77XX
-	};
+		return false;
+	}
 
-	for (auto const currentDeviceId : SINGLE_ZONE_DEVICE_IDS)
+	return (zone != Zone::ALL) ? this->SetKBZoneColour(zone, colour) : this->SetFullKBColour(colour);
+}
+
+uint64_t KeyboardDevice::Query(QueryType queryType)
+{
+	switch (queryType)
 	{
-		m_deviceIdToKBProps[currentDeviceId].kbType = KeyboardType::SINGLE_ZONE;
-		m_deviceIdToKBProps[currentDeviceId].kbCommsType = KBCommunicatorType::Insyde;
+	case QueryType::DeviceChannelType:
+		return xstd::to_underlying(m_pDevChannel->QueryType());
+
+	case QueryType::DeviceType:
+		return xstd::to_underlying(DeviceMask::Keyboard);
+
+	case QueryType::KeyboardType:
+		return xstd::to_underlying(m_kbType);
 	}
 }
 
-void KeyboardDevice::InitializeTripleZoneKBs()
+bool KeyboardDevice::SendCode(uint32_t code)
 {
-	m_deviceIdToKBProps[DEVICE_ID_P650RS_G].kbType = KeyboardType::TRIPLE_ZONE;
-	m_deviceIdToKBProps[DEVICE_ID_P650RS_G].kbCommsType = KBCommunicatorType::Wmi;
+	return m_pDevChannel->SendCode(code);
+}
 
-	m_deviceIdToKBProps[DEVICE_ID_FAKE].kbType = KeyboardType::TRIPLE_ZONE;
-	m_deviceIdToKBProps[DEVICE_ID_FAKE].kbCommsType = KBCommunicatorType::Fake;
+bool KeyboardDevice::SetKBZoneColour(Zone zone, const Colour& colour)
+{
+	if (m_kbType == KeyboardType::NONE)
+	{
+		return false;
+	}
+
+	if (m_kbType == KeyboardType::FAKE)
+	{
+		std::cout << "Zone: " << zone << ", Colour: "
+			<< "(RED - 0x" << (void*)colour[INDEX_COLOUR_RED] << "), "
+			<< "(GREEN - 0x" << (void*)colour[INDEX_COLOUR_GREEN] << "), "
+			<< "(BLUE - 0x" << (void*)colour[INDEX_COLOUR_BLUE] << ") \n\n";
+
+		return true;
+	}
+
+	return m_pDevChannel->SendCode((xstd::to_underlying(zone) << 24ul) | m_colourFactory.Create(colour));
+}
+
+bool KeyboardDevice::SetFullKBColour(const Colour& colour)
+{
+	if (m_kbType == KeyboardType::SINGLE_ZONE)
+	{
+		// Left zone addresses the entire keyboard (Single-Zone).
+		return this->SetKBZoneColour(Zone::LEFT, colour);
+	}
+
+	for (auto const currentZone : { Zone::LEFT, Zone::MID, Zone::RIGHT })
+	{
+		// Not worth checking for success here.
+		std::ignore = this->SetKBZoneColour(currentZone, colour);
+	}
+
+	return true;
 }

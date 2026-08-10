@@ -15,9 +15,9 @@ BreatheAnimation::BreatheAnimation()
 	auto const green = factory.Create(0, 255, 0);
 	auto const blue = factory.Create(0, 0, 255);
 
-	auto const redBreathePattern = m_patternGenerator.GenerateBreathe(red, STEPS, FRAME_DURATION_MS);
-	auto const greenBreathePattern = m_patternGenerator.GenerateBreathe(green, STEPS, FRAME_DURATION_MS);
-	auto const blueBreathePattern = m_patternGenerator.GenerateBreathe(blue, STEPS, FRAME_DURATION_MS);
+	auto const redBreathePattern = m_patternGenerator.GenerateBreathe(DeviceMask::Keyboard, red, STEPS, FRAME_DURATION_MS);
+	auto const greenBreathePattern = m_patternGenerator.GenerateBreathe(DeviceMask::Keyboard, green, STEPS, FRAME_DURATION_MS);
+	auto const blueBreathePattern = m_patternGenerator.GenerateBreathe(DeviceMask::Keyboard, blue, STEPS, FRAME_DURATION_MS);
 
 	m_frames.AddFrames(redBreathePattern);
 	m_frames.AddFrames(greenBreathePattern);
@@ -34,12 +34,12 @@ std::optional<Frame> BreatheAnimation::GetFrame(uint32_t idx)
 	return m_frames.GetFrame(idx);
 }
 
-bool BreatheAnimation::IsSupportedKB(KeyboardType kbType) const 
+bool BreatheAnimation::IsHostSupported(const IHost* pHost) const
 {
-	return kbType != KeyboardType::NONE;
+	return (pHost) ? pHost->GetKeyboardType() != KeyboardType::NONE : false;
 }
 
-uint32_t BreatheAnimation::Size() const 
+uint32_t BreatheAnimation::Size() const
 {
 	return m_frames.Size();
 }

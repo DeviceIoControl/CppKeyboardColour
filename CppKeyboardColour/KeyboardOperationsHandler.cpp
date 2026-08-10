@@ -5,8 +5,10 @@
 #include "ThemeCommandLine.h"
 #include "CommandLine.h"
 #include "ConsoleUtils.h"
+#include "Animator.h"
+#include "DeviceMask.h"
 
-static DWORD DoKeyboardBacklightOperation(IKeyboard* pKeyboard, BacklightType backlight)
+static DWORD DoKeyboardBacklightOperation(std::unique_ptr<IHost> pHost, BacklightType backlight)
 {
 	if (backlight == BacklightType::Invalid)
 	{
@@ -16,30 +18,32 @@ static DWORD DoKeyboardBacklightOperation(IKeyboard* pKeyboard, BacklightType ba
 	switch (backlight)
 	{
 	case BacklightType::On:
-		std::cout << "Turning keyboard lights on.\n";
-		pKeyboard->SetBacklightOn();
+		std::cout << "Turning backlights on.\n";
+		pHost->SetBacklightOn(DeviceMask::Keyboard | DeviceMask::Lightbar | DeviceMask::Logo);
 		break;
 
 	case BacklightType::Off:
-		std::cout << "Turning keyboard lights off.\n";
-		pKeyboard->SetBacklightOff();
+		std::cout << "Turning backlights off.\n";
+		pHost->SetBacklightOff(DeviceMask::Keyboard | DeviceMask::Lightbar | DeviceMask::Logo);
 		break;
 	}
 
 	return 0;
 }
 
-static DWORD DoKeyboardThemeOperation(IKeyboard* pKeyboard, std::unique_ptr<IAnimation> pAnimation, const std::vector<std::wstring>& cmdLines)
+static DWORD DoKeyboardThemeOperation(std::unique_ptr<IHost> pHost, std::unique_ptr<IAnimation> pAnimation, const std::vector<std::wstring>& cmdLines)
 {
 	if (!pAnimation)
 	{
 		return ERROR_INVALID_PARAMETER;
 	}
 
+	Animator animator{ std::move(pHost) };
+
 	// "--speed" command-line is only valid with an animation.
 	auto const speedFactor = ProcessSpeedCommandLine(cmdLines);
 
-	if (!pKeyboard->SetSpeedFactor(speedFactor))
+	if (!animator.SetSpeedFactor(speedFactor))
 	{
 		std::cout << "Speed value out of range (1-250). Animation will not be played.\n";
 		WaitForEnterIfNeeded();
@@ -52,12 +56,12 @@ static DWORD DoKeyboardThemeOperation(IKeyboard* pKeyboard, std::unique_ptr<IAni
 	}
 
 	auto const bShouldLoop = !CommandLine::Contains(L"--once", cmdLines);
-	pKeyboard->PlayAnimation(*pAnimation, bShouldLoop);
+	animator.Play(pAnimation.get(), bShouldLoop);
 
 	return 0;
 }
 
-static DWORD DoKeyboardSystemAnimationOperation(IKeyboard* pKeyboard, SystemAnimation sysAnimation)
+static DWORD DoKeyboardSystemAnimationOperation(std::unique_ptr<IHost> pHost, SystemAnimation sysAnimation)
 {
 	if (sysAnimation == SystemAnimation::KB_MODE_CUSTOM)
 	{
@@ -65,12 +69,12 @@ static DWORD DoKeyboardSystemAnimationOperation(IKeyboard* pKeyboard, SystemAnim
 	}
 
 	std::cout << "Playing Inbuilt Keyboard animation...\n";
-	pKeyboard->SendCode(xstd::to_underlying(sysAnimation));
+	pHost->SendDeviceCode(DeviceMask::Keyboard, xstd::to_underlying(sysAnimation));
 
 	return 0;
 }
 
-static DWORD DoKeyboardUserColourOperation(IKeyboard* pKeyboard, std::optional<Colour> colour)
+static DWORD DoKeyboardUserColourOperation(std::unique_ptr<IHost> pHost, std::optional<Colour> colour)
 {
 	if (!colour.has_value())
 	{
@@ -78,22 +82,16 @@ static DWORD DoKeyboardUserColourOperation(IKeyboard* pKeyboard, std::optional<C
 	}
 
 	std::cout << "Setting user provided colour...\n";
-
-	pKeyboard->SetColour(
-		colour->at(INDEX_COLOUR_RED),
-		colour->at(INDEX_COLOUR_GREEN),
-		colour->at(INDEX_COLOUR_BLUE),
-		Zone::ALL
-	);
+	pHost->SetKeyboardColour(Zone::ALL, colour.value());
 
 	return 0;
 }
 
-static DWORD DoKeyboardUserColour3Operation(IKeyboard* pKeyboard, const std::optional<Colours>& colours)
+static DWORD DoKeyboardUserColour3Operation(std::unique_ptr<IHost> pHost, const std::optional<Colours>& colours)
 {
-	// Somewhat unsafe, but pKeyboard should be valid before we get here.
+	// Somewhat unsafe, but pHost should always be valid before we get here.
 
-	if (pKeyboard->GetKBType() != KeyboardType::TRIPLE_ZONE)
+	if (pHost->GetKeyboardType() != KeyboardType::TRIPLE_ZONE)
 	{
 		std::cout << "This operation is not supported on this keyboard type.\n";
 		WaitForEnterIfNeeded();
@@ -112,52 +110,46 @@ static DWORD DoKeyboardUserColour3Operation(IKeyboard* pKeyboard, const std::opt
 	for (size_t i = 0; i < colours->size(); ++i)
 	{
 		auto const& colour = colours->at(i);
-		
-		pKeyboard->SetColour(
-			colour[INDEX_COLOUR_RED],
-			colour[INDEX_COLOUR_GREEN],
-			colour[INDEX_COLOUR_BLUE],
-			static_cast<Zone>(i)
-		);
+		pHost->SetKeyboardColour(static_cast<Zone>(i), colour);
 	}
 
 	return 0;
 }
 
-DWORD DoKeyboardOperation(IKeyboard* pKeyboard, const std::vector<std::wstring>& cmdLines)
+DWORD DoHostDeviceOperation(std::unique_ptr<IHost> pHost, const std::vector<std::wstring>& cmdLines)
 {
-	// pKeyboard will always be valid before reaching here, so no need to check the pointer again.
+	// pHost will always be valid before reaching here, so no need to check the pointer again.
 	
 	switch (ProcessKeyboardCmdOperation(cmdLines))
 	{
 	case KeyboardOperation::Animation:
 	{
 		auto pAnimation = ProcessThemeCommandLine(cmdLines);
-		return DoKeyboardThemeOperation(pKeyboard, std::move(pAnimation), cmdLines);
+		return DoKeyboardThemeOperation(std::move(pHost), std::move(pAnimation), cmdLines);
 	}
 
 	case KeyboardOperation::InBuilt:
 	{
 		auto const sysAnimation = ProcessSystemAnimationCommandLine(cmdLines);
-		return DoKeyboardSystemAnimationOperation(pKeyboard, sysAnimation);
+		return DoKeyboardSystemAnimationOperation(std::move(pHost), sysAnimation);
 	}
 
 	case KeyboardOperation::Backlight:
 	{
 		auto const backlight = ProcessBacklightCommandLine(cmdLines);
-		return DoKeyboardBacklightOperation(pKeyboard, backlight);
+		return DoKeyboardBacklightOperation(std::move(pHost), backlight);
 	}
 
 	case KeyboardOperation::UserColour:
 	{
 		auto const userColour = ProcessColourCommandLine(cmdLines);
-		return DoKeyboardUserColourOperation(pKeyboard, userColour);
+		return DoKeyboardUserColourOperation(std::move(pHost), userColour);
 	}
 
 	case KeyboardOperation::UserColour3:
 	{
 		auto const userColours = ProcessColoursCommandLine(cmdLines);
-		return DoKeyboardUserColour3Operation(pKeyboard, userColours);
+		return DoKeyboardUserColour3Operation(std::move(pHost), userColours);
 	}
 
 	// The above code logic should ensure that we NEVER reach here.

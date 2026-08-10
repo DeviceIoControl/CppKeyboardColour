@@ -13,11 +13,11 @@ PinkBreatheAnimation::PinkBreatheAnimation()
 
 	auto const pink = factory.Create(255, 110, 168);
 
-	auto const ascendPattern = m_patternGenerator.GenerateAscendingPattern(pink, FRAMES, FRAME_DURATION_MS);
-	auto const descendPattern = m_patternGenerator.GenerateDescendingPattern(pink, FRAMES, FRAME_DURATION_MS);
+	auto const ascendPattern = m_patternGenerator.GenerateAscendingPattern(DeviceMask::Keyboard, pink, FRAMES, FRAME_DURATION_MS);
+	auto const descendPattern = m_patternGenerator.GenerateDescendingPattern(DeviceMask::Keyboard, pink, FRAMES, FRAME_DURATION_MS);
 
 	m_frames.AddFrames(ascendPattern);
-	m_frames.AddFrame(Zone::ALL, pink, 4000);
+	m_frames.AddFrame(DeviceMask::Keyboard, Zone::ALL, pink, 4000);
 	m_frames.AddFrames(descendPattern);
 }
 
@@ -31,9 +31,9 @@ std::optional<Frame> PinkBreatheAnimation::GetFrame(uint32_t idx)
 	return m_frames.GetFrame(idx);
 }
 
-bool PinkBreatheAnimation::IsSupportedKB(KeyboardType kbType) const 
+bool PinkBreatheAnimation::IsHostSupported(const IHost* pHost) const 
 {
-	return kbType != KeyboardType::TRIPLE_ZONE_LIGHTBAR && kbType != KeyboardType::NONE;
+	return pHost->GetKeyboardType() != KeyboardType::NONE;
 }
 
 uint32_t PinkBreatheAnimation::Size() const 

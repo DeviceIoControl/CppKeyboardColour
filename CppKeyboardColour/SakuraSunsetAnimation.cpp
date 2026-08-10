@@ -15,15 +15,15 @@ SakuraSunsetAnimation::SakuraSunsetAnimation()
 	auto const sakuraPink = factory.Create(255, 110, 168);
 	auto const sunsetPink = factory.Create(255, 95, 149);
 
-	auto const sakuraToSunset = m_patternGenerator.GenerateColourTransform(sakuraPink, sunsetPink, FRAMES, FRAME_DURATION_MS);
+	auto const sakuraToSunset = m_patternGenerator.GenerateColourTransform(DeviceMask::Keyboard, sakuraPink, sunsetPink, FRAMES, FRAME_DURATION_MS);
 	m_frames.AddFrames(sakuraToSunset);
 
-	m_frames.AddFrame(Zone::ALL, sunsetPink, COLOUR_DURATION_MS);
+	m_frames.AddFrame(DeviceMask::Keyboard, Zone::ALL, sunsetPink, COLOUR_DURATION_MS);
 
-	auto const sunsetToSakura = m_patternGenerator.GenerateColourTransform( sunsetPink, sakuraPink, FRAMES, FRAME_DURATION_MS);
+	auto const sunsetToSakura = m_patternGenerator.GenerateColourTransform(DeviceMask::Keyboard, sunsetPink, sakuraPink, FRAMES, FRAME_DURATION_MS);
 	m_frames.AddFrames(sakuraToSunset);
 
-	m_frames.AddFrame(Zone::ALL, sakuraPink, COLOUR_DURATION_MS);
+	m_frames.AddFrame(DeviceMask::Keyboard, Zone::ALL, sakuraPink, COLOUR_DURATION_MS);
 }
 
 std::wstring SakuraSunsetAnimation::GetName() const 
@@ -36,9 +36,9 @@ std::optional<Frame> SakuraSunsetAnimation::GetFrame(uint32_t idx)
 	return m_frames.GetFrame(idx);
 }
 
-bool SakuraSunsetAnimation::IsSupportedKB(KeyboardType kbType) const
+bool SakuraSunsetAnimation::IsHostSupported(const IHost* pHost) const
 {
-	return kbType != KeyboardType::TRIPLE_ZONE_LIGHTBAR && kbType != KeyboardType::NONE;
+	return pHost->GetKeyboardType() != KeyboardType::NONE;
 }
 
 uint32_t SakuraSunsetAnimation::Size() const

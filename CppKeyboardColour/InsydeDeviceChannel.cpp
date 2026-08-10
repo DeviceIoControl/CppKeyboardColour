@@ -1,12 +1,12 @@
 // Created by DeviceIoControl
 
 #include "stdafx.h"
-#include "InsydeKBCommunicator.h"
+#include "InsydeDeviceChannel.h"
 #include "ConsoleUtils.h"
 
 #define INSYDE_DLL L"InsydeDCHU.dll"
 
-InsydeKBCommunicator::InsydeKBCommunicator()
+InsydeDeviceChannel::InsydeDeviceChannel()
 {
 	m_hInsydeDHCU = LoadInsydeDCHU_DLL();
 
@@ -14,39 +14,36 @@ InsydeKBCommunicator::InsydeKBCommunicator()
 	m_pfnWriteAppSettings = reinterpret_cast<Detail::T_WriteAppSettings>(GetProcAddress(m_hInsydeDHCU, "WriteAppSettings"));
 }
 
-bool InsydeKBCommunicator::SetKBColour(Zone zone, const Colour& colour) 
+bool InsydeDeviceChannel::SendCode(uint32_t code)
 {
-	if (zone != Zone::ALL)
+	if (!m_pfnSetDCHU_Data || !m_pfnWriteAppSettings)
 	{
 		return false;
 	}
 
 	// Found in CLEVO Control Center v6.053
 	uint8_t const mode = 8;
-	auto const dchuData = xstd::to_underlying(Zone::LEFT) << 24ul | m_colourFactory.Create(colour);
 
-	m_pfnSetDCHU_Data(0x67, reinterpret_cast<const uint8_t*>(&dchuData), sizeof(dchuData));
-	m_pfnWriteAppSettings(2, 0x51, colour.size(), colour.data());
+	const std::array<uint8_t, 4> dchuData{
+		(code & 0x0000ff00) >> 8,	// colour[INDEX_COLOUR_GREEN]
+		(code & 0x00ff0000) >> 16,	// colour[INDEX_COLOUR_RED]
+		(code & 0x000000ff),		// colour[INDEX_COLOUR_BLUE]
+		(code & 0xff000000) >> 24	// keyboard region
+	};
+
+	m_pfnSetDCHU_Data(0x67, dchuData.data(), sizeof(dchuData));
+	m_pfnWriteAppSettings(2, 0x51, 3, reinterpret_cast<uint8_t*>(code) + 1);
 	m_pfnWriteAppSettings(2, 0x20, 1, &mode);
 
 	return true;
 }
 
-// Unsupported for now.
-bool InsydeKBCommunicator::SendKBCode(uint32_t /* code */)
+DeviceChannelType InsydeDeviceChannel::QueryType() const 
 {
-	std::cout << "This system does not support this operation.\n";
-	return false;
+	return DeviceChannelType::Insyde;
 }
 
-// Unsupported.
-bool InsydeKBCommunicator::SetLightbarColour(const Colour& /*colour*/) 
-{
-	std::cout << "This system does not support this operation.\n";
-	return false;
-}
-
-InsydeKBCommunicator::~InsydeKBCommunicator()
+InsydeDeviceChannel::~InsydeDeviceChannel()
 {
 	if (IS_HANDLE_VALID(m_hInsydeDHCU))
 	{
@@ -56,7 +53,7 @@ InsydeKBCommunicator::~InsydeKBCommunicator()
 	}
 }
 
-HMODULE InsydeKBCommunicator::LoadInsydeDCHU_DLL() const
+HMODULE InsydeDeviceChannel::LoadInsydeDCHU_DLL() const
 {
 	auto const hModule = LoadLibraryW(INSYDE_DLL);
 

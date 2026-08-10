@@ -1,0 +1,134 @@
+// Created by DeviceIoControl
+
+#include "stdafx.h"
+#include "Host.h"
+#include "ColourFactory.h"
+
+Host::Host(uint32_t modelId, const std::vector<std::shared_ptr<IDevice>>& devices)
+	: m_modelId(modelId)
+{
+	for (auto const& pDevice : devices)
+	{
+		auto const deviceType = static_cast<DeviceMask>(pDevice->Query(QueryType::DeviceType));
+
+		switch (deviceType)
+		{
+		case DeviceMask::Keyboard:
+			m_pKeyboard = !m_pKeyboard ? pDevice : m_pKeyboard;
+			break;
+
+		case DeviceMask::Lightbar:
+			m_pLightbar = !m_pLightbar ? pDevice : m_pLightbar;
+			break;
+
+		case DeviceMask::Logo:
+			m_pLogo = !m_pLogo ? pDevice : m_pLogo;
+			break;
+
+		case DeviceMask::Unknown:
+			continue;
+		}
+	}
+}
+
+DeviceMask Host::GetDevices() const
+{
+	auto devices = (m_pKeyboard) ? xstd::to_underlying(DeviceMask::Keyboard) : xstd::to_underlying(DeviceMask::Unknown);
+	devices |= (m_pLightbar) ? xstd::to_underlying(DeviceMask::Lightbar) : xstd::to_underlying(DeviceMask::Unknown);
+	devices |= (m_pLogo) ? xstd::to_underlying(DeviceMask::Logo) : xstd::to_underlying(DeviceMask::Unknown);
+
+	return static_cast<DeviceMask>(devices);
+}
+
+KeyboardType Host::GetKeyboardType() const
+{
+	return m_pKeyboard ? static_cast<KeyboardType>(m_pKeyboard->Query(QueryType::KeyboardType)) : KeyboardType::NONE;
+}
+
+uint32_t Host::GetDeviceID() const
+{
+	return m_modelId;
+}
+
+bool Host::SetKeyboardColour(Zone zone, const Colour& colour)
+{
+	return m_pKeyboard ? m_pKeyboard->SetColour(zone, colour) : false;
+}
+
+bool Host::SetLightbarColour(const Colour& colour)
+{
+	return m_pLightbar ? m_pLightbar->SetColour(Zone::ALL, colour) : false;
+}
+
+bool Host::SetLogoColour(const Colour& colour)
+{
+	return m_pLogo ? m_pLogo->SetColour(Zone::ALL, colour) : false;
+}
+
+bool Host::SetBacklightOn(DeviceMask devices)
+{
+	if (devices == DeviceMask::Unknown)
+	{
+		return false;
+	}
+
+	this->ApplyColour(devices, ColourFactory{}.Create(0x00, 0x00, 0xFF));
+
+	return true;
+}
+
+bool Host::SetBacklightOff(DeviceMask devices)
+{
+	if (devices == DeviceMask::Unknown)
+	{
+		return false;
+	}
+
+	Colour const offColour{};
+	this->ApplyColour(devices, offColour);
+
+	return true;
+}
+
+bool Host::SendDeviceCode(DeviceMask devices, uint32_t code)
+{
+	if (devices == DeviceMask::Unknown)
+	{
+		return false;
+	}
+
+	if (m_pKeyboard && !!(devices & DeviceMask::Keyboard))
+	{
+		m_pKeyboard->SendCode(code);
+	}
+
+	if (m_pLightbar && !!(devices & DeviceMask::Lightbar))
+	{
+		m_pLightbar->SendCode(code);
+	}
+
+	if (m_pLogo && !!(devices & DeviceMask::Logo))
+	{
+		m_pLogo->SendCode(code);
+	}
+
+	return true;
+}
+
+void Host::ApplyColour(DeviceMask devices, const Colour& colour)
+{
+	if (m_pKeyboard && !!(devices & DeviceMask::Keyboard))
+	{
+		m_pKeyboard->SetColour(Zone::ALL, colour);
+	}
+
+	if (m_pLightbar && !!(devices & DeviceMask::Lightbar))
+	{
+		m_pLightbar->SetColour(Zone::ALL, colour);
+	}
+
+	if (m_pLogo && !!(devices & DeviceMask::Logo))
+	{
+		m_pLogo->SetColour(Zone::ALL, colour);
+	}
+}

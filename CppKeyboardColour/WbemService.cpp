@@ -25,8 +25,8 @@ ScopedComPtr<IWbemClassObject> WbemService::ExecuteMethod(const std::wstring& st
 {
 	IWbemClassObject* pOutParams = nullptr;
 
-	const auto hr = m_pWbemServices->ExecMethod((BSTR)strObjectPath.c_str(), (BSTR)strMethodName.c_str(), NULL, nullptr, pInParameters,
-		&pOutParams, nullptr);
+	const auto hr = m_pWbemServices->ExecMethod((BSTR)strObjectPath.c_str(), 
+		(BSTR)strMethodName.c_str(), NULL, nullptr, pInParameters, &pOutParams, nullptr);
 
 	if (FAILED(hr))
 	{

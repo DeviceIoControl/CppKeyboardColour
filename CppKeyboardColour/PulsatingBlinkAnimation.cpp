@@ -36,9 +36,9 @@ std::optional<Frame> PulsatingBlinkAnimation::GetFrame(uint32_t idx)
 	return m_frames.GetFrame(idx);
 }
 
-bool PulsatingBlinkAnimation::IsSupportedKB(KeyboardType kbType) const
+bool PulsatingBlinkAnimation::IsHostSupported(const IHost* pHost) const
 {
-	return kbType != KeyboardType::TRIPLE_ZONE_LIGHTBAR && kbType != KeyboardType::NONE;
+	return pHost->GetKeyboardType() != KeyboardType::NONE;
 }
 
 uint32_t PulsatingBlinkAnimation::Size() const
@@ -48,6 +48,6 @@ uint32_t PulsatingBlinkAnimation::Size() const
 
 void PulsatingBlinkAnimation::GenerateBlink(const Colour& colour, uint32_t blinkTimeMs)
 {
-	auto const blinkPattern = m_patternGenerator.GenerateBlink(colour, blinkTimeMs);
+	auto const blinkPattern = m_patternGenerator.GenerateBlink(DeviceMask::Keyboard, colour, blinkTimeMs);
 	m_frames.AddFrames(blinkPattern);
 }

@@ -23,9 +23,9 @@ std::optional<Frame> HeartbeatAnimation::GetFrame(uint32_t idx)
 	return m_frames.GetFrame(idx);
 }
 
-bool HeartbeatAnimation::IsSupportedKB(KeyboardType kbType) const
+bool HeartbeatAnimation::IsHostSupported(const IHost* pHost) const
 {
-	return kbType == KeyboardType::SINGLE_ZONE || kbType == KeyboardType::TRIPLE_ZONE;
+	return pHost->GetKeyboardType() == KeyboardType::SINGLE_ZONE || pHost->GetKeyboardType() == KeyboardType::TRIPLE_ZONE;
 }
 
 uint32_t HeartbeatAnimation::Size() const
@@ -35,6 +35,6 @@ uint32_t HeartbeatAnimation::Size() const
 
 void HeartbeatAnimation::GeneratePulse(const Colour& targetColour, uint32_t beatTimeMs)
 {
-	auto const pulsePattern = m_patternGenerator.GeneratePulse(targetColour, beatTimeMs);
+	auto const pulsePattern = m_patternGenerator.GeneratePulse(DeviceMask::Keyboard, targetColour, beatTimeMs);
 	m_frames.AddFrames(pulsePattern);
 }

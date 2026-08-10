@@ -2,6 +2,7 @@
 
 #pragma once
 #include <cwctype>
+#include "DeviceMask.h"
 
 namespace xstd
 {
@@ -25,7 +26,7 @@ namespace xstd
 		return static_cast<std::underlying_type_t<_Ty>>(value);
 	}
 
-	inline std::optional<uint32_t> stoi(const std::wstring& input, int32_t base = 10) 
+	inline std::optional<uint32_t> stoi(const std::wstring& input, int32_t base = 10)
 	{
 		try
 		{
@@ -38,3 +39,18 @@ namespace xstd
 	}
 
 } // namespace xstd
+
+inline DeviceMask operator&(DeviceMask a, DeviceMask b) 
+{
+	return static_cast<DeviceMask>(xstd::to_underlying(a) & xstd::to_underlying(b));
+}
+
+inline DeviceMask operator|(DeviceMask a, DeviceMask b)
+{
+	return static_cast<DeviceMask>(xstd::to_underlying(a) | xstd::to_underlying(b));
+}
+
+inline bool operator!(DeviceMask a)
+{
+	return xstd::to_underlying(a) != 0;
+}

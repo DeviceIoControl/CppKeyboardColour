@@ -2,6 +2,7 @@
 
 #pragma once
 #include "Frame.h"
+#include "DeviceMask.h"
 
 class FrameCollection
 {
@@ -10,7 +11,7 @@ public:
 	explicit FrameCollection(const std::vector<Frame>& frames);
 
 	void AddFrame(const Frame& frame);
-	void AddFrame(Zone activeZone, Colour zoneColour, uint32_t msTime);
+	void AddFrame(DeviceMask devices, Zone activeZone, Colour zoneColour, uint32_t msTime);
 	void AddFrames(const FrameCollection& frames);
 
 	std::optional<Frame> GetFrame(uint32_t idx);

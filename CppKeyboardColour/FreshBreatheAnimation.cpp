@@ -1,7 +1,6 @@
 // Created by DeviceIoControl
 
 #include "stdafx.h"
-#include "MathConstants.h"
 #include "FreshBreatheAnimation.h"
 #include "ColourFactory.h"
 
@@ -55,9 +54,9 @@ std::optional<Frame> FreshBreatheAnimation::GetFrame(uint32_t idx)
 	return m_frames.GetFrame(idx);
 }
 
-bool FreshBreatheAnimation::IsSupportedKB(KeyboardType kbType) const
+bool FreshBreatheAnimation::IsHostSupported(const IHost* pHost) const
 {
-	return (kbType != KeyboardType::TRIPLE_ZONE_LIGHTBAR && kbType != KeyboardType::NONE);
+	return (pHost->GetKeyboardType() != KeyboardType::NONE);
 }
 
 uint32_t FreshBreatheAnimation::Size() const
@@ -67,6 +66,6 @@ uint32_t FreshBreatheAnimation::Size() const
 
 void FreshBreatheAnimation::GenerateBreathe(const Colour& targetColour, uint32_t steps, uint32_t stepTimeMs)
 {
-	auto const patternFrames = m_patternGenerator.GenerateBreathe(targetColour, steps, stepTimeMs);
+	auto const patternFrames = m_patternGenerator.GenerateBreathe(DeviceMask::Keyboard, targetColour, steps, stepTimeMs);
 	m_frames.AddFrames(patternFrames);
 }

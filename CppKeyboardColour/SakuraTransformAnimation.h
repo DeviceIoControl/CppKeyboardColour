@@ -5,6 +5,7 @@
 #include "IAnimation.h"
 #include "FrameCollection.h"
 #include "FramePatternGenerator.h"
+#include "IHost.h"
 
 class SakuraTransformAnimation 
 	: public IAnimation
@@ -16,7 +17,7 @@ public:
 
 	std::optional<Frame> GetFrame(uint32_t idx) override;
 
-	bool IsSupportedKB(KeyboardType kbType) const override;
+	bool IsHostSupported(const IHost* pHost) const override;
 
 	uint32_t Size() const override;
 

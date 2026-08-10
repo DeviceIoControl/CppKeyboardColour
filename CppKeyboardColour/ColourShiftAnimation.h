@@ -6,6 +6,7 @@
 #include "KeyboardType.h"
 #include "FrameCollection.h"
 #include "ColourFactory.h"
+#include "IHost.h"
 
 class ColourShiftAnimation 
 	: public IAnimation
@@ -18,7 +19,7 @@ public:
 	std::optional<Frame> GetFrame(uint32_t idx) override;
 
 	// This animation requires 3-Zone keyboards.
-	bool IsSupportedKB(KeyboardType kbType) const override;
+	bool IsHostSupported(const IHost* pHost) const override;
 
 	uint32_t Size() const override;
 
@@ -28,9 +29,9 @@ private:
 	FrameCollection m_frames;
 	ColourFactory m_factory{};
 	
-	void GeneratePhase1(uint8_t(&rgb)[3][3]);
-	void GeneratePhase2(uint8_t(&rgb)[3][3]);
-	void GeneratePhase3(uint8_t(&rgb)[3][3]);
+	void GeneratePhase1(Colours& colours);
+	void GeneratePhase2(Colours& colours);
+	void GeneratePhase3(Colours& colours);
 
 	uint32_t ZoneToIndex(Zone zone);
 

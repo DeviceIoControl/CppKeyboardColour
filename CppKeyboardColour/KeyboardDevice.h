@@ -2,32 +2,28 @@
 
 #pragma once
 
+#include "IDevice.h"
+#include "Colour.h"
+#include "IDeviceChannel.h"
+#include "ColourFactory.h"
 #include "KeyboardType.h"
-#include "IKeyboardDevice.h"
-#include "DeviceIdRetriever.h"
-
-struct KB_PROPERTIES
-{
-	KeyboardType kbType;
-	KBCommunicatorType kbCommsType;
-};
 
 class KeyboardDevice
-	: public IKeyboardDevice
+	: public IDevice
 {
 public:
-	KeyboardDevice(bool fakeDevice = false);
+	KeyboardDevice(KeyboardType kbType, std::shared_ptr<IDeviceChannel> pDeviceChannel);
 	~KeyboardDevice() override = default;
 
-	uint32_t GetDeviceId() const override;
-	KeyboardType GetKeyboardType() const override;
-	KBCommunicatorType GetKBCommunicatorType() const override;
-
+	bool SetColour(Zone zone, const Colour& colour) override;
+	uint64_t Query(QueryType queryType) override;
+	bool SendCode(uint32_t code) override;
+	
 private:
-	bool m_useFakeDeviceId = false;
-	std::unique_ptr<DeviceIdRetriever> m_pDevIdRetriever{};
-	std::map<uint32_t, KB_PROPERTIES> m_deviceIdToKBProps{};
+	KeyboardType m_kbType;
+	ColourFactory m_colourFactory;
+	std::shared_ptr<IDeviceChannel> m_pDevChannel;
 
-	void InitializeSingleZoneKBs();
-	void InitializeTripleZoneKBs();
+	bool SetKBZoneColour(Zone zone, const Colour& colour);
+	bool SetFullKBColour(const Colour& colour);
 };

@@ -1,6 +1,6 @@
 // Created by DeviceIoControl
 
 #pragma once
-#include "IKeyboard.h"
+#include "IHost.h"
 
-DWORD DoKeyboardOperation(IKeyboard* pKeyboard, const std::vector<std::wstring>& cmdLines);
+DWORD DoHostDeviceOperation(std::unique_ptr<IHost> pHost, const std::vector<std::wstring>& cmdLines);

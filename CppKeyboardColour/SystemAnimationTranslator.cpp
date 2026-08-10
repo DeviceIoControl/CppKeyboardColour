@@ -2,7 +2,6 @@
 
 #include "stdafx.h"
 #include "SystemAnimationTranslator.h"
-#include "ExtendedStl.h"
 
 SystemAnimation SystemAnimationTranslator::Translate(const std::wstring& sysAnimationAlias) const
 {

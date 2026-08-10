@@ -11,7 +11,7 @@
 #define DEVICE_ID_A715XX 0x0000A554
 #define DEVICE_ID_CV15XX 0x00000157
 #define DEVICE_ID_NP60SXX 0x0000A553
-#define DEVICE_ID_V360ENXX 0x00000353
+#define DEVICE_ID_V360EXX 0x00000353
 
 // #define DEVICE_ID_NH77XX - User did not respond with the appropriate information.
 

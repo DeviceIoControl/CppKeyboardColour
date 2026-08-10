@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "IKeyboardCommunicator.h"
+#include "IDeviceChannel.h"
 #include "ColourFactory.h"
 
 namespace Detail
@@ -11,20 +11,15 @@ namespace Detail
 	using T_WriteAppSettings = DWORD(__stdcall*)(DWORD dwPage, DWORD dwOffset, DWORD dwLength, const UINT8* pInBuffer);
 }
 
-class InsydeKBCommunicator
-	: public IKeyboardCommunicator
+class InsydeDeviceChannel
+	: public IDeviceChannel
 {
 public:
-	InsydeKBCommunicator();
-	~InsydeKBCommunicator() override;
+	InsydeDeviceChannel();
+	~InsydeDeviceChannel() override;
 
-	bool SetKBColour(Zone zone, const Colour& colour) override;
-
-	// Unsupported for now.
-	bool SendKBCode(uint32_t data) override;
-
-	// Unsupported.
-	bool SetLightbarColour(const Colour& colour) override;
+	bool SendCode(uint32_t code) override;
+	DeviceChannelType QueryType() const override;
 
 private:
 	ColourFactory m_colourFactory{};
