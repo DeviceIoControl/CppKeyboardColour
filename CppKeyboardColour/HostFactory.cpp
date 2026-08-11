@@ -27,7 +27,6 @@ namespace
 		return _Ostr;
 	}
 
-
 	std::ostream& operator<<(std::ostream& _Ostr, KeyboardType kbType) 
 	{
 		switch (kbType) 

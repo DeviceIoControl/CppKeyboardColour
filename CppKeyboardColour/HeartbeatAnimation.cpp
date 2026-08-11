@@ -25,7 +25,7 @@ std::optional<Frame> HeartbeatAnimation::GetFrame(uint32_t idx)
 
 bool HeartbeatAnimation::IsHostSupported(const IHost* pHost) const
 {
-	return pHost->GetKeyboardType() == KeyboardType::SINGLE_ZONE || pHost->GetKeyboardType() == KeyboardType::TRIPLE_ZONE;
+	return (pHost) ? pHost->GetKeyboardType() != KeyboardType::PER_KEY && pHost->GetKeyboardType() != KeyboardType::NONE : false;
 }
 
 uint32_t HeartbeatAnimation::Size() const

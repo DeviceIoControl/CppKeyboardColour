@@ -36,7 +36,7 @@ std::optional<Frame> BreatheAnimation::GetFrame(uint32_t idx)
 
 bool BreatheAnimation::IsHostSupported(const IHost* pHost) const
 {
-	return pHost->GetKeyboardType() != KeyboardType::PER_KEY && pHost->GetKeyboardType() != KeyboardType::NONE;
+	return (pHost) ? pHost->GetKeyboardType() != KeyboardType::PER_KEY && pHost->GetKeyboardType() != KeyboardType::NONE : false;
 }
 
 uint32_t BreatheAnimation::Size() const

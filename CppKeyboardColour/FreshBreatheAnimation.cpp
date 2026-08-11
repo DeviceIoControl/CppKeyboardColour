@@ -56,7 +56,7 @@ std::optional<Frame> FreshBreatheAnimation::GetFrame(uint32_t idx)
 
 bool FreshBreatheAnimation::IsHostSupported(const IHost* pHost) const
 {
-	return pHost->GetKeyboardType() != KeyboardType::PER_KEY && pHost->GetKeyboardType() != KeyboardType::NONE;
+	return (pHost) ? pHost->GetKeyboardType() != KeyboardType::PER_KEY && pHost->GetKeyboardType() != KeyboardType::NONE : false;
 }
 
 uint32_t FreshBreatheAnimation::Size() const
