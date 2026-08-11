@@ -207,6 +207,7 @@
     <ClInclude Include="MathConstants.h" />
     <ClInclude Include="PinkBreatheAnimation.h" />
     <ClInclude Include="PulsatingBlinkAnimation.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="SunsetBreatheAnimation.h" />
     <ClInclude Include="SakuraSunsetAnimation.h" />
     <ClInclude Include="SakuraTransformAnimation.h" />
@@ -264,6 +265,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HostFactory.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="CppKeyboardColour.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\Users\joshs\Pictures\keyboard.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
