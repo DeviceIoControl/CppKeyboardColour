@@ -13,7 +13,7 @@ LightbarDevice::LightbarDevice(std::shared_ptr<IDeviceChannel> pDeviceChannel)
 bool LightbarDevice::SetColour(Zone zone, const Colour& colour)
 {
 	// Lightbar = 0xF3
-	return (zone == Zone::ALL) ? m_pDevChannel->SendCode((0xF3 << 24ul) | m_colourFactory.Create(colour)) : false;
+	return (zone == Zone::ALL && m_pDevChannel) ? m_pDevChannel->SendCode((0xF3 << 24ul) | m_colourFactory.Create(colour)) : false;
 }
 
 uint64_t LightbarDevice::Query(QueryType queryType) 
@@ -27,7 +27,7 @@ uint64_t LightbarDevice::Query(QueryType queryType)
 		return xstd::to_underlying(DeviceMask::Lightbar);
 
 	case QueryType::DeviceChannelType:
-		return xstd::to_underlying(m_pDevChannel->QueryType());
+		return (m_pDevChannel) ? xstd::to_underlying(m_pDevChannel->QueryType()) : 0;
 	}
 
 	return 0;
@@ -35,5 +35,5 @@ uint64_t LightbarDevice::Query(QueryType queryType)
 
 bool LightbarDevice::SendCode(uint32_t code) 
 {
-	return m_pDevChannel->SendCode(code);
+	return (m_pDevChannel) ? m_pDevChannel->SendCode(code) : false;
 }

@@ -70,7 +70,8 @@ bool Host::SetBacklightOn(DeviceMask devices)
 		return false;
 	}
 
-	this->ApplyColour(devices, ColourFactory{}.Create(0x00, 0x00, 0xFF));
+	ColourFactory const colourFactory{};
+	this->ApplyColour(devices, colourFactory.Create(0x00, 0x00, 0xFF));
 
 	return true;
 }
@@ -115,6 +116,11 @@ bool Host::SendDeviceCode(DeviceMask devices, uint32_t code)
 
 void Host::ApplyColour(DeviceMask devices, const Colour& colour)
 {
+	if (devices == DeviceMask::Unknown)
+	{
+		return;
+	}
+
 	if (m_pKeyboard && !!(devices & DeviceMask::Keyboard))
 	{
 		m_pKeyboard->SetColour(Zone::ALL, colour);

@@ -185,7 +185,7 @@
     <ClInclude Include="ColourShiftAnimation.h" />
     <ClInclude Include="ColourTransformAnimation.h" />
     <ClInclude Include="CommandLine.h" />
-    <ClInclude Include="DeviceIds.h" />
+    <ClInclude Include="ModelIds.h" />
     <ClInclude Include="FakeDeviceChannel.h" />
     <ClInclude Include="FrameCollection.h" />
     <ClInclude Include="Colour.h" />

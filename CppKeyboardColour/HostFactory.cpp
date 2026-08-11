@@ -2,7 +2,7 @@
 
 #include "stdafx.h"
 #include "HostFactory.h"
-#include "DeviceIds.h"
+#include "ModelIds.h"
 #include "DeviceChannelFactory.h"
 
 namespace 
@@ -137,32 +137,32 @@ DeviceMask HostFactory::GetHostDevices(uint32_t deviceId) const
 
 void HostFactory::InitializeSingleZoneKBs()
 {
-	std::array<uint32_t, 9> constexpr SINGLE_ZONE_INSYDE_DEVICE_IDS
+	std::array<uint32_t, 9> constexpr SINGLE_ZONE_INSYDE_MODEL_IDS
 	{
-		DEVICE_ID_NP50RXX, DEVICE_ID_NH70XX, DEVICE_ID_NKNP50XX,
-		DEVICE_ID_PC50DXX, DEVICE_ID_A715XX, DEVICE_ID_NP50SXX,
-		DEVICE_ID_CV15XX, DEVICE_ID_NP60SXX, DEVICE_ID_V360EXX
-		//, DEVICE_ID_NH77XX
+		MODEL_ID_NP50RXX, MODEL_ID_NH70XX, MODEL_ID_NKNP50XX,
+		MODEL_ID_PC50DXX, MODEL_ID_A715XX, MODEL_ID_NP50SXX,
+		MODEL_ID_CV15XX, MODEL_ID_NP60SXX, MODEL_ID_V360EXX
+		//, MODEL_ID_NH77XX
 	};
 
-	for (auto const currentDeviceId : SINGLE_ZONE_INSYDE_DEVICE_IDS)
+	for (auto const currentModelId : SINGLE_ZONE_INSYDE_MODEL_IDS)
 	{
-		m_modelIdToDevProps[currentDeviceId].devices = DeviceMask::Keyboard;
-		m_modelIdToDevProps[currentDeviceId].kbType = KeyboardType::SINGLE_ZONE;
-		m_modelIdToDevProps[currentDeviceId].deviceChannelType = DeviceChannelType::Insyde;
+		m_modelIdToDevProps[currentModelId].devices = DeviceMask::Keyboard;
+		m_modelIdToDevProps[currentModelId].kbType = KeyboardType::SINGLE_ZONE;
+		m_modelIdToDevProps[currentModelId].deviceChannelType = DeviceChannelType::Insyde;
 	}
 }
 
 void HostFactory::InitializeTripleZoneKBs()
 {
-	m_modelIdToDevProps[DEVICE_ID_P650RS_G].devices = DeviceMask::Keyboard;
-	m_modelIdToDevProps[DEVICE_ID_P650RS_G].kbType = KeyboardType::TRIPLE_ZONE;
-	m_modelIdToDevProps[DEVICE_ID_P650RS_G].deviceChannelType = DeviceChannelType::Wmi;
+	m_modelIdToDevProps[MODEL_ID_P650RS_G].devices = DeviceMask::Keyboard;
+	m_modelIdToDevProps[MODEL_ID_P650RS_G].kbType = KeyboardType::TRIPLE_ZONE;
+	m_modelIdToDevProps[MODEL_ID_P650RS_G].deviceChannelType = DeviceChannelType::Wmi;
 }
 
 void HostFactory::InitializeTripleZoneKBsWithPeripherals()
 {
-	m_modelIdToDevProps[DEVICE_ID_FAKE].devices = DeviceMask::Keyboard | DeviceMask::Lightbar | DeviceMask::Logo;
-	m_modelIdToDevProps[DEVICE_ID_FAKE].kbType = KeyboardType::TRIPLE_ZONE;
-	m_modelIdToDevProps[DEVICE_ID_FAKE].deviceChannelType = DeviceChannelType::Fake;
+	m_modelIdToDevProps[MODEL_ID_FAKE].devices = DeviceMask::Keyboard | DeviceMask::Lightbar | DeviceMask::Logo;
+	m_modelIdToDevProps[MODEL_ID_FAKE].kbType = KeyboardType::TRIPLE_ZONE;
+	m_modelIdToDevProps[MODEL_ID_FAKE].deviceChannelType = DeviceChannelType::Fake;
 }

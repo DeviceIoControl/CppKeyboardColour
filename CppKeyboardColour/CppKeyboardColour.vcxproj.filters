@@ -48,7 +48,7 @@
     <ClInclude Include="ColourShiftAnimation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DeviceIds.h">
+    <ClInclude Include="ModelIds.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BreatheAnimation.h">
