@@ -6,6 +6,12 @@
 
 namespace xstd
 {
+	template<typename _Ty>
+	using _TPointer = typename std::enable_if<std::is_pointer_v<_Ty>, _Ty>::type;
+
+	template<typename _Ty>
+	using _TInteger = typename std::enable_if<std::numeric_limits<_Ty>::is_integer, _Ty>::type;
+
 	inline std::wstring to_upper_case(const std::wstring& str)
 	{
 		std::wstring upper_case(str.length(), NULL);
@@ -18,6 +24,31 @@ namespace xstd
 		std::wstring lower_case(str.length(), NULL);
 		std::transform(str.cbegin(), str.cend(), lower_case.begin(), std::towlower);
 		return lower_case;
+	}
+
+
+	template<typename _TRet = uintptr_t, typename _Ty>
+	constexpr _TInteger<_TRet> ptr_to_integer(_Ty ptr)
+	{
+		static_assert(std::is_pointer<_Ty>::value, "ptr must be a pointer type.");
+		static_assert(std::numeric_limits<_TRet>::is_integer, "return type must be of an integer type.");
+
+		return reinterpret_cast<_TRet>(ptr);
+	}
+
+	template<typename _TRet = void*, typename _Ty>
+	constexpr _TPointer<_TRet> integer_to_ptr(_Ty intptr)
+	{
+		static_assert(std::numeric_limits<_Ty>::is_integer, "intptr must be an integer type.");
+		static_assert(std::is_pointer<_TRet>::value, "return type must be of a pointer type.");
+
+		return reinterpret_cast<_TRet>(intptr);
+	}
+
+	template<typename _TyRet = void, typename _Ty>
+	constexpr _TyRet* adjust_ptr(const _Ty* ptr, size_t byte_offset)
+	{
+		return xstd::integer_to_ptr<_TyRet*>(xstd::ptr_to_integer(ptr) + byte_offset);
 	}
 
 	template<typename _Ty>

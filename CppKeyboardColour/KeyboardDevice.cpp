@@ -77,7 +77,7 @@ bool KeyboardDevice::SetKBZoneColour(Zone zone, const Colour& colour)
 		return true;
 	}
 
-	return (m_pDevChannel) ? m_pDevChannel->SendCode((xstd::to_underlying(zone) << 24ul) | m_colourFactory.Create(colour)) : false;
+	return (m_pDevChannel) ? m_pDevChannel->SendCode((xstd::to_underlying(zone) << 24ul) | m_colourFactory.Create(ColourFormat::B8R8G8, colour)) : false;
 }
 
 bool KeyboardDevice::SetFullKBColour(const Colour& colour)

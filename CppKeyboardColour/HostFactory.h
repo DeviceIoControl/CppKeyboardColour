@@ -37,11 +37,11 @@ private:
 
 	std::vector<std::shared_ptr<IDevice>> CreateRequiredDevices(DeviceMask deviceTypes);
 	
-	KeyboardType GetKeyboardType(uint32_t deviceId) const;
+	KeyboardType GetKeyboardType(uint32_t modelId) const;
 
-	DeviceChannelType GetDeviceChannelType(uint32_t deviceId) const;
+	DeviceChannelType GetDeviceChannelType(uint32_t modelId) const;
 
-	DeviceMask GetHostDevices(uint32_t deviceId) const;
+	DeviceMask GetHostDevices(uint32_t modelId) const;
 
 	void InitializeSingleZoneKBs();
 

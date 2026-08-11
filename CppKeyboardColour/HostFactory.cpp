@@ -129,9 +129,9 @@ DeviceChannelType HostFactory::GetDeviceChannelType(uint32_t modelId) const
 	return (result != m_modelIdToDevProps.cend()) ? result->second.deviceChannelType : DeviceChannelType::None;
 }
 
-DeviceMask HostFactory::GetHostDevices(uint32_t deviceId) const
+DeviceMask HostFactory::GetHostDevices(uint32_t modelId) const
 {
-	auto const result = m_modelIdToDevProps.find(deviceId);
+	auto const result = m_modelIdToDevProps.find(modelId);
 	return (result != m_modelIdToDevProps.cend()) ? result->second.devices : DeviceMask::Unknown;
 }
 

@@ -4,6 +4,12 @@
 
 #include "Colour.h"
 
+enum class ColourFormat : uint16_t
+{
+	R8G8B8,
+	B8R8G8
+};
+
 class ColourFactory
 {
 public:
@@ -13,6 +19,7 @@ public:
 	Colour Create(uint8_t r, uint8_t g, uint8_t b) const;
 	Colour Create(uint32_t rgb) const;
 
-	// Note: Returns BRG format colour value.
-	uint32_t Create(const Colour& colour) const;
+	// Note: Returns RGB format colour value.
+	uint32_t Create(ColourFormat dstFormat, const Colour& colour) const;
+	uint32_t Convert(ColourFormat srcFormat, uint32_t colour, ColourFormat dstFormat) const;
 };
