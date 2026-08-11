@@ -49,32 +49,32 @@ namespace
 
 } // namespace
 
-HostFactory::HostFactory(std::unique_ptr<DeviceIdRetriever> pDevIdRetriever)
-	: m_devIdRetriever(std::move(pDevIdRetriever))
+HostFactory::HostFactory(std::unique_ptr<ModelIdRetriever> pModelIdRetriever)
+	: m_modelIdRetriever(std::move(pModelIdRetriever))
 {
 	this->InitializeHostDeviceProperties();
 	this->InitializeDeviceFactory();
 }
 
 HostFactory::HostFactory()
-	: HostFactory(std::make_unique<DeviceIdRetriever>())
+	: HostFactory(std::make_unique<ModelIdRetriever>())
 {
 }
 
 std::unique_ptr<Host> HostFactory::Create()
 {
-	auto const hostDevices = this->GetHostDevices(m_deviceId);
+	auto const hostDevices = this->GetHostDevices(m_modelId);
 
-	std::cout << "Detected Device ID: 0x" << (void*)m_deviceId << "\n";
+	std::cout << "Detected Model ID: 0x" << (void*)m_modelId << "\n";
 	std::cout << "Host Devices: " << hostDevices << "\n\n";
 
 	if (!!(hostDevices & DeviceMask::Keyboard))
 	{
-		std::cout << "Keyboard Type: " << this->GetKeyboardType(m_deviceId) << "\n";
+		std::cout << "Keyboard Type: " << this->GetKeyboardType(m_modelId) << "\n";
 	}
 
 	auto const devices = this->CreateRequiredDevices(hostDevices);
-	return std::make_unique<Host>(m_deviceId, devices);
+	return std::make_unique<Host>(m_modelId, devices);
 }
 
 void HostFactory::InitializeHostDeviceProperties()
@@ -88,10 +88,10 @@ bool HostFactory::InitializeDeviceFactory()
 {
 	DeviceChannelFactory devChannelFactory{};
 
-	m_deviceId = m_devIdRetriever->GetDeviceID();
-	m_devFactory = std::make_unique<DeviceFactory>(devChannelFactory.Create(this->GetDeviceChannelType(m_deviceId)));
+	m_modelId = m_modelIdRetriever->GetModelID();
+	m_devFactory = std::make_unique<DeviceFactory>(devChannelFactory.Create(this->GetDeviceChannelType(m_modelId)));
 
-	return (m_deviceId && m_devFactory);
+	return (m_modelId && m_devFactory);
 }
 
 std::vector<std::shared_ptr<IDevice>> HostFactory::CreateRequiredDevices(DeviceMask deviceTypes)
@@ -100,7 +100,7 @@ std::vector<std::shared_ptr<IDevice>> HostFactory::CreateRequiredDevices(DeviceM
 
 	if (!!(deviceTypes & DeviceMask::Keyboard))
 	{
-		auto const keyboardType = this->GetKeyboardType(m_deviceId);
+		auto const keyboardType = this->GetKeyboardType(m_modelId);
 		devices.emplace_back(m_devFactory->CreateKeyboard(keyboardType));
 	}
 
@@ -117,22 +117,22 @@ std::vector<std::shared_ptr<IDevice>> HostFactory::CreateRequiredDevices(DeviceM
 	return devices;
 }
 
-KeyboardType HostFactory::GetKeyboardType(uint32_t deviceId) const
+KeyboardType HostFactory::GetKeyboardType(uint32_t modelId) const
 {
-	auto const result = m_deviceIdToDevProps.find(deviceId);
-	return (result != m_deviceIdToDevProps.cend()) ? result->second.kbType : KeyboardType::NONE;
+	auto const result = m_modelIdToDevProps.find(modelId);
+	return (result != m_modelIdToDevProps.cend()) ? result->second.kbType : KeyboardType::NONE;
 }
 
-DeviceChannelType HostFactory::GetDeviceChannelType(uint32_t deviceId) const
+DeviceChannelType HostFactory::GetDeviceChannelType(uint32_t modelId) const
 {
-	auto const result = m_deviceIdToDevProps.find(deviceId);
-	return (result != m_deviceIdToDevProps.cend()) ? result->second.deviceChannelType : DeviceChannelType::None;
+	auto const result = m_modelIdToDevProps.find(modelId);
+	return (result != m_modelIdToDevProps.cend()) ? result->second.deviceChannelType : DeviceChannelType::None;
 }
 
 DeviceMask HostFactory::GetHostDevices(uint32_t deviceId) const
 {
-	auto const result = m_deviceIdToDevProps.find(deviceId);
-	return (result != m_deviceIdToDevProps.cend()) ? result->second.devices : DeviceMask::Unknown;
+	auto const result = m_modelIdToDevProps.find(deviceId);
+	return (result != m_modelIdToDevProps.cend()) ? result->second.devices : DeviceMask::Unknown;
 }
 
 void HostFactory::InitializeSingleZoneKBs()
@@ -147,22 +147,22 @@ void HostFactory::InitializeSingleZoneKBs()
 
 	for (auto const currentDeviceId : SINGLE_ZONE_INSYDE_DEVICE_IDS)
 	{
-		m_deviceIdToDevProps[currentDeviceId].devices = DeviceMask::Keyboard;
-		m_deviceIdToDevProps[currentDeviceId].kbType = KeyboardType::SINGLE_ZONE;
-		m_deviceIdToDevProps[currentDeviceId].deviceChannelType = DeviceChannelType::Insyde;
+		m_modelIdToDevProps[currentDeviceId].devices = DeviceMask::Keyboard;
+		m_modelIdToDevProps[currentDeviceId].kbType = KeyboardType::SINGLE_ZONE;
+		m_modelIdToDevProps[currentDeviceId].deviceChannelType = DeviceChannelType::Insyde;
 	}
 }
 
 void HostFactory::InitializeTripleZoneKBs()
 {
-	m_deviceIdToDevProps[DEVICE_ID_P650RS_G].devices = DeviceMask::Keyboard;
-	m_deviceIdToDevProps[DEVICE_ID_P650RS_G].kbType = KeyboardType::TRIPLE_ZONE;
-	m_deviceIdToDevProps[DEVICE_ID_P650RS_G].deviceChannelType = DeviceChannelType::Wmi;
+	m_modelIdToDevProps[DEVICE_ID_P650RS_G].devices = DeviceMask::Keyboard;
+	m_modelIdToDevProps[DEVICE_ID_P650RS_G].kbType = KeyboardType::TRIPLE_ZONE;
+	m_modelIdToDevProps[DEVICE_ID_P650RS_G].deviceChannelType = DeviceChannelType::Wmi;
 }
 
 void HostFactory::InitializeTripleZoneKBsWithPeripherals()
 {
-	m_deviceIdToDevProps[DEVICE_ID_FAKE].devices = DeviceMask::Keyboard | DeviceMask::Lightbar | DeviceMask::Logo;
-	m_deviceIdToDevProps[DEVICE_ID_FAKE].kbType = KeyboardType::TRIPLE_ZONE;
-	m_deviceIdToDevProps[DEVICE_ID_FAKE].deviceChannelType = DeviceChannelType::Fake;
+	m_modelIdToDevProps[DEVICE_ID_FAKE].devices = DeviceMask::Keyboard | DeviceMask::Lightbar | DeviceMask::Logo;
+	m_modelIdToDevProps[DEVICE_ID_FAKE].kbType = KeyboardType::TRIPLE_ZONE;
+	m_modelIdToDevProps[DEVICE_ID_FAKE].deviceChannelType = DeviceChannelType::Fake;
 }

@@ -12,7 +12,12 @@ Animator::Animator(std::unique_ptr<IHost> pHost)
 
 bool Animator::Play(IAnimation* pAnimation, bool bShouldLoop)
 {
-	if (pAnimation && !pAnimation->IsHostSupported(m_pHost.get()))
+	if (!pAnimation) 
+	{
+		return false;
+	}
+
+	if (!pAnimation->IsHostSupported(m_pHost.get()))
 	{
 		std::wcout << pAnimation->GetName() << L" animation is not supported on this system.\n";
 		return false;

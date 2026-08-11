@@ -54,7 +54,7 @@
     <ClInclude Include="BreatheAnimation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DeviceIdRetriever.h">
+    <ClInclude Include="ModelIdRetriever.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="KeyboardType.h">
@@ -197,7 +197,7 @@
     <ClCompile Include="PulsatingBlinkAnimation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DeviceIdRetriever.cpp">
+    <ClCompile Include="ModelIdRetriever.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DeviceChannelFactory.cpp">

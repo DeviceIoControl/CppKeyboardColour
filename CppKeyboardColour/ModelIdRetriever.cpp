@@ -1,17 +1,17 @@
 // Created by DeviceIoControl
 
 #include "stdafx.h"
-#include "DeviceIdRetriever.h"
+#include "ModelIdRetriever.h"
 
 #define GET_PRODUCT_DLL L"GetProductID64.dll"
 
-DeviceIdRetriever::DeviceIdRetriever() 
+ModelIdRetriever::ModelIdRetriever()
 {
 	m_hGetProductDLL = LoadGetProductDLL();
 	m_pfnGetProductID = reinterpret_cast<Detail::T_GetProductID_PCI>(GetProcAddress(m_hGetProductDLL, "GetProductID_PCI"));
 }
 
-uint32_t DeviceIdRetriever::GetDeviceID() const
+uint32_t ModelIdRetriever::GetModelID() const
 {
 	if (m_pfnGetProductID)
 	{
@@ -23,13 +23,13 @@ uint32_t DeviceIdRetriever::GetDeviceID() const
 	return 0xFFFFFFFF;
 }
 
-DeviceIdRetriever::~DeviceIdRetriever()
+ModelIdRetriever::~ModelIdRetriever()
 {
 	m_pfnGetProductID = nullptr;
 	FreeLibrary(m_hGetProductDLL);
 }
 
-/* static */ uint32_t DeviceIdRetriever::DoGetProductID(const Detail::T_GetProductID_PCI& fnGetProductID)
+/* static */ uint32_t ModelIdRetriever::DoGetProductID(const Detail::T_GetProductID_PCI& fnGetProductID)
 {
 	std::ignore = CoInitializeEx(nullptr, COINIT::COINIT_APARTMENTTHREADED);
 	std::ignore = CoInitializeEx(nullptr, COINIT::COINIT_APARTMENTTHREADED);
@@ -37,7 +37,7 @@ DeviceIdRetriever::~DeviceIdRetriever()
 	return fnGetProductID();
 }
 
-HMODULE DeviceIdRetriever::LoadGetProductDLL() const
+HMODULE ModelIdRetriever::LoadGetProductDLL() const
 {
 	auto const hModule = LoadLibraryW(GET_PRODUCT_DLL);
 

@@ -196,7 +196,7 @@
     <ClInclude Include="IDevice.h" />
     <ClInclude Include="IHost.h" />
     <ClInclude Include="IDeviceChannel.h" />
-    <ClInclude Include="DeviceIdRetriever.h" />
+    <ClInclude Include="ModelIdRetriever.h" />
     <ClInclude Include="InsydeDeviceChannel.h" />
     <ClInclude Include="DeviceChannelFactory.h" />
     <ClInclude Include="KeyboardDevice.h" />
@@ -233,7 +233,7 @@
     <ClCompile Include="ColourShiftAnimation.cpp" />
     <ClCompile Include="ColourTransformAnimation.cpp" />
     <ClCompile Include="CommandLine.cpp" />
-    <ClCompile Include="DeviceIdRetriever.cpp" />
+    <ClCompile Include="ModelIdRetriever.cpp" />
     <ClCompile Include="FakeDeviceChannel.cpp" />
     <ClCompile Include="FrameCollection.cpp" />
     <ClCompile Include="CppKeyboardColour.cpp" />

@@ -5,7 +5,7 @@
 #include "IDevice.h"
 #include "Host.h"
 #include "DeviceChannelType.h"
-#include "DeviceIdRetriever.h"
+#include "ModelIdRetriever.h"
 #include "DeviceFactory.h"
 
 struct HOST_DEVICE_PROPS
@@ -18,7 +18,7 @@ struct HOST_DEVICE_PROPS
 class HostFactory 
 {
 public:
-	HostFactory(std::unique_ptr<DeviceIdRetriever> pDevIdRetriever);
+	HostFactory(std::unique_ptr<ModelIdRetriever> pModelIdRetriever);
 	HostFactory();
 
 	~HostFactory() = default;
@@ -26,9 +26,9 @@ public:
 	std::unique_ptr<Host> Create();
 
 private:
-	uint32_t m_deviceId = 0;
-	std::unique_ptr<DeviceIdRetriever> m_devIdRetriever;
-	std::map<uint32_t, HOST_DEVICE_PROPS> m_deviceIdToDevProps{};
+	uint32_t m_modelId = 0;
+	std::unique_ptr<ModelIdRetriever> m_modelIdRetriever;
+	std::map<uint32_t, HOST_DEVICE_PROPS> m_modelIdToDevProps{};
 	std::unique_ptr<DeviceFactory> m_devFactory{};
 
 	void InitializeHostDeviceProperties();

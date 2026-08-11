@@ -7,14 +7,14 @@ namespace Detail
 	using T_GetProductID_PCI = DWORD(*__stdcall)();
 } // namespace Detail
 
-class DeviceIdRetriever
+class ModelIdRetriever
 {
 public:
-	DeviceIdRetriever();
+	ModelIdRetriever();
 
-	uint32_t GetDeviceID() const;
+	uint32_t GetModelID() const;
 
-	~DeviceIdRetriever();
+	~ModelIdRetriever();
 
 private:
 	HMODULE m_hGetProductDLL = nullptr;
