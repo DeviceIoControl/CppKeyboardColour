@@ -96,3 +96,9 @@ bool KeyboardDevice::SetFullKBColour(const Colour& colour)
 
 	return true;
 }
+
+std::wstring KeyboardDevice::GetName() const 
+{
+	return L"Keyboard";
+}
+

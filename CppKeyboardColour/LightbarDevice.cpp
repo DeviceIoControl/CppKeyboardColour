@@ -37,3 +37,8 @@ bool LightbarDevice::SendCode(uint32_t code)
 {
 	return (m_pDevChannel) ? m_pDevChannel->SendCode(code) : false;
 }
+
+std::wstring LightbarDevice::GetName() const 
+{
+	return L"Lightbar";
+}

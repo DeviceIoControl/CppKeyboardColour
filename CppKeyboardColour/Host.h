@@ -8,6 +8,7 @@
 #include "IDevice.h"
 #include "IHost.h"
 #include "DeviceMask.h"
+#include "DeviceChannelType.h"
 
 class Host
 	: public IHost
@@ -42,4 +43,7 @@ private:
 	std::shared_ptr<IDevice> m_pLogo;
 
 	void ApplyColour(DeviceMask devices, const Colour& colour);
+
+	// Restrict direct SendCode ability to WMI devices only (for now).
+	bool IsDeviceSendCodeCapable(std::shared_ptr<IDevice> pDevice) const;
 };

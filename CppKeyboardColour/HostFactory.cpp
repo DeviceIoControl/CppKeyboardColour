@@ -66,11 +66,11 @@ std::unique_ptr<Host> HostFactory::Create()
 	auto const hostDevices = this->GetHostDevices(m_modelId);
 
 	std::cout << "Detected Model ID: 0x" << (void*)m_modelId << "\n";
-	std::cout << "Host Devices: " << hostDevices << "\n\n";
+	std::cout << "Host Devices: " << hostDevices << "\n";
 
 	if (!!(hostDevices & DeviceMask::Keyboard))
 	{
-		std::cout << "Keyboard Type: " << this->GetKeyboardType(m_modelId) << "\n";
+		std::cout << "Keyboard Type: " << this->GetKeyboardType(m_modelId) << "\n\n";
 	}
 
 	auto const devices = this->CreateRequiredDevices(hostDevices);
@@ -86,7 +86,7 @@ void HostFactory::InitializeHostDeviceProperties()
 
 bool HostFactory::InitializeDeviceFactory()
 {
-	DeviceChannelFactory devChannelFactory{};
+	DeviceChannelFactory const devChannelFactory{};
 
 	m_modelId = m_modelIdRetriever->GetModelID();
 	m_devFactory = std::make_unique<DeviceFactory>(devChannelFactory.Create(this->GetDeviceChannelType(m_modelId)));
@@ -155,9 +155,12 @@ void HostFactory::InitializeSingleZoneKBs()
 
 void HostFactory::InitializeTripleZoneKBs()
 {
-	m_modelIdToDevProps[MODEL_ID_P650RS_G].devices = DeviceMask::Keyboard;
-	m_modelIdToDevProps[MODEL_ID_P650RS_G].kbType = KeyboardType::TRIPLE_ZONE;
-	m_modelIdToDevProps[MODEL_ID_P650RS_G].deviceChannelType = DeviceChannelType::Wmi;
+	for (auto const currentModelId : { MODEL_ID_P650RS_G }) 
+	{
+		m_modelIdToDevProps[currentModelId].devices = DeviceMask::Keyboard;
+		m_modelIdToDevProps[currentModelId].kbType = KeyboardType::TRIPLE_ZONE;
+		m_modelIdToDevProps[currentModelId].deviceChannelType = DeviceChannelType::Wmi;
+	}
 }
 
 void HostFactory::InitializeTripleZoneKBsWithPeripherals()

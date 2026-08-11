@@ -96,17 +96,17 @@ bool Host::SendDeviceCode(DeviceMask devices, uint32_t code)
 		return false;
 	}
 
-	if (m_pKeyboard && !!(devices & DeviceMask::Keyboard))
+	if (!!(devices & DeviceMask::Keyboard) && this->IsDeviceSendCodeCapable(m_pKeyboard))
 	{
 		m_pKeyboard->SendCode(code);
 	}
 
-	if (m_pLightbar && !!(devices & DeviceMask::Lightbar))
+	if (!!(devices & DeviceMask::Lightbar) && this->IsDeviceSendCodeCapable(m_pLightbar))
 	{
 		m_pLightbar->SendCode(code);
 	}
 
-	if (m_pLogo && !!(devices & DeviceMask::Logo))
+	if (!!(devices & DeviceMask::Logo) && this->IsDeviceSendCodeCapable(m_pLogo))
 	{
 		m_pLogo->SendCode(code);
 	}
@@ -135,4 +135,21 @@ void Host::ApplyColour(DeviceMask devices, const Colour& colour)
 	{
 		m_pLogo->SetColour(Zone::ALL, colour);
 	}
+}
+
+bool Host::IsDeviceSendCodeCapable(std::shared_ptr<IDevice> pDevice) const 
+{
+	if (!pDevice) 
+	{
+		std::cout << "Cannot communicate with the requested device.\n";
+		return false;
+	} 
+
+	if (static_cast<DeviceChannelType>(pDevice->Query(QueryType::DeviceChannelType)) != DeviceChannelType::Wmi) 
+	{
+		std::wcout << L"'" << pDevice->GetName() << L"' does not support this operation.\n";
+		return false;
+	}
+
+	return true;
 }

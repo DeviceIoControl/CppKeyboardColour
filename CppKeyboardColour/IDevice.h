@@ -19,4 +19,5 @@ public:
 	virtual bool SetColour(Zone zone, const Colour& colour) = 0;
 	virtual uint64_t Query(QueryType queryType) = 0;
 	virtual bool SendCode(uint32_t code) = 0;
+	virtual std::wstring GetName() const = 0;
 };

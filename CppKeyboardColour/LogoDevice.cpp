@@ -35,3 +35,8 @@ bool LogoDevice::SendCode(uint32_t code)
 {
 	return (m_pDevChannel) ? m_pDevChannel->SendCode(code) : false;
 }
+
+std::wstring LogoDevice::GetName() const 
+{
+	return L"Logo";
+}
