@@ -12,7 +12,7 @@ Animator::Animator(std::unique_ptr<IHost> pHost)
 
 bool Animator::Play(IAnimation* pAnimation, bool bShouldLoop)
 {
-	if (!pAnimation) 
+	if (!pAnimation)
 	{
 		return false;
 	}
@@ -45,24 +45,6 @@ bool Animator::SetSpeedFactor(float factor)
 	return false;
 }
 
-void Animator::SetDeviceColour(DeviceMask devices, Zone zone, const Colour& colour)
-{
-	if (!!(devices & DeviceMask::Keyboard))
-	{
-		m_pHost->SetKeyboardColour(zone, colour);
-	}
-
-	if (!!(devices & DeviceMask::Lightbar) && zone == Zone::ALL)
-	{
-		m_pHost->SetLightbarColour(colour);
-	}
-
-	if (!!(devices & DeviceMask::Logo) && zone == Zone::ALL)
-	{
-		m_pHost->SetLogoColour(colour);
-	}
-}
-
 bool Animator::Animate(IAnimation* pAnimation)
 {
 	if (!pAnimation)
@@ -74,7 +56,7 @@ bool Animator::Animate(IAnimation* pAnimation)
 	{
 		if (const auto frame = pAnimation->GetFrame(i))
 		{
-			this->SetDeviceColour(frame->devices, frame->zone, frame->colour);
+			m_pHost->SetColour(frame->devices, frame->zone, frame->colour);
 			auto const frameSleep = static_cast<uint32_t>(frame->ms_time / m_speedFactor);
 			std::this_thread::sleep_for(millisec(frameSleep));
 		}

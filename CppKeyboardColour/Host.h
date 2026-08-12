@@ -8,7 +8,6 @@
 #include "IDevice.h"
 #include "IHost.h"
 #include "DeviceMask.h"
-#include "DeviceChannelType.h"
 
 class Host
 	: public IHost
@@ -24,11 +23,7 @@ public:
 
 	uint32_t GetModelID() const override;
 
-	bool SetKeyboardColour(Zone zone, const Colour& colour) override;
-
-	bool SetLightbarColour(const Colour& colour) override;
-
-	bool SetLogoColour(const Colour& colour) override;
+	bool SetColour(DeviceMask devices, Zone zone, const Colour& colour) override;
 
 	bool SetBacklightOn(DeviceMask devices) override;
 
@@ -41,8 +36,6 @@ private:
 	std::shared_ptr<IDevice> m_pKeyboard;
 	std::shared_ptr<IDevice> m_pLightbar;
 	std::shared_ptr<IDevice> m_pLogo;
-
-	void ApplyColour(DeviceMask devices, const Colour& colour);
 
 	// Restrict direct SendCode ability to WMI devices only (for now).
 	bool IsDeviceSendCodeCapable(std::shared_ptr<IDevice> pDevice) const;

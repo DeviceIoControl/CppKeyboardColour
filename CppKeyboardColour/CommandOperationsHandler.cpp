@@ -82,7 +82,7 @@ static DWORD DoUserColourOperation(std::unique_ptr<IHost> pHost, std::optional<C
 	}
 
 	std::cout << "Setting user provided colour...\n";
-	pHost->SetKeyboardColour(Zone::ALL, colour.value());
+	pHost->SetColour(DeviceMask::Keyboard,Zone::ALL, colour.value());
 
 	return 0;
 }
@@ -110,7 +110,7 @@ static DWORD DoUserColour3Operation(std::unique_ptr<IHost> pHost, const std::opt
 	for (size_t i = 0; i < colours->size(); ++i)
 	{
 		auto const& colour = colours->at(i);
-		pHost->SetKeyboardColour(static_cast<Zone>(i), colour);
+		pHost->SetColour(DeviceMask::Keyboard, static_cast<Zone>(i), colour);
 	}
 
 	return 0;

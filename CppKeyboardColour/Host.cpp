@@ -3,6 +3,7 @@
 #include "stdafx.h"
 #include "Host.h"
 #include "ColourFactory.h"
+#include "DeviceChannelType.h"
 
 Host::Host(uint32_t modelId, const std::vector<std::shared_ptr<IDevice>>& devices)
 	: m_modelId(modelId)
@@ -48,19 +49,29 @@ uint32_t Host::GetModelID() const
 	return m_modelId;
 }
 
-bool Host::SetKeyboardColour(Zone zone, const Colour& colour)
+bool Host::SetColour(DeviceMask devices, Zone zone, const Colour& colour)
 {
-	return m_pKeyboard ? m_pKeyboard->SetColour(zone, colour) : false;
-}
+	if (devices == DeviceMask::Unknown)
+	{
+		return false;
+	}
 
-bool Host::SetLightbarColour(const Colour& colour)
-{
-	return m_pLightbar ? m_pLightbar->SetColour(Zone::ALL, colour) : false;
-}
+	if (m_pKeyboard && !!(devices & DeviceMask::Keyboard))
+	{
+		m_pKeyboard->SetColour(zone, colour);
+	}
 
-bool Host::SetLogoColour(const Colour& colour)
-{
-	return m_pLogo ? m_pLogo->SetColour(Zone::ALL, colour) : false;
+	if (m_pLightbar && !!(devices & DeviceMask::Lightbar))
+	{
+		m_pLightbar->SetColour(Zone::ALL, colour);
+	}
+
+	if (m_pLogo && !!(devices & DeviceMask::Logo))
+	{
+		m_pLogo->SetColour(Zone::ALL, colour);
+	}
+
+	return true;
 }
 
 bool Host::SetBacklightOn(DeviceMask devices)
@@ -71,7 +82,7 @@ bool Host::SetBacklightOn(DeviceMask devices)
 	}
 
 	ColourFactory const colourFactory{};
-	this->ApplyColour(devices, colourFactory.Create(0x00, 0x00, 0xFF));
+	this->SetColour(devices, Zone::ALL, colourFactory.Create(0x00, 0x00, 0xFF));
 
 	return true;
 }
@@ -84,7 +95,7 @@ bool Host::SetBacklightOff(DeviceMask devices)
 	}
 
 	Colour const offColour{};
-	this->ApplyColour(devices, offColour);
+	this->SetColour(devices, Zone::ALL, offColour);
 
 	return true;
 }
@@ -112,29 +123,6 @@ bool Host::SendDeviceCode(DeviceMask devices, uint32_t code)
 	}
 
 	return true;
-}
-
-void Host::ApplyColour(DeviceMask devices, const Colour& colour)
-{
-	if (devices == DeviceMask::Unknown)
-	{
-		return;
-	}
-
-	if (m_pKeyboard && !!(devices & DeviceMask::Keyboard))
-	{
-		m_pKeyboard->SetColour(Zone::ALL, colour);
-	}
-
-	if (m_pLightbar && !!(devices & DeviceMask::Lightbar))
-	{
-		m_pLightbar->SetColour(Zone::ALL, colour);
-	}
-
-	if (m_pLogo && !!(devices & DeviceMask::Logo))
-	{
-		m_pLogo->SetColour(Zone::ALL, colour);
-	}
 }
 
 bool Host::IsDeviceSendCodeCapable(std::shared_ptr<IDevice> pDevice) const 
