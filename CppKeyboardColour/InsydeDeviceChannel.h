@@ -15,7 +15,7 @@ class InsydeDeviceChannel
 	: public IDeviceChannel
 {
 public:
-	InsydeDeviceChannel();
+	InsydeDeviceChannel(std::shared_ptr<IDeviceChannel> pDbgChannel);
 	~InsydeDeviceChannel() override;
 
 	bool SendCode(uint32_t code) override;
@@ -24,6 +24,7 @@ public:
 private:
 	ColourFactory m_colourFactory{};
 	HMODULE m_hInsydeDHCU = nullptr;
+	std::shared_ptr<IDeviceChannel> m_pDbgChannel{};
 	Detail::T_SetDCHU_Data m_pfnSetDCHU_Data = nullptr;
 	Detail::T_WriteAppSettings m_pfnWriteAppSettings = nullptr;
 

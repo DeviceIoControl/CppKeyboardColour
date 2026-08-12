@@ -13,7 +13,7 @@ LightbarDevice::LightbarDevice(std::shared_ptr<IDeviceChannel> pDeviceChannel)
 bool LightbarDevice::SetColour(Zone zone, const Colour& colour)
 {
 	// Lightbar = 0xF3
-	return (zone == Zone::ALL && m_pDevChannel) ? m_pDevChannel->SendCode((0xF3 << 24ul) | m_colourFactory.Create(ColourFormat::B8R8G8, colour)) : false;
+	return (m_pDevChannel && zone == Zone::ALL) ? m_pDevChannel->SendCode((0xF3 << 24ul) | m_colourFactory.Create(ColourFormat::B8R8G8, colour)) : false;
 }
 
 uint64_t LightbarDevice::Query(QueryType queryType) 

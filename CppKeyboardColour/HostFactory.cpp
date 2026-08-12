@@ -49,15 +49,16 @@ namespace
 
 } // namespace
 
-HostFactory::HostFactory(std::unique_ptr<ModelIdRetriever> pModelIdRetriever)
-	: m_modelIdRetriever(std::move(pModelIdRetriever))
+HostFactory::HostFactory(std::unique_ptr<ModelIdRetriever> pModelIdRetriever, bool enableDebugging)
+	: m_modelIdRetriever(std::move(pModelIdRetriever)),
+	m_enableDebugging(enableDebugging)
 {
 	this->InitializeHostDeviceProperties();
 	this->InitializeDeviceFactory();
 }
 
-HostFactory::HostFactory(bool useFakeDevice /*= false*/)
-	: HostFactory(std::make_unique<ModelIdRetriever>(useFakeDevice))
+HostFactory::HostFactory(bool useDebugChannel /*= false*/, bool enableDebugging /*= false*/)
+	: HostFactory(std::make_unique<ModelIdRetriever>(useDebugChannel), enableDebugging)
 {
 }
 
@@ -91,10 +92,15 @@ void HostFactory::InitializeHostDeviceProperties()
 
 bool HostFactory::InitializeDeviceFactory()
 {
-	DeviceChannelFactory const devChannelFactory{};
+	DeviceChannelFactory const devChannelFactory{ m_enableDebugging };
 
 	m_modelId = m_modelIdRetriever->GetModelID();
 	m_devFactory = std::make_unique<DeviceFactory>(devChannelFactory.Create(this->GetDeviceChannelType(m_modelId)));
+
+	if (m_enableDebugging)
+	{
+		std::cout << "WARNING: DEBUG mode enabled! (Performance may be affected)\n\n";
+	}
 
 	return (m_modelId && m_devFactory);
 }
@@ -170,7 +176,7 @@ void HostFactory::InitializeTripleZoneKBs()
 
 void HostFactory::InitializeTripleZoneKBsWithPeripherals()
 {
-	m_modelIdToDevProps[MODEL_ID_FAKE].devices = DeviceMask::Keyboard | DeviceMask::Lightbar | DeviceMask::Logo;
-	m_modelIdToDevProps[MODEL_ID_FAKE].kbType = KeyboardType::TRIPLE_ZONE;
-	m_modelIdToDevProps[MODEL_ID_FAKE].deviceChannelType = DeviceChannelType::Fake;
+	m_modelIdToDevProps[MODEL_ID_DEBUG].devices = DeviceMask::Keyboard | DeviceMask::Lightbar | DeviceMask::Logo;
+	m_modelIdToDevProps[MODEL_ID_DEBUG].kbType = KeyboardType::TRIPLE_ZONE;
+	m_modelIdToDevProps[MODEL_ID_DEBUG].deviceChannelType = DeviceChannelType::Debug;
 }

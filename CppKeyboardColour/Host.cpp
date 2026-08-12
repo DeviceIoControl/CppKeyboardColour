@@ -82,9 +82,7 @@ bool Host::SetBacklightOn(DeviceMask devices)
 	}
 
 	ColourFactory const colourFactory{};
-	this->SetColour(devices, Zone::ALL, colourFactory.Create(0x00, 0x00, 0xFF));
-
-	return true;
+	return this->SetColour(devices, Zone::ALL, colourFactory.Create(0x00, 0x00, 0xFF));
 }
 
 bool Host::SetBacklightOff(DeviceMask devices)
@@ -95,9 +93,7 @@ bool Host::SetBacklightOff(DeviceMask devices)
 	}
 
 	Colour const offColour{};
-	this->SetColour(devices, Zone::ALL, offColour);
-
-	return true;
+	return this->SetColour(devices, Zone::ALL, offColour);
 }
 
 bool Host::SendDeviceCode(DeviceMask devices, uint32_t code)
@@ -135,7 +131,7 @@ bool Host::IsDeviceSendCodeCapable(std::shared_ptr<IDevice> pDevice) const
 
 	if (static_cast<DeviceChannelType>(pDevice->Query(QueryType::DeviceChannelType)) != DeviceChannelType::Wmi) 
 	{
-		std::wcout << L"'" << pDevice->GetName() << L"' does not support this operation.\n";
+		std::wcout << L"This " << pDevice->GetName() << L" does not support this operation.\n";
 		return false;
 	}
 

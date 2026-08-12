@@ -75,7 +75,7 @@
     <ClInclude Include="DeviceChannelFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FakeDeviceChannel.h">
+    <ClInclude Include="DebugDeviceChannel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FreshBreatheAnimation.h">
@@ -206,7 +206,7 @@
     <ClCompile Include="DeviceChannelFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FakeDeviceChannel.cpp">
+    <ClCompile Include="DebugDeviceChannel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="WmiDeviceChannel.cpp">

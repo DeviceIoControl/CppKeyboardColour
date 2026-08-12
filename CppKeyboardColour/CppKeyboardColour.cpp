@@ -8,7 +8,6 @@
 #include "ConsoleUtils.h"
 
 #pragma warning(disable: 4995)
-
 #define STATUS_NOT_IMPLEMENTED 0xC0000002
 
 int wmain(int argc, const wchar_t* argv[])
@@ -22,7 +21,10 @@ int wmain(int argc, const wchar_t* argv[])
 		return ERROR_ALREADY_EXISTS;
 	}
 
-	HostFactory hostFactory{ USE_DEBUG_DEVICE_CHANNEL };
+	const auto cmdLines = CommandLine::GetCommandLines(argc, argv);
+	auto const enableDebugOutput = CommandLine::Contains(L"--debug", cmdLines);
+
+	HostFactory hostFactory{ USE_DEBUG_DEVICE_CHANNEL, enableDebugOutput };
 	auto pHost = hostFactory.Create();
 
 	if (!pHost)
@@ -32,11 +34,9 @@ int wmain(int argc, const wchar_t* argv[])
 		return STATUS_NOT_IMPLEMENTED;
 	}
 
-	const auto cmdLines = CommandLine::GetCommandLines(argc, argv);
-	 
 	if (!CommandLine::ExclusiveContains({ L"theme", L"inbuilt", L"backlight", L"colour", L"colours" }, cmdLines))
 	{
-		std::cout << "Invalid command line. Command is: CLEVO_KeyboardColour.exe theme/inbuilt/backlight/colour [<themeName>/<hexColour>] [--once] [--speed] <speed>\n";
+		std::cout << "Invalid command line. Command is: CLEVO_KeyboardColour.exe theme/inbuilt/backlight/colour(s) [<themeName>/<hexColour>] [--once] [--speed] <speed>\n";
 		WaitForEnterIfNeeded();
 		return ERROR_INVALID_PARAMETER;
 	}

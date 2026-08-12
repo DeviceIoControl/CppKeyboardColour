@@ -10,7 +10,7 @@ class WmiDeviceChannel
 	: public IDeviceChannel
 {
 public:
-	WmiDeviceChannel();
+	WmiDeviceChannel(std::shared_ptr<IDeviceChannel> pDbgChannel);
 	~WmiDeviceChannel() = default;
 
 	bool SendCode(uint32_t code) override;
@@ -18,6 +18,7 @@ public:
 
 private:
 	WbemService m_wbemService{};
+	std::shared_ptr<IDeviceChannel> m_pDbgChannel{};
 	ScopedComPtr<IWbemClassObject> m_pDataParameter;
 	ScopedComPtr<IWbemClassObject> m_pClevoGetObject;
 };

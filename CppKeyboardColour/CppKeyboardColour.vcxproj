@@ -186,7 +186,7 @@
     <ClInclude Include="ColourTransformAnimation.h" />
     <ClInclude Include="CommandLine.h" />
     <ClInclude Include="ModelIds.h" />
-    <ClInclude Include="FakeDeviceChannel.h" />
+    <ClInclude Include="DebugDeviceChannel.h" />
     <ClInclude Include="FrameCollection.h" />
     <ClInclude Include="Colour.h" />
     <ClInclude Include="Frame.h" />
@@ -235,7 +235,7 @@
     <ClCompile Include="ColourTransformAnimation.cpp" />
     <ClCompile Include="CommandLine.cpp" />
     <ClCompile Include="ModelIdRetriever.cpp" />
-    <ClCompile Include="FakeDeviceChannel.cpp" />
+    <ClCompile Include="DebugDeviceChannel.cpp" />
     <ClCompile Include="FrameCollection.cpp" />
     <ClCompile Include="CppKeyboardColour.cpp" />
     <ClCompile Include="HeartbeatAnimation.cpp" />

@@ -4,12 +4,12 @@
 #include "IDeviceChannel.h"
 #include "ColourFactory.h"
 
-class FakeDeviceChannel
+class DebugDeviceChannel
 	: public IDeviceChannel
 {
 public:
-	FakeDeviceChannel() = default;
-	~FakeDeviceChannel() override = default;
+	DebugDeviceChannel() = default;
+	~DebugDeviceChannel() override = default;
 
 	bool SendCode(uint32_t code) override;
 	DeviceChannelType QueryType() const override;

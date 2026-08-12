@@ -8,7 +8,7 @@
 #include "IAnimation.h"
 #include "Host.h"
 
-class BreatheAnimation 
+class BreatheAnimation
 	: public IAnimation
 {
 public:

@@ -5,20 +5,25 @@
 
 #include "WmiDeviceChannel.h"
 #include "InsydeDeviceChannel.h"
-#include "FakeDeviceChannel.h"
+#include "DebugDeviceChannel.h"
+
+DeviceChannelFactory::DeviceChannelFactory(bool enableDebugging)
+	: m_pDbgChannel(enableDebugging ? std::make_shared<DebugDeviceChannel>() : nullptr)
+{
+}
 
 std::shared_ptr<IDeviceChannel> DeviceChannelFactory::Create(DeviceChannelType channelType) const
 {
 	switch (channelType)
 	{
-	case DeviceChannelType::Fake:
-		return std::make_shared<FakeDeviceChannel>();
+	case DeviceChannelType::Debug:
+		return m_pDbgChannel;
 
 	case DeviceChannelType::Wmi:
-		return std::make_shared<WmiDeviceChannel>();
+		return std::make_shared<WmiDeviceChannel>(m_pDbgChannel);
 
 	case DeviceChannelType::Insyde:
-		return std::make_shared<InsydeDeviceChannel>();
+		return std::make_shared<InsydeDeviceChannel>(m_pDbgChannel);
 	}
 
 	return nullptr;

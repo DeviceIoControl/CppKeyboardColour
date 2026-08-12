@@ -34,6 +34,8 @@ uint64_t KeyboardDevice::Query(QueryType queryType)
 	case QueryType::KeyboardType:
 		return xstd::to_underlying(m_kbType);
 	}
+
+	return 0;
 }
 
 bool KeyboardDevice::SendCode(uint32_t code)

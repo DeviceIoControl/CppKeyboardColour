@@ -36,7 +36,7 @@ std::optional<Frame> ColourShiftAnimation::GetFrame(uint32_t idx)
 
 bool ColourShiftAnimation::IsHostSupported(const IHost* pHost) const
 {
-	return pHost->GetKeyboardType() == KeyboardType::TRIPLE_ZONE;
+	return (pHost) ? pHost->GetKeyboardType() == KeyboardType::TRIPLE_ZONE : false;
 }
 
 uint32_t ColourShiftAnimation::Size() const 
