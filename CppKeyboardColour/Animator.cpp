@@ -23,7 +23,7 @@ bool Animator::Play(IAnimation* pAnimation, bool bShouldLoop)
 		return false;
 	}
 
-	std::wcout << L"Playing " << pAnimation->GetName() << L" animation...\n";
+	std::wcout << L"Playing " << pAnimation->GetName() << L" animation...\n\n";
 
 	do
 	{

@@ -4,25 +4,6 @@
 #include "KeyboardDevice.h"
 #include "DeviceMask.h"
 
-namespace
-{
-	std::ostream& operator<<(std::ostream& _Ostr, Zone zone)
-	{
-		switch (zone)
-		{
-		case Zone::LEFT:
-			return _Ostr << "Left";
-
-		case Zone::MID:
-			return _Ostr << "Middle";
-
-		case Zone::RIGHT:
-			return _Ostr << "Right";
-		}
-	}
-
-} // namespace
-
 KeyboardDevice::KeyboardDevice(KeyboardType kbType, std::shared_ptr<IDeviceChannel> pDeviceChannel)
 	: m_kbType(kbType),
 	m_pDevChannel(std::move(pDeviceChannel))
@@ -65,16 +46,6 @@ bool KeyboardDevice::SetKBZoneColour(Zone zone, const Colour& colour)
 	if (m_kbType == KeyboardType::NONE)
 	{
 		return false;
-	}
-
-	if (m_kbType == KeyboardType::FAKE)
-	{
-		std::cout << "Zone: " << zone << ", Colour: "
-			<< "(RED - 0x" << (void*)colour[INDEX_COLOUR_RED] << "), "
-			<< "(GREEN - 0x" << (void*)colour[INDEX_COLOUR_GREEN] << "), "
-			<< "(BLUE - 0x" << (void*)colour[INDEX_COLOUR_BLUE] << ") \n\n";
-
-		return true;
 	}
 
 	return (m_pDevChannel) ? m_pDevChannel->SendCode((xstd::to_underlying(zone) << 24ul) | m_colourFactory.Create(ColourFormat::B8R8G8, colour)) : false;

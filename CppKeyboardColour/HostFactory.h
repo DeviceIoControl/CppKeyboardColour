@@ -19,7 +19,7 @@ class HostFactory
 {
 public:
 	HostFactory(std::unique_ptr<ModelIdRetriever> pModelIdRetriever);
-	HostFactory();
+	HostFactory(bool useFakeDevice = false);
 
 	~HostFactory() = default;
 

@@ -25,3 +25,9 @@
 #pragma comment(lib, "wbemuuid.lib")
 
 #define IS_HANDLE_VALID(handle) (handle && handle != INVALID_HANDLE_VALUE)
+
+#ifdef _DEBUG
+#define USE_DEBUG_DEVICE_CHANNEL true
+#else
+#define USE_DEBUG_DEVICE_CHANNEL false
+#endif

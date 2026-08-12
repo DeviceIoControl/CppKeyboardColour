@@ -56,14 +56,19 @@ HostFactory::HostFactory(std::unique_ptr<ModelIdRetriever> pModelIdRetriever)
 	this->InitializeDeviceFactory();
 }
 
-HostFactory::HostFactory()
-	: HostFactory(std::make_unique<ModelIdRetriever>())
+HostFactory::HostFactory(bool useFakeDevice /*= false*/)
+	: HostFactory(std::make_unique<ModelIdRetriever>(useFakeDevice))
 {
 }
 
 std::unique_ptr<Host> HostFactory::Create()
 {
 	auto const hostDevices = this->GetHostDevices(m_modelId);
+
+	if (hostDevices == DeviceMask::Unknown)
+	{
+		return nullptr;
+	}
 
 	std::cout << "Detected Model ID: 0x" << (void*)m_modelId << "\n";
 	std::cout << "Host Devices: " << hostDevices << "\n";

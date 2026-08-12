@@ -22,7 +22,7 @@ int wmain(int argc, const wchar_t* argv[])
 		return ERROR_ALREADY_EXISTS;
 	}
 
-	HostFactory hostFactory{};
+	HostFactory hostFactory{ USE_DEBUG_DEVICE_CHANNEL };
 	auto pHost = hostFactory.Create();
 
 	if (!pHost)

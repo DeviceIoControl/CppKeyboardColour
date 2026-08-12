@@ -2,6 +2,7 @@
 
 #pragma once
 #include "IDeviceChannel.h"
+#include "ColourFactory.h"
 
 class FakeDeviceChannel
 	: public IDeviceChannel
@@ -12,4 +13,7 @@ public:
 
 	bool SendCode(uint32_t code) override;
 	DeviceChannelType QueryType() const override;
+
+private:
+	ColourFactory m_colourFactory{};
 };

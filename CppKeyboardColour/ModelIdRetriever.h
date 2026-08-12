@@ -10,13 +10,14 @@ namespace Detail
 class ModelIdRetriever
 {
 public:
-	ModelIdRetriever();
+	ModelIdRetriever(bool fakeDevice = false);
 
 	uint32_t GetModelID() const;
 
 	~ModelIdRetriever();
 
 private:
+	bool m_useFakeDevice = false;
 	HMODULE m_hGetProductDLL = nullptr;
 	Detail::T_GetProductID_PCI m_pfnGetProductID = nullptr;
 
