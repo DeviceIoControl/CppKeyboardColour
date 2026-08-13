@@ -5,6 +5,14 @@
 
 using millisec = std::chrono::milliseconds;
 
+namespace
+{
+	inline millisec to_ms(float time)
+	{
+		return millisec(static_cast<uint32_t>(time));
+	}
+} // namespace
+
 Animator::Animator(std::unique_ptr<IHost> pHost)
 	: m_pHost(std::move(pHost))
 {
@@ -12,7 +20,7 @@ Animator::Animator(std::unique_ptr<IHost> pHost)
 
 bool Animator::Play(IAnimation* pAnimation, bool bShouldLoop)
 {
-	if (!pAnimation)
+	if (!m_pHost || !pAnimation)
 	{
 		return false;
 	}
@@ -57,8 +65,7 @@ bool Animator::Animate(IAnimation* pAnimation)
 		if (const auto frame = pAnimation->GetFrame(i))
 		{
 			m_pHost->SetColour(frame->devices, frame->zone, frame->colour);
-			auto const frameSleep = static_cast<uint32_t>(frame->ms_time / m_speedFactor);
-			std::this_thread::sleep_for(millisec(frameSleep));
+			std::this_thread::sleep_for(to_ms(frame->ms_time / m_speedFactor));
 		}
 	}
 

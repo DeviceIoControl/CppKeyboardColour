@@ -12,7 +12,6 @@ constexpr size_t COLOUR_DURATION_MS = 3000;
 // 0xff6ea8 (255, 110, 168) - Sakura Pink
 // 0xff5f95 (255, 95, 149) - Sunset Pink
 // 0xdc46dc (220, 70, 220) - Pink Violet
-// 0xff6ea8 (255, 110, 168) - Sakura Pink
 //
 // 0xff6ea8 -> 0xff5f95 -> 0xdc46dc -> 0xff6ea8
 //
