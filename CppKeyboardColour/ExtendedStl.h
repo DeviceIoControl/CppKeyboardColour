@@ -69,6 +69,11 @@ namespace xstd
 		}
 	}
 
+	constexpr float lerp(float a, float b, float t) noexcept 
+	{
+		return static_cast<float>(t == 1 ? b : (t * b + (1 - t) * a));
+	}
+
 } // namespace xstd
 
 inline bool operator&(DeviceMask a, DeviceMask b) 

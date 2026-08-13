@@ -5,11 +5,6 @@
 #include "ColourFactory.h"
 #include "MathConstants.h"
 
-size_t FramePatternGenerator::CalculateDifference(size_t a, size_t b) const
-{
-	return std::max(a, b) - std::min(a, b);
-}
-
 FrameCollection FramePatternGenerator::GenerateAscendingPattern(DeviceMask devices, const Colour& targetColour, uint32_t steps, uint32_t stepTimeMs)
 {
 	FrameCollection frames{};
@@ -70,7 +65,7 @@ FrameCollection FramePatternGenerator::GenerateBreathe(DeviceMask devices, const
 	return frames;
 }
 
-FrameCollection FramePatternGenerator::GenerateColourTransform(DeviceMask devices, const Colour& startColour, const Colour& endColour, uint32_t steps, uint32_t stepTimeMs)
+FrameCollection FramePatternGenerator::GenerateColourBlend(DeviceMask devices, const Colour& startColour, const Colour& endColour, uint32_t steps, uint32_t stepTimeMs)
 {
 	FrameCollection frames{};
 
@@ -80,21 +75,7 @@ FrameCollection FramePatternGenerator::GenerateColourTransform(DeviceMask device
 
 		for (size_t channel = 0; channel < startColour.size(); ++channel)
 		{
-			size_t const difference = CalculateDifference(startColour[channel], endColour[channel]);
-
-			if (startColour[channel] < endColour[channel])
-			{
-				currentColour[channel] = startColour[channel] + ((difference / steps) * i);
-				continue;
-			}
-
-			if (startColour[channel] > endColour[channel])
-			{
-				currentColour[channel] = startColour[channel] - ((difference / steps) * i);
-				continue;
-			}
-
-			currentColour[channel] = endColour[channel];
+			currentColour[channel] = static_cast<uint8_t>(xstd::lerp(startColour[channel], endColour[channel], (1.0f / steps) * i));
 		}
 
 		frames.AddFrame(devices, Zone::ALL, currentColour, stepTimeMs);

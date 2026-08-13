@@ -12,5 +12,6 @@ public:
 	std::shared_ptr<IDeviceChannel> Create(DeviceChannelType channelType) const;
 
 private:
+	bool m_enableNativeChannelDbg = false;
 	std::shared_ptr<IDeviceChannel> m_pDbgChannel;
 };

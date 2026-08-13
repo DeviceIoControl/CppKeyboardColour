@@ -31,7 +31,7 @@ ModelIdRetriever::~ModelIdRetriever()
 	FreeLibrary(m_hGetProductDLL);
 }
 
-/* static */ uint32_t ModelIdRetriever::DoGetProductID(const Detail::T_GetProductID_PCI& fnGetProductID)
+/* static */ uint32_t ModelIdRetriever::DoGetProductID(Detail::T_GetProductID_PCI fnGetProductID)
 {
 	std::ignore = CoInitializeEx(nullptr, COINIT::COINIT_APARTMENTTHREADED);
 	std::ignore = CoInitializeEx(nullptr, COINIT::COINIT_APARTMENTTHREADED);

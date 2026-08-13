@@ -2,7 +2,6 @@
 
 #include "stdafx.h"
 #include "WmiDeviceChannel.h"
-#include "DebugDeviceChannel.h"
 
 #define CLEVO_WMI_OBJECT_NAME L"CLEVO_GET"
 #define CLEVO_WMI_KB_METHOD_NAME L"SetKBLED"
@@ -29,13 +28,13 @@ bool WmiDeviceChannel::SendCode(uint32_t code)
 	parameters.vt = VT_I4;
 	parameters.uintVal = code;
 
-	const auto hr = m_pDataParameter->Put((BSTR)L"Data", NULL, &parameters, CIM_UINT32);
-	std::ignore = m_wbemService.ExecuteMethod(CLEVO_WMI_INSTANCE_NAME, CLEVO_WMI_KB_METHOD_NAME, m_pDataParameter.Get());
-
 	if (m_pDbgChannel)
 	{
 		std::ignore = m_pDbgChannel->SendCode(code);
 	}
+
+	const auto hr = m_pDataParameter->Put((BSTR)L"Data", NULL, &parameters, CIM_UINT32);
+	std::ignore = m_wbemService.ExecuteMethod(CLEVO_WMI_INSTANCE_NAME, CLEVO_WMI_KB_METHOD_NAME, m_pDataParameter.Get());
 
 	return SUCCEEDED(hr);
 }

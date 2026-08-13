@@ -23,7 +23,7 @@ private:
 
 	// NOTE: GetProductID64 (A.K.A GetProductdll.dll) is buggy and unintializes COM multiples times,
 	// even though only one call to CoInitialize succeeds.
-	static uint32_t DoGetProductID(const Detail::T_GetProductID_PCI& fnGetProductID);
+	static uint32_t DoGetProductID(Detail::T_GetProductID_PCI fnGetProductID);
 
 	HMODULE LoadGetProductDLL() const;
 };

@@ -3,7 +3,6 @@
 #include "stdafx.h"
 #include "InsydeDeviceChannel.h"
 #include "ConsoleUtils.h"
-#include "DebugDeviceChannel.h"
 
 #define INSYDE_DLL L"InsydeDCHU.dll"
 

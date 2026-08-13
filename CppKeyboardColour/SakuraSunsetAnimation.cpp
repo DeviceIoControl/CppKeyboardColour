@@ -15,12 +15,12 @@ SakuraSunsetAnimation::SakuraSunsetAnimation()
 	auto const sakuraPink = factory.Create(255, 110, 168);
 	auto const sunsetPink = factory.Create(255, 95, 149);
 
-	auto const sakuraToSunset = m_patternGenerator.GenerateColourTransform(DeviceMask::Keyboard, sakuraPink, sunsetPink, FRAMES, FRAME_DURATION_MS);
+	auto const sakuraToSunset = m_patternGenerator.GenerateColourBlend(DeviceMask::Keyboard, sakuraPink, sunsetPink, FRAMES, FRAME_DURATION_MS);
 	m_frames.AddFrames(sakuraToSunset);
 
 	m_frames.AddFrame(DeviceMask::Keyboard, Zone::ALL, sunsetPink, COLOUR_DURATION_MS);
 
-	auto const sunsetToSakura = m_patternGenerator.GenerateColourTransform(DeviceMask::Keyboard, sunsetPink, sakuraPink, FRAMES, FRAME_DURATION_MS);
+	auto const sunsetToSakura = m_patternGenerator.GenerateColourBlend(DeviceMask::Keyboard, sunsetPink, sakuraPink, FRAMES, FRAME_DURATION_MS);
 	m_frames.AddFrames(sakuraToSunset);
 
 	m_frames.AddFrame(DeviceMask::Keyboard, Zone::ALL, sakuraPink, COLOUR_DURATION_MS);
