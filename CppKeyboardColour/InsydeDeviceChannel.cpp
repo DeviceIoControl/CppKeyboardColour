@@ -6,8 +6,7 @@
 
 #define INSYDE_DLL L"InsydeDCHU.dll"
 
-InsydeDeviceChannel::InsydeDeviceChannel(std::shared_ptr<IDeviceChannel> pDbgChannel) 
-	: m_pDbgChannel(std::move(pDbgChannel))
+InsydeDeviceChannel::InsydeDeviceChannel()
 {
 	m_hInsydeDHCU = LoadInsydeDCHU_DLL();
 
@@ -20,11 +19,6 @@ bool InsydeDeviceChannel::SendCode(uint32_t code)
 	if (!m_pfnSetDCHU_Data || !m_pfnWriteAppSettings)
 	{
 		return false;
-	}
-
-	if (m_pDbgChannel)
-	{
-		m_pDbgChannel->SendCode(code);
 	}
 
 	// Found in CLEVO Control Center v6.053

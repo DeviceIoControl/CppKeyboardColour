@@ -12,7 +12,7 @@
 
 int wmain(int argc, const wchar_t* argv[])
 {
-	std::cout << "CLEVO Keyboard Colours Tool 1.26.0709 - Created by DeviceIoControl.\n\n";
+	std::cout << "CLEVO Keyboard Colours Tool 1.26.0901 - Created by DeviceIoControl.\n\n";
 
 	if (!IsSingleInstance())
 	{
@@ -22,9 +22,9 @@ int wmain(int argc, const wchar_t* argv[])
 	}
 
 	const auto cmdLines = CommandLine::GetCommandLines(argc, argv);
-	auto const enableDebugOutput = CommandLine::Contains(L"--debug", cmdLines);
+	auto const enableDeviceMonitorMode = CommandLine::Contains(L"--dmm", cmdLines);
 
-	HostFactory hostFactory{ USE_DEBUG_DEVICE_CHANNEL, enableDebugOutput };
+	HostFactory hostFactory{ USE_DEBUG_DEVICE_CHANNEL, enableDeviceMonitorMode };
 	auto pHost = hostFactory.Create();
 
 	if (!pHost)

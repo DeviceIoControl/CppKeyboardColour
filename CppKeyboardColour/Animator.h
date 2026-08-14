@@ -10,7 +10,7 @@ class Animator
 public:
 	Animator(std::unique_ptr<IHost> pHost);
 
-	bool Play(IAnimation* pAnimation, bool bShouldLoop) ;
+	bool Play(IAnimation* pAnimation, bool bShouldLoop);
 	bool SetSpeedFactor(float factor);
 
 	~Animator() = default;
@@ -18,8 +18,6 @@ public:
 private:
 	float m_speedFactor = 1.0f;
 	std::unique_ptr<IHost> m_pHost;
-
-	void SetDeviceColour(DeviceMask devices, Zone zone, const Colour& colour);
 
 	bool Animate(IAnimation* pAnimation);
 };

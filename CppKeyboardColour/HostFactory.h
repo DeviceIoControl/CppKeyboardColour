@@ -18,8 +18,8 @@ struct HOST_DEVICE_PROPS
 class HostFactory 
 {
 public:
-	HostFactory(std::unique_ptr<ModelIdRetriever> pModelIdRetriever, bool enableDebugging);
-	HostFactory(bool useDebugChannel = false, bool enableDebugging = false);
+	HostFactory(std::unique_ptr<ModelIdRetriever> pModelIdRetriever, bool enableDeviceMonitoring);
+	HostFactory(bool useDbgChannel = false, bool enableDeviceMonitoring = false);
 
 	~HostFactory() = default;
 
@@ -27,7 +27,7 @@ public:
 
 private:
 	uint32_t m_modelId = 0;
-	bool m_enableDebugging = false;
+	bool m_enableDeviceMonitoring = false;
 	std::unique_ptr<ModelIdRetriever> m_modelIdRetriever;
 	std::map<uint32_t, HOST_DEVICE_PROPS> m_modelIdToDevProps{};
 	std::unique_ptr<DeviceFactory> m_devFactory{};

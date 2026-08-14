@@ -5,11 +5,11 @@
 #include "ModelIds.h"
 #include "DeviceChannelFactory.h"
 
-namespace 
+namespace
 {
-	std::ostream& operator<<(std::ostream& _Ostr, DeviceMask devices) 
+	std::ostream& operator<<(std::ostream& _Ostr, DeviceMask devices)
 	{
-		if (!!(devices & DeviceMask::Keyboard)) 
+		if (!!(devices & DeviceMask::Keyboard))
 		{
 			_Ostr << "[Keyboard] ";
 		}
@@ -27,9 +27,9 @@ namespace
 		return _Ostr;
 	}
 
-	std::ostream& operator<<(std::ostream& _Ostr, KeyboardType kbType) 
+	std::ostream& operator<<(std::ostream& _Ostr, KeyboardType kbType)
 	{
-		switch (kbType) 
+		switch (kbType)
 		{
 		case KeyboardType::FAKE:
 			return _Ostr << "Fake";
@@ -49,16 +49,16 @@ namespace
 
 } // namespace
 
-HostFactory::HostFactory(std::unique_ptr<ModelIdRetriever> pModelIdRetriever, bool enableDebugging)
+HostFactory::HostFactory(std::unique_ptr<ModelIdRetriever> pModelIdRetriever, bool enableDeviceMonitoring)
 	: m_modelIdRetriever(std::move(pModelIdRetriever)),
-	m_enableDebugging(enableDebugging)
+	m_enableDeviceMonitoring(enableDeviceMonitoring)
 {
 	this->InitializeHostDeviceProperties();
 	this->InitializeDeviceFactory();
 }
 
-HostFactory::HostFactory(bool useDebugChannel /*= false*/, bool enableDebugging /*= false*/)
-	: HostFactory(std::make_unique<ModelIdRetriever>(useDebugChannel), enableDebugging)
+HostFactory::HostFactory(bool useDebugChannel /*= false*/, bool enableDeviceMonitoring /*= false*/)
+	: HostFactory(std::make_unique<ModelIdRetriever>(useDebugChannel), enableDeviceMonitoring)
 {
 }
 
@@ -92,14 +92,18 @@ void HostFactory::InitializeHostDeviceProperties()
 
 bool HostFactory::InitializeDeviceFactory()
 {
-	DeviceChannelFactory const devChannelFactory{ m_enableDebugging };
+	DeviceChannelFactory const devChannelFactory{ m_enableDeviceMonitoring };
 
 	m_modelId = m_modelIdRetriever->GetModelID();
-	m_devFactory = std::make_unique<DeviceFactory>(devChannelFactory.Create(this->GetDeviceChannelType(m_modelId)));
 
-	if (m_enableDebugging)
+	if (auto const pDeviceChannel = devChannelFactory.Create(this->GetDeviceChannelType(m_modelId)))
 	{
-		std::cout << "WARNING: DEBUG mode enabled! (Performance may be affected)\n\n";
+		m_devFactory = std::make_unique<DeviceFactory>(pDeviceChannel);
+	}
+
+	if (m_enableDeviceMonitoring)
+	{
+		std::cout << "WARNING: Device monitor mode enabled! (Performance may be affected)\n\n";
 	}
 
 	return (m_modelId && m_devFactory);
@@ -166,7 +170,7 @@ void HostFactory::InitializeSingleZoneKBs()
 
 void HostFactory::InitializeTripleZoneKBs()
 {
-	for (auto const currentModelId : { MODEL_ID_P650RS_G }) 
+	for (auto const currentModelId : { MODEL_ID_P650RS_G })
 	{
 		m_modelIdToDevProps[currentModelId].devices = DeviceMask::Keyboard;
 		m_modelIdToDevProps[currentModelId].kbType = KeyboardType::TRIPLE_ZONE;

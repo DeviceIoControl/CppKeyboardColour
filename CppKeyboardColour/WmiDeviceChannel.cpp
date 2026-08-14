@@ -7,8 +7,7 @@
 #define CLEVO_WMI_KB_METHOD_NAME L"SetKBLED"
 #define CLEVO_WMI_INSTANCE_NAME L"CLEVO_GET.InstanceName='ACPI\\PNP0C14\\0_0'"
 
-WmiDeviceChannel::WmiDeviceChannel(std::shared_ptr<IDeviceChannel> pDbgChannel /*= nullptr*/)
-	: m_pDbgChannel(std::move(pDbgChannel))
+WmiDeviceChannel::WmiDeviceChannel()
 {
 	m_pClevoGetObject = m_wbemService.GetWbemClassObject(CLEVO_WMI_OBJECT_NAME);
 
@@ -27,11 +26,6 @@ bool WmiDeviceChannel::SendCode(uint32_t code)
 	VARIANT parameters = { 0 };
 	parameters.vt = VT_I4;
 	parameters.uintVal = code;
-
-	if (m_pDbgChannel)
-	{
-		std::ignore = m_pDbgChannel->SendCode(code);
-	}
 
 	const auto hr = m_pDataParameter->Put((BSTR)L"Data", NULL, &parameters, CIM_UINT32);
 	std::ignore = m_wbemService.ExecuteMethod(CLEVO_WMI_INSTANCE_NAME, CLEVO_WMI_KB_METHOD_NAME, m_pDataParameter.Get());
