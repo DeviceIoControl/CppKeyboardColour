@@ -27,7 +27,7 @@
 #define IS_HANDLE_VALID(handle) (handle && handle != INVALID_HANDLE_VALUE)
 
 #ifdef _DEBUG
-#define USE_DEBUG_DEVICE_CHANNEL true
+#define USE_DEBUGGABLE_HOST true
 #else
-#define USE_DEBUG_DEVICE_CHANNEL false
+#define USE_DEBUGGABLE_HOST false
 #endif

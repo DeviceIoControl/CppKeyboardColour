@@ -57,8 +57,8 @@ HostFactory::HostFactory(std::unique_ptr<ModelIdRetriever> pModelIdRetriever, bo
 	this->InitializeDeviceFactory();
 }
 
-HostFactory::HostFactory(bool useDebugChannel /*= false*/, bool enableDeviceMonitoring /*= false*/)
-	: HostFactory(std::make_unique<ModelIdRetriever>(useDebugChannel), enableDeviceMonitoring)
+HostFactory::HostFactory(bool useDbgChannel /*= false*/, bool enableDeviceMonitoring /*= false*/)
+	: HostFactory(std::make_unique<ModelIdRetriever>(useDbgChannel), enableDeviceMonitoring)
 {
 }
 
@@ -92,7 +92,7 @@ void HostFactory::InitializeHostDeviceProperties()
 
 bool HostFactory::InitializeDeviceFactory()
 {
-	DeviceChannelFactory const devChannelFactory{ m_enableDeviceMonitoring };
+	DeviceChannelFactory const devChannelFactory(this->GetKeyboardType(m_modelId), m_enableDeviceMonitoring);
 
 	m_modelId = m_modelIdRetriever->GetModelID();
 

@@ -29,6 +29,8 @@ uint64_t LogoDevice::Query(QueryType queryType)
 	case QueryType::DeviceChannelType:
 		return (m_pDevChannel) ? xstd::to_underlying(m_pDevChannel->QueryType()) : 0;
 	}
+
+	return 0;
 }
 
 bool LogoDevice::SendCode(uint32_t code) 

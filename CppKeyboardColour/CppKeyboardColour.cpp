@@ -24,7 +24,7 @@ int wmain(int argc, const wchar_t* argv[])
 	const auto cmdLines = CommandLine::GetCommandLines(argc, argv);
 	auto const enableDeviceMonitorMode = CommandLine::Contains(L"--dmm", cmdLines);
 
-	HostFactory hostFactory{ USE_DEBUG_DEVICE_CHANNEL, enableDeviceMonitorMode };
+	HostFactory hostFactory{ USE_DEBUGGABLE_HOST, enableDeviceMonitorMode };
 	auto pHost = hostFactory.Create();
 
 	if (!pHost)

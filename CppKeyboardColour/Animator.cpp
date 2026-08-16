@@ -55,11 +55,6 @@ bool Animator::SetSpeedFactor(float factor)
 
 bool Animator::Animate(IAnimation* pAnimation)
 {
-	if (!pAnimation)
-	{
-		return false;
-	}
-
 	for (size_t i = 0; i < pAnimation->Size(); ++i)
 	{
 		if (const auto frame = pAnimation->GetFrame(i))

@@ -16,10 +16,10 @@ bool DeviceChannel::SendCode(uint32_t code)
 		m_pDbgChannel->SendCode(code);
 	}
 
-	return m_pDevChannel->SendCode(code);
+	return (m_pDevChannel) ? m_pDevChannel->SendCode(code) : false;
 }
 
-DeviceChannelType DeviceChannel::QueryType() const 
+DeviceChannelType DeviceChannel::QueryType() const
 {
-	return m_pDevChannel->QueryType();
+	return (m_pDevChannel) ? m_pDevChannel->QueryType() : DeviceChannelType::None;
 }

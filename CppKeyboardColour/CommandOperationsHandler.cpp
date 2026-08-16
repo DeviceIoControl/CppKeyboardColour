@@ -10,6 +10,8 @@
 
 static DWORD DoBacklightOperation(std::unique_ptr<IHost> pHost, BacklightType backlight)
 {
+	// Somewhat unsafe, but pHost should always be valid before we get here.
+
 	if (backlight == BacklightType::Invalid)
 	{
 		return ERROR_INVALID_PARAMETER;
@@ -33,12 +35,14 @@ static DWORD DoBacklightOperation(std::unique_ptr<IHost> pHost, BacklightType ba
 
 static DWORD DoThemeOperation(std::unique_ptr<IHost> pHost, std::unique_ptr<IAnimation> pAnimation, const std::vector<std::wstring>& cmdLines)
 {
+	// Somewhat unsafe, but pHost should always be valid before we get here.
+
 	if (!pAnimation)
 	{
 		return ERROR_INVALID_PARAMETER;
 	}
 
-	Animator animator{ std::move(pHost) };
+	Animator animator(std::move(pHost));
 
 	// "--speed" command-line is only valid with an animation.
 	auto const speedFactor = ProcessSpeedCommandLine(cmdLines);
@@ -63,6 +67,8 @@ static DWORD DoThemeOperation(std::unique_ptr<IHost> pHost, std::unique_ptr<IAni
 
 static DWORD DoSystemAnimationOperation(std::unique_ptr<IHost> pHost, SystemAnimation sysAnimation)
 {
+	// Somewhat unsafe, but pHost should always be valid before we get here.
+
 	if (sysAnimation == SystemAnimation::KB_MODE_CUSTOM)
 	{
 		return ERROR_INVALID_PARAMETER;
@@ -76,6 +82,8 @@ static DWORD DoSystemAnimationOperation(std::unique_ptr<IHost> pHost, SystemAnim
 
 static DWORD DoUserColourOperation(std::unique_ptr<IHost> pHost, std::optional<Colour> colour)
 {
+	// Somewhat unsafe, but pHost should always be valid before we get here.
+
 	if (!colour.has_value())
 	{
 		return ERROR_INVALID_PARAMETER;

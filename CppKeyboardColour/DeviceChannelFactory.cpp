@@ -8,8 +8,8 @@
 #include "InsydeDeviceChannel.h"
 #include "DebugDeviceChannel.h"
 
-DeviceChannelFactory::DeviceChannelFactory(bool enableChannelMonitoring)
-	: m_pDbgChannel(std::make_shared<DebugDeviceChannel>()),
+DeviceChannelFactory::DeviceChannelFactory(KeyboardType kbType, bool enableChannelMonitoring)
+	: m_pDbgChannel(std::make_shared<DebugDeviceChannel>(kbType)),
 	m_enableChannelMonitoring(enableChannelMonitoring)
 {
 }
