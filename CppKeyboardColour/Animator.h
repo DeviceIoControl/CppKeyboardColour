@@ -5,7 +5,7 @@
 #include "IHost.h"
 #include "IAnimation.h"
 
-class Animator 
+class Animator
 {
 public:
 	Animator(std::unique_ptr<IHost> pHost);

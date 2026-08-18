@@ -4,7 +4,6 @@
 
 #include "stdafx.h"
 #include "Frame.h"
-#include "KeyboardType.h"
 
 class IHost;
 

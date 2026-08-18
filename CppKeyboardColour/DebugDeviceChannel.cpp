@@ -40,12 +40,15 @@ bool DebugDeviceChannel::SendCode(uint32_t code)
 
 	if (m_kbType == KeyboardType::TRIPLE_ZONE)
 	{
-		std::cout << "Keyboard Zone: " << static_cast<Zone>(zoneIdentifier) << ", ";
+		if (static_cast<uint8_t>(zoneIdentifier) >= 0xf0 && static_cast<uint8_t>(zoneIdentifier) <= 0xf2) 
+		{
+			std::cout << "Keyboard Zone: " << static_cast<Zone>(zoneIdentifier) << ", ";
+		}
 	}
 
 	if (m_kbType == KeyboardType::SINGLE_ZONE)
 	{
-		std::cout << (zoneIdentifier == Zone::LEFT) ? "Keyboard Zone: All, " : "Keyboard Zone: Unknown, ";
+		std::cout << ((zoneIdentifier == Zone::LEFT) ? "Keyboard Zone: All, " : "Keyboard Zone: Unknown, ");
 	}
 
 	if (static_cast<uint8_t>(zoneIdentifier) == 0xf3)

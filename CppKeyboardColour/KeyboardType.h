@@ -6,7 +6,6 @@
 enum class KeyboardType : uint16_t
 {
 	NONE,
-	FAKE,
 	TRIPLE_ZONE,
 	SINGLE_ZONE,
 	PER_KEY

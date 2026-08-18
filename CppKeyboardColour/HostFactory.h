@@ -36,6 +36,8 @@ private:
 
 	bool InitializeDeviceFactory();
 
+	void InitializeModelID();
+
 	std::vector<std::shared_ptr<IDevice>> CreateRequiredDevices(DeviceMask deviceTypes);
 	
 	KeyboardType GetKeyboardType(uint32_t modelId) const;

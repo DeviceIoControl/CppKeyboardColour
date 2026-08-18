@@ -31,9 +31,6 @@ namespace
 	{
 		switch (kbType)
 		{
-		case KeyboardType::FAKE:
-			return _Ostr << "Fake";
-
 		case KeyboardType::SINGLE_ZONE:
 			return _Ostr << "Single Zone";
 
@@ -54,6 +51,7 @@ HostFactory::HostFactory(std::unique_ptr<ModelIdRetriever> pModelIdRetriever, bo
 	m_enableDeviceMonitoring(enableDeviceMonitoring)
 {
 	this->InitializeHostDeviceProperties();
+	this->InitializeModelID();
 	this->InitializeDeviceFactory();
 }
 
@@ -90,11 +88,14 @@ void HostFactory::InitializeHostDeviceProperties()
 	this->InitializeTripleZoneKBsWithPeripherals();
 }
 
+void HostFactory::InitializeModelID() 
+{
+	m_modelId = m_modelIdRetriever->GetModelID();
+}
+
 bool HostFactory::InitializeDeviceFactory()
 {
 	DeviceChannelFactory const devChannelFactory(this->GetKeyboardType(m_modelId), m_enableDeviceMonitoring);
-
-	m_modelId = m_modelIdRetriever->GetModelID();
 
 	if (auto const pDeviceChannel = devChannelFactory.Create(this->GetDeviceChannelType(m_modelId)))
 	{
@@ -181,6 +182,6 @@ void HostFactory::InitializeTripleZoneKBs()
 void HostFactory::InitializeTripleZoneKBsWithPeripherals()
 {
 	m_modelIdToDevProps[MODEL_ID_DEBUG].devices = DeviceMask::Keyboard | DeviceMask::Lightbar | DeviceMask::Logo;
-	m_modelIdToDevProps[MODEL_ID_DEBUG].kbType = KeyboardType::TRIPLE_ZONE;
+	m_modelIdToDevProps[MODEL_ID_DEBUG].kbType = KeyboardType::SINGLE_ZONE;
 	m_modelIdToDevProps[MODEL_ID_DEBUG].deviceChannelType = DeviceChannelType::Debug;
 }

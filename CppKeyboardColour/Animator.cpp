@@ -3,13 +3,11 @@
 #include "stdafx.h"
 #include "Animator.h"
 
-using millisec = std::chrono::milliseconds;
-
 namespace
 {
-	inline millisec to_ms(float time)
+	inline std::chrono::milliseconds to_ms(float time)
 	{
-		return millisec(static_cast<uint32_t>(time));
+		return std::chrono::milliseconds(static_cast<uint32_t>(time));
 	}
 } // namespace
 
