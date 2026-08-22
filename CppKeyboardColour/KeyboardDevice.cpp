@@ -25,14 +25,14 @@ uint64_t KeyboardDevice::Query(QueryType queryType)
 {
 	switch (queryType)
 	{
-	case QueryType::DeviceChannelType:
-		return (m_pDevChannel) ? xstd::to_underlying(m_pDevChannel->QueryType()) : 0;
-
 	case QueryType::DeviceType:
 		return xstd::to_underlying(DeviceMask::Keyboard);
 
 	case QueryType::KeyboardType:
 		return xstd::to_underlying(m_kbType);
+
+	case QueryType::DeviceChannelType:
+		return (m_pDevChannel) ? xstd::to_underlying(m_pDevChannel->QueryType()) : 0;
 	}
 
 	return 0;
@@ -50,7 +50,8 @@ bool KeyboardDevice::SetKBZoneColour(Zone zone, const Colour& colour)
 		return false;
 	}
 
-	return (m_pDevChannel) ? m_pDevChannel->SendCode((xstd::to_underlying(zone) << 24ul) | m_colourFactory.Create(ColourFormat::B8R8G8, colour)) : false;
+	auto const code = (xstd::to_underlying(zone) << 24ul) | m_colourFactory.Create(ColourFormat::B8R8G8, colour);
+	return (m_pDevChannel) ? m_pDevChannel->SendCode(code) : false;
 }
 
 bool KeyboardDevice::SetFullKBColour(const Colour& colour)

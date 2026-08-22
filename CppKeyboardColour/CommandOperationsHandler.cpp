@@ -90,7 +90,7 @@ static DWORD DoUserColourOperation(std::unique_ptr<IHost> pHost, std::optional<C
 	}
 
 	std::cout << "Setting user provided colour...\n";
-	pHost->SetColour(DeviceMask::Keyboard,Zone::ALL, colour.value());
+	pHost->SetColour(DeviceMask::Keyboard, Zone::ALL, colour.value());
 
 	return 0;
 }
@@ -120,6 +120,27 @@ static DWORD DoUserColour3Operation(std::unique_ptr<IHost> pHost, const std::opt
 		auto const& colour = colours->at(i);
 		pHost->SetColour(DeviceMask::Keyboard, static_cast<Zone>(i), colour);
 	}
+
+	return 0;
+}
+
+static DWORD DoLightbarOperation(std::unique_ptr<IHost> pHost, const std::optional<Colour>& colour) 
+{
+	// Somewhat unsafe, but pHost should always be valid before we get here.
+
+	if (!colour.has_value())
+	{
+		return ERROR_INVALID_PARAMETER;
+	}
+
+	if (!(pHost->GetDevices() & DeviceMask::Lightbar)) 
+	{
+		std::cout << "This operation is not supported on this system.\n";
+		return ERROR_DEVICE_NOT_CONNECTED;
+	}
+
+	std::cout << "Setting user provided lightbar colour...\n";
+	pHost->SetColour(DeviceMask::Lightbar, Zone::ALL, colour.value());
 
 	return 0;
 }
@@ -158,6 +179,12 @@ DWORD DoCommandOperation(std::unique_ptr<IHost> pHost, const std::vector<std::ws
 	{
 		auto const userColours = ProcessColoursCommandLine(cmdLines);
 		return DoUserColour3Operation(std::move(pHost), userColours);
+	}
+	
+	case CmdOperation::Lightbar:
+	{
+		auto const lightbarColour = ProcessLightbarCommandLine(cmdLines);
+		return DoLightbarOperation(std::move(pHost), lightbarColour);
 	}
 
 	// The above code logic should ensure that we NEVER reach here.

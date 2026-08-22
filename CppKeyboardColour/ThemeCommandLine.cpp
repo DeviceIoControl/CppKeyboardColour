@@ -35,6 +35,11 @@ CmdOperation ProcessCmdOperation(const std::vector<std::wstring>& cmdLines)
 		return CmdOperation::UserColour3;
 	}
 
+	if (CommandLine::Contains(L"lightbar", cmdLines)) 
+	{
+		return CmdOperation::Lightbar;
+	}
+
 	return CmdOperation::FlagInvalid;
 }
 
@@ -140,6 +145,20 @@ std::optional<Colours> ProcessColoursCommandLine(const std::vector<std::wstring>
 			factory.Create(midZoneColour.value()),
 			factory.Create(rightZoneColour.value())
 		};
+	}
+
+	return std::nullopt;
+}
+
+std::optional<Colour> ProcessLightbarCommandLine(const std::vector<std::wstring>& cmdLines) 
+{
+	if (auto const afterCmdLine = CommandLine::GetCommandsAfter(L"lightbar", cmdLines); !afterCmdLine.empty())
+	{
+		if (auto const parsedColour = xstd::stoi(afterCmdLine[0], 16))
+		{
+			ColourFactory factory{};
+			return factory.Create(parsedColour.value());
+		}
 	}
 
 	return std::nullopt;

@@ -16,7 +16,7 @@ ScopedComPtr<IWbemClassObject> WbemService::GetWbemClassObject(const std::wstrin
 {
 	IWbemClassObject* pWbemClassObject = nullptr;
 	m_pWbemServices->GetObjectW((BSTR)strObjectPath.c_str(), NULL, nullptr, &pWbemClassObject, nullptr);
-
+	
 	return ScopedComPtr<IWbemClassObject>(pWbemClassObject);
 }
 

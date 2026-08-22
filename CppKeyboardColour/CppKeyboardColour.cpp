@@ -34,9 +34,9 @@ int wmain(int argc, const wchar_t* argv[])
 		return STATUS_NOT_IMPLEMENTED;
 	}
 
-	if (!CommandLine::ExclusiveContains({ L"theme", L"inbuilt", L"backlight", L"colour", L"colours" }, cmdLines))
+	if (!CommandLine::ExclusiveContains({ L"theme", L"inbuilt", L"backlight", L"colour", L"colours", L"lightbar" }, cmdLines))
 	{
-		std::cout << "Invalid command line. Command is: CLEVO_KeyboardColour.exe theme/inbuilt/backlight/colour(s) [<themeName>/<hexColour>] [--once] [--speed] <speed>\n";
+		std::cout << "Invalid command line. Command is: CLEVO_KeyboardColour.exe theme/inbuilt/backlight/lightbar/colour(s) [<themeName>/<hexColour>] [--once] [--speed] <speed>\n";
 		WaitForEnterIfNeeded();
 		return ERROR_INVALID_PARAMETER;
 	}

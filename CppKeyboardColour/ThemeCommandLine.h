@@ -11,7 +11,8 @@ enum class CmdOperation
 	InBuilt,
 	Backlight,
 	UserColour,
-	UserColour3
+	UserColour3,
+	Lightbar
 };
 
 enum class BacklightType
@@ -27,4 +28,5 @@ SystemAnimation ProcessSystemAnimationCommandLine(const std::vector<std::wstring
 std::unique_ptr<IAnimation> ProcessThemeCommandLine(const std::vector<std::wstring>& cmdLines);
 std::optional<Colour> ProcessColourCommandLine(const std::vector<std::wstring>& cmdLines);
 std::optional<Colours> ProcessColoursCommandLine(const std::vector<std::wstring>& cmdLines);
+std::optional<Colour> ProcessLightbarCommandLine(const std::vector<std::wstring>& cmdLines);
 float ProcessSpeedCommandLine(const std::vector<std::wstring>& cmdLines);
