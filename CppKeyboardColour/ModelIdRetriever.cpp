@@ -5,12 +5,13 @@
 #include "ModelIds.h"
 
 #define GET_PRODUCT_DLL L"GetProductID64.dll"
+#define FN_GETPRODUCT_NAME "GetProductID_PCI"
 
 ModelIdRetriever::ModelIdRetriever(bool useDebugModel /*= false*/)
 	: m_useDebugModel(useDebugModel)
 {
 	m_hGetProductDLL = LoadGetProductDLL();
-	m_pfnGetProductID = reinterpret_cast<Detail::T_GetProductID_PCI>(GetProcAddress(m_hGetProductDLL, "GetProductID_PCI"));
+	m_pfnGetProductID = reinterpret_cast<Detail::T_GetProductID_PCI>(GetProcAddress(m_hGetProductDLL, FN_GETPRODUCT_NAME));
 }
 
 uint32_t ModelIdRetriever::GetModelID() const
@@ -21,7 +22,7 @@ uint32_t ModelIdRetriever::GetModelID() const
 		// as this DLL (GetProductID64!GetProductID_PCI specifically) is buggy.
 		return std::async(std::launch::async, DoGetProductID, m_pfnGetProductID).get();
 	}
-
+	
 	return m_useDebugModel ? MODEL_ID_DEBUG : 0xFFFFFFFF;
 }
 

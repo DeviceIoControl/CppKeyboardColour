@@ -133,7 +133,7 @@ static DWORD DoLightbarOperation(std::unique_ptr<IHost> pHost, const std::option
 		return ERROR_INVALID_PARAMETER;
 	}
 
-	if (!(pHost->GetDevices() & DeviceMask::Lightbar)) 
+	if (!(pHost->GetDevices() & DeviceMask::Lightbar))
 	{
 		std::cout << "This operation is not supported on this system.\n";
 		return ERROR_DEVICE_NOT_CONNECTED;

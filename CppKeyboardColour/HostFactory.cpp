@@ -182,6 +182,6 @@ void HostFactory::InitializeTripleZoneKBs()
 void HostFactory::InitializeTripleZoneKBsWithPeripherals()
 {
 	m_modelIdToDevProps[MODEL_ID_DEBUG].devices = DeviceMask::Keyboard | DeviceMask::Lightbar | DeviceMask::Logo;
-	m_modelIdToDevProps[MODEL_ID_DEBUG].kbType = KeyboardType::SINGLE_ZONE;
+	m_modelIdToDevProps[MODEL_ID_DEBUG].kbType = KeyboardType::TRIPLE_ZONE;
 	m_modelIdToDevProps[MODEL_ID_DEBUG].deviceChannelType = DeviceChannelType::Debug;
 }
