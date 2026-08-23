@@ -209,6 +209,7 @@
     <ClInclude Include="LightbarDevice.h" />
     <ClInclude Include="LogoDevice.h" />
     <ClInclude Include="MathConstants.h" />
+    <ClInclude Include="ModelIdTranslator.h" />
     <ClInclude Include="PinkBreatheAnimation.h" />
     <ClInclude Include="PulsatingBlinkAnimation.h" />
     <ClInclude Include="resource.h" />
@@ -252,6 +253,7 @@
     <ClCompile Include="CommandOperationsHandler.cpp" />
     <ClCompile Include="LightbarDevice.cpp" />
     <ClCompile Include="LogoDevice.cpp" />
+    <ClCompile Include="ModelIdTranslator.cpp" />
     <ClCompile Include="PinkBreatheAnimation.cpp" />
     <ClCompile Include="PulsatingBlinkAnimation.cpp" />
     <ClCompile Include="SunsetBreatheAnimation.cpp" />

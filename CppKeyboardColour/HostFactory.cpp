@@ -2,7 +2,6 @@
 
 #include "stdafx.h"
 #include "HostFactory.h"
-#include "ModelIds.h"
 #include "DeviceChannelFactory.h"
 
 namespace
@@ -46,23 +45,23 @@ namespace
 
 } // namespace
 
-HostFactory::HostFactory(std::unique_ptr<ModelIdRetriever> pModelIdRetriever, bool enableDeviceMonitoring)
+HostFactory::HostFactory(std::unique_ptr<ModelIdRetriever> pModelIdRetriever, std::unique_ptr<ModelIdTranslator> pModelIdTranslator, bool enableDeviceMonitoring)
 	: m_modelIdRetriever(std::move(pModelIdRetriever)),
+	m_modelIdTranslator(std::move(pModelIdTranslator)),
 	m_enableDeviceMonitoring(enableDeviceMonitoring)
 {
-	this->InitializeHostDeviceProperties();
 	this->InitializeModelID();
 	this->InitializeDeviceFactory();
 }
 
 HostFactory::HostFactory(bool useDbgChannel /*= false*/, bool enableDeviceMonitoring /*= false*/)
-	: HostFactory(std::make_unique<ModelIdRetriever>(useDbgChannel), enableDeviceMonitoring)
+	: HostFactory(std::make_unique<ModelIdRetriever>(useDbgChannel), std::make_unique<ModelIdTranslator>(), enableDeviceMonitoring)
 {
 }
 
 std::unique_ptr<Host> HostFactory::Create()
 {
-	auto const hostDevices = this->GetHostDevices(m_modelId);
+	auto const hostDevices = m_modelIdTranslator->GetHostDevices(m_modelId);
 
 	if (hostDevices == DeviceMask::Unknown)
 	{
@@ -74,30 +73,23 @@ std::unique_ptr<Host> HostFactory::Create()
 
 	if (!!(hostDevices & DeviceMask::Keyboard))
 	{
-		std::cout << "Keyboard Type: " << this->GetKeyboardType(m_modelId) << "\n\n";
+		std::cout << "Keyboard Type: " << m_modelIdTranslator->GetKeyboardType(m_modelId) << "\n\n";
 	}
 
 	auto const devices = this->CreateRequiredDevices(hostDevices);
 	return std::make_unique<Host>(m_modelId, devices);
 }
 
-void HostFactory::InitializeHostDeviceProperties()
-{
-	this->InitializeSingleZoneKBs();
-	this->InitializeTripleZoneKBs();
-	this->InitializeTripleZoneKBsWithPeripherals();
-}
-
-void HostFactory::InitializeModelID() 
+void HostFactory::InitializeModelID()
 {
 	m_modelId = m_modelIdRetriever->GetModelID();
 }
 
 bool HostFactory::InitializeDeviceFactory()
 {
-	DeviceChannelFactory const devChannelFactory(this->GetKeyboardType(m_modelId), m_enableDeviceMonitoring);
+	DeviceChannelFactory const devChannelFactory(m_modelIdTranslator->GetKeyboardType(m_modelId), m_enableDeviceMonitoring);
 
-	if (auto const pDeviceChannel = devChannelFactory.Create(this->GetDeviceChannelType(m_modelId)))
+	if (auto const pDeviceChannel = devChannelFactory.Create(m_modelIdTranslator->GetDeviceChannelType(m_modelId)))
 	{
 		m_devFactory = std::make_unique<DeviceFactory>(pDeviceChannel);
 	}
@@ -116,7 +108,7 @@ std::vector<std::shared_ptr<IDevice>> HostFactory::CreateRequiredDevices(DeviceM
 
 	if (!!(deviceTypes & DeviceMask::Keyboard))
 	{
-		auto const keyboardType = this->GetKeyboardType(m_modelId);
+		auto const keyboardType = m_modelIdTranslator->GetKeyboardType(m_modelId);
 		devices.emplace_back(m_devFactory->CreateKeyboard(keyboardType));
 	}
 
@@ -131,57 +123,4 @@ std::vector<std::shared_ptr<IDevice>> HostFactory::CreateRequiredDevices(DeviceM
 	}
 
 	return devices;
-}
-
-KeyboardType HostFactory::GetKeyboardType(uint32_t modelId) const
-{
-	auto const result = m_modelIdToDevProps.find(modelId);
-	return (result != m_modelIdToDevProps.cend()) ? result->second.kbType : KeyboardType::NONE;
-}
-
-DeviceChannelType HostFactory::GetDeviceChannelType(uint32_t modelId) const
-{
-	auto const result = m_modelIdToDevProps.find(modelId);
-	return (result != m_modelIdToDevProps.cend()) ? result->second.deviceChannelType : DeviceChannelType::None;
-}
-
-DeviceMask HostFactory::GetHostDevices(uint32_t modelId) const
-{
-	auto const result = m_modelIdToDevProps.find(modelId);
-	return (result != m_modelIdToDevProps.cend()) ? result->second.devices : DeviceMask::Unknown;
-}
-
-void HostFactory::InitializeSingleZoneKBs()
-{
-	std::array<uint32_t, 9> constexpr SINGLE_ZONE_INSYDE_MODEL_IDS
-	{
-		MODEL_ID_NP50RXX, MODEL_ID_NH70XX, MODEL_ID_NKNP50XX,
-		MODEL_ID_PC50DXX, MODEL_ID_A715XX, MODEL_ID_NP50SXX,
-		MODEL_ID_CV15XX, MODEL_ID_NP60SXX, MODEL_ID_V360EXX
-		//, MODEL_ID_NH77XX
-	};
-
-	for (auto const currentModelId : SINGLE_ZONE_INSYDE_MODEL_IDS)
-	{
-		m_modelIdToDevProps[currentModelId].devices = DeviceMask::Keyboard;
-		m_modelIdToDevProps[currentModelId].kbType = KeyboardType::SINGLE_ZONE;
-		m_modelIdToDevProps[currentModelId].deviceChannelType = DeviceChannelType::Insyde;
-	}
-}
-
-void HostFactory::InitializeTripleZoneKBs()
-{
-	for (auto const currentModelId : { MODEL_ID_P650RS_G })
-	{
-		m_modelIdToDevProps[currentModelId].devices = DeviceMask::Keyboard;
-		m_modelIdToDevProps[currentModelId].kbType = KeyboardType::TRIPLE_ZONE;
-		m_modelIdToDevProps[currentModelId].deviceChannelType = DeviceChannelType::Wmi;
-	}
-}
-
-void HostFactory::InitializeTripleZoneKBsWithPeripherals()
-{
-	m_modelIdToDevProps[MODEL_ID_DEBUG].devices = DeviceMask::Keyboard | DeviceMask::Lightbar | DeviceMask::Logo;
-	m_modelIdToDevProps[MODEL_ID_DEBUG].kbType = KeyboardType::TRIPLE_ZONE;
-	m_modelIdToDevProps[MODEL_ID_DEBUG].deviceChannelType = DeviceChannelType::Debug;
 }
