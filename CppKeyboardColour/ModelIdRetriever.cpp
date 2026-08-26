@@ -20,7 +20,7 @@ uint32_t ModelIdRetriever::GetModelID() const
 	{
 		// Call this function on a seperate thread to avoid causing COM issues on our thread
 		// as this DLL (GetProductID64!GetProductID_PCI specifically) is buggy.
-		return std::async(std::launch::async, DoGetProductID, m_pfnGetProductID).get();
+		return std::async(std::launch::async, GetProductIDWorker, m_pfnGetProductID).get();
 	}
 	
 	return m_useDebugModel ? MODEL_ID_DEBUG : 0xFFFFFFFF;
@@ -32,9 +32,8 @@ ModelIdRetriever::~ModelIdRetriever()
 	FreeLibrary(m_hGetProductDLL);
 }
 
-/* static */ uint32_t ModelIdRetriever::DoGetProductID(Detail::T_GetProductID_PCI fnGetProductID)
+/* static */ uint32_t ModelIdRetriever::GetProductIDWorker(Detail::T_GetProductID_PCI fnGetProductID)
 {
-	std::ignore = CoInitializeEx(nullptr, COINIT::COINIT_APARTMENTTHREADED);
 	std::ignore = CoInitializeEx(nullptr, COINIT::COINIT_APARTMENTTHREADED);
 
 	return fnGetProductID();

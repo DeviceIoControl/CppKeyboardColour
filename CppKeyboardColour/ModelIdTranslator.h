@@ -19,9 +19,7 @@ public:
 	~ModelIdTranslator() = default;
 
 	KeyboardType GetKeyboardType(uint32_t modelId) const;
-
 	DeviceChannelType GetDeviceChannelType(uint32_t modelId) const;
-
 	DeviceMask GetHostDevices(uint32_t modelId) const;
 
 private:

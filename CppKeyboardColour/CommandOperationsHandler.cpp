@@ -189,7 +189,8 @@ DWORD DoCommandOperation(std::unique_ptr<IHost> pHost, const std::vector<std::ws
 
 	// The above code logic should ensure that we NEVER reach here.
 	default:
-		return ERROR_FAIL_FAST_EXCEPTION;
+		std::cout << "An invalid command was provided.\n";
+		return ERROR_INVALID_OPERATION;
 	}
 
 	std::cout << "Exiting...\n";

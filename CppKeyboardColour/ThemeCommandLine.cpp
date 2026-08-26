@@ -8,41 +8,6 @@
 #include "AnimationFactory.h"
 #include "SystemAnimationTranslator.h"
 
-CmdOperation ProcessCmdOperation(const std::vector<std::wstring>& cmdLines)
-{
-	if (CommandLine::Contains(L"inbuilt", cmdLines))
-	{
-		return CmdOperation::InBuilt;
-	}
-
-	if (CommandLine::Contains(L"theme", cmdLines))
-	{
-		return CmdOperation::Animation;
-	}
-
-	if (CommandLine::Contains(L"backlight", cmdLines))
-	{
-		return CmdOperation::Backlight;
-	}
-
-	if (CommandLine::Contains(L"colour", cmdLines))
-	{
-		return CmdOperation::UserColour;
-	}
-
-	if (CommandLine::Contains(L"colours", cmdLines))
-	{
-		return CmdOperation::UserColour3;
-	}
-
-	if (CommandLine::Contains(L"lightbar", cmdLines)) 
-	{
-		return CmdOperation::Lightbar;
-	}
-
-	return CmdOperation::FlagInvalid;
-}
-
 BacklightType ProcessBacklightCommandLine(const std::vector<std::wstring>& cmdLines)
 {
 	auto const ourCmds = CommandLine::GetCommandsAfter(L"backlight", cmdLines);
@@ -129,6 +94,11 @@ std::optional<Colours> ProcessColoursCommandLine(const std::vector<std::wstring>
 {
 	if (auto const afterCmdLine = CommandLine::GetCommandsAfter(L"colours", cmdLines); !afterCmdLine.empty())
 	{
+		if (afterCmdLine.size() < 3)
+		{
+			return std::nullopt;
+		}
+
 		auto const leftZoneColour = xstd::stoi(afterCmdLine[0], 16);
 		auto const midZoneColour = xstd::stoi(afterCmdLine[1], 16);
 		auto const rightZoneColour = xstd::stoi(afterCmdLine[2], 16);
@@ -168,8 +138,48 @@ float ProcessSpeedCommandLine(const std::vector<std::wstring>& cmdLines)
 {
 	if (auto const afterCmdLine = CommandLine::GetCommandsAfter(L"--speed", cmdLines); !afterCmdLine.empty())
 	{
-		return xstd::stoi(afterCmdLine[0]).value_or(1.0f) / 100.0f;
+		if (auto const val = xstd::stoi(afterCmdLine[0]))
+		{
+			return val.value() / 100.0f;
+		}
+
+		std::cout << "Failed to parse speed input! Fallback to default speed.\n";
 	}
 
 	return 1.0f; // default speed
+}
+
+CmdOperation ProcessCmdOperation(const std::vector<std::wstring>& cmdLines)
+{
+	if (CommandLine::Contains(L"inbuilt", cmdLines))
+	{
+		return CmdOperation::InBuilt;
+	}
+
+	if (CommandLine::Contains(L"theme", cmdLines))
+	{
+		return CmdOperation::Animation;
+	}
+
+	if (CommandLine::Contains(L"backlight", cmdLines))
+	{
+		return CmdOperation::Backlight;
+	}
+
+	if (CommandLine::Contains(L"colour", cmdLines))
+	{
+		return CmdOperation::UserColour;
+	}
+
+	if (CommandLine::Contains(L"colours", cmdLines))
+	{
+		return CmdOperation::UserColour3;
+	}
+
+	if (CommandLine::Contains(L"lightbar", cmdLines))
+	{
+		return CmdOperation::Lightbar;
+	}
+
+	return CmdOperation::FlagInvalid;
 }

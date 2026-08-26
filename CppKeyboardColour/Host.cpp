@@ -123,13 +123,15 @@ bool Host::SendDeviceCode(DeviceMask devices, uint32_t code)
 
 bool Host::IsDeviceSendCodeCapable(std::shared_ptr<IDevice> pDevice) const 
 {
-	if (!pDevice) 
+	if (!pDevice)
 	{
 		std::cout << "Cannot communicate with the requested device.\n";
 		return false;
 	} 
 
-	if (static_cast<DeviceChannelType>(pDevice->Query(QueryType::DeviceChannelType)) != DeviceChannelType::Wmi) 
+	auto const deviceChannelType = static_cast<DeviceChannelType>(pDevice->Query(QueryType::DeviceChannelType));
+
+	if (deviceChannelType != DeviceChannelType::Wmi)
 	{
 		std::wcout << L"This " << pDevice->GetName() << L" does not support this operation.\n";
 		return false;

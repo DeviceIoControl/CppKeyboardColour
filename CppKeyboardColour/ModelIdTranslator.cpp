@@ -29,7 +29,6 @@ DeviceMask ModelIdTranslator::GetHostDevices(uint32_t modelId) const
 	return (result != m_modelIdToDevProps.cend()) ? result->second.devices : DeviceMask::Unknown;
 }
 
-
 void ModelIdTranslator::InitializeSingleZoneKBs()
 {
 	std::array constexpr SINGLE_ZONE_INSYDE_MODEL_IDS
