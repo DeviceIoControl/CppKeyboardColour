@@ -13,7 +13,7 @@ LightbarDevice::LightbarDevice(std::shared_ptr<IDeviceChannel> pDeviceChannel)
 bool LightbarDevice::SetColour(Zone zone, const Colour& colour)
 {
 	// Lightbar = 0xF3
-	auto const code = (0xF3 << 24ul) | m_colourFactory.Create(ColourFormat::B8R8G8, colour);
+	const auto code = (0xF3 << 24ul) | m_colourFactory.Create(ColourFormat::B8R8G8, colour);
 	return (m_pDevChannel && zone == Zone::ALL) ? m_pDevChannel->SendCode(code) : false;
 }
 

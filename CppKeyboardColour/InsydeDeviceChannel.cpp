@@ -49,7 +49,7 @@ InsydeDeviceChannel::~InsydeDeviceChannel()
 
 HMODULE InsydeDeviceChannel::LoadInsydeDCHU_DLL() const
 {
-	auto const hModule = LoadLibraryW(INSYDE_DLL);
+	const auto hModule = LoadLibraryW(INSYDE_DLL);
 
 	if (!hModule || hModule == INVALID_HANDLE_VALUE)
 	{

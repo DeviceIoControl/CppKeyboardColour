@@ -11,10 +11,10 @@ SunsetBreatheAnimation::SunsetBreatheAnimation()
 {
 	ColourFactory factory{};
 
-	auto const sunsetPink = factory.Create(255, 95, 149);
+	const auto sunsetPink = factory.Create(255, 95, 149);
 
-	auto const ascendPattern = m_patternGenerator.GenerateAscendingPattern(DeviceMask::Keyboard, sunsetPink, FRAMES, FRAME_DURATION_MS);
-	auto const descendPattern = m_patternGenerator.GenerateDescendingPattern(DeviceMask::Keyboard, sunsetPink, FRAMES, FRAME_DURATION_MS);
+	const auto ascendPattern = m_patternGenerator.GenerateAscendingPattern(DeviceMask::Keyboard, sunsetPink, FRAMES, FRAME_DURATION_MS);
+	const auto descendPattern = m_patternGenerator.GenerateDescendingPattern(DeviceMask::Keyboard, sunsetPink, FRAMES, FRAME_DURATION_MS);
 
 	m_frames.AddFrames(ascendPattern);
 	m_frames.AddFrame(DeviceMask::Keyboard, Zone::ALL, sunsetPink, 4000);

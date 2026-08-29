@@ -10,7 +10,7 @@
 
 BacklightType ProcessBacklightCommandLine(const std::vector<std::wstring>& cmdLines)
 {
-	auto const ourCmds = CommandLine::GetCommandsAfter(L"backlight", cmdLines);
+	const auto ourCmds = CommandLine::GetCommandsAfter(L"backlight", cmdLines);
 
 	if (ourCmds.empty())
 	{
@@ -36,7 +36,7 @@ BacklightType ProcessBacklightCommandLine(const std::vector<std::wstring>& cmdLi
 SystemAnimation ProcessSystemAnimationCommandLine(const std::vector<std::wstring>& cmdLines)
 {
 	SystemAnimationTranslator const sysAnimTranslator{};
-	auto const ourCmds = CommandLine::GetCommandsAfter(L"inbuilt", cmdLines);
+	const auto ourCmds = CommandLine::GetCommandsAfter(L"inbuilt", cmdLines);
 
 	if (ourCmds.empty())
 	{
@@ -44,7 +44,7 @@ SystemAnimation ProcessSystemAnimationCommandLine(const std::vector<std::wstring
 		return SystemAnimation::KB_MODE_CUSTOM;
 	}
 
-	auto const sysAnimation = sysAnimTranslator.Translate(ourCmds.front());
+	const auto sysAnimation = sysAnimTranslator.Translate(ourCmds.front());
 
 	if (sysAnimation == SystemAnimation::KB_MODE_CUSTOM)
 	{
@@ -56,7 +56,7 @@ SystemAnimation ProcessSystemAnimationCommandLine(const std::vector<std::wstring
 
 std::unique_ptr<IAnimation> ProcessThemeCommandLine(const std::vector<std::wstring>& cmdLines)
 {
-	auto const ourCmds = CommandLine::GetCommandsAfter(L"theme", cmdLines);
+	const auto ourCmds = CommandLine::GetCommandsAfter(L"theme", cmdLines);
 
 	if (ourCmds.empty())
 	{
@@ -78,9 +78,9 @@ std::unique_ptr<IAnimation> ProcessThemeCommandLine(const std::vector<std::wstri
 
 std::optional<Colour> ProcessColourCommandLine(const std::vector<std::wstring>& cmdLines)
 {
-	if (auto const afterCmdLine = CommandLine::GetCommandsAfter(L"colour", cmdLines); !afterCmdLine.empty())
+	if (const auto afterCmdLine = CommandLine::GetCommandsAfter(L"colour", cmdLines); !afterCmdLine.empty())
 	{
-		if (auto const parsedColour = xstd::stoi(afterCmdLine[0], 16))
+		if (const auto parsedColour = xstd::stoi(afterCmdLine[0], 16))
 		{
 			ColourFactory factory{};
 			return factory.Create(parsedColour.value());
@@ -92,16 +92,16 @@ std::optional<Colour> ProcessColourCommandLine(const std::vector<std::wstring>& 
 
 std::optional<Colours> ProcessColoursCommandLine(const std::vector<std::wstring>& cmdLines)
 {
-	if (auto const afterCmdLine = CommandLine::GetCommandsAfter(L"colours", cmdLines); !afterCmdLine.empty())
+	if (const auto afterCmdLine = CommandLine::GetCommandsAfter(L"colours", cmdLines); !afterCmdLine.empty())
 	{
 		if (afterCmdLine.size() < 3)
 		{
 			return std::nullopt;
 		}
 
-		auto const leftZoneColour = xstd::stoi(afterCmdLine[0], 16);
-		auto const midZoneColour = xstd::stoi(afterCmdLine[1], 16);
-		auto const rightZoneColour = xstd::stoi(afterCmdLine[2], 16);
+		const auto leftZoneColour = xstd::stoi(afterCmdLine[0], 16);
+		const auto midZoneColour = xstd::stoi(afterCmdLine[1], 16);
+		const auto rightZoneColour = xstd::stoi(afterCmdLine[2], 16);
 
 		if (!leftZoneColour.has_value() || !midZoneColour.has_value() || !rightZoneColour.has_value())
 		{
@@ -122,9 +122,9 @@ std::optional<Colours> ProcessColoursCommandLine(const std::vector<std::wstring>
 
 std::optional<Colour> ProcessLightbarCommandLine(const std::vector<std::wstring>& cmdLines) 
 {
-	if (auto const afterCmdLine = CommandLine::GetCommandsAfter(L"lightbar", cmdLines); !afterCmdLine.empty())
+	if (const auto afterCmdLine = CommandLine::GetCommandsAfter(L"lightbar", cmdLines); !afterCmdLine.empty())
 	{
-		if (auto const parsedColour = xstd::stoi(afterCmdLine[0], 16))
+		if (const auto parsedColour = xstd::stoi(afterCmdLine[0], 16))
 		{
 			ColourFactory factory{};
 			return factory.Create(parsedColour.value());
@@ -136,9 +136,9 @@ std::optional<Colour> ProcessLightbarCommandLine(const std::vector<std::wstring>
 
 float ProcessSpeedCommandLine(const std::vector<std::wstring>& cmdLines)
 {
-	if (auto const afterCmdLine = CommandLine::GetCommandsAfter(L"--speed", cmdLines); !afterCmdLine.empty())
+	if (const auto afterCmdLine = CommandLine::GetCommandsAfter(L"--speed", cmdLines); !afterCmdLine.empty())
 	{
-		if (auto const val = xstd::stoi(afterCmdLine[0]))
+		if (const auto val = xstd::stoi(afterCmdLine[0]))
 		{
 			return val.value() / 100.0f;
 		}

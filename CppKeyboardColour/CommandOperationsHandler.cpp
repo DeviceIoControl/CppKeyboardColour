@@ -45,7 +45,7 @@ static DWORD DoThemeOperation(std::unique_ptr<IHost> pHost, std::unique_ptr<IAni
 	Animator animator(std::move(pHost));
 
 	// "--speed" command-line is only valid with an animation.
-	auto const speedFactor = ProcessSpeedCommandLine(cmdLines);
+	const auto speedFactor = ProcessSpeedCommandLine(cmdLines);
 
 	if (!animator.SetSpeedFactor(speedFactor))
 	{
@@ -59,7 +59,7 @@ static DWORD DoThemeOperation(std::unique_ptr<IHost> pHost, std::unique_ptr<IAni
 		std::cout << "Custom speed: " << (100 * speedFactor) << "%\n";
 	}
 
-	auto const bShouldLoop = !CommandLine::Contains(L"--once", cmdLines);
+	const auto bShouldLoop = !CommandLine::Contains(L"--once", cmdLines);
 	animator.Play(pAnimation.get(), bShouldLoop);
 
 	return 0;
@@ -117,7 +117,7 @@ static DWORD DoUserColour3Operation(std::unique_ptr<IHost> pHost, const std::opt
 
 	for (size_t i = 0; i < colours->size(); ++i)
 	{
-		auto const& colour = colours->at(i);
+		const auto& colour = colours->at(i);
 		pHost->SetColour(DeviceMask::Keyboard, static_cast<Zone>(i), colour);
 	}
 
@@ -159,31 +159,31 @@ DWORD DoCommandOperation(std::unique_ptr<IHost> pHost, const std::vector<std::ws
 
 	case CmdOperation::InBuilt:
 	{
-		auto const sysAnimation = ProcessSystemAnimationCommandLine(cmdLines);
+		const auto sysAnimation = ProcessSystemAnimationCommandLine(cmdLines);
 		return DoSystemAnimationOperation(std::move(pHost), sysAnimation);
 	}
 
 	case CmdOperation::Backlight:
 	{
-		auto const backlight = ProcessBacklightCommandLine(cmdLines);
+		const auto backlight = ProcessBacklightCommandLine(cmdLines);
 		return DoBacklightOperation(std::move(pHost), backlight);
 	}
 
 	case CmdOperation::UserColour:
 	{
-		auto const userColour = ProcessColourCommandLine(cmdLines);
+		const auto userColour = ProcessColourCommandLine(cmdLines);
 		return DoUserColourOperation(std::move(pHost), userColour);
 	}
 
 	case CmdOperation::UserColour3:
 	{
-		auto const userColours = ProcessColoursCommandLine(cmdLines);
+		const auto userColours = ProcessColoursCommandLine(cmdLines);
 		return DoUserColour3Operation(std::move(pHost), userColours);
 	}
 	
 	case CmdOperation::Lightbar:
 	{
-		auto const lightbarColour = ProcessLightbarCommandLine(cmdLines);
+		const auto lightbarColour = ProcessLightbarCommandLine(cmdLines);
 		return DoLightbarOperation(std::move(pHost), lightbarColour);
 	}
 

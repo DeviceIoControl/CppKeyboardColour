@@ -102,7 +102,7 @@ FrameCollection FramePatternGenerator::GeneratePulse(DeviceMask devices, const C
 	ColourFactory factory{};
 	FrameCollection frames{};
 
-	auto const firstPulseColour = factory.Create(
+	const auto firstPulseColour = factory.Create(
 		static_cast<uint8_t>(targetColour[INDEX_COLOUR_RED] * 0.33f),
 		static_cast<uint8_t>(targetColour[INDEX_COLOUR_GREEN] * 0.33f),
 		static_cast<uint8_t>(targetColour[INDEX_COLOUR_BLUE] * 0.33f)

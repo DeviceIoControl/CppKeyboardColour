@@ -66,6 +66,6 @@ uint32_t FreshBreatheAnimation::Size() const
 
 void FreshBreatheAnimation::GenerateBreathe(const Colour& targetColour, uint32_t steps, uint32_t stepTimeMs)
 {
-	auto const patternFrames = m_patternGenerator.GenerateBreathe(DeviceMask::Keyboard, targetColour, steps, stepTimeMs);
+	const auto patternFrames = m_patternGenerator.GenerateBreathe(DeviceMask::Keyboard, targetColour, steps, stepTimeMs);
 	m_frames.AddFrames(patternFrames);
 }

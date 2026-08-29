@@ -8,9 +8,9 @@
 Host::Host(uint32_t modelId, const std::vector<std::shared_ptr<IDevice>>& devices)
 	: m_modelId(modelId)
 {
-	for (auto const& pDevice : devices)
+	for (const auto& pDevice : devices)
 	{
-		auto const deviceType = static_cast<DeviceMask>(pDevice->Query(QueryType::DeviceType));
+		const auto deviceType = static_cast<DeviceMask>(pDevice->Query(QueryType::DeviceType));
 
 		switch (deviceType)
 		{
@@ -129,7 +129,7 @@ bool Host::IsDeviceSendCodeCapable(std::shared_ptr<IDevice> pDevice) const
 		return false;
 	} 
 
-	auto const deviceChannelType = static_cast<DeviceChannelType>(pDevice->Query(QueryType::DeviceChannelType));
+	const auto deviceChannelType = static_cast<DeviceChannelType>(pDevice->Query(QueryType::DeviceChannelType));
 
 	if (deviceChannelType != DeviceChannelType::Wmi)
 	{

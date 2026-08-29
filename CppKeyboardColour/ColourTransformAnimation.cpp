@@ -16,13 +16,13 @@ ColourTransformAnimation::ColourTransformAnimation()
 	const auto green = factory.Create(0, 255, 0);
 	const auto blue = factory.Create(0, 0, 255);
 
-	auto const redToGreen = m_patternGenerator.GenerateColourBlend(DeviceMask::Keyboard, red, green, STEPS, FRAME_DURATION_MS);
+	const auto redToGreen = m_patternGenerator.GenerateColourBlend(DeviceMask::Keyboard, red, green, STEPS, FRAME_DURATION_MS);
 	m_frames.AddFrames(redToGreen);
 
-	auto const greenToBlue = m_patternGenerator.GenerateColourBlend(DeviceMask::Keyboard, green, blue, STEPS, FRAME_DURATION_MS);
+	const auto greenToBlue = m_patternGenerator.GenerateColourBlend(DeviceMask::Keyboard, green, blue, STEPS, FRAME_DURATION_MS);
 	m_frames.AddFrames(greenToBlue);
 
-	auto const blueToRed = m_patternGenerator.GenerateColourBlend(DeviceMask::Keyboard, blue, red, STEPS, FRAME_DURATION_MS);
+	const auto blueToRed = m_patternGenerator.GenerateColourBlend(DeviceMask::Keyboard, blue, red, STEPS, FRAME_DURATION_MS);
 	m_frames.AddFrames(blueToRed);
 }
 

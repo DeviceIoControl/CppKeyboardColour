@@ -50,7 +50,7 @@ bool KeyboardDevice::SetKBZoneColour(Zone zone, const Colour& colour)
 		return false;
 	}
 
-	auto const code = (xstd::to_underlying(zone) << 24ul) | m_colourFactory.Create(ColourFormat::B8R8G8, colour);
+	const auto code = (xstd::to_underlying(zone) << 24ul) | m_colourFactory.Create(ColourFormat::B8R8G8, colour);
 	return (m_pDevChannel) ? m_pDevChannel->SendCode(code) : false;
 }
 
@@ -62,7 +62,7 @@ bool KeyboardDevice::SetFullKBColour(const Colour& colour)
 		return this->SetKBZoneColour(Zone::LEFT, colour);
 	}
 
-	for (auto const currentZone : { Zone::LEFT, Zone::MID, Zone::RIGHT })
+	for (const auto currentZone : { Zone::LEFT, Zone::MID, Zone::RIGHT })
 	{
 		// Not worth checking for success here.
 		std::ignore = this->SetKBZoneColour(currentZone, colour);

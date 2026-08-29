@@ -11,10 +11,10 @@ PinkBreatheAnimation::PinkBreatheAnimation()
 {
 	ColourFactory factory{};
 
-	auto const pink = factory.Create(255, 110, 168);
+	const auto pink = factory.Create(255, 110, 168);
 
-	auto const ascendPattern = m_patternGenerator.GenerateAscendingPattern(DeviceMask::Keyboard, pink, FRAMES, FRAME_DURATION_MS);
-	auto const descendPattern = m_patternGenerator.GenerateDescendingPattern(DeviceMask::Keyboard, pink, FRAMES, FRAME_DURATION_MS);
+	const auto ascendPattern = m_patternGenerator.GenerateAscendingPattern(DeviceMask::Keyboard, pink, FRAMES, FRAME_DURATION_MS);
+	const auto descendPattern = m_patternGenerator.GenerateDescendingPattern(DeviceMask::Keyboard, pink, FRAMES, FRAME_DURATION_MS);
 
 	m_frames.AddFrames(ascendPattern);
 	m_frames.AddFrame(DeviceMask::Keyboard, Zone::ALL, pink, 4000);

@@ -41,7 +41,7 @@ ModelIdRetriever::~ModelIdRetriever()
 
 HMODULE ModelIdRetriever::LoadGetProductDLL() const
 {
-	auto const hModule = LoadLibraryW(GET_PRODUCT_DLL);
+	const auto hModule = LoadLibraryW(GET_PRODUCT_DLL);
 
 	if (!hModule || hModule == INVALID_HANDLE_VALUE)
 	{

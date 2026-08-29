@@ -2,15 +2,16 @@
 
 **A C++ version of the original "keyboard-colour-program" developed in C#.**
 
-This is a cleaner, more organized, and efficient version of the initial program. It is designed to provide enhanced features for customizing CLEVO keyboards with **RGB** lighting, supporting both **1-zone** and **3-zone** keyboards. The program also includes a variety of animated effects to enhance your keyboard’s visual experience.
+This is a cleaner, more organized, and efficient version of the initial program. It is designed to provide enhanced features for customizing CLEVO keyboards with **RGB** lighting, supporting devices with **1-zone**, **3-zone** keyboards and devices with **RGB Lightbars**. The program also includes a variety of animated effects to enhance your keyboard’s visual experience.
 
 ---
 
 ## 🎨 Current Features
 
-- **Support for CLEVO keyboards:**
+- **Support for CLEVO Devices with the following:**
   - **RGB 3-zone keyboards**.
   - **RGB 1-zone keyboards**.
+  - **RGB Keyboards with Lightbars**.
 - **Predefined Animated Effects:**
   - 🌈 **Fading Colors:** Smooth color transitions (predefined themes).
   - 🎥 **Optimized Animations:** Enhanced visual effects using animation objects.
@@ -36,11 +37,12 @@ The following commands are supported and can be executed via the **Command Promp
 Extract the program zip and run the commands **as an administrator**. To execute the `.exe` files, prepend the `.\` before the command.
 
 ```bash
-.\CLEVO_KeyboardColour.exe theme [theme] --speed [speed]
-.\CLEVO_KeyboardColour.exe inbuilt [theme] (3-Zone keyboards only)
-.\CLEVO_KeyboardColour.exe backlight [on/off]
-.\CLEVO_KeyboardColour.exe colour [hexColour]
-.\CLEVO_KeyboardColour.exe colours [hexColour] [hexColour] [hexColour] (3-Zone keyboards only)
+.\CLEVO_KeyboardColour.exe theme [theme] --speed [speed] [--dmm]
+.\CLEVO_KeyboardColour.exe inbuilt [theme] [--dmm] (3-Zone keyboards only)
+.\CLEVO_KeyboardColour.exe backlight [on/off] [--dmm]
+.\CLEVO_KeyboardColour.exe colour [hexColour] [--dmm]
+.\CLEVO_KeyboardColour.exe colours [hexColour] [hexColour] [hexColour] [--dmm] (3-Zone keyboards only)
+.\CLEVO_KeyboardColour.exe lightbar [hexColour] [--dmm]
 ```
 ---
 
@@ -91,6 +93,30 @@ Extract the program zip and run the commands **as an administrator**. To execute
   .\CLEVO_KeyboardColour.exe colours 0xff0000 0x00ff00 0x0000ff
   ```
   🌈 Sets the Left zone to Red, the middle zone to Green and right zone to Blue on the keyboard (3-Zone keyboards ONLY)
+---
+
+### 🚥 Custom Lightbar Colour Operations:
+
+- **Set lightbar colour to Red:**  
+  ```bash
+  .\CLEVO_KeyboardColour.exe lightbar 0xff0000
+  ```
+  ❤️ Turns the lightbar Red.
+
+- **Set lightbar colour to Green:**
+  ```bash
+  .\CLEVO_KeyboardColour.exe lightbar 0x00ff00
+  ```
+  💚 Turns the lightbar Green.
+
+- **Set lightbar colour to Blue:**  
+  ```bash
+  .\CLEVO_KeyboardColour.exe lightbar 0x0000ff
+  ```
+  💙 Turns the lightbar Blue.
+
+This command works in the same way as the `colour` command - For more info, please read the 'Custom Colour Operations' section.
+
 ---
 
 ### 🎨 Supported Animations:
@@ -211,7 +237,32 @@ Extract the program zip and run the commands **as an administrator**. To execute
   🌈 Creates a fast rainbow sweep effect with smooth transitions at 200% speed.
 
 
-**Setting speed is not required. You can leave it out, and it will default to the standard speed.**
+**This is an optional argument, and it will default to the standard speed if not provided.**
+
+---
+
+### 💻 Device Monitor Mode:
+
+  Device Monitor mode is a feature for power users and developers to display extended console output of the in-flight data that is sent to the device when performing keyboard operations.
+
+  ```bash
+  .\CLEVO_KeyboardColour.exe theme colourtransform --dmm
+  ```
+  Plays the requested 'colourtransform' theme, while the console outputs the in-flight data being processed by the device.
+
+  ```bash
+  .\CLEVO_KeyboardColour.exe theme colourtransform --speed 150 --dmm
+  ```
+  Plays the requested 'colourtransform' theme at 150% speed, while the console outputs the in-flight data being processed by the device.
+
+  ```bash
+  .\CLEVO_KeyboardColour.exe backlight on --dmm
+  ```
+  Turns off the backlight for all detected devices on the system, and outputs the in-flight data being processed by the device.
+
+  **This is an optional argument, and will not display the extended console output if the argument is not provided.**
+
+  ⚠️ **Warning:** This argument will have a performance impact when provided and is therefore only recommended for debugging purposes. 
 
 ---
 
@@ -227,7 +278,7 @@ Extract the program zip and run the commands **as an administrator**. To execute
 
 4. Run the desired command using the syntax:
    ```
-   .\CLEVO_KeyboardColour.exe theme/inbuilt/backlight/colour/colours [argument] [--speed <speed>]
+   .\CLEVO_KeyboardColour.exe theme/inbuilt/backlight/lightbar/colour(s) [argument] [--speed <speed>] [--dmm]
    ```
 
 ---
@@ -244,6 +295,11 @@ To activate an effect for a single iteration, add the `--once` argument:
 ```
 NOTE: This will run the theme once, and stop. Use this command line if you want to experiment with the available themes.
 
+To enable 'Device Monitor Mode' for the 'breathing' effect, run:
+```bash
+.\CLEVO_KeyboardColour.exe theme breathe --dmm
+```
+NOTE: This argument will have a performance impact when provided and is therefore only recommended for debugging purposes.
 
 To activate the inbuilt 'Wave' effect, run:
 ```bash
@@ -266,8 +322,9 @@ NOTE: This command does not support the `--once` argument.
 
 ## 📋 Requirements
 
-- **Compatible CLEVO keyboards:**
+- **Compatible CLEVO Devices:**
   - **RGB 1-zone** or **3-zone** lighting.
+  - **RGB Lightbar lighting**.
   - For **1-zone keyboards**, the **InsydeDCHU.dll** file must be in the same directory as `CLEVO_KeyboardColour.exe`.
 - **Administrator Permissions:** This program requests for administrator privileges. Please ensure you accept the Windows UAC prompt to avoid WMI failures.
 

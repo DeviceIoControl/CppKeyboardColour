@@ -33,8 +33,8 @@ DebugDeviceChannel::DebugDeviceChannel(KeyboardType kbType)
 bool DebugDeviceChannel::SendCode(uint32_t code)
 {
 	Zone const zoneIdentifier = static_cast<Zone>((code & 0xff000000) >> 24);
-	auto const rgbColour = m_colourFactory.Convert(ColourFormat::B8R8G8, code & 0x00ffffff, ColourFormat::R8G8B8);
-	auto const colourObject = m_colourFactory.Create(rgbColour);
+	const auto rgbColour = m_colourFactory.Convert(ColourFormat::B8R8G8, code & 0x00ffffff, ColourFormat::R8G8B8);
+	const auto colourObject = m_colourFactory.Create(rgbColour);
 
 	std::cout << "Code: 0x" << (void*)code << " -> ";
 

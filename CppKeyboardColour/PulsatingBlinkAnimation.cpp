@@ -15,10 +15,10 @@ PulsatingBlinkAnimation::PulsatingBlinkAnimation()
 {
 	ColourFactory const factory{};
 
-	auto const skyBlue = factory.Create(135, 206, 235);
-	auto const forestGreen = factory.Create(34, 139, 34);
-	auto const sunsetOrange = factory.Create(255, 69, 0);
-	auto const rosePink = factory.Create(255, 102, 204);
+	const auto skyBlue = factory.Create(135, 206, 235);
+	const auto forestGreen = factory.Create(34, 139, 34);
+	const auto sunsetOrange = factory.Create(255, 69, 0);
+	const auto rosePink = factory.Create(255, 102, 204);
 
 	this->GenerateBlink(skyBlue, BLINK_TIME_MS);
 	this->GenerateBlink(forestGreen, BLINK_TIME_MS);
@@ -48,6 +48,6 @@ uint32_t PulsatingBlinkAnimation::Size() const
 
 void PulsatingBlinkAnimation::GenerateBlink(const Colour& colour, uint32_t blinkTimeMs)
 {
-	auto const blinkPattern = m_patternGenerator.GenerateBlink(DeviceMask::Keyboard, colour, blinkTimeMs);
+	const auto blinkPattern = m_patternGenerator.GenerateBlink(DeviceMask::Keyboard, colour, blinkTimeMs);
 	m_frames.AddFrames(blinkPattern);
 }

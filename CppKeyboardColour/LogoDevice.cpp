@@ -13,7 +13,7 @@ LogoDevice::LogoDevice(std::shared_ptr<IDeviceChannel> pDeviceChannel)
 bool LogoDevice::SetColour(Zone zone, const Colour& colour) 
 {
 	// Logo = 0xF4
-	auto const code = (0xF4 << 24ul) | m_colourFactory.Create(ColourFormat::B8R8G8, colour);
+	const auto code = (0xF4 << 24ul) | m_colourFactory.Create(ColourFormat::B8R8G8, colour);
 	return (m_pDevChannel && zone == Zone::ALL) ? m_pDevChannel->SendCode(code) : false;
 }
 

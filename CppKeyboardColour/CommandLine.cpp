@@ -27,7 +27,7 @@
 {
 	bool isFound = false;
 
-	for (auto const& current : toFind)
+	for (const auto& current : toFind)
 	{
 		if (isFound && CommandLine::Contains(current, cmdlines))
 		{
@@ -47,9 +47,9 @@
 {
 	bool foundCommand = false;
 	std::vector<std::wstring> followingCmds{};
-	auto const _toFind = xstd::to_lower_case(toFind);
+	const auto _toFind = xstd::to_lower_case(toFind);
 
-	for (auto const& currentCmd : cmdLines)
+	for (const auto& currentCmd : cmdLines)
 	{
 		if (!foundCommand && currentCmd == _toFind)
 		{

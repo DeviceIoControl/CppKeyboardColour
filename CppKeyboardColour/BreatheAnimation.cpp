@@ -11,13 +11,13 @@ BreatheAnimation::BreatheAnimation()
 {
 	ColourFactory factory{};
 
-	auto const red = factory.Create(255, 0, 0);
-	auto const green = factory.Create(0, 255, 0);
-	auto const blue = factory.Create(0, 0, 255);
+	const auto red = factory.Create(255, 0, 0);
+	const auto green = factory.Create(0, 255, 0);
+	const auto blue = factory.Create(0, 0, 255);
 
-	auto const redBreathePattern = m_patternGenerator.GenerateBreathe(DeviceMask::Keyboard, red, STEPS, FRAME_DURATION_MS);
-	auto const greenBreathePattern = m_patternGenerator.GenerateBreathe(DeviceMask::Keyboard, green, STEPS, FRAME_DURATION_MS);
-	auto const blueBreathePattern = m_patternGenerator.GenerateBreathe(DeviceMask::Keyboard, blue, STEPS, FRAME_DURATION_MS);
+	const auto redBreathePattern = m_patternGenerator.GenerateBreathe(DeviceMask::Keyboard, red, STEPS, FRAME_DURATION_MS);
+	const auto greenBreathePattern = m_patternGenerator.GenerateBreathe(DeviceMask::Keyboard, green, STEPS, FRAME_DURATION_MS);
+	const auto blueBreathePattern = m_patternGenerator.GenerateBreathe(DeviceMask::Keyboard, blue, STEPS, FRAME_DURATION_MS);
 
 	m_frames.AddFrames(redBreathePattern);
 	m_frames.AddFrames(greenBreathePattern);

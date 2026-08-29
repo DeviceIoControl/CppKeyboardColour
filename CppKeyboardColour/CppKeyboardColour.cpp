@@ -24,8 +24,7 @@ int wmain(int argc, const wchar_t* argv[])
 	const auto cmdLines = CommandLine::GetCommandLines(argc, argv);
 	const auto enableDeviceMonitorMode = CommandLine::Contains(L"--dmm", cmdLines);
 
-	// HostFactory hostFactory{ USE_DEBUGGABLE_HOST, enableDeviceMonitorMode };
-	HostFactory hostFactory{ false, enableDeviceMonitorMode };
+	HostFactory hostFactory{ USE_DEBUGGABLE_HOST, enableDeviceMonitorMode };
 	auto pHost = hostFactory.Create();
 
 	if (!pHost)
@@ -37,7 +36,7 @@ int wmain(int argc, const wchar_t* argv[])
 
 	if (!CommandLine::ExclusiveContains({ L"theme", L"inbuilt", L"backlight", L"colour", L"colours", L"lightbar" }, cmdLines))
 	{
-		std::cout << "Invalid command line. Command is: CLEVO_KeyboardColour.exe theme/inbuilt/backlight/lightbar/colour(s) [<themeName>/<hexColour>] [--once] [--speed] <speed>\n";
+		std::cout << "Invalid command line. Command is: CLEVO_KeyboardColour.exe theme/inbuilt/backlight/lightbar/colour(s) [<themeName>/<hexColour>] [--once] [--speed] <speed> [--dmm]\n";
 		WaitForEnterIfNeeded();
 		return ERROR_INVALID_PARAMETER;
 	}

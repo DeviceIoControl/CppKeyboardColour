@@ -61,7 +61,7 @@ HostFactory::HostFactory(bool useDbgChannel /*= false*/, bool enableDeviceMonito
 
 std::unique_ptr<Host> HostFactory::Create()
 {
-	auto const hostDevices = m_modelIdTranslator->GetHostDevices(m_modelId);
+	const auto hostDevices = m_modelIdTranslator->GetHostDevices(m_modelId);
 
 	if (hostDevices == DeviceMask::Unknown)
 	{
@@ -76,7 +76,7 @@ std::unique_ptr<Host> HostFactory::Create()
 		std::cout << "Keyboard Type: " << m_modelIdTranslator->GetKeyboardType(m_modelId) << "\n\n";
 	}
 
-	auto const devices = this->CreateRequiredDevices(hostDevices);
+	const auto devices = this->CreateRequiredDevices(hostDevices);
 	return std::make_unique<Host>(m_modelId, devices);
 }
 
@@ -89,7 +89,7 @@ bool HostFactory::InitializeDeviceFactory()
 {
 	DeviceChannelFactory const devChannelFactory(m_modelIdTranslator->GetKeyboardType(m_modelId), m_enableDeviceMonitoring);
 
-	if (auto const pDeviceChannel = devChannelFactory.Create(m_modelIdTranslator->GetDeviceChannelType(m_modelId)))
+	if (const auto pDeviceChannel = devChannelFactory.Create(m_modelIdTranslator->GetDeviceChannelType(m_modelId)))
 	{
 		m_devFactory = std::make_unique<DeviceFactory>(pDeviceChannel);
 	}
@@ -108,7 +108,7 @@ std::vector<std::shared_ptr<IDevice>> HostFactory::CreateRequiredDevices(DeviceM
 
 	if (!!(deviceTypes & DeviceMask::Keyboard))
 	{
-		auto const keyboardType = m_modelIdTranslator->GetKeyboardType(m_modelId);
+		const auto keyboardType = m_modelIdTranslator->GetKeyboardType(m_modelId);
 		devices.emplace_back(m_devFactory->CreateKeyboard(keyboardType));
 	}
 

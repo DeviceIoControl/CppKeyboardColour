@@ -48,9 +48,9 @@ void ColourShiftAnimation::GeneratePhase1(Colours& colours)
 {	
 	for (int i = 0; i < 0xFF; ++i)
 	{
-		for (auto const currentZone : { Zone::LEFT,  Zone::MID, Zone::RIGHT })
+		for (const auto currentZone : { Zone::LEFT,  Zone::MID, Zone::RIGHT })
 		{
-			auto const zoneColour = m_factory.Create(
+			const auto zoneColour = m_factory.Create(
 				colours[ZoneToIndex(currentZone)][INDEX_COLOUR_RED],
 				colours[ZoneToIndex(currentZone)][INDEX_COLOUR_GREEN],
 				colours[ZoneToIndex(currentZone)][INDEX_COLOUR_BLUE]
@@ -68,9 +68,9 @@ void ColourShiftAnimation::GeneratePhase2(Colours& colours)
 {
 	for (int i = 0; i < 0xFF; ++i)
 	{
-		for (auto const currentZone : { Zone::LEFT, Zone::MID, Zone::RIGHT })
+		for (const auto currentZone : { Zone::LEFT, Zone::MID, Zone::RIGHT })
 		{
-			auto const zoneColour = m_factory.Create(
+			const auto zoneColour = m_factory.Create(
 				colours[ZoneToIndex(currentZone)][INDEX_COLOUR_RED],
 				colours[ZoneToIndex(currentZone)][INDEX_COLOUR_GREEN],
 				colours[ZoneToIndex(currentZone)][INDEX_COLOUR_BLUE]
@@ -88,9 +88,9 @@ void ColourShiftAnimation::GeneratePhase3(Colours& colours)
 {
 	for (int i = 0; i < 0xFF; ++i)
 	{
-		for (auto const currentZone : { Zone::LEFT, Zone::MID, Zone::RIGHT })
+		for (const auto currentZone : { Zone::LEFT, Zone::MID, Zone::RIGHT })
 		{
-			auto const zoneColour = m_factory.Create(
+			const auto zoneColour = m_factory.Create(
 				colours[ZoneToIndex(currentZone)][INDEX_COLOUR_RED],
 				colours[ZoneToIndex(currentZone)][INDEX_COLOUR_GREEN],
 				colours[ZoneToIndex(currentZone)][INDEX_COLOUR_BLUE]

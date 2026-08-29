@@ -8,7 +8,7 @@ HeartbeatAnimation::HeartbeatAnimation()
 {
 	ColourFactory const factory{};
 
-	auto const pulseColour = factory.Create(255, 0, 0);
+	const auto pulseColour = factory.Create(255, 0, 0);
 
 	this->GeneratePulse(pulseColour, 60);
 }
@@ -35,6 +35,6 @@ uint32_t HeartbeatAnimation::Size() const
 
 void HeartbeatAnimation::GeneratePulse(const Colour& targetColour, uint32_t beatTimeMs)
 {
-	auto const pulsePattern = m_patternGenerator.GeneratePulse(DeviceMask::Keyboard, targetColour, beatTimeMs);
+	const auto pulsePattern = m_patternGenerator.GeneratePulse(DeviceMask::Keyboard, targetColour, beatTimeMs);
 	m_frames.AddFrames(pulsePattern);
 }

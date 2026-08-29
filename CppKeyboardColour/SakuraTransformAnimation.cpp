@@ -20,21 +20,21 @@ SakuraTransformAnimation::SakuraTransformAnimation()
 {
 	ColourFactory const factory{};
 
-	auto const sakuraPink = factory.Create(255, 110, 168);
-	auto const sunsetPink = factory.Create(255, 95, 149);
-	auto const pinkViolet = factory.Create(220, 70, 220);
+	const auto sakuraPink = factory.Create(255, 110, 168);
+	const auto sunsetPink = factory.Create(255, 95, 149);
+	const auto pinkViolet = factory.Create(220, 70, 220);
 
-	auto const sakuraToSunset = m_patternGenerator.GenerateColourBlend(DeviceMask::Keyboard, sakuraPink, sunsetPink, FRAMES, FRAME_DURATION_MS);
+	const auto sakuraToSunset = m_patternGenerator.GenerateColourBlend(DeviceMask::Keyboard, sakuraPink, sunsetPink, FRAMES, FRAME_DURATION_MS);
 	m_frames.AddFrames(sakuraToSunset);
 
 	m_frames.AddFrame(DeviceMask::Keyboard, Zone::ALL, sunsetPink, COLOUR_DURATION_MS);
 
-	auto const sunsetToViolet = m_patternGenerator.GenerateColourBlend(DeviceMask::Keyboard, sunsetPink, pinkViolet, FRAMES, FRAME_DURATION_MS);
+	const auto sunsetToViolet = m_patternGenerator.GenerateColourBlend(DeviceMask::Keyboard, sunsetPink, pinkViolet, FRAMES, FRAME_DURATION_MS);
 	m_frames.AddFrames(sunsetToViolet);
 
 	m_frames.AddFrame(DeviceMask::Keyboard, Zone::ALL, pinkViolet, COLOUR_DURATION_MS);
 
-	auto const violetToSakura = m_patternGenerator.GenerateColourBlend(DeviceMask::Keyboard, pinkViolet, sakuraPink, FRAMES, FRAME_DURATION_MS);
+	const auto violetToSakura = m_patternGenerator.GenerateColourBlend(DeviceMask::Keyboard, pinkViolet, sakuraPink, FRAMES, FRAME_DURATION_MS);
 	m_frames.AddFrames(violetToSakura);
 
 	m_frames.AddFrame(DeviceMask::Keyboard, Zone::ALL, sakuraPink, COLOUR_DURATION_MS);

@@ -13,19 +13,19 @@ ModelIdTranslator::ModelIdTranslator()
 
 KeyboardType ModelIdTranslator::GetKeyboardType(uint32_t modelId) const
 {
-	auto const result = m_modelIdToDevProps.find(modelId);
+	const auto result = m_modelIdToDevProps.find(modelId);
 	return (result != m_modelIdToDevProps.cend()) ? result->second.kbType : KeyboardType::NONE;
 }
 
 DeviceChannelType ModelIdTranslator::GetDeviceChannelType(uint32_t modelId) const
 {
-	auto const result = m_modelIdToDevProps.find(modelId);
+	const auto result = m_modelIdToDevProps.find(modelId);
 	return (result != m_modelIdToDevProps.cend()) ? result->second.deviceChannelType : DeviceChannelType::None;
 }
 
 DeviceMask ModelIdTranslator::GetHostDevices(uint32_t modelId) const
 {
-	auto const result = m_modelIdToDevProps.find(modelId);
+	const auto result = m_modelIdToDevProps.find(modelId);
 	return (result != m_modelIdToDevProps.cend()) ? result->second.devices : DeviceMask::Unknown;
 }
 
@@ -39,7 +39,7 @@ void ModelIdTranslator::InitializeSingleZoneKBs()
 		//, MODEL_ID_NH77XX
 	};
 
-	for (auto const currentModelId : SINGLE_ZONE_INSYDE_MODEL_IDS)
+	for (const auto currentModelId : SINGLE_ZONE_INSYDE_MODEL_IDS)
 	{
 		m_modelIdToDevProps[currentModelId].devices = DeviceMask::Keyboard;
 		m_modelIdToDevProps[currentModelId].kbType = KeyboardType::SINGLE_ZONE;
@@ -49,7 +49,7 @@ void ModelIdTranslator::InitializeSingleZoneKBs()
 
 void ModelIdTranslator::InitializeTripleZoneKBs()
 {
-	for (auto const currentModelId : { MODEL_ID_P650RS_G })
+	for (const auto currentModelId : { MODEL_ID_P650RS_G })
 	{
 		m_modelIdToDevProps[currentModelId].devices = DeviceMask::Keyboard;
 		m_modelIdToDevProps[currentModelId].kbType = KeyboardType::TRIPLE_ZONE;
