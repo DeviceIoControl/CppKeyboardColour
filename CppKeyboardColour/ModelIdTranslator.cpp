@@ -4,6 +4,17 @@
 #include "ModelIdTranslator.h"
 #include "ModelIds.h"
 
+namespace
+{
+	std::array constexpr g_SingleZoneInsydeModelIds
+	{
+		MODEL_ID_NP50RXX, MODEL_ID_NH70XX, MODEL_ID_NKNP50XX,
+		MODEL_ID_PC50DXX, MODEL_ID_A715XX, MODEL_ID_NP50SXX,
+		MODEL_ID_CV15XX, MODEL_ID_NP60SXX, MODEL_ID_V360EXX
+		//, MODEL_ID_NH77XX
+	};
+} // namespace 
+
 ModelIdTranslator::ModelIdTranslator()
 {
 	this->InitializeSingleZoneKBs();
@@ -31,15 +42,7 @@ DeviceMask ModelIdTranslator::GetHostDevices(uint32_t modelId) const
 
 void ModelIdTranslator::InitializeSingleZoneKBs()
 {
-	std::array constexpr SINGLE_ZONE_INSYDE_MODEL_IDS
-	{
-		MODEL_ID_NP50RXX, MODEL_ID_NH70XX, MODEL_ID_NKNP50XX,
-		MODEL_ID_PC50DXX, MODEL_ID_A715XX, MODEL_ID_NP50SXX,
-		MODEL_ID_CV15XX, MODEL_ID_NP60SXX, MODEL_ID_V360EXX
-		//, MODEL_ID_NH77XX
-	};
-
-	for (const auto currentModelId : SINGLE_ZONE_INSYDE_MODEL_IDS)
+	for (const auto currentModelId : g_SingleZoneInsydeModelIds)
 	{
 		m_modelIdToDevProps[currentModelId].devices = DeviceMask::Keyboard;
 		m_modelIdToDevProps[currentModelId].kbType = KeyboardType::SINGLE_ZONE;
