@@ -103,7 +103,7 @@ static DWORD DoUserColour3Operation(std::unique_ptr<IHost> pHost, const std::opt
 	{
 		std::cout << "This operation is not supported on this keyboard type.\n";
 		WaitForEnterIfNeeded();
-		return 0;
+		return ERROR_NOT_SUPPORTED;
 	}
 
 	if (!colours.has_value() || colours->size() != 3)
@@ -115,10 +115,11 @@ static DWORD DoUserColour3Operation(std::unique_ptr<IHost> pHost, const std::opt
 
 	std::cout << "Setting user provided zone colours...\n";
 
-	for (size_t i = 0; i < colours->size(); ++i)
+	constexpr std::array zones = { Zone::LEFT, Zone::MID, Zone::RIGHT };
+
+	for (size_t i = 0; i < colours->size() ; ++i)
 	{
-		const auto& colour = colours->at(i);
-		pHost->SetColour(DeviceMask::Keyboard, static_cast<Zone>(i), colour);
+		pHost->SetColour(DeviceMask::Keyboard, zones[i], colours->at(i));
 	}
 
 	return 0;
@@ -136,7 +137,7 @@ static DWORD DoLightbarOperation(std::unique_ptr<IHost> pHost, const std::option
 	if (!(pHost->GetDevices() & DeviceMask::Lightbar))
 	{
 		std::cout << "This operation is not supported on this system.\n";
-		return ERROR_DEVICE_NOT_CONNECTED;
+		return ERROR_NOT_SUPPORTED;
 	}
 
 	std::cout << "Setting user provided lightbar colour...\n";
@@ -187,7 +188,7 @@ DWORD DoCommandOperation(std::unique_ptr<IHost> pHost, const std::vector<std::ws
 		return DoLightbarOperation(std::move(pHost), lightbarColour);
 	}
 
-	// The above code logic should ensure that we NEVER reach here.
+	// The code logic from the caller should ensure that we NEVER reach here.
 	default:
 		std::cout << "An invalid command was provided.\n";
 		return ERROR_INVALID_OPERATION;

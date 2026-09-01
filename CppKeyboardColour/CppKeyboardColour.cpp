@@ -8,7 +8,6 @@
 #include "ConsoleUtils.h"
 
 #pragma warning(disable: 4995)
-#define STATUS_NOT_IMPLEMENTED 0xC0000002
 
 int wmain(int argc, const wchar_t* argv[])
 {
@@ -31,7 +30,7 @@ int wmain(int argc, const wchar_t* argv[])
 	{
 		std::cout << "This system is not supported.\n\n Please request for support using the following URL: https://github.com/DeviceIoControl/CppKeyboardColour/issues/new.\n";
 		WaitForEnterIfNeeded();
-		return STATUS_NOT_IMPLEMENTED;
+		return ERROR_NOT_SUPPORTED;
 	}
 
 	if (!CommandLine::ExclusiveContains({ L"theme", L"inbuilt", L"backlight", L"colour", L"colours", L"lightbar" }, cmdLines))
