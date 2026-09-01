@@ -11,7 +11,7 @@
 
 int wmain(int argc, const wchar_t* argv[])
 {
-	std::cout << "CLEVO Keyboard Colours Tool 1.26.0901 - Created by DeviceIoControl.\n\n";
+	std::cout << "CLEVO Keyboard Colours Tool 1.26.0902 - Created by DeviceIoControl.\n\n";
 	
 	if (!IsSingleInstance())
 	{
@@ -39,6 +39,6 @@ int wmain(int argc, const wchar_t* argv[])
 		WaitForEnterIfNeeded();
 		return ERROR_INVALID_PARAMETER;
 	}
-
+	
 	return DoCommandOperation(std::move(pHost), cmdLines);
 }

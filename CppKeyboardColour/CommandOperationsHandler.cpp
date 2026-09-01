@@ -149,7 +149,7 @@ static DWORD DoLightbarOperation(std::unique_ptr<IHost> pHost, const std::option
 DWORD DoCommandOperation(std::unique_ptr<IHost> pHost, const std::vector<std::wstring>& cmdLines)
 {
 	// pHost will always be valid before reaching here, so no need to check the pointer again.
-	
+
 	switch (ProcessCmdOperation(cmdLines))
 	{
 	case CmdOperation::Animation:
