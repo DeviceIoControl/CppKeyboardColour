@@ -11,7 +11,7 @@ This is a cleaner, more organized, and efficient version of the initial program.
 - **Support for CLEVO Devices with the following:**
   - **RGB 3-zone keyboards**.
   - **RGB 1-zone keyboards**.
-  - **RGB Keyboards with Lightbars**.
+  - **RGB Lightbars**.
 - **Predefined Animated Effects:**
   - 🌈 **Fading Colors:** Smooth color transitions (predefined themes).
   - 🎥 **Optimized Animations:** Enhanced visual effects using animation objects.
@@ -324,7 +324,7 @@ NOTE: This command does not support the `--once` argument.
 
 - **Compatible CLEVO Devices:**
   - **RGB 1-zone** or **3-zone** lighting.
-  - **RGB Lightbar lighting**.
+  - **RGB Lightbar** lighting.
   - For **1-zone keyboards**, the **InsydeDCHU.dll** file must be in the same directory as `CLEVO_KeyboardColour.exe`.
 - **Administrator Permissions:** This program requests for administrator privileges. Please ensure you accept the Windows UAC prompt to avoid WMI failures.
 
