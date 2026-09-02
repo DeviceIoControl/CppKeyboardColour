@@ -117,7 +117,7 @@ static DWORD DoUserColour3Operation(std::unique_ptr<IHost> pHost, const std::opt
 
 	constexpr std::array zones = { Zone::LEFT, Zone::MID, Zone::RIGHT };
 
-	for (size_t i = 0; i < colours->size() ; ++i)
+	for (size_t i = 0; i < colours->size(); ++i)
 	{
 		pHost->SetColour(DeviceMask::Keyboard, zones[i], colours->at(i));
 	}
