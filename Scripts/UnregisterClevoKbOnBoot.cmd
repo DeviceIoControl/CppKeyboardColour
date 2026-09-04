@@ -14,7 +14,6 @@ sc delete "CLEVO Keyboard Colours"
 echo Deleting CLEVO Keyboard Colour service files...
 del /f /q C:\ClevoKB\Service\CLEVO_KeyboardColour.exe > nul
 del /f /q C:\ClevoKB\Service\InsydeDCHU.dll > nul
-del /f /q C:\ClevoKB\Service\GetProductID64.dll > nul
 del /f /q C:\ClevoKB\StartClevoKB.cmd > nul
 
 echo Removing Clevo KB Colour service directories...

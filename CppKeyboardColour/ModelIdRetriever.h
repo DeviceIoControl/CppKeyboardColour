@@ -16,10 +16,5 @@ public:
 private:
 	bool m_useDbgModelId = false;
 	WbemService m_wbemService{ L"ROOT\\CIMV2" };
-
-	std::wstring GetPnpDeviceId(IWbemClassObject* pObject);
-	bool IsPCIDeviceInstancePath(const std::wstring& devInstPath);
-	std::wstring ExtractDeviceInstancePathSubsystem(const std::wstring& devInstPath);
-	uint32_t ExtractSubsystemID(const std::wstring& subsystem);
 };
 

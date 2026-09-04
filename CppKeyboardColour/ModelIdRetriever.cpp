@@ -7,6 +7,64 @@
 
 #define CLEVO_DEVICE_OEM_ID 0x1558
 
+namespace 
+{
+	std::wstring GetWin32PnpEntityPNPDeviceIDProperty(IWbemClassObject* pObject) 
+	{
+		VARIANT var{};
+
+		if (FAILED(pObject->Get(L"PNPDeviceID", 0, &var, nullptr, nullptr)))
+		{
+			return {};
+		}
+
+		if (var.vt != VT_BSTR)
+		{
+			return {};
+		}
+
+		std::wstring pnpDeviceId{ var.bstrVal };
+
+		VariantClear(&var);
+
+		return pnpDeviceId;
+	}
+
+	bool IsDeviceOnPCIBus(const std::wstring& devInstPath) 
+	{
+		return devInstPath.find(L"PCI\\") != std::wstring::npos;
+	}
+
+	std::wstring ExtractDeviceInstancePathSubsystem(const std::wstring& devInstPath) 
+	{
+		const auto subsysPosition = devInstPath.find(L"SUBSYS_");
+		if (subsysPosition == std::wstring::npos)
+		{
+			return {};
+		}
+
+		const auto subsysEnd = devInstPath.find(L'&', subsysPosition);
+		if (subsysEnd == std::wstring::npos)
+		{
+			return {};
+		}
+
+		return devInstPath.substr(subsysPosition, subsysEnd - subsysPosition);
+	}
+
+	uint32_t ExtractSubsystemID(const std::wstring& subsystem) 
+	{
+		if (subsystem.empty() || subsystem.find(L'_') == std::wstring::npos)
+		{
+			return 0;
+		}
+
+		const auto subSysId = subsystem.substr(subsystem.find(L'_') + 1);
+		return xstd::stoi(subSysId, 16).value_or(0);
+	}
+
+} // namespace 
+
 ModelIdRetriever::ModelIdRetriever(bool useDebugModel /*= false*/) 
 	: m_useDbgModelId(useDebugModel)
 {
@@ -23,20 +81,20 @@ uint32_t ModelIdRetriever::GetModelID()
 	
 	while (const auto object = enumerator.Next())
 	{
-		const auto devInstancePath = this->GetPnpDeviceId(object.Get());
+		const auto devInstancePath = GetWin32PnpEntityPNPDeviceIDProperty(object.Get());
 		
-		if (!this->IsPCIDeviceInstancePath(devInstancePath)) 
+		if (!IsDeviceOnPCIBus(devInstancePath))
 		{
 			continue;
 		}
 
-		const auto subsystem = this->ExtractDeviceInstancePathSubsystem(devInstancePath);
+		const auto subsystem = ExtractDeviceInstancePathSubsystem(devInstancePath);
 		if (subsystem.empty())
 		{
 			continue;
 		}
 
-		const auto subSysId = this->ExtractSubsystemID(subsystem);
+		const auto subSysId = ExtractSubsystemID(subsystem);
 		if ((subSysId & 0xffff) != CLEVO_DEVICE_OEM_ID)
 		{
 			continue;
@@ -46,58 +104,4 @@ uint32_t ModelIdRetriever::GetModelID()
 	}
 
 	return 0;
-}
-
-uint32_t ModelIdRetriever::ExtractSubsystemID(const std::wstring& subsystem) 
-{
-	if (subsystem.empty() || subsystem.find(L'_') == std::wstring::npos)
-	{
-		return 0;
-	}
-
-	const auto subSysId = subsystem.substr(subsystem.find(L'_') + 1);
-	return xstd::stoi(subSysId, 16).value_or(0);
-}
-
-bool ModelIdRetriever::IsPCIDeviceInstancePath(const std::wstring& devInstPath)
-{
-	return devInstPath.find_first_of(L"PCI\\") != std::wstring::npos;
-}
-
-std::wstring ModelIdRetriever::ExtractDeviceInstancePathSubsystem(const std::wstring& devInstPath) 
-{
-	const auto subsysPosition = devInstPath.find(L"SUBSYS_");
-	if (subsysPosition == std::wstring::npos)
-	{
-		return {};
-	}
-
-	const auto subsysEnd = devInstPath.find(L'&', subsysPosition);
-	if (subsysEnd == std::wstring::npos)
-	{
-		return {};
-	}
-
-	return devInstPath.substr(subsysPosition, subsysEnd - subsysPosition);
-}
-
-std::wstring ModelIdRetriever::GetPnpDeviceId(IWbemClassObject* pObject) 
-{
-	VARIANT var{};
-
-	if (FAILED(pObject->Get(L"PNPDeviceID", 0, &var, nullptr, nullptr)))
-	{
-		return {};
-	}
-	
-	if (var.vt != VT_BSTR) 
-	{
-		return {};
-	}
-
-	std::wstring pnpDeviceId{ var.bstrVal };
-
-	VariantClear(&var);
-
-	return pnpDeviceId;
 }

@@ -19,7 +19,6 @@ echo Copying files...
 copy StartClevoKB.cmd C:\ClevoKB\ > nul
 copy ..\CLEVO_KeyboardColour.exe C:\ClevoKB\Service\ > nul
 copy ..\InsydeDCHU.dll C:\ClevoKB\Service\ > nul
-copy ..\GetProductID64.dll C:\ClevoKB\Service\ > nul
 
 echo Registering CLEVO Keyboard Colours startup service...
 sc create "CLEVO Keyboard Colours" binPath="cmd.exe /c \"call C:\ClevoKB\StartClevoKB.cmd\"" type=own depend=winmgmt start=auto error=normal
