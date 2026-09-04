@@ -1,3 +1,5 @@
+// Created by DeviceIoControl
+
 #pragma once
 #include "WbemService.h"
 #include "IModelIdRetriever.h"
