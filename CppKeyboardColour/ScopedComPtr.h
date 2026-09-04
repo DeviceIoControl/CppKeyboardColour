@@ -41,7 +41,7 @@ public:
 	inline T* Get() const 
 	{
 		DoAddRef(m_ptr);
-		return reinterpret_cast<T*>(m_ptr); 
+		return reinterpret_cast<T*>(m_ptr);
 	}
 
 	inline T* Reset(T* ptr)
@@ -58,6 +58,7 @@ public:
 
 	inline bool IsValid() const { return !!(m_ptr); }
 
+	inline operator bool() const { return this->IsValid(); }
 	inline T* operator->() const { return reinterpret_cast<T*>(m_ptr); }
 
 	~ScopedComPtr()

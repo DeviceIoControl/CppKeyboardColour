@@ -1,29 +1,23 @@
-// Created by DeviceIoControl
-
 #pragma once
+#include "WbemService.h"
+#include "IModelIdRetriever.h"
 
-namespace Detail 
-{
-	using T_GetProductID_PCI = DWORD(*__stdcall)();
-} // namespace Detail
-
-class ModelIdRetriever
+class ModelIdRetriever 
+	: public IModelIdRetriever
 {
 public:
 	ModelIdRetriever(bool useDebugModel = false);
+	~ModelIdRetriever() override = default;
 
-	uint32_t GetModelID() const;
-
-	~ModelIdRetriever();
+	uint32_t GetModelID() override;
 
 private:
-	bool m_useDebugModel = false;
-	HMODULE m_hGetProductDLL = nullptr;
-	Detail::T_GetProductID_PCI m_pfnGetProductID = nullptr;
+	bool m_useDbgModelId = false;
+	WbemService m_wbemService{ L"ROOT\\CIMV2" };
 
-	// NOTE: GetProductID64 (A.K.A GetProductdll.dll) is buggy and unintializes COM multiples times,
-	// even though only one call to CoInitialize succeeds.
-	static uint32_t GetProductIDWorker(Detail::T_GetProductID_PCI fnGetProductID);
-
-	HMODULE LoadGetProductDLL() const;
+	std::wstring GetPnpDeviceId(IWbemClassObject* pObject);
+	bool IsPCIDeviceInstancePath(const std::wstring& devInstPath);
+	std::wstring ExtractDeviceInstancePathSubsystem(const std::wstring& devInstPath);
+	uint32_t ExtractSubsystemID(const std::wstring& subsystem);
 };
+

@@ -1,53 +1,101 @@
-// Created by DeviceIoControl
-
 #include "stdafx.h"
 #include "ModelIdRetriever.h"
+#include "WbemClassEnumerator.h"
 #include "ModelIds.h"
 
-#define GET_PRODUCT_DLL L"GetProductID64.dll"
-#define FN_GETPRODUCT_NAME "GetProductID_PCI"
+#define CLEVO_DEVICE_OEM_ID 0x1558
 
-ModelIdRetriever::ModelIdRetriever(bool useDebugModel /*= false*/)
-	: m_useDebugModel(useDebugModel)
+ModelIdRetriever::ModelIdRetriever(bool useDebugModel /*= false*/) 
+	: m_useDbgModelId(useDebugModel)
 {
-	m_hGetProductDLL = LoadGetProductDLL();
-	m_pfnGetProductID = reinterpret_cast<Detail::T_GetProductID_PCI>(GetProcAddress(m_hGetProductDLL, FN_GETPRODUCT_NAME));
 }
 
-uint32_t ModelIdRetriever::GetModelID() const
+uint32_t ModelIdRetriever::GetModelID()
 {
-	if (m_pfnGetProductID && !m_useDebugModel)
+	if (m_useDbgModelId) 
 	{
-		// Call this function on a seperate thread to avoid causing COM issues on our thread
-		// as this DLL (GetProductID64!GetProductID_PCI specifically) is buggy.
-		return std::async(std::launch::async, GetProductIDWorker, m_pfnGetProductID).get();
+		return MODEL_ID_DEBUG;
+	}
+
+	WbemClassEnumerator enumerator = m_wbemService.GetWbemInstanceEnumerator(L"Win32_PnpEntity");
+	
+	while (const auto object = enumerator.Next())
+	{
+		const auto devInstancePath = this->GetPnpDeviceId(object.Get());
+		
+		if (!this->IsPCIDeviceInstancePath(devInstancePath)) 
+		{
+			continue;
+		}
+
+		const auto subsystem = this->ExtractDeviceInstancePathSubsystem(devInstancePath);
+		if (subsystem.empty()) 
+		{
+			continue;
+		}
+
+		const auto subSysId = this->ExtractSubsystemID(subsystem);
+		if ((subSysId & 0xffff) != CLEVO_DEVICE_OEM_ID) 
+		{
+			continue;
+		}
+
+		return (subSysId & (0xffff << 16)) >> 16;
+	}
+
+	return 0;
+}
+
+uint32_t ModelIdRetriever::ExtractSubsystemID(const std::wstring& subsystem) 
+{
+	if (subsystem.empty() || subsystem.find(L'_') == std::wstring::npos)
+	{
+		return 0;
+	}
+
+	const auto subSysId = subsystem.substr(subsystem.find(L'_') + 1);
+	return xstd::stoi(subSysId, 16).value_or(0);
+}
+
+bool ModelIdRetriever::IsPCIDeviceInstancePath(const std::wstring& devInstPath)
+{
+	return devInstPath.find_first_of(L"PCI\\") != std::wstring::npos;
+}
+
+std::wstring ModelIdRetriever::ExtractDeviceInstancePathSubsystem(const std::wstring& devInstPath) 
+{
+	const auto subsysPosition = devInstPath.find(L"SUBSYS_");
+	if (subsysPosition == std::wstring::npos)
+	{
+		return {};
+	}
+
+	const auto subsysEnd = devInstPath.find(L'&', subsysPosition);
+	if (subsysEnd == std::wstring::npos)
+	{
+		return {};
+	}
+
+	return devInstPath.substr(subsysPosition, subsysEnd - subsysPosition);
+}
+
+std::wstring ModelIdRetriever::GetPnpDeviceId(IWbemClassObject* pObject) 
+{
+	VARIANT var{};
+
+	if (FAILED(pObject->Get(L"PNPDeviceID", 0, &var, nullptr, nullptr)))
+	{
+		return {};
 	}
 	
-	return m_useDebugModel ? MODEL_ID_DEBUG : 0xFFFFFFFF;
-}
-
-ModelIdRetriever::~ModelIdRetriever()
-{
-	m_pfnGetProductID = nullptr;
-	FreeLibrary(m_hGetProductDLL);
-}
-
-/* static */ uint32_t ModelIdRetriever::GetProductIDWorker(Detail::T_GetProductID_PCI fnGetProductID)
-{
-	std::ignore = CoInitializeEx(nullptr, COINIT::COINIT_APARTMENTTHREADED);
-
-	return fnGetProductID();
-}
-
-HMODULE ModelIdRetriever::LoadGetProductDLL() const
-{
-	const auto hModule = LoadLibraryW(GET_PRODUCT_DLL);
-
-	if (!hModule || hModule == INVALID_HANDLE_VALUE)
+	if (var.vt != VT_BSTR) 
 	{
-		std::wcout << L"Cannot load " << GET_PRODUCT_DLL << L". Please ensure the DLL is within the same directory!\n";
-		std::exit(STATUS_DLL_NOT_FOUND);
+		return {};
 	}
 
-	return hModule;
+	std::wstring pnpDeviceId{ var.bstrVal };
+
+	VariantClear(&var);
+
+	return pnpDeviceId;
 }

@@ -3,6 +3,8 @@
 #include "stdafx.h"
 #include "HostFactory.h"
 #include "DeviceChannelFactory.h"
+#include "LegacyModelIdRetriever.h"
+#include "ModelIdRetriever.h"
 
 namespace
 {
@@ -45,7 +47,7 @@ namespace
 
 } // namespace
 
-HostFactory::HostFactory(std::unique_ptr<ModelIdRetriever> pModelIdRetriever, std::unique_ptr<ModelIdTranslator> pModelIdTranslator, bool enableDeviceMonitoring)
+HostFactory::HostFactory(std::unique_ptr<IModelIdRetriever> pModelIdRetriever, std::unique_ptr<ModelIdTranslator> pModelIdTranslator, bool enableDeviceMonitoring)
 	: m_modelIdRetriever(std::move(pModelIdRetriever)),
 	m_modelIdTranslator(std::move(pModelIdTranslator)),
 	m_enableDeviceMonitoring(enableDeviceMonitoring)
@@ -63,12 +65,12 @@ std::unique_ptr<Host> HostFactory::Create()
 {
 	const auto hostDevices = m_modelIdTranslator->GetHostDevices(m_modelId);
 
+	std::cout << "Detected Model ID: 0x" << (void*)m_modelId << "\n";
 	if (hostDevices == DeviceMask::Unknown)
 	{
 		return nullptr;
 	}
 
-	std::cout << "Detected Model ID: 0x" << (void*)m_modelId << "\n";
 	std::cout << "Host Devices: " << hostDevices << "\n";
 
 	if (!!(hostDevices & DeviceMask::Keyboard))

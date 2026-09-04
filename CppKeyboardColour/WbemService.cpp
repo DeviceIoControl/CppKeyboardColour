@@ -20,6 +20,14 @@ ScopedComPtr<IWbemClassObject> WbemService::GetWbemClassObject(const std::wstrin
 	return ScopedComPtr<IWbemClassObject>(pWbemClassObject);
 }
 
+ScopedComPtr<IEnumWbemClassObject> WbemService::GetWbemInstanceEnumerator(const std::wstring& strFilter) 
+{
+	IEnumWbemClassObject* pWbemClassEnum = nullptr;
+	m_pWbemServices->CreateInstanceEnum((BSTR)strFilter.c_str(), WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY, nullptr, &pWbemClassEnum);
+
+	return ScopedComPtr<IEnumWbemClassObject>(pWbemClassEnum);
+}
+
 ScopedComPtr<IWbemClassObject> WbemService::ExecuteMethod(const std::wstring& strObjectPath, const std::wstring& strMethodName,
 	IWbemClassObject* pInParameters)
 {

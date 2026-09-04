@@ -54,7 +54,7 @@
     <ClInclude Include="BreatheAnimation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ModelIdRetriever.h">
+    <ClInclude Include="LegacyModelIdRetriever.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="KeyboardType.h">
@@ -177,6 +177,15 @@
     <ClInclude Include="ModelIdTranslator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ModelIdRetriever.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WbemClassEnumerator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IModelIdRetriever.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -206,7 +215,7 @@
     <ClCompile Include="PulsatingBlinkAnimation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ModelIdRetriever.cpp">
+    <ClCompile Include="LegacyModelIdRetriever.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DeviceChannelFactory.cpp">
@@ -285,6 +294,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ModelIdTranslator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelIdRetriever.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WbemClassEnumerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

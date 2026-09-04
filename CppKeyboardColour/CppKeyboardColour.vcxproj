@@ -189,6 +189,8 @@
     <ClInclude Include="ColourShiftAnimation.h" />
     <ClInclude Include="ColourTransformAnimation.h" />
     <ClInclude Include="CommandLine.h" />
+    <ClInclude Include="IModelIdRetriever.h" />
+    <ClInclude Include="ModelIdRetriever.h" />
     <ClInclude Include="ModelIds.h" />
     <ClInclude Include="DebugDeviceChannel.h" />
     <ClInclude Include="FrameCollection.h" />
@@ -200,7 +202,7 @@
     <ClInclude Include="IDevice.h" />
     <ClInclude Include="IHost.h" />
     <ClInclude Include="IDeviceChannel.h" />
-    <ClInclude Include="ModelIdRetriever.h" />
+    <ClInclude Include="LegacyModelIdRetriever.h" />
     <ClInclude Include="InsydeDeviceChannel.h" />
     <ClInclude Include="DeviceChannelFactory.h" />
     <ClInclude Include="KeyboardDevice.h" />
@@ -223,6 +225,7 @@
     <ClInclude Include="SystemAnimationTranslator.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ThemeCommandLine.h" />
+    <ClInclude Include="WbemClassEnumerator.h" />
     <ClInclude Include="WbemService.h" />
     <ClInclude Include="WmiDeviceChannel.h" />
     <ClInclude Include="Zone.h" />
@@ -240,7 +243,7 @@
     <ClCompile Include="ColourShiftAnimation.cpp" />
     <ClCompile Include="ColourTransformAnimation.cpp" />
     <ClCompile Include="CommandLine.cpp" />
-    <ClCompile Include="ModelIdRetriever.cpp" />
+    <ClCompile Include="LegacyModelIdRetriever.cpp" />
     <ClCompile Include="DebugDeviceChannel.cpp" />
     <ClCompile Include="FrameCollection.cpp" />
     <ClCompile Include="CppKeyboardColour.cpp" />
@@ -253,6 +256,7 @@
     <ClCompile Include="CommandOperationsHandler.cpp" />
     <ClCompile Include="LightbarDevice.cpp" />
     <ClCompile Include="LogoDevice.cpp" />
+    <ClCompile Include="ModelIdRetriever.cpp" />
     <ClCompile Include="ModelIdTranslator.cpp" />
     <ClCompile Include="PinkBreatheAnimation.cpp" />
     <ClCompile Include="PulsatingBlinkAnimation.cpp" />
@@ -267,6 +271,7 @@
     </ClCompile>
     <ClCompile Include="SystemAnimationTranslator.cpp" />
     <ClCompile Include="ThemeCommandLine.cpp" />
+    <ClCompile Include="WbemClassEnumerator.cpp" />
     <ClCompile Include="WbemService.cpp" />
     <ClCompile Include="WmiDeviceChannel.cpp" />
   </ItemGroup>

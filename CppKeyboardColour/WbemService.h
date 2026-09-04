@@ -9,8 +9,11 @@ public:
 	explicit WbemService(const std::wstring& wbemNamespace = L"ROOT\\WMI");
 
 	ScopedComPtr<IWbemClassObject> GetWbemClassObject(const std::wstring& strObjectPath);
+	ScopedComPtr<IEnumWbemClassObject> GetWbemInstanceEnumerator(const std::wstring& strFilter);
 
-	ScopedComPtr<IWbemClassObject> ExecuteMethod(const std::wstring& strObjectPath, const std::wstring& strMethodName,
+	ScopedComPtr<IWbemClassObject> ExecuteMethod(
+		const std::wstring& strObjectPath, 
+		const std::wstring& strMethodName,
 		IWbemClassObject* pInParameters);
 
 	~WbemService();
