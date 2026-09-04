@@ -52,7 +52,7 @@ void ModelIdTranslator::InitializeSingleZoneKBs()
 
 void ModelIdTranslator::InitializeTripleZoneKBs()
 {
-	for (const auto currentModelId : { MODEL_ID_P650RS_G })
+	for (const auto currentModelId : { MODEL_ID_P650RS_GH, MODEL_ID_P650RS_GD })
 	{
 		m_modelIdToDevProps[currentModelId].devices = DeviceMask::Keyboard;
 		m_modelIdToDevProps[currentModelId].kbType = KeyboardType::TRIPLE_ZONE;

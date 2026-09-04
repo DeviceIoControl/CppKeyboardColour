@@ -1,6 +1,7 @@
 // Created by DeviceIoControl
 
 #pragma once
+#include "ComInitialiser.h"
 #include "ScopedComPtr.h"
 
 class WbemService
@@ -10,20 +11,15 @@ public:
 
 	ScopedComPtr<IWbemClassObject> GetWbemClassObject(const std::wstring& strObjectPath);
 	ScopedComPtr<IEnumWbemClassObject> GetWbemInstanceEnumerator(const std::wstring& strFilter);
+	ScopedComPtr<IWbemClassObject> ExecuteMethod(const std::wstring& strObjectPath, const std::wstring& strMethodName, IWbemClassObject* pInParameters);
 
-	ScopedComPtr<IWbemClassObject> ExecuteMethod(
-		const std::wstring& strObjectPath, 
-		const std::wstring& strMethodName,
-		IWbemClassObject* pInParameters);
-
-	~WbemService();
+	~WbemService() = default;
 
 private:
+	ComInitialiser m_comInit{};
 	std::wstring m_strObjectName;
 	ScopedComPtr<IWbemLocator> m_pWbemLocator;
 	ScopedComPtr<IWbemServices> m_pWbemServices;
-
-	bool InitialiseCom();
 
 	bool InitialiseComSecurity(DWORD dwAuthnLevel, DWORD dwImpLevel);
 

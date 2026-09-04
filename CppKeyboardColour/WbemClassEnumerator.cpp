@@ -10,7 +10,7 @@ WbemClassEnumerator::WbemClassEnumerator(ScopedComPtr<IEnumWbemClassObject> pEnu
 
 bool WbemClassEnumerator::Skip(uint32_t count /*= 1*/) 
 {
-	return SUCCEEDED(m_pEnumerator->Skip(0, count));
+	return SUCCEEDED(m_pEnumerator->Skip(-1, count));
 }
 
 ScopedComPtr<IWbemClassObject> WbemClassEnumerator::Next() 

@@ -177,6 +177,7 @@
     <ClInclude Include="Animations.h" />
     <ClInclude Include="Animator.h" />
     <ClInclude Include="BreatheAnimation.h" />
+    <ClInclude Include="ComInitialiser.h" />
     <ClInclude Include="ConsoleUtils.h" />
     <ClInclude Include="DeviceChannel.h" />
     <ClInclude Include="DeviceChannelType.h" />
@@ -234,6 +235,7 @@
     <ClCompile Include="AnimationFactory.cpp" />
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="BreatheAnimation.cpp" />
+    <ClCompile Include="ComInitialiser.cpp" />
     <ClCompile Include="ConsoleUtils.cpp" />
     <ClCompile Include="DeviceChannel.cpp" />
     <ClCompile Include="DeviceFactory.cpp" />

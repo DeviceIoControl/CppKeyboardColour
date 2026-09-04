@@ -186,6 +186,9 @@
     <ClInclude Include="IModelIdRetriever.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ComInitialiser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -300,6 +303,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="WbemClassEnumerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComInitialiser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

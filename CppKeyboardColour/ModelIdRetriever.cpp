@@ -31,13 +31,13 @@ uint32_t ModelIdRetriever::GetModelID()
 		}
 
 		const auto subsystem = this->ExtractDeviceInstancePathSubsystem(devInstancePath);
-		if (subsystem.empty()) 
+		if (subsystem.empty())
 		{
 			continue;
 		}
 
 		const auto subSysId = this->ExtractSubsystemID(subsystem);
-		if ((subSysId & 0xffff) != CLEVO_DEVICE_OEM_ID) 
+		if ((subSysId & 0xffff) != CLEVO_DEVICE_OEM_ID)
 		{
 			continue;
 		}
