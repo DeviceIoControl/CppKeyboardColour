@@ -72,7 +72,7 @@ ModelIdRetriever::ModelIdRetriever(bool useDebugModel /*= false*/)
 
 uint32_t ModelIdRetriever::GetModelID()
 {
-	if (m_useDbgModelId) 
+	if (m_useDbgModelId)
 	{
 		return MODEL_ID_DEBUG;
 	}
@@ -82,7 +82,6 @@ uint32_t ModelIdRetriever::GetModelID()
 	while (const auto object = enumerator.Next())
 	{
 		const auto devInstancePath = GetWin32PnpEntityPNPDeviceIDProperty(object.Get());
-		
 		if (!IsDeviceOnPCIBus(devInstancePath))
 		{
 			continue;

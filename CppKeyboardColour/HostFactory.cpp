@@ -63,16 +63,15 @@ HostFactory::HostFactory(bool useDbgChannel /*= false*/, bool enableDeviceMonito
 
 std::unique_ptr<Host> HostFactory::Create()
 {
-	const auto hostDevices = m_modelIdTranslator->GetHostDevices(m_modelId);
-
 	std::cout << "Detected Model ID: 0x" << (void*)m_modelId << "\n";
+
+	const auto hostDevices = m_modelIdTranslator->GetHostDevices(m_modelId);
 	if (hostDevices == DeviceMask::Unknown)
 	{
 		return nullptr;
 	}
 
 	std::cout << "Host Devices: " << hostDevices << "\n";
-
 	if (!!(hostDevices & DeviceMask::Keyboard))
 	{
 		std::cout << "Keyboard Type: " << m_modelIdTranslator->GetKeyboardType(m_modelId) << "\n\n";

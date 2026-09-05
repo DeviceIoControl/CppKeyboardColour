@@ -2,9 +2,7 @@
 
 #pragma once
 
-#include "stdafx.h"
-
-#define MODEL_ID_P650RS_GH 0x00006A01 // With Integrated GPU enabled
+#define MODEL_ID_P650RS_GH 0x00006A01 // With Integrated GPU enabled (Hybrid mode)
 #define MODEL_ID_P650RS_GD 0x00006A02 // With Discrete GPU enabled
 #define MODEL_ID_NP50RXX 0x0000A550
 #define MODEL_ID_NP50SXX 0x0000A650
