@@ -38,5 +38,5 @@ private:
 	std::shared_ptr<IDevice> m_pLogo;
 
 	// Restrict direct SendCode ability to WMI devices only (for now).
-	bool IsDeviceSendCodeCapable(std::shared_ptr<IDevice> pDevice) const;
+	bool TrySendDeviceCode(const std::shared_ptr<IDevice>& pDevice, uint32_t code) const;
 };

@@ -3,8 +3,8 @@
 #include "stdafx.h"
 #include "DeviceChannel.h"
 
-DeviceChannel::DeviceChannel(std::shared_ptr<IDeviceChannel> pUnderlyingDevChannel, std::shared_ptr<IDeviceChannel> pDbgChannel)
-	: m_pDevChannel(std::move(pUnderlyingDevChannel)),
+DeviceChannel::DeviceChannel(std::shared_ptr<IDeviceChannel> pDevChannel, std::shared_ptr<IDeviceChannel> pDbgChannel)
+	: m_pDevChannel(std::move(pDevChannel)),
 	m_pDbgChannel(std::move(pDbgChannel))
 {
 }

@@ -103,25 +103,25 @@ bool Host::SendDeviceCode(DeviceMask devices, uint32_t code)
 		return false;
 	}
 
-	if (!!(devices & DeviceMask::Keyboard) && this->IsDeviceSendCodeCapable(m_pKeyboard))
+	if (!!(devices & DeviceMask::Keyboard))
 	{
-		m_pKeyboard->SendCode(code);
+		this->TrySendDeviceCode(m_pKeyboard, code);
 	}
 
-	if (!!(devices & DeviceMask::Lightbar) && this->IsDeviceSendCodeCapable(m_pLightbar))
+	if (!!(devices & DeviceMask::Lightbar))
 	{
-		m_pLightbar->SendCode(code);
+		this->TrySendDeviceCode(m_pLightbar, code);
 	}
 
-	if (!!(devices & DeviceMask::Logo) && this->IsDeviceSendCodeCapable(m_pLogo))
+	if (!!(devices & DeviceMask::Logo))
 	{
-		m_pLogo->SendCode(code);
+		this->TrySendDeviceCode(m_pLogo, code);
 	}
 
 	return true;
 }
 
-bool Host::IsDeviceSendCodeCapable(std::shared_ptr<IDevice> pDevice) const 
+bool Host::TrySendDeviceCode(const std::shared_ptr<IDevice>& pDevice, uint32_t code) const
 {
 	if (!pDevice)
 	{
@@ -133,9 +133,9 @@ bool Host::IsDeviceSendCodeCapable(std::shared_ptr<IDevice> pDevice) const
 
 	if (deviceChannelType != DeviceChannelType::Wmi)
 	{
-		std::wcout << L"This " << pDevice->GetName() << L" does not support this operation.\n";
+		std::wcout << L"This " << pDevice->GetName() << L" does not support the requested operation.\n";
 		return false;
 	}
 
-	return true;
+	return pDevice->SendCode(code);
 }

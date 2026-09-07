@@ -8,7 +8,7 @@ This is a cleaner, more organized, and efficient version of the initial program.
 
 ## 🎨 Current Features
 
-- **Support for CLEVO Devices with the following:**
+- **Support for CLEVO & Tongfang systems with the following RGB components:**
   - **RGB 3-zone keyboards**.
   - **RGB 1-zone keyboards**.
   - **RGB Lightbars**.

@@ -7,7 +7,7 @@ class DeviceChannel
 	: public IDeviceChannel
 {
 public:
-	DeviceChannel(std::shared_ptr<IDeviceChannel> pUnderlyingDevChannel, std::shared_ptr<IDeviceChannel> pDbgChannel);
+	DeviceChannel(std::shared_ptr<IDeviceChannel> pDevChannel, std::shared_ptr<IDeviceChannel> pDbgChannel);
 	~DeviceChannel() override = default;
 
 	bool SendCode(uint32_t code) override;

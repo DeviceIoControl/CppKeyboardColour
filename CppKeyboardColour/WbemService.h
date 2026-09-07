@@ -17,11 +17,8 @@ public:
 
 private:
 	ComInitialiser m_comInit{};
-	std::wstring m_strObjectName;
 	ScopedComPtr<IWbemLocator> m_pWbemLocator;
 	ScopedComPtr<IWbemServices> m_pWbemServices;
-
-	bool InitialiseComSecurity(DWORD dwAuthnLevel, DWORD dwImpLevel);
 
 	IWbemLocator* CreateWbemLocator();
 

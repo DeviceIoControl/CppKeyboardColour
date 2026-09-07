@@ -5,7 +5,7 @@
 
 WbemService::WbemService(const std::wstring& wbemNamespace /* = L"ROOT\\WMI" */)
 {
-	InitialiseComSecurity(RPC_C_AUTHN_LEVEL_CONNECT, RPC_C_IMP_LEVEL_IMPERSONATE);
+	m_comInit.InitialiseSecurity(RPC_C_AUTHN_LEVEL_CONNECT, RPC_C_IMP_LEVEL_IMPERSONATE);
 
 	m_pWbemLocator.Reset(this->CreateWbemLocator());
 	m_pWbemServices.Reset(this->CreateNativeWbemServices(wbemNamespace));
@@ -41,23 +41,6 @@ ScopedComPtr<IWbemClassObject> WbemService::ExecuteMethod(const std::wstring& st
 	}
 
 	return ScopedComPtr<IWbemClassObject>(pOutParams);
-}
-
-
-bool WbemService::InitialiseComSecurity(DWORD dwAuthnLevel, DWORD dwImpLevel)
-{
-	const auto hError = CoInitializeSecurity(
-		nullptr,
-		-1,
-		nullptr,
-		nullptr,
-		dwAuthnLevel,
-		dwImpLevel,
-		nullptr,
-		EOAC_NONE,
-		nullptr);
-
-	return SUCCEEDED(hError);
 }
 
 IWbemLocator* WbemService::CreateWbemLocator()

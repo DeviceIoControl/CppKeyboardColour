@@ -26,7 +26,6 @@ namespace xstd
 		return lower_case;
 	}
 
-
 	template<typename _TRet = uintptr_t, typename _Ty>
 	constexpr _TInteger<_TRet> ptr_to_integer(_Ty ptr)
 	{

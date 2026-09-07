@@ -74,6 +74,12 @@ static DWORD DoSystemAnimationOperation(std::unique_ptr<IHost> pHost, SystemAnim
 		return ERROR_INVALID_PARAMETER;
 	}
 
+	if (!(pHost->GetDevices() & DeviceMask::Keyboard))
+	{
+		std::cout << "This operation is not supported on this system.\n";
+		return ERROR_NOT_SUPPORTED;
+	}
+
 	std::cout << "Playing Inbuilt Keyboard animation...\n";
 	pHost->SendDeviceCode(DeviceMask::Keyboard, xstd::to_underlying(sysAnimation));
 
@@ -87,6 +93,12 @@ static DWORD DoUserColourOperation(std::unique_ptr<IHost> pHost, std::optional<C
 	if (!colour.has_value())
 	{
 		return ERROR_INVALID_PARAMETER;
+	}
+
+	if (!(pHost->GetDevices() & DeviceMask::Keyboard))
+	{
+		std::cout << "This operation is not supported on this system.\n";
+		return ERROR_NOT_SUPPORTED;
 	}
 
 	std::cout << "Setting user provided colour...\n";

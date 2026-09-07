@@ -25,11 +25,11 @@ bool Animator::Play(IAnimation* pAnimation, bool bShouldLoop)
 
 	if (!pAnimation->IsHostSupported(m_pHost.get()))
 	{
-		std::wcout << pAnimation->GetName() << L" animation is not supported on this system.\n";
+		std::wcout << L"'" << pAnimation->GetName() << L"' animation is not supported on this system.\n";
 		return false;
 	}
 
-	std::wcout << L"Playing " << pAnimation->GetName() << L" animation...\n\n";
+	std::wcout << L"Playing '" << pAnimation->GetName() << L"' animation...\n\n";
 
 	do
 	{
