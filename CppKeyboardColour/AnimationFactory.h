@@ -3,7 +3,7 @@
 #pragma once
 #include "IAnimation.h"
 
-class AnimationFactory 
+class AnimationFactory
 {
 public:
 	AnimationFactory() = default;

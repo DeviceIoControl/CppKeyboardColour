@@ -1,5 +1,4 @@
 #pragma once
-
 #include "targetver.h"
 
 #define NOMINMAX
@@ -11,10 +10,10 @@
 #include <array>
 #include <string>
 #include <memory>
-#include <set>
 #include <map>
 #include <future>
 #include <algorithm>
+#include <cwctype>
 
 #include <Windows.h>
 #include <comdef.h>

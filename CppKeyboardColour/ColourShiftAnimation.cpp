@@ -1,27 +1,40 @@
 // Created by DeviceIoControl
 
 #include "stdafx.h"
+#include "KeyboardType.h"
 #include "ColourShiftAnimation.h"
 
 ColourShiftAnimation::ColourShiftAnimation()
 {
-	Colours colours {
+	Colours const rgbColours {
 		m_factory.Create(0xff, 0x00, 0x00),
 		m_factory.Create(0x00, 0xff, 0x00),
 		m_factory.Create(0x00, 0x00, 0xff),
 	};
 
-	this->GeneratePhase1(colours);
-	auto frame1 = m_frames.GetFrame(m_frames.Size() - 1);
-	this->GenerateDelayFrame(frame1.value());
+	Colours const brgColours {
+		m_factory.Create(0x00, 0x00, 0xff),
+		m_factory.Create(0xff, 0x00, 0x00),
+		m_factory.Create(0x00, 0xff, 0x00),
+	};
 
-	this->GeneratePhase2(colours);
-	auto frame2 = m_frames.GetFrame(m_frames.Size() - 1);
-	this->GenerateDelayFrame(frame2.value());
-	
-	this->GeneratePhase3(colours);
-	auto frame3 = m_frames.GetFrame(m_frames.Size() - 1);
-	this->GenerateDelayFrame(frame3.value());
+	Colours const gbrColours {
+		m_factory.Create(0x00, 0xff, 0x00),
+		m_factory.Create(0x00, 0x00, 0xff),
+		m_factory.Create(0xff, 0x00, 0x00),
+	};
+
+	auto const rgbToBrg = m_frameGenerator.GenerateColourRotation(DeviceMask::Keyboard, rgbColours, brgColours, 255, 0);
+	auto const brgToGbr = m_frameGenerator.GenerateColourRotation(DeviceMask::Keyboard, brgColours, gbrColours, 255, 0);
+	auto const gbrToRgb = m_frameGenerator.GenerateColourRotation(DeviceMask::Keyboard, gbrColours, rgbColours, 255, 0);
+
+	// Transitions with interleaved delay frames.
+	m_frames.AddFrames(rgbToBrg);
+	m_frames.AddFrame(DeviceMask::Keyboard, Zone::LEFT, brgColours[ZoneToArrayIndex(Zone::LEFT)], 5000);
+	m_frames.AddFrames(brgToGbr);
+	m_frames.AddFrame(DeviceMask::Keyboard, Zone::LEFT, gbrColours[ZoneToArrayIndex(Zone::LEFT)], 5000);
+	m_frames.AddFrames(gbrToRgb);
+	m_frames.AddFrame(DeviceMask::Keyboard, Zone::LEFT, rgbColours[ZoneToArrayIndex(Zone::LEFT)], 5000);
 }
 
 std::wstring ColourShiftAnimation::GetName() const
@@ -42,74 +55,4 @@ bool ColourShiftAnimation::IsHostSupported(const IHost* pHost) const
 uint32_t ColourShiftAnimation::Size() const 
 {
 	return m_frames.Size();
-}
-
-void ColourShiftAnimation::GeneratePhase1(Colours& colours)
-{	
-	for (int i = 0; i < 0xFF; ++i)
-	{
-		for (const auto currentZone : { Zone::LEFT,  Zone::MID, Zone::RIGHT })
-		{
-			const auto zoneColour = m_factory.Create(
-				colours[ZoneToIndex(currentZone)][INDEX_COLOUR_RED],
-				colours[ZoneToIndex(currentZone)][INDEX_COLOUR_GREEN],
-				colours[ZoneToIndex(currentZone)][INDEX_COLOUR_BLUE]
-			);
-
-			m_frames.AddFrame(DeviceMask::Keyboard, currentZone, zoneColour, 0);
-
-			colours[ZoneToIndex(currentZone)][ZoneToIndex(currentZone)]--;
-			colours[ZoneToIndex(currentZone)][(ZoneToIndex(currentZone) + 2) % 3]++;
-		}
-	}
-}
-
-void ColourShiftAnimation::GeneratePhase2(Colours& colours)
-{
-	for (int i = 0; i < 0xFF; ++i)
-	{
-		for (const auto currentZone : { Zone::LEFT, Zone::MID, Zone::RIGHT })
-		{
-			const auto zoneColour = m_factory.Create(
-				colours[ZoneToIndex(currentZone)][INDEX_COLOUR_RED],
-				colours[ZoneToIndex(currentZone)][INDEX_COLOUR_GREEN],
-				colours[ZoneToIndex(currentZone)][INDEX_COLOUR_BLUE]
-			);
-
-			m_frames.AddFrame(DeviceMask::Keyboard, currentZone, zoneColour, 0);
-
-			colours[ZoneToIndex(currentZone)][(ZoneToIndex(currentZone) + 2) % 3]--;
-			colours[ZoneToIndex(currentZone)][(ZoneToIndex(currentZone) + 1) % 3]++;
-		}
-	}
-}
-
-void ColourShiftAnimation::GeneratePhase3(Colours& colours)
-{
-	for (int i = 0; i < 0xFF; ++i)
-	{
-		for (const auto currentZone : { Zone::LEFT, Zone::MID, Zone::RIGHT })
-		{
-			const auto zoneColour = m_factory.Create(
-				colours[ZoneToIndex(currentZone)][INDEX_COLOUR_RED],
-				colours[ZoneToIndex(currentZone)][INDEX_COLOUR_GREEN],
-				colours[ZoneToIndex(currentZone)][INDEX_COLOUR_BLUE]
-			);
-
-			m_frames.AddFrame(DeviceMask::Keyboard, currentZone, zoneColour, 0);
-
-			colours[ZoneToIndex(currentZone)][(ZoneToIndex(currentZone) + 1) % 3]--;
-			colours[ZoneToIndex(currentZone)][ZoneToIndex(currentZone)]++;
-		}
-	}
-}
-
-uint32_t ColourShiftAnimation::ZoneToIndex(Zone zone)
-{
-	return xstd::to_underlying(zone) - xstd::to_underlying(Zone::LEFT);
-}
-
-void ColourShiftAnimation::GenerateDelayFrame(const Frame& frame)
-{
-	m_frames.AddFrame(DeviceMask::Keyboard, frame.zone, frame.colour, 5000);
 }

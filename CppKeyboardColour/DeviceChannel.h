@@ -3,7 +3,7 @@
 #pragma once
 #include "IDeviceChannel.h"
 
-class DeviceChannel 
+class DeviceChannel
 	: public IDeviceChannel
 {
 public:

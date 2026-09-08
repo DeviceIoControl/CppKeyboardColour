@@ -3,8 +3,8 @@
 #pragma once
 
 #include "IAnimation.h"
-#include "KeyboardType.h"
 #include "FrameCollection.h"
+#include "FramePatternGenerator.h"
 #include "ColourFactory.h"
 #include "IHost.h"
 
@@ -28,12 +28,5 @@ public:
 private:
 	FrameCollection m_frames;
 	ColourFactory m_factory{};
-	
-	void GeneratePhase1(Colours& colours);
-	void GeneratePhase2(Colours& colours);
-	void GeneratePhase3(Colours& colours);
-
-	uint32_t ZoneToIndex(Zone zone);
-
-	void GenerateDelayFrame(const Frame& frame);
+	FramePatternGenerator m_frameGenerator;
 };

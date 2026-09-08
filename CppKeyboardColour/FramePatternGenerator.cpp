@@ -67,21 +67,7 @@ FrameCollection FramePatternGenerator::GenerateBreathe(DeviceMask devices, const
 
 FrameCollection FramePatternGenerator::GenerateColourBlend(DeviceMask devices, const Colour& startColour, const Colour& endColour, uint32_t steps, uint32_t stepTimeMs)
 {
-	FrameCollection frames{};
-
-	for (size_t i = 0; i < steps; ++i)
-	{
-		Colour currentColour{};
-
-		for (size_t channel = 0; channel < startColour.size(); ++channel)
-		{
-			currentColour[channel] = static_cast<uint8_t>(xstd::lerp(startColour[channel], endColour[channel], (1.0f / steps) * i));
-		}
-
-		frames.AddFrame(devices, Zone::ALL, currentColour, stepTimeMs);
-	}
-
-	return frames;
+	return this->DoGenerateColourBlend(devices, Zone::ALL, startColour, endColour, steps, stepTimeMs);
 }
 
 FrameCollection FramePatternGenerator::GenerateBlink(DeviceMask devices, const Colour& targetColour, uint32_t blinkTimeMs)
@@ -116,3 +102,42 @@ FrameCollection FramePatternGenerator::GeneratePulse(DeviceMask devices, const C
 
 	return frames;
 }
+
+FrameCollection FramePatternGenerator::GenerateColourRotation(DeviceMask devices, const Colours& startColours, const Colours& endColours, uint32_t steps, uint32_t stepTimeMs)
+{
+	FrameCollection frames{};
+
+	auto leftZoneFrames = this->DoGenerateColourBlend(devices, Zone::LEFT, startColours[ZoneToArrayIndex(Zone::LEFT)], endColours[ZoneToArrayIndex(Zone::LEFT)], steps, stepTimeMs);
+	auto midZoneFrames = this->DoGenerateColourBlend(devices, Zone::MID, startColours[ZoneToArrayIndex(Zone::MID)], endColours[ZoneToArrayIndex(Zone::MID)], steps, stepTimeMs);
+	auto rightZoneFrames = this->DoGenerateColourBlend(devices, Zone::RIGHT,startColours[ZoneToArrayIndex(Zone::RIGHT)], endColours[ZoneToArrayIndex(Zone::RIGHT)], steps, stepTimeMs);
+
+	// Interleave the frames to apply to each zone.
+	for (size_t i = 0; i < leftZoneFrames.Size(); ++i)
+	{
+		frames.TryAddFrame(leftZoneFrames.GetFrame(i));
+		frames.TryAddFrame(midZoneFrames.GetFrame(i));
+		frames.TryAddFrame(rightZoneFrames.GetFrame(i));
+	}
+
+	return frames;
+}
+
+FrameCollection FramePatternGenerator::DoGenerateColourBlend(DeviceMask devices, Zone zone, const Colour& startColour, const Colour& endColour, uint32_t steps, uint32_t stepTimeMs) 
+{
+	FrameCollection frames{};
+
+	for (size_t i = 0; i < steps; ++i)
+	{
+		Colour currentColour{};
+
+		for (size_t channel = 0; channel < startColour.size(); ++channel)
+		{
+			currentColour[channel] = static_cast<uint8_t>(xstd::lerp(startColour[channel], endColour[channel], (1.0f / steps) * i));
+		}
+
+		frames.AddFrame(devices, zone, currentColour, stepTimeMs);
+	}
+
+	return frames;
+}
+

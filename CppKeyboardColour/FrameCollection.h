@@ -14,6 +14,8 @@ public:
 	void AddFrame(DeviceMask devices, Zone activeZone, Colour zoneColour, uint32_t msTime);
 	void AddFrames(const FrameCollection& frames);
 
+	bool TryAddFrame(const std::optional<Frame>& frame);
+
 	std::optional<Frame> GetFrame(uint32_t idx);
 
 	inline uint32_t Size() const { return m_frames.size(); }

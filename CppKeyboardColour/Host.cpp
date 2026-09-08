@@ -103,6 +103,8 @@ bool Host::SendDeviceCode(DeviceMask devices, uint32_t code)
 		return false;
 	}
 
+	bool success = true;
+
 	if (!!(devices & DeviceMask::Keyboard))
 	{
 		this->TrySendDeviceCode(m_pKeyboard, code);
