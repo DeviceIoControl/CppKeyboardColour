@@ -25,18 +25,16 @@ void FrameCollection::AddFrames(const FrameCollection& frames)
 
 bool FrameCollection::TryAddFrame(const std::optional<Frame>& frame) 
 {
-	if (!frame.has_value())
+	if (frame.has_value())
 	{
-		return false;
+		m_frames.emplace_back(frame->devices, frame->zone, frame->colour, frame->ms_time);
 	}
 
-	m_frames.push_back(frame.value());
-
-	return true;
+	return frame.has_value();
 }
 
 std::optional<Frame> FrameCollection::GetFrame(uint32_t idx)
 {
-	return (m_frames.size() >= idx) ? std::make_optional(m_frames[idx]) : std::nullopt;
+	return (m_frames.size() > idx) ? std::make_optional(m_frames[idx]) : std::nullopt;
 }
 

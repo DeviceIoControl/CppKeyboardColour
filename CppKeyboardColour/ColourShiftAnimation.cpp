@@ -6,27 +6,27 @@
 
 ColourShiftAnimation::ColourShiftAnimation()
 {
-	Colours const rgbColours {
+	const Colours rgbColours {
 		m_factory.Create(0xff, 0x00, 0x00),
 		m_factory.Create(0x00, 0xff, 0x00),
 		m_factory.Create(0x00, 0x00, 0xff),
 	};
 
-	Colours const brgColours {
+	const Colours brgColours {
 		m_factory.Create(0x00, 0x00, 0xff),
 		m_factory.Create(0xff, 0x00, 0x00),
 		m_factory.Create(0x00, 0xff, 0x00),
 	};
 
-	Colours const gbrColours {
+	const Colours gbrColours {
 		m_factory.Create(0x00, 0xff, 0x00),
 		m_factory.Create(0x00, 0x00, 0xff),
 		m_factory.Create(0xff, 0x00, 0x00),
 	};
 
-	auto const rgbToBrg = m_frameGenerator.GenerateColourRotation(DeviceMask::Keyboard, rgbColours, brgColours, 255, 0);
-	auto const brgToGbr = m_frameGenerator.GenerateColourRotation(DeviceMask::Keyboard, brgColours, gbrColours, 255, 0);
-	auto const gbrToRgb = m_frameGenerator.GenerateColourRotation(DeviceMask::Keyboard, gbrColours, rgbColours, 255, 0);
+	const auto rgbToBrg = m_frameGenerator.GenerateColourBlendRotation(DeviceMask::Keyboard, rgbColours, brgColours, 255, 0);
+	const auto brgToGbr = m_frameGenerator.GenerateColourBlendRotation(DeviceMask::Keyboard, brgColours, gbrColours, 255, 0);
+	const auto gbrToRgb = m_frameGenerator.GenerateColourBlendRotation(DeviceMask::Keyboard, gbrColours, rgbColours, 255, 0);
 
 	// Transitions with interleaved delay frames.
 	m_frames.AddFrames(rgbToBrg);

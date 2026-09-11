@@ -163,6 +163,9 @@
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <CallingConvention>StdCall</CallingConvention>
       <StringPooling>true</StringPooling>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Fast</FloatingPointModel>
+      <EnableParallelCodeGeneration>false</EnableParallelCodeGeneration>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -178,6 +181,7 @@
     <ClInclude Include="Animations.h" />
     <ClInclude Include="Animator.h" />
     <ClInclude Include="BreatheAnimation.h" />
+    <ClInclude Include="ColourWaveAnimation.h" />
     <ClInclude Include="ComInitialiser.h" />
     <ClInclude Include="ConsoleUtils.h" />
     <ClInclude Include="DeviceChannel.h" />
@@ -236,6 +240,7 @@
     <ClCompile Include="AnimationFactory.cpp" />
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="BreatheAnimation.cpp" />
+    <ClCompile Include="ColourWaveAnimation.cpp" />
     <ClCompile Include="ComInitialiser.cpp" />
     <ClCompile Include="ConsoleUtils.cpp" />
     <ClCompile Include="DeviceChannel.cpp" />

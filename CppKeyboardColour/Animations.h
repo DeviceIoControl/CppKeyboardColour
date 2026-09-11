@@ -14,3 +14,4 @@
 #include "PinkBreatheAnimation.h"
 #include "SunsetBreatheAnimation.h"
 #include "SakuraSunsetAnimation.h"
+#include "ColourWaveAnimation.h"

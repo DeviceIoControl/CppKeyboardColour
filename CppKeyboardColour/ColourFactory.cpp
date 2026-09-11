@@ -39,6 +39,23 @@ uint32_t ColourFactory::Create(ColourFormat dstFormat, const Colour& colour) con
 	return 0;
 }
 
+Colour ColourFactory::Create(ColourValue colour) const 
+{
+	switch (colour) 
+	{
+	case ColourValue::RED:
+		return this->Create(0xff, 0x00, 0x00);
+
+	case ColourValue::GREEN:
+		return this->Create(0x00, 0xff, 0x00);
+
+	case ColourValue::BLUE:
+		return this->Create(0x00, 0x00, 0xff);
+	}
+
+	return this->Create(0x00, 0x00, 0x00);
+}
+
 uint32_t ColourFactory::Convert(ColourFormat srcFormat, uint32_t colour, ColourFormat dstFormat) const
 {
 	Colour colourObj{};
