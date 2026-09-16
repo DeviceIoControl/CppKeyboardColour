@@ -1,7 +1,6 @@
 // Created by DeviceIoControl
 
 #pragma once
-
 #include "Colour.h"
 
 enum class ColourFormat : uint16_t
@@ -10,7 +9,16 @@ enum class ColourFormat : uint16_t
 	B8R8G8
 };
 
-enum class ColourValue : uint16_t { RED, GREEN, BLUE };
+enum class ColourValue : uint32_t 
+{ 
+	RED = 0xff0000,
+	GREEN = 0x00ff00,
+	BLUE = 0x0000ff,
+	YELLOW = 0xffff00,
+	PURPLE = 0xff00ff,
+	WHITE = 0xffffff,
+	BLACK = 0x000000
+};
 
 class ColourFactory
 {

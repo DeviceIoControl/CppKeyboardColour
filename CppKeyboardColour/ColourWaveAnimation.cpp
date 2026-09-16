@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "ColourWaveAnimation.h"
 
-constexpr size_t STEPS = 40;
+constexpr size_t STEPS = 50;
 constexpr size_t FRAME_DURATION_MS = 25;
 
 ColourWaveAnimation::ColourWaveAnimation()

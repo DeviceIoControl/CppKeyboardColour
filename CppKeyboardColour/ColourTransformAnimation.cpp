@@ -12,9 +12,9 @@ ColourTransformAnimation::ColourTransformAnimation()
 {
 	ColourFactory factory{};
 
-	const auto red = factory.Create(255, 0, 0);
-	const auto green = factory.Create(0, 255, 0);
-	const auto blue = factory.Create(0, 0, 255);
+	const auto red = factory.Create(ColourValue::RED);
+	const auto green = factory.Create(ColourValue::GREEN);
+	const auto blue = factory.Create(ColourValue::BLUE);
 
 	const auto redToGreen = m_patternGenerator.GenerateColourBlend(DeviceMask::Keyboard, red, green, STEPS, FRAME_DURATION_MS);
 	m_frames.AddFrames(redToGreen);

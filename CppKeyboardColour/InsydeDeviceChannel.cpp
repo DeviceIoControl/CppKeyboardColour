@@ -22,8 +22,8 @@ bool InsydeDeviceChannel::SendCode(uint32_t code)
 	}
 
 	// Found in CLEVO Control Center v6.053
-	uint8_t const mode = 8;
-	uint32_t const colour = m_colourFactory.Convert(ColourFormat::B8R8G8, code & 0x00ffffff, ColourFormat::R8G8B8);
+	const uint8_t mode = 8;
+	const auto colour = m_colourFactory.Convert(ColourFormat::B8R8G8, code & 0x00ffffff, ColourFormat::R8G8B8);
 
 	m_pfnSetDCHU_Data(0x67, xstd::adjust_ptr<const uint8_t>(&code, 0), sizeof(code));
 	m_pfnWriteAppSettings(2, 0x51, 3, xstd::adjust_ptr<const uint8_t>(&colour, 1));

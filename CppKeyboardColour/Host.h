@@ -13,7 +13,7 @@ class Host
 	: public IHost
 {
 public:
-	Host(uint32_t modelId, const std::vector<std::shared_ptr<IDevice>>& devices);
+	Host(uint32_t modelId, const std::wstring& modelName, const std::vector<std::shared_ptr<IDevice>>& devices);
 
 	~Host() override = default;
 
@@ -22,6 +22,8 @@ public:
 	KeyboardType GetKeyboardType() const override;
 
 	uint32_t GetModelID() const override;
+
+	std::wstring GetModelName() const override;
 
 	bool SetColour(DeviceMask devices, Zone zone, const Colour& colour) override;
 
@@ -33,6 +35,7 @@ public:
 
 private:
 	uint32_t m_modelId{};
+	std::wstring m_modelName{};
 	std::shared_ptr<IDevice> m_pKeyboard;
 	std::shared_ptr<IDevice> m_pLightbar;
 	std::shared_ptr<IDevice> m_pLogo;

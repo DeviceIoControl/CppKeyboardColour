@@ -79,14 +79,19 @@ inline bool operator&(DeviceMask a, DeviceMask b)
 	return (xstd::to_underlying(a) & xstd::to_underlying(b)) != 0;
 }
 
+inline void operator&=(DeviceMask& a, DeviceMask b)
+{
+	a = static_cast<DeviceMask>(xstd::to_underlying(a) & xstd::to_underlying(b));
+}
+
 inline DeviceMask operator|(DeviceMask a, DeviceMask b)
 {
 	return static_cast<DeviceMask>(xstd::to_underlying(a) | xstd::to_underlying(b));
 }
 
-inline DeviceMask operator|=(DeviceMask a, DeviceMask b)
+inline void operator|=(DeviceMask& a, DeviceMask b)
 {
-	return static_cast<DeviceMask>(xstd::to_underlying(a) | xstd::to_underlying(b));
+	a = static_cast<DeviceMask>(xstd::to_underlying(a) | xstd::to_underlying(b));
 }
 
 inline bool operator!(DeviceMask a)

@@ -2,7 +2,9 @@
 
 #pragma once
 
-#include "stdafx.h"
+#ifndef _AWESOME_ANIMATION_H_
+#include "AwesomeAnimation.h"
+#endif
 
 #include "BreatheAnimation.h"
 #include "ColourShiftAnimation.h"

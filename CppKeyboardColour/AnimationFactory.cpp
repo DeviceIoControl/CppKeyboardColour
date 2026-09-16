@@ -46,9 +46,13 @@ std::unique_ptr<IAnimation> AnimationFactory::Create(const std::wstring& name) c
 	{
 		return std::make_unique<SakuraSunsetAnimation>();
 	}
-	else if (name == L"colourwave") 
+	else if (name == L"colourwave")
 	{
 		return std::make_unique<ColourWaveAnimation>();
+	} 
+	else if (name == L"awesome")
+	{
+		return std::make_unique<AwesomeAnimation>();
 	}
 
 	return nullptr;

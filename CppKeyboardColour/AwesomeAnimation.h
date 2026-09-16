@@ -4,15 +4,13 @@
 #include "IAnimation.h"
 #include "FramePatternGenerator.h"
 #include "FrameCollection.h"
-#include "ColourFactory.h"
-#include "IHost.h"
 
-class ColourWaveAnimation 
+class AwesomeAnimation 
 	: public IAnimation
 {
 public:
-	ColourWaveAnimation();
-	~ColourWaveAnimation() override = default;
+	AwesomeAnimation();
+	~AwesomeAnimation() override = default;
 
 	std::wstring GetName() const override;
 	std::optional<Frame> GetFrame(uint32_t idx) override;
@@ -20,7 +18,21 @@ public:
 	uint32_t Size() const override;
 
 private:
-	ColourFactory m_factory;
 	FrameCollection m_frames;
 	FramePatternGenerator m_frameGenerator;
+
+	template<typename TAnimation>
+	void AddAnimationFrames() 
+	{
+		std::unique_ptr<IAnimation> pAnimation = std::make_unique<TAnimation>();
+
+		for (size_t i = 0; i < pAnimation->Size(); ++i)
+		{
+			if (auto frame = pAnimation->GetFrame(i))
+			{
+				frame->devices |= DeviceMask::Lightbar;
+				m_frames.AddFrame(frame.value());
+			}
+		}
+	}
 };

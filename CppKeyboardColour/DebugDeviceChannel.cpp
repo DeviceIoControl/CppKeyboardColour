@@ -6,23 +6,26 @@
 
 namespace
 {
-	std::ostream& operator<<(std::ostream& _Ostr, Zone zone)
+	std::string_view GetZoneString(KeyboardType kbType, uint32_t code)
 	{
-		switch (zone)
+		switch ((code & 0xff000000) >> 24)
 		{
-		case Zone::LEFT:
-			return _Ostr << "Left";
+		case xstd::to_underlying(Zone::LEFT):
+			return (kbType == KeyboardType::SINGLE_ZONE) ? "Keyboard Zone: All," : "Keyboard Zone: Left,";
 
-		case Zone::MID:
-			return _Ostr << "Middle";
+		case xstd::to_underlying(Zone::MID):
+			return "Keyboard Zone: Middle,";
 
-		case Zone::RIGHT:
-			return _Ostr << "Right";
+		case xstd::to_underlying(Zone::RIGHT):
+			return "Keyboard Zone: Right,";
+
+		case 0xF3:
+			return "Lightbar,";
+
+		case 0xF4:
+			return "Logo,";
 		}
-
-		return _Ostr << "Unknown";
 	}
-
 } // namespace
 
 DebugDeviceChannel::DebugDeviceChannel(KeyboardType kbType)
@@ -32,42 +35,17 @@ DebugDeviceChannel::DebugDeviceChannel(KeyboardType kbType)
 
 bool DebugDeviceChannel::SendCode(uint32_t code)
 {
-	Zone const zoneIdentifier = static_cast<Zone>((code & 0xff000000) >> 24);
 	const auto rgbColour = m_colourFactory.Convert(ColourFormat::B8R8G8, code & 0x00ffffff, ColourFormat::R8G8B8);
 	const auto colourObject = m_colourFactory.Create(rgbColour);
 
-	std::cout << "Code: 0x" << (void*)code << " -> ";
-
-	if (m_kbType == KeyboardType::TRIPLE_ZONE)
-	{
-		if (static_cast<uint8_t>(zoneIdentifier) >= 0xf0 && static_cast<uint8_t>(zoneIdentifier) <= 0xf2) 
-		{
-			std::cout << "Keyboard Zone: " << static_cast<Zone>(zoneIdentifier) << ", ";
-		}
-	}
-
-	if (m_kbType == KeyboardType::SINGLE_ZONE)
-	{
-		std::cout << ((zoneIdentifier == Zone::LEFT) ? "Keyboard Zone: All, " : "");
-	}
-
-	if (static_cast<uint8_t>(zoneIdentifier) == 0xf3)
-	{
-		std::cout << "Lightbar ";
-	}
-
-	if (static_cast<uint8_t>(zoneIdentifier) == 0xf4)
-	{
-		std::cout << "Logo ";
-	}
-
-	std::cout << "Colour: "
-		<< "(RED - 0x" << (void*)colourObject[INDEX_COLOUR_RED] << "), "
-		<< "(GREEN - 0x" << (void*)colourObject[INDEX_COLOUR_GREEN] << "), "
-		<< "(BLUE - 0x" << (void*)colourObject[INDEX_COLOUR_BLUE] << ") \n";
+	std::printf("Code: 0x%08X -> %s Colour: (RED: 0x%08X), (GREEN: 0x%08X), (BLUE: 0x%08X)\n", 
+		code, 
+		GetZoneString(m_kbType, code).data(),
+		colourObject[INDEX_COLOUR_RED],
+		colourObject[INDEX_COLOUR_GREEN],
+		colourObject[INDEX_COLOUR_BLUE]);
 
 	return true;
-
 }
 
 DeviceChannelType DebugDeviceChannel::QueryType() const

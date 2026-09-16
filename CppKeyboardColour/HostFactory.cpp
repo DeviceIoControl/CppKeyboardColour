@@ -6,101 +6,44 @@
 #include "LegacyModelIdRetriever.h"
 #include "ModelIdRetriever.h"
 
-namespace
-{
-	std::ostream& operator<<(std::ostream& _Ostr, DeviceMask devices)
-	{
-		if (!!(devices & DeviceMask::Keyboard))
-		{
-			_Ostr << "[Keyboard] ";
-		}
-
-		if (!!(devices & DeviceMask::Lightbar))
-		{
-			_Ostr << "[Lightbar] ";
-		}
-
-		if (!!(devices & DeviceMask::Logo))
-		{
-			_Ostr << "[Logo] ";
-		}
-
-		return _Ostr;
-	}
-
-	std::ostream& operator<<(std::ostream& _Ostr, KeyboardType kbType)
-	{
-		switch (kbType)
-		{
-		case KeyboardType::SINGLE_ZONE:
-			return _Ostr << "Single Zone";
-
-		case KeyboardType::TRIPLE_ZONE:
-			return _Ostr << "Triple Zone";
-
-		case KeyboardType::PER_KEY:
-			return _Ostr << "Per-Key";
-		}
-
-		return _Ostr;
-	}
-
-} // namespace
-
 HostFactory::HostFactory(std::unique_ptr<IModelIdRetriever> pModelIdRetriever, std::unique_ptr<ModelIdTranslator> pModelIdTranslator, bool enableDeviceMonitoring)
-	: m_modelIdRetriever(std::move(pModelIdRetriever)),
-	m_modelIdTranslator(std::move(pModelIdTranslator)),
+	: m_modelIdTranslator(std::move(pModelIdTranslator)),
 	m_enableDeviceMonitoring(enableDeviceMonitoring)
 {
-	this->InitializeModelID();
-	this->InitializeDeviceFactory();
+	m_modelId = pModelIdRetriever->GetModelID();
+	m_modelIdTranslator = std::make_shared<ModelIdTranslator>(std::move(pModelIdRetriever));
+
+	DeviceChannelFactory devChannelFactory(m_modelIdTranslator->GetKeyboardType(), enableDeviceMonitoring);
+	m_devFactory = std::make_unique<DeviceFactory>(devChannelFactory.Create(m_modelIdTranslator->GetDeviceChannelType()));
+}
+
+HostFactory::HostFactory(std::unique_ptr<IModelIdRetriever> pModelIdRetriever, bool enableDeviceMonitoring)
+	: m_enableDeviceMonitoring(enableDeviceMonitoring)
+{
+	m_modelId = pModelIdRetriever->GetModelID();
+	m_modelIdTranslator = std::make_shared<ModelIdTranslator>(std::move(pModelIdRetriever));
+
+	DeviceChannelFactory devChannelFactory(m_modelIdTranslator->GetKeyboardType(), enableDeviceMonitoring);
+	m_devFactory = std::make_unique<DeviceFactory>(devChannelFactory.Create(m_modelIdTranslator->GetDeviceChannelType()));
 }
 
 HostFactory::HostFactory(bool useDbgChannel /*= false*/, bool enableDeviceMonitoring /*= false*/)
-	: HostFactory(std::make_unique<ModelIdRetriever>(useDbgChannel), std::make_unique<ModelIdTranslator>(), enableDeviceMonitoring)
+	: HostFactory(std::make_unique<ModelIdRetriever>(useDbgChannel), enableDeviceMonitoring)
 {
 }
 
 std::unique_ptr<Host> HostFactory::Create()
 {
-	std::cout << "Detected Model ID: 0x" << (void*)m_modelId << "\n";
+	std::printf("Detected Model ID: 0x%08x\n", m_modelId);
 
-	const auto hostDevices = m_modelIdTranslator->GetHostDevices(m_modelId);
+	const auto hostDevices = m_modelIdTranslator->GetHostDevices();
 	if (hostDevices == DeviceMask::Unknown)
 	{
 		return nullptr;
 	}
 
-	std::cout << "Host Devices: " << hostDevices << "\n";
-	if (!!(hostDevices & DeviceMask::Keyboard))
-	{
-		std::cout << "Keyboard Type: " << m_modelIdTranslator->GetKeyboardType(m_modelId) << "\n\n";
-	}
-
 	const auto devices = this->CreateRequiredDevices(hostDevices);
-	return std::make_unique<Host>(m_modelId, devices);
-}
-
-void HostFactory::InitializeModelID()
-{
-	m_modelId = m_modelIdRetriever->GetModelID();
-}
-
-bool HostFactory::InitializeDeviceFactory()
-{
-	DeviceChannelFactory const devChannelFactory(m_modelIdTranslator->GetKeyboardType(m_modelId), m_enableDeviceMonitoring);
-
-	if (const auto pDeviceChannel = devChannelFactory.Create(m_modelIdTranslator->GetDeviceChannelType(m_modelId)))
-	{
-		m_devFactory = std::make_unique<DeviceFactory>(pDeviceChannel);
-	}
-
-	if (m_enableDeviceMonitoring)
-	{
-		std::cout << "WARNING: Device monitor mode enabled! (Performance may be affected)\n\n";
-	}
-
-	return (m_modelId && m_devFactory);
+	return std::make_unique<Host>(m_modelId, m_modelIdTranslator->GetModelName(), devices);
 }
 
 std::vector<std::shared_ptr<IDevice>> HostFactory::CreateRequiredDevices(DeviceMask deviceTypes)
@@ -109,7 +52,7 @@ std::vector<std::shared_ptr<IDevice>> HostFactory::CreateRequiredDevices(DeviceM
 
 	if (!!(deviceTypes & DeviceMask::Keyboard))
 	{
-		const auto keyboardType = m_modelIdTranslator->GetKeyboardType(m_modelId);
+		const auto keyboardType = m_modelIdTranslator->GetKeyboardType();
 		devices.emplace_back(m_devFactory->CreateKeyboard(keyboardType));
 	}
 

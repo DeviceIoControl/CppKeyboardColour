@@ -3,6 +3,7 @@
 #pragma once
 #include "IDeviceChannel.h"
 #include "KeyboardType.h"
+#include "ModelIdTranslator.h"
 
 class DeviceChannelFactory
 {

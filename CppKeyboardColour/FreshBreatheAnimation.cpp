@@ -23,22 +23,22 @@ FreshBreatheAnimation::FreshBreatheAnimation()
 	ColourFactory factory{};
 	
 	// Breathe yellow
-	GenerateBreathe(factory.Create(255, 255, 0), STEPS, FRAME_DURATION_MS);
+	GenerateBreathe(factory.Create(ColourValue::YELLOW), STEPS, FRAME_DURATION_MS);
 
 	// Breathe red
-	GenerateBreathe(factory.Create(255, 0, 0), STEPS, FRAME_DURATION_MS);
+	GenerateBreathe(factory.Create(ColourValue::RED), STEPS, FRAME_DURATION_MS);
 
 	// Breathe purple
-	GenerateBreathe(factory.Create(255, 0, 255), STEPS, FRAME_DURATION_MS);
+	GenerateBreathe(factory.Create(ColourValue::PURPLE), STEPS, FRAME_DURATION_MS);
 
 	// Breathe green
-	GenerateBreathe(factory.Create(0, 255, 0), STEPS, FRAME_DURATION_MS);
+	GenerateBreathe(factory.Create(ColourValue::GREEN), STEPS, FRAME_DURATION_MS);
 
 	// Breathe white
-	GenerateBreathe(factory.Create(255, 255, 255), STEPS, FRAME_DURATION_MS);
+	GenerateBreathe(factory.Create(ColourValue::WHITE), STEPS, FRAME_DURATION_MS);
 
 	// Breathe blue
-	GenerateBreathe(factory.Create(0, 0, 255), STEPS, FRAME_DURATION_MS);
+	GenerateBreathe(factory.Create(ColourValue::BLUE), STEPS, FRAME_DURATION_MS);
 
 	// Breathe brown
 	GenerateBreathe(factory.Create(255, 120, 120), STEPS, FRAME_DURATION_MS);

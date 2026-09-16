@@ -1,6 +1,6 @@
 # CLEVO Keyboard Colour Program (C++)
 
-**A C++ version of the original "keyboard-colour-program" developed in C#.**
+**A command-line RGB Keyboard backlight control program for CLEVO & Tongfang based laptops.**
 
 This is a cleaner, more organized, and efficient version of the initial program. It is designed to provide enhanced features for customizing CLEVO keyboards with **RGB** lighting, supporting devices with **1-zone**, **3-zone** keyboards and devices with **RGB Lightbars**. The program also includes a variety of animated effects to enhance your keyboard’s visual experience.
 
@@ -159,7 +159,7 @@ This command works in the same way as the `colour` command - For more info, plea
 
 - **Sakura Transform (Pink & Violet colour sweep):**
   ```bash
-  .\CLEVO_KeyboardColour.exe theme sakuratranform
+  .\CLEVO_KeyboardColour.exe theme sakuratransform
   ```
   🩷 💙 Makes the keyboard lights sweep through various shades of Pink & Violet.
 

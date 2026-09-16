@@ -8,16 +8,17 @@
 FrameCollection FramePatternGenerator::GenerateAscendingPattern(DeviceMask devices, const Colour& targetColour, uint32_t steps, uint32_t stepTimeMs)
 {
 	FrameCollection frames{};
+	ColourFactory factory{};
 
 	for (size_t i = 0; i < steps; ++i)
 	{
 		const auto channelBrightnessFactor = std::sin(((90.0f / steps) * i) * (MATH_PI / 180.0f));
 
-		const Colour currentColour{
+		const auto currentColour = factory.Create(
 			(targetColour[INDEX_COLOUR_RED] * channelBrightnessFactor),
 			(targetColour[INDEX_COLOUR_GREEN] * channelBrightnessFactor),
 			(targetColour[INDEX_COLOUR_BLUE] * channelBrightnessFactor)
-		};
+		);
 
 		frames.AddFrame(devices, Zone::ALL, currentColour, stepTimeMs);
 	}
@@ -28,16 +29,17 @@ FrameCollection FramePatternGenerator::GenerateAscendingPattern(DeviceMask devic
 FrameCollection FramePatternGenerator::GenerateDescendingPattern(DeviceMask devices, const Colour& targetColour, uint32_t steps, uint32_t stepTimeMs)
 {
 	FrameCollection frames{};
+	ColourFactory factory{};
 
 	for (size_t i = steps; i > 0; --i)
 	{
 		const auto channelBrightnessFactor = std::sin(((90.0f / steps) * i) * (MATH_PI / 180.0f));
 
-		const Colour currentColour{
+		const auto currentColour = factory.Create(
 			(targetColour[INDEX_COLOUR_RED] * channelBrightnessFactor),
 			(targetColour[INDEX_COLOUR_GREEN] * channelBrightnessFactor),
 			(targetColour[INDEX_COLOUR_BLUE] * channelBrightnessFactor)
-		};
+		);
 
 		frames.AddFrame(devices, Zone::ALL, currentColour, stepTimeMs);
 	}
@@ -110,14 +112,15 @@ FrameCollection FramePatternGenerator::GenerateColourBlendRotation(DeviceMask de
 FrameCollection FramePatternGenerator::DoGenerateColourBlend(DeviceMask devices, Zone zone, const Colour& startColour, const Colour& endColour, uint32_t steps, uint32_t stepTimeMs)
 {
 	FrameCollection frames{};
+	ColourFactory factory{};
 
 	for (size_t i = 0; i < steps; ++i)
 	{
-		const Colour currentColour{
+		const auto currentColour = factory.Create(
 			static_cast<uint8_t>(xstd::lerp(startColour[INDEX_COLOUR_RED], endColour[INDEX_COLOUR_RED], (1.0f / steps) * i)),
 			static_cast<uint8_t>(xstd::lerp(startColour[INDEX_COLOUR_GREEN], endColour[INDEX_COLOUR_GREEN], (1.0f / steps) * i)),
 			static_cast<uint8_t>(xstd::lerp(startColour[INDEX_COLOUR_BLUE], endColour[INDEX_COLOUR_BLUE], (1.0f / steps) * i))
-		};
+		);
 
 		frames.AddFrame(devices, zone, currentColour, stepTimeMs);
 	}
@@ -128,20 +131,21 @@ FrameCollection FramePatternGenerator::DoGenerateColourBlend(DeviceMask devices,
 FrameCollection FramePatternGenerator::DoGenerateBreathePattern(DeviceMask devices, Zone zone, const Colour& targetColour, uint32_t steps, uint32_t stepTimeMs) 
 {
 	FrameCollection frames{};
+	ColourFactory factory{};
 
 	for (size_t i = 0; i < steps; ++i)
 	{
 		const auto channelBrightnessFactor = std::sin(((180.0f / steps) * i) * (MATH_PI / 180.0f));
 
-		const Colour currentColour{
+		const auto currentColour = factory.Create(
 			(targetColour[INDEX_COLOUR_RED] * channelBrightnessFactor),
 			(targetColour[INDEX_COLOUR_GREEN] * channelBrightnessFactor),
 			(targetColour[INDEX_COLOUR_BLUE] * channelBrightnessFactor)
-		};
+		);
 
 		frames.AddFrame(devices, zone, currentColour, stepTimeMs);
 	}
-
+	
 	return frames;
 }
 
@@ -155,7 +159,7 @@ FrameCollection FramePatternGenerator::GenerateColourWavePattern(DeviceMask devi
 
 	for (size_t i = 0; i < (steps * 1.66f); ++i)
 	{
-		if (i >= 0 && i <= steps)
+		if (i >= 0 && i <= steps) 
 		{
 			frames.TryAddFrame(leftZoneBreathe.GetFrame(i));
 		}

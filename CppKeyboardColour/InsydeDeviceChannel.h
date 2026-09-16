@@ -9,7 +9,7 @@ namespace Detail
 {
 	using T_SetDCHU_Data = DWORD(__stdcall*)(DWORD command, const UINT8* buffer, DWORD length);
 	using T_WriteAppSettings = DWORD(__stdcall*)(DWORD dwPage, DWORD dwOffset, DWORD dwLength, const UINT8* pInBuffer);
-}
+} // namespace Detail
 
 class InsydeDeviceChannel
 	: public IDeviceChannel

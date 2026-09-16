@@ -5,16 +5,15 @@
 #include "IDevice.h"
 #include "IDeviceChannel.h"
 #include "KeyboardType.h"
+#include "DeviceChannelFactory.h"
 
 class DeviceFactory 
 {
 public:
 	DeviceFactory(std::shared_ptr<IDeviceChannel> pDevChannel);
-
+	
 	std::unique_ptr<IDevice> CreateKeyboard(KeyboardType kbType);
-
 	std::unique_ptr<IDevice> CreateLightbar();
-
 	std::unique_ptr<IDevice> CreateLogo();
 
 	~DeviceFactory() = default;	

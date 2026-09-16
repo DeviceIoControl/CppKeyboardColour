@@ -37,7 +37,7 @@ ScopedComPtr<IWbemClassObject> WbemService::ExecuteMethod(const std::wstring& st
 
 	if (FAILED(hr))
 	{
-		std::cout << "IWbemServices::ExecMethod failed with error code: 0x" << (void*)hr << "\n";
+		std::printf("IWbemServices::ExecMethod failed with error code: 0x%08x\n", hr);
 	}
 
 	return ScopedComPtr<IWbemClassObject>(pOutParams);

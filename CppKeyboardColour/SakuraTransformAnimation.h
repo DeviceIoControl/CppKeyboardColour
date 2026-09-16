@@ -14,11 +14,8 @@ public:
 	SakuraTransformAnimation();
 
 	std::wstring GetName() const override;
-
 	std::optional<Frame> GetFrame(uint32_t idx) override;
-
 	bool IsHostSupported(const IHost* pHost) const override;
-
 	uint32_t Size() const override;
 
 	~SakuraTransformAnimation() override = default;

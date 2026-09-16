@@ -15,6 +15,7 @@ public:
 	virtual DeviceMask GetDevices() const = 0;
 	virtual KeyboardType GetKeyboardType() const = 0;
 	virtual uint32_t GetModelID() const = 0;
+	virtual std::wstring GetModelName() const = 0;
 	virtual bool SetColour(DeviceMask devices, Zone zone, const Colour& colour) = 0;
 	virtual bool SetBacklightOn(DeviceMask devices) = 0;
 	virtual bool SetBacklightOff(DeviceMask devices) = 0;

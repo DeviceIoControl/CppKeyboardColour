@@ -8,7 +8,7 @@ HeartbeatAnimation::HeartbeatAnimation()
 {
 	ColourFactory const factory{};
 
-	const auto pulseColour = factory.Create(255, 0, 0);
+	const auto pulseColour = factory.Create(ColourValue::RED);
 
 	this->GeneratePulse(pulseColour, 60);
 }

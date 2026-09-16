@@ -7,21 +7,21 @@
 ColourShiftAnimation::ColourShiftAnimation()
 {
 	const Colours rgbColours {
-		m_factory.Create(0xff, 0x00, 0x00),
-		m_factory.Create(0x00, 0xff, 0x00),
-		m_factory.Create(0x00, 0x00, 0xff),
+		m_factory.Create(ColourValue::RED),
+		m_factory.Create(ColourValue::GREEN),
+		m_factory.Create(ColourValue::BLUE),
 	};
 
 	const Colours brgColours {
-		m_factory.Create(0x00, 0x00, 0xff),
-		m_factory.Create(0xff, 0x00, 0x00),
-		m_factory.Create(0x00, 0xff, 0x00),
+		m_factory.Create(ColourValue::BLUE),
+		m_factory.Create(ColourValue::RED),
+		m_factory.Create(ColourValue::GREEN),
 	};
 
 	const Colours gbrColours {
-		m_factory.Create(0x00, 0xff, 0x00),
-		m_factory.Create(0x00, 0x00, 0xff),
-		m_factory.Create(0xff, 0x00, 0x00),
+		m_factory.Create(ColourValue::GREEN),
+		m_factory.Create(ColourValue::BLUE),
+		m_factory.Create(ColourValue::RED),
 	};
 
 	const auto rgbToBrg = m_frameGenerator.GenerateColourBlendRotation(DeviceMask::Keyboard, rgbColours, brgColours, 255, 0);

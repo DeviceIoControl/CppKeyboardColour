@@ -221,6 +221,7 @@
     <ClInclude Include="PinkBreatheAnimation.h" />
     <ClInclude Include="PulsatingBlinkAnimation.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="AwesomeAnimation.h" />
     <ClInclude Include="SunsetBreatheAnimation.h" />
     <ClInclude Include="SakuraSunsetAnimation.h" />
     <ClInclude Include="SakuraTransformAnimation.h" />
@@ -268,6 +269,7 @@
     <ClCompile Include="ModelIdTranslator.cpp" />
     <ClCompile Include="PinkBreatheAnimation.cpp" />
     <ClCompile Include="PulsatingBlinkAnimation.cpp" />
+    <ClCompile Include="AwesomeAnimation.cpp" />
     <ClCompile Include="SunsetBreatheAnimation.cpp" />
     <ClCompile Include="SakuraSunsetAnimation.cpp" />
     <ClCompile Include="SakuraTransformAnimation.cpp" />

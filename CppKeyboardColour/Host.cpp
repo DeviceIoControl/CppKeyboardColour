@@ -5,14 +5,18 @@
 #include "ColourFactory.h"
 #include "DeviceChannelType.h"
 
-Host::Host(uint32_t modelId, const std::vector<std::shared_ptr<IDevice>>& devices)
-	: m_modelId(modelId)
+Host::Host(uint32_t modelId, const std::wstring& modelName, const std::vector<std::shared_ptr<IDevice>>& devices)
+	: m_modelId(modelId), 
+	m_modelName(modelName)
 {
 	for (const auto& pDevice : devices)
 	{
-		const auto deviceType = static_cast<DeviceMask>(pDevice->Query(QueryType::DeviceType));
+		if (!pDevice)
+		{
+			continue;
+		}
 
-		switch (deviceType)
+		switch (static_cast<DeviceMask>(pDevice->Query(QueryType::DeviceType)))
 		{
 		case DeviceMask::Keyboard:
 			m_pKeyboard = !m_pKeyboard ? pDevice : m_pKeyboard;
@@ -49,6 +53,11 @@ uint32_t Host::GetModelID() const
 	return m_modelId;
 }
 
+std::wstring Host::GetModelName() const 
+{
+	return m_modelName;
+}
+
 bool Host::SetColour(DeviceMask devices, Zone zone, const Colour& colour)
 {
 	if (devices == DeviceMask::Unknown)
@@ -82,7 +91,7 @@ bool Host::SetBacklightOn(DeviceMask devices)
 	}
 
 	ColourFactory const colourFactory{};
-	return this->SetColour(devices, Zone::ALL, colourFactory.Create(0x00, 0x00, 0xFF));
+	return this->SetColour(devices, Zone::ALL, colourFactory.Create(ColourValue::BLUE));
 }
 
 bool Host::SetBacklightOff(DeviceMask devices)

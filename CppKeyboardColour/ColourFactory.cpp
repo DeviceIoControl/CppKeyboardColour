@@ -5,24 +5,16 @@
 
 Colour ColourFactory::Create(uint8_t r, uint8_t g, uint8_t b) const
 {
-	Colour colour{};
-
-	colour[INDEX_COLOUR_RED] = r;
-	colour[INDEX_COLOUR_GREEN] = g;
-	colour[INDEX_COLOUR_BLUE] = b;
-
-	return colour;
+	return Colour{ r, g, b };
 }
 
 Colour ColourFactory::Create(uint32_t rgb) const 
 {
-	Colour colour;
-
-	colour[INDEX_COLOUR_RED] = static_cast<uint8_t>((rgb & 0x00FF0000) >> 16);
-	colour[INDEX_COLOUR_GREEN] = static_cast<uint8_t>((rgb & 0x0000FF00) >> 8);
-	colour[INDEX_COLOUR_BLUE] = static_cast<uint8_t>(rgb & 0x000000FF);
-
-	return colour;
+	return Colour {
+		static_cast<uint8_t>((rgb & 0x00FF0000) >> 16),
+		static_cast<uint8_t>((rgb & 0x0000FF00) >> 8),
+		static_cast<uint8_t>(rgb & 0x000000FF)
+	};
 }
 
 uint32_t ColourFactory::Create(ColourFormat dstFormat, const Colour& colour) const
@@ -41,19 +33,7 @@ uint32_t ColourFactory::Create(ColourFormat dstFormat, const Colour& colour) con
 
 Colour ColourFactory::Create(ColourValue colour) const 
 {
-	switch (colour) 
-	{
-	case ColourValue::RED:
-		return this->Create(0xff, 0x00, 0x00);
-
-	case ColourValue::GREEN:
-		return this->Create(0x00, 0xff, 0x00);
-
-	case ColourValue::BLUE:
-		return this->Create(0x00, 0x00, 0xff);
-	}
-
-	return this->Create(0x00, 0x00, 0x00);
+	return this->Create(xstd::to_underlying(colour));
 }
 
 uint32_t ColourFactory::Convert(ColourFormat srcFormat, uint32_t colour, ColourFormat dstFormat) const
