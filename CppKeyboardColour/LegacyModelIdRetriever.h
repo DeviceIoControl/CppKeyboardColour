@@ -16,7 +16,7 @@ public:
 
 	uint32_t GetModelID() override;
 
-	~LegacyModelIdRetriever();
+	~LegacyModelIdRetriever() override;
 
 private:
 	bool m_useDebugModel = false;
@@ -26,6 +26,4 @@ private:
 	// NOTE: GetProductID64 (A.K.A GetProductdll.dll) is buggy and unintializes COM multiples times,
 	// even though only one call to CoInitialize succeeds.
 	static uint32_t GetProductIDWorker(Detail::T_GetProductID_PCI fnGetProductID);
-
-	HMODULE LoadGetProductDLL() const;
 };

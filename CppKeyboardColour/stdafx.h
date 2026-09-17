@@ -14,6 +14,7 @@
 #include <future>
 #include <algorithm>
 #include <cwctype>
+#include <type_traits>
 
 #include <Windows.h>
 #include <comdef.h>
@@ -27,8 +28,8 @@
 
 #ifdef _DEBUG
 #define USE_DEBUGGABLE_HOST true
-#define PROGRAM_BOOTSTRAP_STRING "CLEVO Keyboard Colours Tool 1.26.XXXX (Debug) - Created by DeviceIoControl."
+#define PROGRAM_BOOTSTRAP_STRING L"CLEVO Keyboard Colours Tool 1.26.XXXX (Debug) - Created by DeviceIoControl."
 #else
 #define USE_DEBUGGABLE_HOST false
-#define PROGRAM_BOOTSTRAP_STRING "CLEVO Keyboard Colours Tool 1.26.1005 - Created by DeviceIoControl."
+#define PROGRAM_BOOTSTRAP_STRING L"CLEVO Keyboard Colours Tool 1.26.1005 - Created by DeviceIoControl."
 #endif

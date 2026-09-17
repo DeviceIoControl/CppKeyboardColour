@@ -23,8 +23,8 @@ static void DisplayHostInformation(const IHost* pHost)
 
 int wmain(int argc, const wchar_t* argv[])
 {
-	SetConsoleTitleA(PROGRAM_BOOTSTRAP_STRING);
-	std::cout << PROGRAM_BOOTSTRAP_STRING << "\n\n";
+	SetConsoleTitleW(PROGRAM_BOOTSTRAP_STRING);
+	std::wcout << PROGRAM_BOOTSTRAP_STRING << L"\n\n";
 
 	if (!IsSingleInstance())
 	{

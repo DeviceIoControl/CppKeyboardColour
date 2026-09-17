@@ -1,8 +1,10 @@
 // Created by DeviceIoControl
 
 #include "stdafx.h"
-#include "ModelIdTranslator.h"
+#include "ModelIdentifier.h"
 #include "ModelIds.h"
+#include "ModelIdRetriever.h"
+#include "LegacyModelIdRetriever.h"
 
 namespace
 {
@@ -13,9 +15,15 @@ namespace
 		MODEL_ID_CV15XX, MODEL_ID_NP60SXX, MODEL_ID_V360EXX
 		//, MODEL_ID_NH77XX
 	};
+
+	template<typename TModelIdRetriever>
+	std::unique_ptr<IModelIdRetriever> CreateModelIdRetriever(bool useDebugModel) 
+	{
+		return std::make_unique<TModelIdRetriever>(useDebugModel);
+	}
 } // namespace 
 
-ModelIdTranslator::ModelIdTranslator(std::unique_ptr<IModelIdRetriever> pModelRetriever)
+ModelIdentifier::ModelIdentifier(std::unique_ptr<IModelIdRetriever> pModelRetriever)
 {
 	this->InitializeSingleZoneKBs();
 	this->InitializeTripleZoneKBs();
@@ -24,31 +32,41 @@ ModelIdTranslator::ModelIdTranslator(std::unique_ptr<IModelIdRetriever> pModelRe
 	m_modelId = pModelRetriever->GetModelID();
 }
 
-KeyboardType ModelIdTranslator::GetKeyboardType() const
+ModelIdentifier::ModelIdentifier(bool useLegacyModelIdRetriever /*= false*/, bool useDebugModel /*= false*/)
+	: ModelIdentifier(useLegacyModelIdRetriever ? CreateModelIdRetriever<LegacyModelIdRetriever>(useDebugModel) : CreateModelIdRetriever<ModelIdRetriever>(useDebugModel))
+{
+}
+
+uint32_t ModelIdentifier::GetModelID() const
+{
+	return m_modelId;
+}
+
+KeyboardType ModelIdentifier::GetKeyboardType() const
 {
 	const auto result = m_modelIdToDevProps.find(m_modelId);
 	return (result != m_modelIdToDevProps.cend()) ? result->second.kbType : KeyboardType::NONE;
 }
 
-DeviceChannelType ModelIdTranslator::GetDeviceChannelType() const
+DeviceChannelType ModelIdentifier::GetDeviceChannelType() const
 {
 	const auto result = m_modelIdToDevProps.find(m_modelId);
 	return (result != m_modelIdToDevProps.cend()) ? result->second.deviceChannelType : DeviceChannelType::None;
 }
 
-DeviceMask ModelIdTranslator::GetHostDevices() const
+DeviceMask ModelIdentifier::GetHostDevices() const
 {
 	const auto result = m_modelIdToDevProps.find(m_modelId);
 	return (result != m_modelIdToDevProps.cend()) ? result->second.devices : DeviceMask::Unknown;
 }
 
-std::wstring ModelIdTranslator::GetModelName() const
+std::wstring ModelIdentifier::GetModelName() const
 {
 	const auto result = m_modelIdToDevProps.find(m_modelId);
 	return (result != m_modelIdToDevProps.cend()) ? result->second.modelName : std::wstring{L"N/A"};
 }
 
-void ModelIdTranslator::InitializeSingleZoneKBs()
+void ModelIdentifier::InitializeSingleZoneKBs()
 {
 	for (const auto currentModelId : g_SingleZoneInsydeModelIds)
 	{
@@ -59,7 +77,7 @@ void ModelIdTranslator::InitializeSingleZoneKBs()
 	}
 }
 
-void ModelIdTranslator::InitializeTripleZoneKBs()
+void ModelIdentifier::InitializeTripleZoneKBs()
 {
 	for (const auto currentModelId : { MODEL_ID_P650RS_GH, MODEL_ID_P650RS_GD })
 	{
@@ -70,7 +88,7 @@ void ModelIdTranslator::InitializeTripleZoneKBs()
 	}
 }
 
-void ModelIdTranslator::InitializeTripleZoneKBsWithPeripherals()
+void ModelIdentifier::InitializeTripleZoneKBsWithPeripherals()
 {
 	m_modelIdToDevProps[MODEL_ID_DEBUG].devices = DeviceMask::Keyboard | DeviceMask::Lightbar | DeviceMask::Logo;
 	m_modelIdToDevProps[MODEL_ID_DEBUG].kbType = KeyboardType::TRIPLE_ZONE;
@@ -78,7 +96,7 @@ void ModelIdTranslator::InitializeTripleZoneKBsWithPeripherals()
 	m_modelIdToDevProps[MODEL_ID_DEBUG].modelName = ConvertModelIdToString(MODEL_ID_DEBUG);
 }
 
-std::wstring ModelIdTranslator::ConvertModelIdToString(uint32_t modelId) 
+std::wstring ModelIdentifier::ConvertModelIdToString(uint32_t modelId)
 {
 	switch (modelId) 
 	{

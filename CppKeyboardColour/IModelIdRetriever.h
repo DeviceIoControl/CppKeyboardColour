@@ -2,7 +2,7 @@
 
 #pragma once
 
-class IModelIdRetriever 
+class IModelIdRetriever
 {
 public:
 	virtual uint32_t GetModelID() = 0;

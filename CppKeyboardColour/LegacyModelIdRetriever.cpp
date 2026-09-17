@@ -7,6 +7,22 @@
 #define GET_PRODUCT_DLL L"GetProductID64.dll"
 #define FN_GETPRODUCT_NAME "GetProductID_PCI"
 
+namespace 
+{
+	HMODULE LoadGetProductDLL()
+	{
+		const auto hModule = LoadLibraryW(GET_PRODUCT_DLL);
+
+		if (!hModule || hModule == INVALID_HANDLE_VALUE)
+		{
+			std::wcout << L"Cannot load " << GET_PRODUCT_DLL << L". Please ensure the DLL is within the same directory!\n";
+			std::exit(STATUS_DLL_NOT_FOUND);
+		}
+
+		return hModule;
+	}
+} // namespace
+
 LegacyModelIdRetriever::LegacyModelIdRetriever(bool useDebugModel /*= false*/)
 	: m_useDebugModel(useDebugModel)
 {
@@ -34,20 +50,8 @@ LegacyModelIdRetriever::~LegacyModelIdRetriever()
 
 /* static */ uint32_t LegacyModelIdRetriever::GetProductIDWorker(Detail::T_GetProductID_PCI fnGetProductID)
 {
+	// Initialize COM to rebalance the COM Init ref count when the function returns.
 	std::ignore = CoInitializeEx(nullptr, COINIT::COINIT_APARTMENTTHREADED);
 
 	return fnGetProductID();
-}
-
-HMODULE LegacyModelIdRetriever::LoadGetProductDLL() const
-{
-	const auto hModule = LoadLibraryW(GET_PRODUCT_DLL);
-
-	if (!hModule || hModule == INVALID_HANDLE_VALUE)
-	{
-		std::wcout << L"Cannot load " << GET_PRODUCT_DLL << L". Please ensure the DLL is within the same directory!\n";
-		std::exit(STATUS_DLL_NOT_FOUND);
-	}
-
-	return hModule;
 }

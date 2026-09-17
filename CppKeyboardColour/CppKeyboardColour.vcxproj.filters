@@ -174,7 +174,7 @@
     <ClInclude Include="DeviceChannel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ModelIdTranslator.h">
+    <ClInclude Include="ModelIdentifier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ModelIdRetriever.h">
@@ -193,6 +193,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AwesomeAnimation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HostDeviceProperties.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -302,7 +305,7 @@
     <ClCompile Include="DeviceChannel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ModelIdTranslator.cpp">
+    <ClCompile Include="ModelIdentifier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ModelIdRetriever.cpp">
