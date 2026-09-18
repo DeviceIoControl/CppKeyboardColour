@@ -6,6 +6,7 @@
 #include "KeyboardType.h"
 #include "Zone.h"
 #include "Colour.h"
+#include "DeviceChannelType.h"
 
 class IHost 
 {
@@ -16,6 +17,8 @@ public:
 	virtual KeyboardType GetKeyboardType() const = 0;
 	virtual uint32_t GetModelID() const = 0;
 	virtual std::wstring GetModelName() const = 0;
+	virtual DeviceChannelType GetDeviceChannelType(DeviceMask device) const = 0;
+
 	virtual bool SetColour(DeviceMask devices, Zone zone, const Colour& colour) = 0;
 	virtual bool SetBacklightOn(DeviceMask devices) = 0;
 	virtual bool SetBacklightOff(DeviceMask devices) = 0;

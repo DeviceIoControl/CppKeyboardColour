@@ -60,9 +60,7 @@ static DWORD DoThemeOperation(std::unique_ptr<IHost> pHost, std::unique_ptr<IAni
 	}
 
 	const auto bShouldLoop = !CommandLine::Contains(L"--once", cmdLines);
-	animator.Play(pAnimation.get(), bShouldLoop);
-
-	return 0;
+	return !animator.Play(pAnimation.get(), bShouldLoop) ? ERROR_NOT_SUPPORTED : ERROR_SUCCESS;
 }
 
 static DWORD DoSystemAnimationOperation(std::unique_ptr<IHost> pHost, SystemAnimation sysAnimation)
@@ -74,7 +72,9 @@ static DWORD DoSystemAnimationOperation(std::unique_ptr<IHost> pHost, SystemAnim
 		return ERROR_INVALID_PARAMETER;
 	}
 
-	if (!(pHost->GetDevices() & DeviceMask::Keyboard))
+	// Restrict direct SendCode ability to WMI devices only (for now).
+	// NOTE: If no keyboard is found, we would recieve a DeviceChannelType::None here.
+	if (pHost->GetDeviceChannelType(DeviceMask::Keyboard) != DeviceChannelType::Wmi)
 	{
 		std::cout << "This operation is not supported on this system.\n";
 		return ERROR_NOT_SUPPORTED;

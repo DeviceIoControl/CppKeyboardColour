@@ -21,7 +21,7 @@ bool Animator::Play(IAnimation* pAnimation, bool bShouldLoop)
 	if (!m_pHost || !pAnimation)
 	{
 		return false;
-	}
+	} 
 
 	if (!pAnimation->IsHostSupported(m_pHost.get()))
 	{

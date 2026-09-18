@@ -5,9 +5,35 @@
 #include "ColourFactory.h"
 #include "DeviceChannelType.h"
 
-Host::Host(uint32_t modelId, const std::wstring& modelName, const std::vector<std::shared_ptr<IDevice>>& devices)
-	: m_modelId(modelId), 
-	m_modelName(modelName)
+namespace 
+{
+	DeviceChannelType QueryDeviceChannelType(std::shared_ptr<IDevice> pDevice) 
+	{
+		return (pDevice) ? static_cast<DeviceChannelType>(pDevice->Query(QueryType::DeviceChannelType)) : DeviceChannelType::None;
+	}
+
+	DeviceMask QueryDeviceType(std::shared_ptr<IDevice> pDevice) 
+	{
+		return (pDevice) ? static_cast<DeviceMask>(pDevice->Query(QueryType::DeviceType)) : DeviceMask::Unknown;
+	}
+
+	bool TrySendDeviceCode(std::shared_ptr<IDevice> pDevice, uint32_t code) 
+	{
+		if (!pDevice)
+		{
+			std::cout << "Cannot communicate with the requested device.\n";
+			return false;
+		}
+
+		return pDevice->SendCode(code);
+	}
+
+} // namespace
+
+Host::Host(std::shared_ptr<ModelIdentifier> pModelId, const std::vector<std::shared_ptr<IDevice>>& devices)
+	: m_modelId(pModelId->GetModelID()),
+	m_modelName(pModelId->GetModelName()),
+	m_devChannelType(pModelId->GetDeviceChannelType())
 {
 	for (const auto& pDevice : devices)
 	{
@@ -16,7 +42,7 @@ Host::Host(uint32_t modelId, const std::wstring& modelName, const std::vector<st
 			continue;
 		}
 
-		switch (static_cast<DeviceMask>(pDevice->Query(QueryType::DeviceType)))
+		switch (QueryDeviceType(pDevice))
 		{
 		case DeviceMask::Keyboard:
 			m_pKeyboard = !m_pKeyboard ? pDevice : m_pKeyboard;
@@ -56,6 +82,23 @@ uint32_t Host::GetModelID() const
 std::wstring Host::GetModelName() const 
 {
 	return m_modelName;
+}
+
+DeviceChannelType Host::GetDeviceChannelType(DeviceMask device) const 
+{
+	switch (device)
+	{
+	case DeviceMask::Keyboard:
+		return QueryDeviceChannelType(m_pKeyboard);
+
+	case DeviceMask::Lightbar:
+		return QueryDeviceChannelType(m_pLightbar);
+
+	case DeviceMask::Logo:
+		return QueryDeviceChannelType(m_pLogo);
+	}
+
+	return DeviceChannelType::None;
 }
 
 bool Host::SetColour(DeviceMask devices, Zone zone, const Colour& colour)
@@ -112,41 +155,20 @@ bool Host::SendDeviceCode(DeviceMask devices, uint32_t code)
 		return false;
 	}
 
-	bool success = true;
-
 	if (!!(devices & DeviceMask::Keyboard))
 	{
-		this->TrySendDeviceCode(m_pKeyboard, code);
+		TrySendDeviceCode(m_pKeyboard, code);
 	}
 
 	if (!!(devices & DeviceMask::Lightbar))
 	{
-		this->TrySendDeviceCode(m_pLightbar, code);
+		TrySendDeviceCode(m_pLightbar, code);
 	}
 
 	if (!!(devices & DeviceMask::Logo))
 	{
-		this->TrySendDeviceCode(m_pLogo, code);
+		TrySendDeviceCode(m_pLogo, code);
 	}
 
 	return true;
-}
-
-bool Host::TrySendDeviceCode(const std::shared_ptr<IDevice>& pDevice, uint32_t code) const
-{
-	if (!pDevice)
-	{
-		std::cout << "Cannot communicate with the requested device.\n";
-		return false;
-	} 
-
-	const auto deviceChannelType = static_cast<DeviceChannelType>(pDevice->Query(QueryType::DeviceChannelType));
-
-	if (deviceChannelType != DeviceChannelType::Wmi)
-	{
-		std::wcout << L"This " << pDevice->GetName() << L" does not support the requested operation.\n";
-		return false;
-	}
-
-	return pDevice->SendCode(code);
 }

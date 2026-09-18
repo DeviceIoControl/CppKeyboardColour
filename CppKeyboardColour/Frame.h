@@ -4,6 +4,7 @@
 
 #include "stdafx.h"
 #include "Colour.h"
+#include "Zone.h"
 #include "DeviceMask.h"
 
 struct Frame

@@ -21,6 +21,5 @@ private:
 	ScopedComPtr<IWbemServices> m_pWbemServices;
 
 	IWbemLocator* CreateWbemLocator();
-
 	IWbemServices* CreateNativeWbemServices(const std::wstring& strNamespace);
 };

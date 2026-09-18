@@ -1,8 +1,8 @@
-# CLEVO Keyboard Colour Program (C++)
+# CLEVO & Tongfang Keyboard Colour Program
 
 **A command-line RGB Keyboard backlight control program for CLEVO & Tongfang based laptops.**
 
-This is a cleaner, more organized, and efficient version of the initial program. It is designed to provide enhanced features for customizing CLEVO keyboards with **RGB** lighting, supporting devices with **1-zone**, **3-zone** keyboards and devices with **RGB Lightbars**. The program also includes a variety of animated effects to enhance your keyboard’s visual experience.
+This is a cleaner, more organized, and efficient version of the initial program. It is designed to provide enhanced features for customizing CLEVO & Tongfang laptop keyboards with **RGB** lighting, supporting devices with **1-zone**, **3-zone** keyboards and devices with **RGB Lightbars**. The program also includes a variety of animated effects to enhance your keyboard’s visual experience.
 
 ---
 
@@ -180,6 +180,19 @@ This command works in the same way as the `colour` command - For more info, plea
   .\CLEVO_KeyboardColour.exe theme pinkbreathe
   ```
   🫁 Enables a Pink breathing effect (smooth inhale/exhale transition pattern).
+
+  **Colour Wave:**  
+  ```bash
+  .\CLEVO_KeyboardColour.exe theme colourwave
+  ```
+  🏄 Enables an RGB colour wave effect over the 3 keyboard zones (designed for 3-zone keyboards only!).
+
+**Awesome:**  
+  ```bash
+  .\CLEVO_KeyboardColour.exe theme awesome
+  ```
+  😎 Cycles through all of the supported animations for the device.
+
 ---
 
 ### ⚙️ Inbuilt Themes (3-Zone Keyboards ONLY):
@@ -322,11 +335,17 @@ NOTE: This command does not support the `--once` argument.
 
 ## 📋 Requirements
 
-- **Compatible CLEVO Devices:**
+- **Compatible CLEVO & Tongfang Devices:**
   - **RGB 1-zone** or **3-zone** lighting.
   - **RGB Lightbar** lighting.
   - For **1-zone keyboards**, the **InsydeDCHU.dll** file must be in the same directory as `CLEVO_KeyboardColour.exe`.
 - **Administrator Permissions:** This program requests for administrator privileges. Please ensure you accept the Windows UAC prompt to avoid WMI failures.
+
+---
+
+## Legal / Disclaimer
+
+This is an unofficial, non-commercial project. CLEVO, Tongfang and related names or binaries (except CLEVO_KeyboardColour.exe), are property of CLEVO. This project is not affiliated with, endorsed by, or sponsored by CLEVO.
 
 ---
 

@@ -28,7 +28,7 @@ std::unique_ptr<Host> HostFactory::Create()
 	}
 
 	const auto devices = this->CreateRequiredDevices(hostDevices);
-	return std::make_unique<Host>(m_modelIdentifer->GetModelID(), m_modelIdentifer->GetModelName(), devices);
+	return std::make_unique<Host>(m_modelIdentifer, devices);
 }
 
 std::vector<std::shared_ptr<IDevice>> HostFactory::CreateRequiredDevices(DeviceMask deviceTypes)

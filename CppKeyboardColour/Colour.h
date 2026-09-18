@@ -3,7 +3,6 @@
 #pragma once
 
 #include "stdafx.h"
-#include "Zone.h"
 
 #define INDEX_COLOUR_RED 0
 #define INDEX_COLOUR_GREEN 1

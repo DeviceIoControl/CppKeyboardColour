@@ -96,7 +96,7 @@ void ModelIdentifier::InitializeTripleZoneKBsWithPeripherals()
 	m_modelIdToDevProps[MODEL_ID_DEBUG].modelName = ConvertModelIdToString(MODEL_ID_DEBUG);
 }
 
-std::wstring ModelIdentifier::ConvertModelIdToString(uint32_t modelId)
+std::wstring_view ModelIdentifier::ConvertModelIdToString(uint32_t modelId)
 {
 	switch (modelId) 
 	{

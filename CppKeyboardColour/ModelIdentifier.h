@@ -20,6 +20,7 @@ public:
 	std::wstring GetModelName() const;
 
 	~ModelIdentifier() = default;
+
 private:
 	uint32_t m_modelId = 0;
 	std::map<uint32_t, HOST_DEVICE_PROPS> m_modelIdToDevProps{};
@@ -28,5 +29,5 @@ private:
 	void InitializeTripleZoneKBs();
 	void InitializeTripleZoneKBsWithPeripherals();
 
-	std::wstring ConvertModelIdToString(uint32_t modelId);
+	std::wstring_view ConvertModelIdToString(uint32_t modelId);
 };
