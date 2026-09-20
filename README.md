@@ -29,7 +29,7 @@ This is a cleaner, more organized, and efficient version of the initial program.
 
 ## ❓FAQ - Frequently asked questions:
 
-**How do I request for support?** - *Please report it [here](https://github.com/DeviceIoControl/CppKeyboardColour/issues).*
+**How do I request for support?** - *Please report it [here](https://github.com/DeviceIoControl/CppKeyboardColour/issues/new/choose).*
 
 **What systems are supported?** - *This program is built for laptops based off of the CLEVO / Tongfang ODM design - For a list of supported CLEVO Models, please take a look at the [releases](https://github.com/DeviceIoControl/CppKeyboardColour/releases/latest)*
 
@@ -38,6 +38,8 @@ This is a cleaner, more organized, and efficient version of the initial program.
 **Does this program have a GUI?** - *No. The intention of this program is to be a lightweight app to enable keyboard themes on your system without the need for the bloatware included with the Control Center. This program does not intend to be a complete replacement of the software shipped with your system.*
 
 **How long does it take to add support for my system?** - *Depends on your device. In most cases (If GitHub notifications worked properly), I can add support for certain models of laptop and create a new release within an hour. On certain occassions (depending of the device) it can take 24-hours or more, but I will ensure communication with you to let you know when that is the case.*
+
+**NOTE:** Please bear in mind, I am the sole developer for this project, and although on occassion there maybe a single code contribution, the majority of the time, it is *only me* adding support and servicing requests for this project. Therefore some requests may take longer than expected, if I am not available. Thank you for your understanding!
 
 ---
 
