@@ -1,0 +1,25 @@
+---
+name: Bug Report template
+about: Template issue for users to report bugs or issues found in the software.
+title: "[BUG] - "
+labels: bug
+assignees: DeviceIoControl
+type: Bug
+
+---
+
+**Describe the bug (A clear and concise description of what the bug is):**
+
+**To Reproduce (Steps to reproduce the behavior):**
+
+**Expected behavior (A clear and concise description of what you expected to happen):**
+
+**Screenshots (If applicable, add screenshots to help explain your problem):**
+
+
+**System Information (please complete the following information):**
+ - OS (e.g. Windows 11 24H2 x64): 
+ - Version (e.g. 1.26.XXXX): 
+- Laptop Model (Model ID): 
+
+**Additional information / notes (Add any other context about the problem here):**
