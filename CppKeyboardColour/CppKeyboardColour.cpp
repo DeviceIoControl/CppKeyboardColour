@@ -42,7 +42,7 @@ int wmain(int argc, const wchar_t* argv[])
 
 	if (!pHost)
 	{
-		std::cout << "This system is not supported.\n\nPlease request for support using the following URL: https://github.com/DeviceIoControl/CppKeyboardColour/issues/new.\n";
+		std::cout << "This system is not supported.\n\nPlease request for support using the following URL: https://github.com/DeviceIoControl/CppKeyboardColour/issues/new/choose.\n";
 		WaitForEnterIfNeeded();
 		return ERROR_NOT_SUPPORTED;
 	}

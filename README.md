@@ -31,9 +31,9 @@ This is a cleaner, more organized, and efficient version of the initial program.
 
 **How do I request for support?** - *Please report it [here](https://github.com/DeviceIoControl/CppKeyboardColour/issues/new/choose).*
 
-**What systems are supported?** - *This program is built for laptops based off of the CLEVO / Tongfang ODM design - For a list of supported CLEVO Models, please take a look at the [releases](https://github.com/DeviceIoControl/CppKeyboardColour/releases/latest)*
+**What systems are supported?** - *This program is built for laptops based off of the CLEVO / Tongfang ODM design - For a list of supported CLEVO Models, please take a look at the [releases](https://github.com/DeviceIoControl/CppKeyboardColour/releases/latest).*
 
-**How do I get more themes?** - *Please create an issue and request for it [here](https://github.com/DeviceIoControl/CppKeyboardColour/issues)*
+**How do I get more themes?** - *Please create an issue and request for it [here](https://github.com/DeviceIoControl/CppKeyboardColour/issues).*
 
 **Does this program have a GUI?** - *No. The intention of this program is to be a lightweight app to enable keyboard themes on your system without the need for the bloatware included with the Control Center. This program does not intend to be a complete replacement of the software shipped with your system.*
 
