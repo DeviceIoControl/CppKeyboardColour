@@ -1,9 +1,10 @@
 ---
-name: Add device support template
-about: Template issue for users to request for support of there laptop.
+name: Device support request template
+about: Template issue for users to request for support of their laptop.
 title: "[FEATURE] - Add support for <DEVICE NAME>"
 labels: enhancement
 assignees: DeviceIoControl
+type: Feature
 
 ---
 
