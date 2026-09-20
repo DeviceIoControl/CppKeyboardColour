@@ -19,7 +19,7 @@ HostFactory::HostFactory(bool useDbgChannel /*= false*/, bool enableDeviceMonito
 
 std::unique_ptr<Host> HostFactory::Create()
 {
-	std::printf("Detected Model ID: 0x%08x\n", m_modelIdentifer->GetModelID());
+	std::printf("Detected Model ID: 0x%08X\n", m_modelIdentifer->GetModelID());
 
 	const auto hostDevices = m_modelIdentifer->GetHostDevices();
 	if (hostDevices == DeviceMask::Unknown)

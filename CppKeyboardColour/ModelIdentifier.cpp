@@ -79,7 +79,7 @@ void ModelIdentifier::InitializeSingleZoneKBs()
 
 void ModelIdentifier::InitializeTripleZoneKBs()
 {
-	for (const auto currentModelId : { MODEL_ID_P650RS_GH, MODEL_ID_P650RS_GD })
+	for (const auto currentModelId : { MODEL_ID_P650RS_GH, MODEL_ID_P650RS_GD, MODEL_ID_P775TXX })
 	{
 		m_modelIdToDevProps[currentModelId].devices = DeviceMask::Keyboard;
 		m_modelIdToDevProps[currentModelId].kbType = KeyboardType::TRIPLE_ZONE;
@@ -126,6 +126,9 @@ std::wstring_view ModelIdentifier::ConvertModelIdToString(uint32_t modelId)
 
 	case MODEL_ID_V360EXX:
 		return L"CLEVO V360EXX Series";
+
+	case MODEL_ID_P775TXX:
+		return L"CLEVO P775TXX Series";
 
 	case MODEL_ID_P650RS_GH:
 	case MODEL_ID_P650RS_GD:

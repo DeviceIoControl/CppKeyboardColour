@@ -20,6 +20,12 @@ void WaitForEnterIfNeeded()
 	AppConsole().Prompt(L"\nPress Enter to exit...");
 }
 
+void PromptUserOnError(const std::wstring& errMessage)
+{
+	const std::wstring userMessage(errMessage + L"\nPress Enter to exit...");
+	AppConsole().Prompt(userMessage);
+}
+
 void EnterHiddenMode(bool shouldHide)
 {
 	shouldHide ? AppConsole().Hide() : AppConsole().Show();

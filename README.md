@@ -19,19 +19,15 @@ This is a cleaner, more organized, and efficient version of the initial program.
   
 ⚠️ **Important Note:** This application requests for **Administrator privileges**. Please ensure you accept the Windows UAC prompt, as Windows Management Instrumentation (WMI) requires this to function correctly.
 
-⚠️ **Warning (1):** Certain themes may utilize **~15% of CPU** at certain times.
-
-⚠️ **Warning (2):** Please ensure that the **InsydeDCHU.dll** file is in the same directory as `CLEVO_KeyboardColour.exe` if you're using a **Single-Zone** keyboard.
-
-⚠️ **Warning (3):** Some anti-virus products may incorrectly flag this application as **malware** and quarantine the program. If this happens, **please add the application to the AV exclusion list**.
+⚠️ **Warning:** Certain themes may utilize **~15% of CPU** at certain times.
 
 ---
 
 ## ❓FAQ - Frequently asked questions:
 
-**How do I request for support?** - *Please request for it [here](https://github.com/DeviceIoControl/CppKeyboardColour/issues/new/choose).*
+**How do I request for support?** - *Please create a request for it [here](https://github.com/DeviceIoControl/CppKeyboardColour/issues/new/choose).*
 
-**How do I report a software bug?** - *Please report it [here](https://github.com/DeviceIoControl/CppKeyboardColour/issues/new/choose)*
+**How do I report a software bug?** - *Please create a bug report for it [here](https://github.com/DeviceIoControl/CppKeyboardColour/issues/new/choose).*
 
 **What systems are supported?** - *This program is built for laptops based off of the CLEVO / Tongfang ODM design - For a list of supported CLEVO Models, please take a look at the [releases](https://github.com/DeviceIoControl/CppKeyboardColour/releases/latest).*
 
@@ -39,9 +35,13 @@ This is a cleaner, more organized, and efficient version of the initial program.
 
 **Does this program have a GUI?** - *No. The intention of this program is to be a lightweight app to enable keyboard themes on your system without the need for the bloatware included with the Control Center. This program does not intend to be a complete replacement of the software shipped with your system.*
 
-**How long does it take to add support for my system?** - *Depends on your device. In most cases (If GitHub notifications worked properly), I can add support for certain models of laptop and create a new release within an hour. On certain occassions (depending on the device) it can take 24-hours or more, but I will ensure this is communicated with you when that is the case.*
+**How do I hide the command window?** - *Please refer to the 'Background Modes' section of the README for more information.*
 
-**NOTE:** Please bear in mind, I am the sole developer for this project, and although on occassion there maybe a single code contribution, the majority of the time, it is *only me* adding support and servicing requests for this project. **Therefore some requests may take longer than expected, if I am not available. Thank you for your understanding!**
+**How long does it take to add support for my system?** - *Depends on your device. In most cases (If GitHub notifications worked properly), I can add support for certain models of laptop and create a new release within an hour. On certain occassions (depending on the device) it can take 24-hours or more, but I will ensure you are informed about this when that is the case.*
+
+**How do I fix this error?** - *Please refer to the 'Common Errors' section of the README for more information.*
+
+**NOTE:** Please bear in mind, I am the sole developer for this project, and although there may be a few minor code contributions on occassion, the majority of the time, it's *only me* adding support and servicing requests for this project. **So, please understand that some requests may take longer than expected, if I am not available or busy. Thank you for your understanding!**
 
 ---
 
@@ -374,6 +374,30 @@ To turn off the keyboard backlight, run:
 .\CLEVO_KeyboardColour.exe backlight off
 ```
 NOTE: This command does not support the `--once` argument.
+
+---
+
+## ❗Common Errors
+
+The section will address all of the most common errors and provide troubleshooting tips and fixes.
+
+**Error "Cannot load InsydeDCHU.dll..."**
+
+- If you're using a **Single-Zone** keyboard system, please ensure that the **InsydeDCHU.dll** file is in the same directory as `CLEVO_KeyboardColour.exe`.
+
+**Error "Cannot load clevomof.dll..."**
+
+- If you're using a **Triple-Zone** keyboard system, please ensure you run the "Scripts\RegisterClevoMof.cmd" script **AS ADMINISTRATOR** and follow the instructions carefully.
+
+**Error "Please change the current directory (using the `cd` command) to 'Scripts\' directory before running this command." (RegisterClevoMof.cmd)**
+
+1.) Open a command prompt as Administrator.
+2.) Change directory (using the `cd` command) in this command prompt to the "Scripts" folder located in the same folder you extracted the files to.
+3.) Run "RegisterClevoMof.cmd" from this command prompt.
+4.) Follow the instructions outputted by the script.
+
+**Application keeps disappearing when trying to launch it?** 
+Some anti-virus products may incorrectly flag this application as **malware** and quarantine the program. If this happens, **please add the application to the AV exclusion list**.
 
 ---
 

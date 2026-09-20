@@ -6,6 +6,22 @@
 
 #define INSYDE_DLL L"InsydeDCHU.dll"
 
+namespace 
+{
+	HMODULE LoadInsydeDCHU_DLL() 
+	{
+		const auto hModule = LoadLibraryW(INSYDE_DLL);
+
+		if (!hModule || hModule == INVALID_HANDLE_VALUE)
+		{
+			PromptUserOnError(L"Cannot load InsydeDCHU.dll. Please ensure the DLL is within the same directory!\n");
+			std::exit(STATUS_DLL_NOT_FOUND);
+		}
+
+		return hModule;
+	}
+}
+
 InsydeDeviceChannel::InsydeDeviceChannel()
 {
 	m_hInsydeDHCU = LoadInsydeDCHU_DLL();
@@ -47,16 +63,3 @@ InsydeDeviceChannel::~InsydeDeviceChannel()
 	}
 }
 
-HMODULE InsydeDeviceChannel::LoadInsydeDCHU_DLL() const
-{
-	const auto hModule = LoadLibraryW(INSYDE_DLL);
-
-	if (!hModule || hModule == INVALID_HANDLE_VALUE)
-	{
-		std::wcout << L"Cannot load " << INSYDE_DLL << L". Please ensure the DLL is within the same directory!\n";
-		WaitForEnterIfNeeded();
-		std::exit(STATUS_DLL_NOT_FOUND);
-	}
-
-	return hModule;
-}

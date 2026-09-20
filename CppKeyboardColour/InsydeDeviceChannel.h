@@ -24,6 +24,4 @@ private:
 	HMODULE m_hInsydeDHCU = nullptr;
 	T_SetDCHU_Data m_pfnSetDCHU_Data = nullptr;
 	T_WriteAppSettings m_pfnWriteAppSettings = nullptr;
-
-	HMODULE LoadInsydeDCHU_DLL() const;
 };

@@ -21,6 +21,15 @@ static void DisplayHostInformation(const IHost* pHost)
 	std::wcout << L"Model Name: " << pHost->GetModelName() << L"\n\n";
 }
 
+static bool ShouldEnableDMM(const std::vector<std::wstring>& cmdLines) 
+{
+#ifdef TEST_BUILD
+	return true;
+#else
+	return CommandLine::Contains(L"--dmm", cmdLines);
+#endif
+}
+
 int wmain(int argc, const wchar_t* argv[])
 {
 	AppConsole().SetTitle(PROGRAM_BOOTSTRAP_STRING);
@@ -34,7 +43,7 @@ int wmain(int argc, const wchar_t* argv[])
 	}
 
 	const auto cmdLines = CommandLine::GetCommandLines(argc, argv);
-	const auto enableDeviceMonitorMode = CommandLine::Contains(L"--dmm", cmdLines);
+	const auto enableDeviceMonitorMode = ShouldEnableDMM(cmdLines);
 	const auto enableHiddenMode = CommandLine::Contains(L"--hide", cmdLines);
 
 	HostFactory hostFactory(USE_DEBUGGABLE_HOST, enableDeviceMonitorMode);
