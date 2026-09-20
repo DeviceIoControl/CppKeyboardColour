@@ -39,7 +39,7 @@ This is a cleaner, more organized, and efficient version of the initial program.
 
 **How long does it take to add support for my system?** - *Depends on your device. In most cases (If GitHub notifications worked properly), I can add support for certain models of laptop and create a new release within an hour. On certain occassions (depending of the device) it can take 24-hours or more, but I will ensure communication with you to let you know when that is the case.*
 
-**NOTE:** Please bear in mind, I am the sole developer for this project, and although on occassion there maybe a single code contribution, the majority of the time, it is *only me* adding support and servicing requests for this project. Therefore some requests may take longer than expected, if I am not available. Thank you for your understanding!
+**NOTE:** Please bear in mind, I am the sole developer for this project, and although on occassion there maybe a single code contribution, the majority of the time, it is *only me* adding support and servicing requests for this project. **Therefore some requests may take longer than expected, if I am not available. Thank you for your understanding!**
 
 ---
 
