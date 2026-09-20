@@ -3,10 +3,26 @@
 #include "stdafx.h"
 #include "ConsoleUtils.h"
 
+std::unique_ptr<Console> g_Console = nullptr;
+
+Console& AppConsole()
+{
+	if (!g_Console)
+	{
+		g_Console = std::make_unique<Console>();
+	}
+
+	return *g_Console;
+}
+
 void WaitForEnterIfNeeded()
 {
-	std::cout << "\nPress Enter to exit...";
-	std::getchar();
+	AppConsole().Prompt(L"\nPress Enter to exit...");
+}
+
+void EnterHiddenMode(bool shouldHide)
+{
+	shouldHide ? AppConsole().Hide() : AppConsole().Show();
 }
 
 std::ostream& operator<<(std::ostream& _Ostr, DeviceMask devices)

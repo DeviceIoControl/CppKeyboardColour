@@ -25,6 +25,8 @@ namespace
 		case 0xF4:
 			return "Logo,";
 		}
+
+		return "N/A";
 	}
 } // namespace
 

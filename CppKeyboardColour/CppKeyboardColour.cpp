@@ -23,7 +23,7 @@ static void DisplayHostInformation(const IHost* pHost)
 
 int wmain(int argc, const wchar_t* argv[])
 {
-	SetConsoleTitleW(PROGRAM_BOOTSTRAP_STRING);
+	AppConsole().SetTitle(PROGRAM_BOOTSTRAP_STRING);
 	std::wcout << PROGRAM_BOOTSTRAP_STRING << L"\n\n";
 
 	if (!IsSingleInstance())
@@ -35,6 +35,7 @@ int wmain(int argc, const wchar_t* argv[])
 
 	const auto cmdLines = CommandLine::GetCommandLines(argc, argv);
 	const auto enableDeviceMonitorMode = CommandLine::Contains(L"--dmm", cmdLines);
+	const auto enableHiddenMode = CommandLine::Contains(L"--hide", cmdLines);
 
 	HostFactory hostFactory(USE_DEBUGGABLE_HOST, enableDeviceMonitorMode);
 	auto pHost = hostFactory.Create();
@@ -50,15 +51,24 @@ int wmain(int argc, const wchar_t* argv[])
 
 	if (enableDeviceMonitorMode)
 	{
-		std::cout << "WARNING: Device monitor mode enabled! (Performance may be affected)\n\n";
+		std::cout << "WARNING: Device monitor mode enabled! (Performance may be affected)\n";
+
+		if (enableHiddenMode)
+		{
+			std::cout << "WARNING: Cannot enable hidden mode with Device monitor mode enabled.\n";
+		}
+
+		std::cout << "\n";
 	}
 
 	if (!CommandLine::ExclusiveContains({ L"theme", L"inbuilt", L"backlight", L"colour", L"colours", L"lightbar" }, cmdLines))
 	{
-		std::cout << "Invalid command line. Command is: CLEVO_KeyboardColour.exe theme/inbuilt/backlight/lightbar/colour(s) [<themeName>/<hexColour>] [--once] [--speed] <speed> [--dmm]\n";
+		std::cout << "Invalid command line. Command is: CLEVO_KeyboardColour.exe theme/inbuilt/backlight/lightbar/colour(s) [<themeName>/<hexColour>] [--once] [--speed] <speed> [--dmm] [--hide]\n";
 		WaitForEnterIfNeeded();
 		return ERROR_INVALID_PARAMETER;
 	}
 
+	EnterHiddenMode(!enableDeviceMonitorMode && enableHiddenMode);
+	
 	return DoCommandOperation(std::move(pHost), cmdLines);
 }

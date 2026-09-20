@@ -3,6 +3,7 @@
 #include "stdafx.h"
 #include "LegacyModelIdRetriever.h"
 #include "ModelIds.h"
+#include "ConsoleUtils.h"
 
 #define GET_PRODUCT_DLL L"GetProductID64.dll"
 #define FN_GETPRODUCT_NAME "GetProductID_PCI"
@@ -15,7 +16,7 @@ namespace
 
 		if (!hModule || hModule == INVALID_HANDLE_VALUE)
 		{
-			std::wcout << L"Cannot load " << GET_PRODUCT_DLL << L". Please ensure the DLL is within the same directory!\n";
+			AppConsole().Prompt(std::wstring(L"Cannot load ").append(GET_PRODUCT_DLL).append(L". Please ensure the DLL is within the same directory!\n\nPress enter to exit."));
 			std::exit(STATUS_DLL_NOT_FOUND);
 		}
 

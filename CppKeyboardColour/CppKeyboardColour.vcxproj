@@ -183,6 +183,7 @@
     <ClInclude Include="BreatheAnimation.h" />
     <ClInclude Include="ColourWaveAnimation.h" />
     <ClInclude Include="ComInitialiser.h" />
+    <ClInclude Include="Console.h" />
     <ClInclude Include="ConsoleUtils.h" />
     <ClInclude Include="DeviceChannel.h" />
     <ClInclude Include="DeviceChannelType.h" />
@@ -244,6 +245,7 @@
     <ClCompile Include="BreatheAnimation.cpp" />
     <ClCompile Include="ColourWaveAnimation.cpp" />
     <ClCompile Include="ComInitialiser.cpp" />
+    <ClCompile Include="Console.cpp" />
     <ClCompile Include="ConsoleUtils.cpp" />
     <ClCompile Include="DeviceChannel.cpp" />
     <ClCompile Include="DeviceFactory.cpp" />

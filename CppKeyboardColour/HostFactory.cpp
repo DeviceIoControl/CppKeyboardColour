@@ -13,7 +13,7 @@ HostFactory::HostFactory(std::unique_ptr<ModelIdentifier> pModelId, bool enableD
 }
 
 HostFactory::HostFactory(bool useDbgChannel /*= false*/, bool enableDeviceMonitoring /*= false*/)
-	: HostFactory(std::make_unique<ModelIdentifier>(false, useDbgChannel), enableDeviceMonitoring)
+	: HostFactory(std::make_unique<ModelIdentifier>(USE_LEGACY_MODEL_RETRIEVER, useDbgChannel), enableDeviceMonitoring)
 {
 }
 

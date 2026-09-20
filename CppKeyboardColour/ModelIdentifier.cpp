@@ -12,8 +12,8 @@ namespace
 	{
 		MODEL_ID_NP50RXX, MODEL_ID_NH70XX, MODEL_ID_NKNP50XX,
 		MODEL_ID_PC50DXX, MODEL_ID_A715XX, MODEL_ID_NP50SXX,
-		MODEL_ID_CV15XX, MODEL_ID_NP60SXX, MODEL_ID_V360EXX
-		//, MODEL_ID_NH77XX
+		MODEL_ID_CV15XX, MODEL_ID_NP60SXX, MODEL_ID_V360EXX,
+		MODEL_ID_NP50PXX //, MODEL_ID_NH77XX
 	};
 
 	template<typename TModelIdRetriever>
@@ -98,7 +98,7 @@ void ModelIdentifier::InitializeTripleZoneKBsWithPeripherals()
 
 std::wstring_view ModelIdentifier::ConvertModelIdToString(uint32_t modelId)
 {
-	switch (modelId) 
+	switch (modelId)
 	{
 	case MODEL_ID_NP50RXX:
 		return L"CLEVO NP50RXX Series";
@@ -131,7 +131,12 @@ std::wstring_view ModelIdentifier::ConvertModelIdToString(uint32_t modelId)
 	case MODEL_ID_P650RS_GD:
 		return L"CLEVO P650RS-G Series";
 
+	case MODEL_ID_NP50PXX:
+		return L"CLEVO NP50PXX Series";
+
 	case MODEL_ID_DEBUG:
 		return L"CLEVO XXXXXX Series";
 	}
+
+	return L"Unsupported device";
 }

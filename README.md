@@ -1,4 +1,4 @@
-# CLEVO & Tongfang Keyboard Colour Program
+# CLEVO Keyboard Colour Program
 
 **A command-line RGB Keyboard backlight control program for CLEVO & Tongfang based laptops.**
 
@@ -17,8 +17,6 @@ This is a cleaner, more organized, and efficient version of the initial program.
   - 🎥 **Optimized Animations:** Enhanced visual effects using animation objects.
   - ⏱️ **Custom Speed:** Change the speed to make an animation faster or slower.
   
-- **Note:** If you wish to run this program on startup (in the background), please run the "Scripts\RegisterClevoKbOnBoot.cmd" script **AS ADMINISTRATOR** and follow it's instructions. (Please use Scripts\UnregisterClevoKbOnBoot.cmd to stop running at startup) -- Also ensure you have confirmed your theme of choice prior to running the script and adjust the command line in "Scripts\StartClevoKB.cmd" to the requested theme.
-
 ⚠️ **Important Note:** This application requests for **Administrator privileges**. Please ensure you accept the Windows UAC prompt, as Windows Management Instrumentation (WMI) requires this to function correctly.
 
 ⚠️ **Warning (1):** Certain themes may utilize **~15% of CPU** at certain times.
@@ -26,6 +24,20 @@ This is a cleaner, more organized, and efficient version of the initial program.
 ⚠️ **Warning (2):** Please ensure that the **InsydeDCHU.dll** file is in the same directory as `CLEVO_KeyboardColour.exe` if you're using a **Single-Zone** keyboard.
 
 ⚠️ **Warning (3):** Some anti-virus products may incorrectly flag this application as **malware** and quarantine the program. If this happens, **please add the application to the AV exclusion list**.
+
+---
+
+## ❓FAQ - Frequently asked questions:
+
+**How do I request for support?** - *Please report it [here](https://github.com/DeviceIoControl/CppKeyboardColour/issues).*
+
+**What systems are supported?** - *This program is built for laptops based off of the CLEVO / Tongfang ODM design - For a list of supported CLEVO Models, please take a look at the [releases](https://github.com/DeviceIoControl/CppKeyboardColour/releases/latest)*
+
+**How do I get more themes?** - *Please create an issue and request for it [here](https://github.com/DeviceIoControl/CppKeyboardColour/issues)*
+
+**Does this program have a GUI?** - *No. The intention of this program is to be a lightweight app to enable keyboard themes on your system without the need for the bloatware included with the Control Center. This program does not intend to be a complete replacement of the software shipped with your system.*
+
+**How long does it take to add support for my system?** - *Depends on your device. In most cases (If GitHub notifications worked properly), I can add support for certain models of laptop and create a new release within an hour. On certain occassions (depending of the device) it can take 24-hours or more, but I will ensure communication with you to let you know when that is the case.*
 
 ---
 
@@ -37,12 +49,12 @@ The following commands are supported and can be executed via the **Command Promp
 Extract the program zip and run the commands **as an administrator**. To execute the `.exe` files, prepend the `.\` before the command.
 
 ```bash
-.\CLEVO_KeyboardColour.exe theme [theme] --speed [speed] [--dmm]
-.\CLEVO_KeyboardColour.exe inbuilt [theme] [--dmm] (3-Zone keyboards only)
-.\CLEVO_KeyboardColour.exe backlight [on/off] [--dmm]
-.\CLEVO_KeyboardColour.exe colour [hexColour] [--dmm]
-.\CLEVO_KeyboardColour.exe colours [hexColour] [hexColour] [hexColour] [--dmm] (3-Zone keyboards only)
-.\CLEVO_KeyboardColour.exe lightbar [hexColour] [--dmm]
+.\CLEVO_KeyboardColour.exe theme [theme] --speed [speed] [--dmm] [--hide]
+.\CLEVO_KeyboardColour.exe inbuilt [theme] [--dmm] [--hide] (3-Zone keyboards only)
+.\CLEVO_KeyboardColour.exe backlight [on/off] [--dmm] [--hide]
+.\CLEVO_KeyboardColour.exe colour [hexColour] [--dmm] [--hide]
+.\CLEVO_KeyboardColour.exe colours [hexColour] [hexColour] [hexColour] [--dmm] [--hide] (3-Zone keyboards only)
+.\CLEVO_KeyboardColour.exe lightbar [hexColour] [--dmm] [--hide]
 ```
 ---
 
@@ -279,6 +291,28 @@ This command works in the same way as the `colour` command - For more info, plea
 
 ---
 
+### 🪄 Background Modes:
+
+If you wish to run this program on startup (in the background), there are multiple approaches that can be used to hide the CLI Window. 
+
+**For startup background usage**
+
+ 1. Adjust the command line in "Scripts\StartClevoKB.cmd" to play your favourite theme.
+ 
+ 2. Please run the "Scripts\RegisterClevoKbOnBoot.cmd" script **AS ADMINISTRATOR** and follow it's instructions. (Please use Scripts\UnregisterClevoKbOnBoot.cmd to deregister it from startup.)
+ 
+ ⚠️ **WARNING:** This argument should not be used in conjunction with the "--dmm" (Device monitor mode) argument.
+ 
+ **For hidden mode**
+
+ 1. Append the "--hide" argument to your requested theme command-line before launching.
+
+**NOTE:** Please use Task Manager to locate close the application to play other themes.
+
+⚠️ **WARNING:** This argument cannot be used in conjunction with the "--dmm" (Device monitor mode) argument.
+
+---
+
 ## 🛠️ How to Use
 
 1. Download the release which contains the version of the program that supports your system.
@@ -291,7 +325,7 @@ This command works in the same way as the `colour` command - For more info, plea
 
 4. Run the desired command using the syntax:
    ```
-   .\CLEVO_KeyboardColour.exe theme/inbuilt/backlight/lightbar/colour(s) [argument] [--speed <speed>] [--dmm]
+   .\CLEVO_KeyboardColour.exe theme/inbuilt/backlight/lightbar/colour(s) [argument] [--speed <speed>] [--dmm] [--hide]
    ```
 
 ---
@@ -324,6 +358,11 @@ NOTE: This command does not support the `--once` argument.
 
 ⚠️ **Warning (2):** This is supported on 3-Zone keyboard ONLY.
 
+To activate an effect to run in the background, add the `--hide` argument:
+```bash
+.\CLEVO_KeyboardColour.exe theme breathe --hide
+```
+NOTE: This will run the 'breathe' theme, and hide the command-line window. Please use Task Manager to locate close the application to play other themes.
 
 To turn off the keyboard backlight, run:
 ```bash
@@ -345,7 +384,7 @@ NOTE: This command does not support the `--once` argument.
 
 ## Legal / Disclaimer
 
-This is an unofficial, non-commercial project. CLEVO, Tongfang and related names or binaries (except CLEVO_KeyboardColour.exe), are property of CLEVO. This project is not affiliated with, endorsed by, or sponsored by CLEVO.
+This is an unofficial, non-commercial project. CLEVO, Tongfang, Insyde and related names or binaries (except CLEVO_KeyboardColour.exe), are property of CLEVO. This project is not affiliated with, endorsed by, or sponsored by CLEVO, Tongfang or Insyde.
 
 ---
 

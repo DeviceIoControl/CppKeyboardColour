@@ -1,3 +1,5 @@
+// Written by DeviceIoControl
+
 #pragma once
 #include "targetver.h"
 
@@ -24,6 +26,7 @@
 
 #pragma comment(lib, "wbemuuid.lib")
 
+#define USE_LEGACY_MODEL_RETRIEVER false
 #define IS_HANDLE_VALID(handle) (handle && handle != INVALID_HANDLE_VALUE)
 
 #ifdef _DEBUG
@@ -31,5 +34,5 @@
 #define PROGRAM_BOOTSTRAP_STRING L"CLEVO Keyboard Colours Tool 1.26.XXXX (Debug) - Created by DeviceIoControl."
 #else
 #define USE_DEBUGGABLE_HOST false
-#define PROGRAM_BOOTSTRAP_STRING L"CLEVO Keyboard Colours Tool 1.26.1005 - Created by DeviceIoControl."
+#define PROGRAM_BOOTSTRAP_STRING L"CLEVO Keyboard Colours Tool 1.26.0920 - Created by DeviceIoControl."
 #endif
