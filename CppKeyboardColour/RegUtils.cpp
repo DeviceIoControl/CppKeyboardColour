@@ -8,7 +8,7 @@ namespace Registry
 		DWORD stringLength = 0;
 		RegGetValueW(hHive, path.c_str(), valueName.c_str(), RRF_RT_REG_SZ, nullptr, nullptr, &stringLength);
 
-		if (!stringLength) 
+		if (!stringLength)
 		{
 			return {};
 		}
