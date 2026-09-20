@@ -2,13 +2,13 @@
 
 **A command-line RGB Keyboard backlight control program for CLEVO & Tongfang based laptops.**
 
-This is a cleaner, more organized, and efficient version of the initial program. It is designed to provide enhanced features for customizing CLEVO & Tongfang laptop keyboards with **RGB** lighting, supporting devices with **1-zone**, **3-zone** keyboards and devices with **RGB Lightbars**. The program also includes a variety of animated effects to enhance your keyboard’s visual experience.
+This is a cleaner, more organized, and efficient version of the initial program. It is designed to provide enhanced features for customizing CLEVO & Tongfang based laptop keyboards with **RGB** lighting, supporting devices with **1-zone**, **3-zone** keyboards and devices with **RGB Lightbars**. The program also includes a variety of animated effects to enhance your keyboard’s visual experience.
 
 ---
 
 ## 🎨 Current Features
 
-- **Support for CLEVO & Tongfang systems with the following RGB components:**
+- **Support for CLEVO & Tongfang based systems with the following RGB components:**
   - **RGB 3-zone keyboards**.
   - **RGB 1-zone keyboards**.
   - **RGB Lightbars**.
@@ -195,13 +195,13 @@ This command works in the same way as the `colour` command - For more info, plea
   ```
   🫁 Enables a Pink breathing effect (smooth inhale/exhale transition pattern).
 
-  **Colour Wave:**  
+- **Colour Wave:**  
   ```bash
   .\CLEVO_KeyboardColour.exe theme colourwave
   ```
   🏄 Enables an RGB colour wave effect over the 3 keyboard zones (designed for 3-zone keyboards only!).
 
-**Awesome:**  
+- **Awesome:**  
   ```bash
   .\CLEVO_KeyboardColour.exe theme awesome
   ```
@@ -263,8 +263,7 @@ This command works in the same way as the `colour` command - For more info, plea
   ```
   🌈 Creates a fast rainbow sweep effect with smooth transitions at 200% speed.
 
-
-**This is an optional argument, and it will default to the standard speed if not provided.**
+  **This is an optional argument, and it will default to the standard speed if not provided.**
 
 ---
 
@@ -295,9 +294,9 @@ This command works in the same way as the `colour` command - For more info, plea
 
 ### 🪄 Background Modes:
 
-If you wish to run this program on startup (in the background), there are multiple approaches that can be used to hide the CLI Window. 
+If you wish to run this program on (in the background), there are multiple approaches that can be used to hide the CLI Window. 
 
-**For startup background usage**
+**On Startup (as a background application)**
 
  1. Adjust the command line in "Scripts\StartClevoKB.cmd" to play your favourite theme.
  
@@ -376,7 +375,7 @@ NOTE: This command does not support the `--once` argument.
 
 ## 📋 Requirements
 
-- **Compatible CLEVO & Tongfang Devices:**
+- **Compatible CLEVO & Tongfang based devices:**
   - **RGB 1-zone** or **3-zone** lighting.
   - **RGB Lightbar** lighting.
   - For **1-zone keyboards**, the **InsydeDCHU.dll** file must be in the same directory as `CLEVO_KeyboardColour.exe`.
@@ -386,7 +385,7 @@ NOTE: This command does not support the `--once` argument.
 
 ## Legal / Disclaimer
 
-This is an unofficial, non-commercial project. CLEVO, Tongfang, Insyde and related names or binaries (except CLEVO_KeyboardColour.exe), are property of CLEVO. This project is not affiliated with, endorsed by, or sponsored by CLEVO, Tongfang or Insyde.
+**This is an unofficial, non-commercial project. CLEVO, Tongfang, Insyde and related names or binaries (except CLEVO_KeyboardColour.exe), are property of CLEVO. This project is not affiliated with, endorsed by, or sponsored by CLEVO, Tongfang or Insyde.**
 
 ---
 
