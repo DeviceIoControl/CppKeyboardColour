@@ -387,7 +387,9 @@ The section will address all of the most common errors and provide troubleshooti
 
 ⚠️ **Error "Cannot load clevomof.dll..."**
 
-- If you're using a **Triple-Zone** keyboard system, please ensure you run the "Scripts\RegisterClevoMof.cmd" script **AS ADMINISTRATOR** and follow the instructions carefully.
+- If you're using a **Triple-Zone** keyboard system, please ensure you've run the "Scripts\RegisterClevoMof.cmd" script **AS ADMINISTRATOR** and follow the instructions **carefully.**
+
+- If you have already installed any variation of the "CLEVO Control Center", **you do not need to execute this script.**
 
 ⚠️ **Error "Please change the current directory (using the `cd` command) to 'Scripts\' directory before running this command." (RegisterClevoMof.cmd)**
 
@@ -408,6 +410,7 @@ The section will address all of the most common errors and provide troubleshooti
   - **RGB 1-zone** or **3-zone** lighting.
   - **RGB Lightbar** lighting.
   - For **1-zone keyboards**, the **InsydeDCHU.dll** file must be in the same directory as `CLEVO_KeyboardColour.exe`.
+  - For **3-zone keyboards**, the **CLEVOMOF.dll** must be registered using the "Scripts\RegisterClevoMof.cmd" script on 1st use.
 - **Administrator Permissions:** This program requests for administrator privileges. Please ensure you accept the Windows UAC prompt to avoid WMI failures.
 
 ---
