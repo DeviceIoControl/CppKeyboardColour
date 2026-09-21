@@ -5,9 +5,8 @@
 #include "IDevice.h"
 #include "IDeviceChannel.h"
 #include "KeyboardType.h"
-#include "DeviceChannelFactory.h"
 
-class DeviceFactory 
+class DeviceFactory
 {
 public:
 	DeviceFactory(std::shared_ptr<IDeviceChannel> pDevChannel);

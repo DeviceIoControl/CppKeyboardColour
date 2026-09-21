@@ -21,6 +21,23 @@ namespace
 		return Registry::GetRegSzValue(HKEY_LOCAL_MACHINE, CLEVO_MOF_REGKEY, CLEVO_MOF_REGVALUE);
 	}
 
+	bool VerifyClevoMofRegisteredPath(const std::wstring& path) 
+	{
+		if (path.empty()) 
+		{
+			return false;
+		}
+
+		const auto _path = xstd::to_lower_case(path);
+
+		if (_path.find(L"syswow64\\clevomof.dll") == std::wstring::npos) 
+		{
+			return false;
+		}
+
+		return true;
+	}
+
 	bool VerifyClevoMofRegistration()
 	{
 		const auto clevoMofRegisteredPath = GetClevoMofRegisteredPath();
@@ -31,7 +48,13 @@ namespace
 			return false;
 		}
 		
-		if (!File::Exists(clevoMofRegisteredPath))
+		if (!VerifyClevoMofRegisteredPath(clevoMofRegisteredPath)) 
+		{
+			PromptUserOnError(L"Cannot load clevomof.dll.\n");
+			return false;
+		}
+
+		if (!File::Exists(CLEVO_MOF_PATH))
 		{
 			const std::wstring errMsg(L"Cannot load clevomof.dll.\nPlease ensure the DLL is at: " + clevoMofRegisteredPath);
 			PromptUserOnError(errMsg);
