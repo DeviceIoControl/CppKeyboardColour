@@ -381,20 +381,20 @@ NOTE: This command does not support the `--once` argument.
 
 The section will address all of the most common errors and provide troubleshooting tips and fixes.
 
-**Error "Cannot load InsydeDCHU.dll..."**
+⚠️ **Error "Cannot load InsydeDCHU.dll..."**
 
 - If you're using a **Single-Zone** keyboard system, please ensure that the **InsydeDCHU.dll** file is in the same directory as `CLEVO_KeyboardColour.exe`.
 
-**Error "Cannot load clevomof.dll..."**
+⚠️ **Error "Cannot load clevomof.dll..."**
 
 - If you're using a **Triple-Zone** keyboard system, please ensure you run the "Scripts\RegisterClevoMof.cmd" script **AS ADMINISTRATOR** and follow the instructions carefully.
 
-**Error "Please change the current directory (using the `cd` command) to 'Scripts\' directory before running this command." (RegisterClevoMof.cmd)**
+⚠️ **Error "Please change the current directory (using the `cd` command) to 'Scripts\' directory before running this command." (RegisterClevoMof.cmd)**
 
-1.) Open a command prompt as Administrator.
-2.) Change directory (using the `cd` command) in this command prompt to the "Scripts" folder located in the same folder you extracted the files to.
-3.) Run "RegisterClevoMof.cmd" from this command prompt.
-4.) Follow the instructions outputted by the script.
+1. Open a command prompt as Administrator.
+2. Change directory (using the `cd` command) in this command prompt to the "Scripts" folder located in the same folder you extracted the files to.
+3. Run "RegisterClevoMof.cmd" from this command prompt.
+4. Follow the instructions outputted by the script.
 
 **Application keeps disappearing when trying to launch it?** 
 Some anti-virus products may incorrectly flag this application as **malware** and quarantine the program. If this happens, **please add the application to the AV exclusion list**.
