@@ -396,8 +396,9 @@ The section will address all of the most common errors and provide troubleshooti
 3. Run "RegisterClevoMof.cmd" from this command prompt.
 4. Follow the instructions outputted by the script.
 
-**Application keeps disappearing when trying to launch it?** 
-Some anti-virus products may incorrectly flag this application as **malware** and quarantine the program. If this happens, **please add the application to the AV exclusion list**.
+⚠️**Application keeps disappearing when trying to launch it?** 
+
+- Some anti-virus products may incorrectly flag this application as **malware** and quarantine the program. If this happens, **please add the application to the AV exclusion list**.
 
 ---
 
