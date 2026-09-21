@@ -12,8 +12,10 @@ type: Feature
 
 Laptop Model: 
 
-Laptop Keyboard Type (*Single-Zone/Triple Zone*):
+BIOS Version: 
 
-Laptop RGB Components (*Keyboard/Lightbar/Logo*):
+Laptop Keyboard Type (*Single-Zone/Triple Zone*): 
+
+Laptop RGB Components (*Keyboard/Lightbar/Logo*): 
 
 Device Model ID:
