@@ -3,6 +3,8 @@
 #include "stdafx.h"
 #include "WbemClassEnumerator.h"
 
+#define ENUM_TIMEOUT -1
+
 WbemClassEnumerator::WbemClassEnumerator(ScopedComPtr<IEnumWbemClassObject> pEnumerator) 
 	: m_pEnumerator(std::move(pEnumerator))
 {
@@ -10,7 +12,7 @@ WbemClassEnumerator::WbemClassEnumerator(ScopedComPtr<IEnumWbemClassObject> pEnu
 
 bool WbemClassEnumerator::Skip(uint32_t count /*= 1*/)
 {
-	return SUCCEEDED(m_pEnumerator->Skip(-1, count));
+	return SUCCEEDED(m_pEnumerator->Skip(ENUM_TIMEOUT, count));
 }
 
 ScopedComPtr<IWbemClassObject> WbemClassEnumerator::Next() 
@@ -18,7 +20,7 @@ ScopedComPtr<IWbemClassObject> WbemClassEnumerator::Next()
 	ULONG ulReturned = 0;
 	IWbemClassObject* pWbemClassObject = nullptr;
 
-	m_pEnumerator->Next(-1, 1, &pWbemClassObject, &ulReturned);
+	m_pEnumerator->Next(ENUM_TIMEOUT, 1, &pWbemClassObject, &ulReturned);
 	
 	return ScopedComPtr<IWbemClassObject>(pWbemClassObject);
 }

@@ -29,6 +29,9 @@ bool Animator::Play(IAnimation* pAnimation, bool bShouldLoop)
 		return false;
 	}
 
+	// Reset colours on all devices before playing animation.
+	m_pHost->SetBacklightOff(DeviceMask::All);
+
 	std::wcout << L"Playing '" << pAnimation->GetName() << L"' animation...\n\n";
 
 	do

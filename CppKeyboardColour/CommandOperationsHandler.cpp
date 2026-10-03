@@ -21,12 +21,12 @@ static DWORD DoBacklightOperation(std::unique_ptr<IHost> pHost, BacklightType ba
 	{
 	case BacklightType::On:
 		std::cout << "Turning backlights on.\n";
-		pHost->SetBacklightOn(DeviceMask::Keyboard | DeviceMask::Lightbar | DeviceMask::Logo);
+		pHost->SetBacklightOn(DeviceMask::All);
 		break;
 
 	case BacklightType::Off:
 		std::cout << "Turning backlights off.\n";
-		pHost->SetBacklightOff(DeviceMask::Keyboard | DeviceMask::Lightbar | DeviceMask::Logo);
+		pHost->SetBacklightOff(DeviceMask::All);
 		break;
 	}
 
@@ -81,9 +81,10 @@ static DWORD DoSystemAnimationOperation(std::unique_ptr<IHost> pHost, SystemAnim
 	}
 
 	std::cout << "Playing Inbuilt Keyboard animation...\n";
-	pHost->SendDeviceCode(DeviceMask::Keyboard, xstd::to_underlying(sysAnimation));
 
-	return 0;
+	return !pHost->SendDeviceCode(DeviceMask::Keyboard, xstd::to_underlying(sysAnimation)) 
+		? ERROR_NOT_SUPPORTED 
+		: ERROR_SUCCESS;
 }
 
 static DWORD DoUserColourOperation(std::unique_ptr<IHost> pHost, std::optional<Colour> colour)
@@ -102,9 +103,10 @@ static DWORD DoUserColourOperation(std::unique_ptr<IHost> pHost, std::optional<C
 	}
 
 	std::cout << "Setting user provided colour...\n";
-	pHost->SetColour(DeviceMask::Keyboard, Zone::ALL, colour.value());
 
-	return 0;
+	return pHost->SetColour(DeviceMask::Keyboard, Zone::ALL, colour.value())
+		? ERROR_NOT_SUPPORTED
+		: ERROR_SUCCESS;
 }
 
 static DWORD DoUserColour3Operation(std::unique_ptr<IHost> pHost, const std::optional<Colours>& colours)
@@ -153,9 +155,10 @@ static DWORD DoLightbarOperation(std::unique_ptr<IHost> pHost, const std::option
 	}
 
 	std::cout << "Setting user provided lightbar colour...\n";
-	pHost->SetColour(DeviceMask::Lightbar, Zone::ALL, colour.value());
 
-	return 0;
+	return pHost->SetColour(DeviceMask::Lightbar, Zone::ALL, colour.value())
+		? ERROR_NOT_SUPPORTED
+		: ERROR_SUCCESS;
 }
 
 DWORD DoCommandOperation(std::unique_ptr<IHost> pHost, const std::vector<std::wstring>& cmdLines)
@@ -200,7 +203,7 @@ DWORD DoCommandOperation(std::unique_ptr<IHost> pHost, const std::vector<std::ws
 		return DoLightbarOperation(std::move(pHost), lightbarColour);
 	}
 
-	// The code logic from the caller should ensure that we NEVER reach here.
+	// Logic from the caller should ensure that we NEVER reach here.
 	default:
 		std::cout << "An invalid command was provided.\n";
 		return ERROR_INVALID_OPERATION;

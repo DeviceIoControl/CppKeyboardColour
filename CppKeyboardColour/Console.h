@@ -13,6 +13,8 @@ public:
 	void Hide();
 	void Show();
 
+	void OnErrorPrompt(const std::wstring& errMsg, std::optional<DWORD> exitCode);
+
 	bool IsVisible() const;
 
 private:

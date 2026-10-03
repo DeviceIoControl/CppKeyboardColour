@@ -32,6 +32,16 @@ void Console::Show()
 	ShowWindow(m_hWnd, !this->IsVisible() ? SW_SHOW : SW_NORMAL);
 }
 
+void Console::OnErrorPrompt(const std::wstring& errMsg, std::optional<DWORD> exitCode)
+{
+	this->Prompt(errMsg + L"\nPress Enter to exit.");
+
+	if (exitCode.has_value())
+	{
+		std::exit(exitCode.value());
+	}
+}
+
 bool Console::IsVisible() const
 {
 	return !!(GetWindowLongPtrW(m_hWnd, GWL_STYLE) & WS_VISIBLE);

@@ -12,7 +12,7 @@
 static void DisplayHostInformation(const IHost* pHost)
 {
 	std::cout << "Host Devices: " << pHost->GetDevices() << "\n";
-	
+
 	if (!!(pHost->GetDevices() & DeviceMask::Keyboard))
 	{
 		std::cout << "Keyboard Type: " << pHost->GetKeyboardType() << "\n";
@@ -21,7 +21,7 @@ static void DisplayHostInformation(const IHost* pHost)
 	std::wcout << L"Model Name: " << pHost->GetModelName() << L"\n\n";
 }
 
-static bool ShouldEnableDMM(const std::vector<std::wstring>& cmdLines) 
+static bool ShouldEnableDMM(const std::vector<std::wstring>& cmdLines)
 {
 #ifdef TEST_BUILD
 	return true;
@@ -41,7 +41,7 @@ int wmain(int argc, const wchar_t* argv[])
 		WaitForEnterIfNeeded();
 		return ERROR_ALREADY_EXISTS;
 	}
-
+	
 	const auto cmdLines = CommandLine::GetCommandLines(argc, argv);
 	const auto enableDeviceMonitorMode = ShouldEnableDMM(cmdLines);
 	const auto enableHiddenMode = CommandLine::Contains(L"--hide", cmdLines);
@@ -58,13 +58,13 @@ int wmain(int argc, const wchar_t* argv[])
 
 	DisplayHostInformation(pHost.get());
 
-	if (enableDeviceMonitorMode)
+	if (enableHiddenMode)
 	{
-		std::cout << "WARNING: Device monitor mode enabled! (Performance may be affected)\n";
+		std::cout << "WARNING: Cannot enable hidden mode with Device monitor mode enabled.\n";
 
-		if (enableHiddenMode)
+		if (enableDeviceMonitorMode)
 		{
-			std::cout << "WARNING: Cannot enable hidden mode with Device monitor mode enabled.\n";
+			std::cout << "WARNING: Device monitor mode enabled! (Performance may be affected)\n";
 		}
 
 		std::cout << "\n";
@@ -78,6 +78,6 @@ int wmain(int argc, const wchar_t* argv[])
 	}
 
 	EnterHiddenMode(!enableDeviceMonitorMode && enableHiddenMode);
-	
+
 	return DoCommandOperation(std::move(pHost), cmdLines);
 }

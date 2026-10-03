@@ -17,7 +17,7 @@ namespace
 		return (pDevice) ? static_cast<DeviceMask>(pDevice->Query(QueryType::DeviceType)) : DeviceMask::Unknown;
 	}
 
-	bool TrySendDeviceCode(std::shared_ptr<IDevice> pDevice, uint32_t code) 
+	bool TrySendDeviceCode(std::shared_ptr<IDevice> pDevice, uint32_t code)
 	{
 		if (!pDevice)
 		{
@@ -45,15 +45,15 @@ Host::Host(std::shared_ptr<ModelIdentifier> pModelId, const std::vector<std::sha
 		switch (QueryDeviceType(pDevice))
 		{
 		case DeviceMask::Keyboard:
-			m_pKeyboard = !m_pKeyboard ? pDevice : m_pKeyboard;
+			m_pKeyboard = pDevice;
 			break;
 
 		case DeviceMask::Lightbar:
-			m_pLightbar = !m_pLightbar ? pDevice : m_pLightbar;
+			m_pLightbar = pDevice;
 			break;
 
 		case DeviceMask::Logo:
-			m_pLogo = !m_pLogo ? pDevice : m_pLogo;
+			m_pLogo = pDevice;
 			break;
 
 		case DeviceMask::Unknown:
@@ -144,8 +144,7 @@ bool Host::SetBacklightOff(DeviceMask devices)
 		return false;
 	}
 
-	Colour const offColour{};
-	return this->SetColour(devices, Zone::ALL, offColour);
+	return this->SetColour(devices, Zone::ALL, Colour{});
 }
 
 bool Host::SendDeviceCode(DeviceMask devices, uint32_t code)

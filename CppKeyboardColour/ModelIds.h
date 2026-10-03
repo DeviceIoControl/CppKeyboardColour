@@ -15,6 +15,7 @@
 #define MODEL_ID_NP50PXX 0x0000866C
 #define MODEL_ID_NKNP50XX 0x0000866D
 #define MODEL_ID_PC50DXX 0x000025A1
+#define MODEL_ID_V175RXX 0x00002566
 #define MODEL_ID_DEBUG 0x12345678
 
 // #define MODEL_ID_NH77XX - User did not respond with the appropriate information.

@@ -8,4 +8,5 @@ enum class DeviceMask : uint16_t
 	Keyboard = 1,
 	Lightbar = 2,
 	Logo = 4,
+	All = Keyboard | Lightbar | Logo
 };

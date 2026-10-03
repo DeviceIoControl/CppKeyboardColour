@@ -38,6 +38,6 @@
 #define PROGRAM_BOOTSTRAP_STRING L"CLEVO Keyboard Colours Tool 1.26.XXXX (Test Build) - Created by DeviceIoControl."
 #elif defined (RELEASE_BUILD)
 #define USE_DEBUGGABLE_HOST false
-#define PROGRAM_BOOTSTRAP_STRING L"CLEVO Keyboard Colours Tool 1.26.0921 - Created by DeviceIoControl."
+#define PROGRAM_BOOTSTRAP_STRING L"CLEVO Keyboard Colours Tool 1.26.1003 - Created by DeviceIoControl."
 #endif
 
