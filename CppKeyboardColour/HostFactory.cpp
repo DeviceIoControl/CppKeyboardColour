@@ -2,7 +2,7 @@
 
 #include "stdafx.h"
 #include "HostFactory.h"
-#include "DeviceChannelFactory.h"
+#include "Channels/DeviceChannelFactory.h"
 
 HostFactory::HostFactory(std::unique_ptr<ModelIdentifier> pModelId, bool enableDeviceMonitoring)
 	: m_modelIdentifer(std::move(pModelId)),

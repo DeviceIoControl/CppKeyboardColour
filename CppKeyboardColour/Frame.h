@@ -4,8 +4,8 @@
 
 #include "stdafx.h"
 #include "Colour.h"
-#include "Zone.h"
-#include "DeviceMask.h"
+#include "Common/Zone.h"
+#include "Devices/DeviceMask.h"
 
 struct Frame
 {

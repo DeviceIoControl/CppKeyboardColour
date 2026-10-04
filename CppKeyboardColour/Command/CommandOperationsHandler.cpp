@@ -1,0 +1,215 @@
+// Created by DeviceIoControl
+
+#include "stdafx.h"
+#include "../Animator.h"
+#include "CommandLine.h"
+#include "ThemeCommandLine.h"
+#include "../Utils/ConsoleUtils.h"
+#include "../Devices/DeviceMask.h"
+#include "CommandOperationsHandler.h"
+
+static DWORD DoBacklightOperation(std::unique_ptr<IHost> pHost, BacklightType backlight)
+{
+	// Somewhat unsafe, but pHost should always be valid before we get here.
+
+	if (backlight == BacklightType::Invalid)
+	{
+		return ERROR_INVALID_PARAMETER;
+	}
+
+	switch (backlight)
+	{
+	case BacklightType::On:
+		std::cout << "Turning backlights on.\n";
+		pHost->SetBacklightOn(DeviceMask::All);
+		break;
+
+	case BacklightType::Off:
+		std::cout << "Turning backlights off.\n";
+		pHost->SetBacklightOff(DeviceMask::All);
+		break;
+	}
+
+	return 0;
+}
+
+static DWORD DoThemeOperation(std::unique_ptr<IHost> pHost, std::unique_ptr<IAnimation> pAnimation, const std::vector<std::wstring>& cmdLines)
+{
+	// Somewhat unsafe, but pHost should always be valid before we get here.
+
+	if (!pAnimation)
+	{
+		return ERROR_INVALID_PARAMETER;
+	}
+
+	Animator animator(std::move(pHost));
+
+	// "--speed" command-line is only valid with an animation.
+	const auto speedFactor = ProcessSpeedCommandLine(cmdLines);
+
+	if (!animator.SetSpeedFactor(speedFactor))
+	{
+		std::cout << "Speed value out of range (1-250). Animation will not be played.\n";
+		WaitForEnterIfNeeded();
+		return ERROR_INVALID_PARAMETER;
+	}
+
+	if (speedFactor != 1.0f)
+	{
+		std::cout << "Custom speed: " << (100 * speedFactor) << "%\n";
+	}
+
+	const auto bShouldLoop = !CommandLine::Contains(L"--once", cmdLines);
+	return !animator.Play(pAnimation.get(), bShouldLoop) ? ERROR_NOT_SUPPORTED : ERROR_SUCCESS;
+}
+
+static DWORD DoSystemAnimationOperation(std::unique_ptr<IHost> pHost, SystemAnimation sysAnimation)
+{
+	// Somewhat unsafe, but pHost should always be valid before we get here.
+
+	if (sysAnimation == SystemAnimation::KB_MODE_CUSTOM)
+	{
+		return ERROR_INVALID_PARAMETER;
+	}
+
+	// Restrict direct SendCode ability to WMI devices only (for now).
+	// NOTE: If no keyboard is found, we would recieve a DeviceChannelType::None here.
+	if (pHost->GetDeviceChannelType(DeviceMask::Keyboard) != DeviceChannelType::Wmi)
+	{
+		std::cout << "This operation is not supported on this system.\n";
+		return ERROR_NOT_SUPPORTED;
+	}
+
+	std::cout << "Playing Inbuilt Keyboard animation...\n";
+
+	return !pHost->SendDeviceCode(DeviceMask::Keyboard, xstd::to_underlying(sysAnimation)) 
+		? ERROR_NOT_SUPPORTED 
+		: ERROR_SUCCESS;
+}
+
+static DWORD DoUserColourOperation(std::unique_ptr<IHost> pHost, std::optional<Colour> colour)
+{
+	// Somewhat unsafe, but pHost should always be valid before we get here.
+
+	if (!colour.has_value())
+	{
+		return ERROR_INVALID_PARAMETER;
+	}
+
+	if (!(pHost->GetDevices() & DeviceMask::Keyboard))
+	{
+		std::cout << "This operation is not supported on this system.\n";
+		return ERROR_NOT_SUPPORTED;
+	}
+
+	std::cout << "Setting user provided colour...\n";
+
+	return pHost->SetColour(DeviceMask::Keyboard, Zone::ALL, colour.value())
+		? ERROR_NOT_SUPPORTED
+		: ERROR_SUCCESS;
+}
+
+static DWORD DoUserColour3Operation(std::unique_ptr<IHost> pHost, const std::optional<Colours>& colours)
+{
+	// Somewhat unsafe, but pHost should always be valid before we get here.
+
+	if (pHost->GetKeyboardType() != KeyboardType::TRIPLE_ZONE)
+	{
+		std::cout << "This operation is not supported on this keyboard type.\n";
+		WaitForEnterIfNeeded();
+		return ERROR_NOT_SUPPORTED;
+	}
+
+	if (!colours.has_value() || colours->size() != 3)
+	{
+		std::cout << "Invalid argument: Must be 3 hexadecimal colours specified.\n";
+		WaitForEnterIfNeeded();
+		return ERROR_INVALID_PARAMETER;
+	}
+
+	std::cout << "Setting user provided zone colours...\n";
+
+	constexpr std::array zones = { Zone::LEFT, Zone::MID, Zone::RIGHT };
+
+	for (size_t i = 0; i < colours->size(); ++i)
+	{
+		pHost->SetColour(DeviceMask::Keyboard, zones[i], colours->at(i));
+	}
+
+	return 0;
+}
+
+static DWORD DoLightbarOperation(std::unique_ptr<IHost> pHost, const std::optional<Colour>& colour) 
+{
+	// Somewhat unsafe, but pHost should always be valid before we get here.
+
+	if (!colour.has_value())
+	{
+		return ERROR_INVALID_PARAMETER;
+	}
+
+	if (!(pHost->GetDevices() & DeviceMask::Lightbar))
+	{
+		std::cout << "This operation is not supported on this system.\n";
+		return ERROR_NOT_SUPPORTED;
+	}
+
+	std::cout << "Setting user provided lightbar colour...\n";
+
+	return pHost->SetColour(DeviceMask::Lightbar, Zone::ALL, colour.value())
+		? ERROR_NOT_SUPPORTED
+		: ERROR_SUCCESS;
+}
+
+DWORD DoCommandOperation(std::unique_ptr<IHost> pHost, const std::vector<std::wstring>& cmdLines)
+{
+	// pHost will always be valid before reaching here, so no need to check the pointer again.
+
+	switch (ProcessCmdOperation(cmdLines))
+	{
+	case CmdOperation::Animation:
+	{
+		auto pAnimation = ProcessThemeCommandLine(cmdLines);
+		return DoThemeOperation(std::move(pHost), std::move(pAnimation), cmdLines);
+	}
+
+	case CmdOperation::InBuilt:
+	{
+		const auto sysAnimation = ProcessSystemAnimationCommandLine(cmdLines);
+		return DoSystemAnimationOperation(std::move(pHost), sysAnimation);
+	}
+
+	case CmdOperation::Backlight:
+	{
+		const auto backlight = ProcessBacklightCommandLine(cmdLines);
+		return DoBacklightOperation(std::move(pHost), backlight);
+	}
+
+	case CmdOperation::UserColour:
+	{
+		const auto userColour = ProcessColourCommandLine(cmdLines);
+		return DoUserColourOperation(std::move(pHost), userColour);
+	}
+
+	case CmdOperation::UserColour3:
+	{
+		const auto userColours = ProcessColoursCommandLine(cmdLines);
+		return DoUserColour3Operation(std::move(pHost), userColours);
+	}
+	
+	case CmdOperation::Lightbar:
+	{
+		const auto lightbarColour = ProcessLightbarCommandLine(cmdLines);
+		return DoLightbarOperation(std::move(pHost), lightbarColour);
+	}
+
+	// Logic from the caller should ensure that we NEVER reach here.
+	default:
+		std::cout << "An invalid command was provided.\n";
+		return ERROR_INVALID_OPERATION;
+	}
+
+	std::cout << "Exiting...\n";
+
+	return 1;
+}

@@ -1,7 +1,7 @@
 // Created by DeviceIoControl
 
 #pragma once
-#include "DeviceMask.h"
+#include "Devices/DeviceMask.h"
 
 namespace xstd
 {

@@ -31,7 +31,7 @@ uint32_t ColourFactory::Create(ColourFormat dstFormat, const Colour& colour) con
 	return 0;
 }
 
-Colour ColourFactory::Create(ColourValue colour) const 
+Colour ColourFactory::Create(ColourValue colour) const
 {
 	return this->Create(xstd::to_underlying(colour));
 }

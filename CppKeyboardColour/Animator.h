@@ -3,7 +3,7 @@
 #pragma once
 
 #include "IHost.h"
-#include "IAnimation.h"
+#include "Animations/IAnimation.h"
 
 class Animator
 {

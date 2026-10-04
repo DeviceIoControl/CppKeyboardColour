@@ -1,13 +1,14 @@
 // Created by DeviceIoControl
 
 #pragma once
-#include "Zone.h"
-#include "Colour.h"
-#include "KeyboardType.h"
-#include "IDevice.h"
+
 #include "IHost.h"
-#include "DeviceMask.h"
-#include "ModelIdentifier.h"
+#include "Colour.h"
+#include "Common/Zone.h"
+#include "Devices/IDevice.h"
+#include "Common/KeyboardType.h"
+#include "Devices/DeviceMask.h"
+#include "Identifier/ModelIdentifier.h"
 
 class Host
 	: public IHost

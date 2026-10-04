@@ -2,10 +2,10 @@
 
 #pragma once
 
-#include "IDevice.h"
 #include "Host.h"
-#include "DeviceFactory.h"
-#include "ModelIdentifier.h"
+#include "Devices/IDevice.h"
+#include "Devices/DeviceFactory.h"
+#include "Identifier/ModelIdentifier.h"
 
 class HostFactory 
 {

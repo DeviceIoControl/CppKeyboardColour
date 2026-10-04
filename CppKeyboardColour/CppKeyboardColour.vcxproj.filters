@@ -13,18 +13,54 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Animations">
+      <UniqueIdentifier>{0143ce9c-eef6-488f-8232-753915b5d79b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Animations">
+      <UniqueIdentifier>{a50607bb-0dc0-43b3-9214-7adc3d100b1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Devices">
+      <UniqueIdentifier>{a467ea39-a5ad-44c9-919e-cdb47271cc87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Devices">
+      <UniqueIdentifier>{3d20b126-388e-4be8-90f6-5ef8aa8a5388}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Channels">
+      <UniqueIdentifier>{d15d95d9-55bf-487c-ac77-75a03a7b489a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utils">
+      <UniqueIdentifier>{c2d21495-4851-4f12-b089-747cd593d9b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Identifier">
+      <UniqueIdentifier>{0ac42a85-256d-4097-b2ac-4e1083fd6ed1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Command">
+      <UniqueIdentifier>{43c347c7-0d94-471f-81b1-f6d6731a7c8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Common">
+      <UniqueIdentifier>{48cf9c71-f533-47b0-9cf8-80e8963dd5a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Channels">
+      <UniqueIdentifier>{eff2689e-c4a1-4c57-bb09-75da06db30c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Command">
+      <UniqueIdentifier>{e51deae5-ade7-4c97-b5b7-c9f9fdddb038}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Common">
+      <UniqueIdentifier>{698faeb3-e8bc-4cda-b4e4-2e44b18ab003}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Identifier">
+      <UniqueIdentifier>{0e0eca08-6080-4337-9459-18c4f4290166}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utils">
+      <UniqueIdentifier>{ae17e394-855a-4d2b-903e-6346644a8d4b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FrameCollection.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SystemAnimation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Frame.h">
@@ -33,124 +69,19 @@
     <ClInclude Include="Colour.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Zone.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ScopedComPtr.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WbemService.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IAnimation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ColourShiftAnimation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelIds.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BreatheAnimation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LegacyModelIdRetriever.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyboardType.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Animations.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InsydeDeviceChannel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IDeviceChannel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WmiDeviceChannel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DeviceChannelFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugDeviceChannel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FreshBreatheAnimation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MathConstants.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ColourTransformAnimation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PulsatingBlinkAnimation.h">
+    <ClInclude Include="Animations\Animations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ColourFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CommandLine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SingleInstanceEvent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="HeartbeatAnimation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ThemeCommandLine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SystemAnimationTranslator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ExtendedStl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CommandOperationsHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ConsoleUtils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SakuraTransformAnimation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FramePatternGenerator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PinkBreatheAnimation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SunsetBreatheAnimation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SakuraSunsetAnimation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimationFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyboardDevice.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Host.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IDevice.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="HostFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DeviceChannelType.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DeviceFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Animator.h">
@@ -159,40 +90,7 @@
     <ClInclude Include="IHost.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DeviceMask.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LightbarDevice.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LogoDevice.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DeviceChannel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelIdentifier.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ModelIdRetriever.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WbemClassEnumerator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IModelIdRetriever.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ComInitialiser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ColourWaveAnimation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AwesomeAnimation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HostDeviceProperties.h">
@@ -201,11 +99,173 @@
     <ClInclude Include="Console.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FileUtils.h">
+    <ClInclude Include="Animations\ColourShiftAnimation.h">
+      <Filter>Header Files\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Animations\ColourTransformAnimation.h">
+      <Filter>Header Files\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Animations\ColourWaveAnimation.h">
+      <Filter>Header Files\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Animations\AwesomeAnimation.h">
+      <Filter>Header Files\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Animations\BreatheAnimation.h">
+      <Filter>Header Files\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Animations\FreshBreatheAnimation.h">
+      <Filter>Header Files\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Animations\HeartbeatAnimation.h">
+      <Filter>Header Files\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Animations\PinkBreatheAnimation.h">
+      <Filter>Header Files\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Animations\PulsatingBlinkAnimation.h">
+      <Filter>Header Files\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Animations\SakuraSunsetAnimation.h">
+      <Filter>Header Files\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Animations\SakuraTransformAnimation.h">
+      <Filter>Header Files\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Animations\IAnimation.h">
+      <Filter>Header Files\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Channels\DebugDeviceChannel.h">
+      <Filter>Header Files\Channels</Filter>
+    </ClInclude>
+    <ClInclude Include="Channels\DeviceChannel.h">
+      <Filter>Header Files\Channels</Filter>
+    </ClInclude>
+    <ClInclude Include="Channels\InsydeDeviceChannel.h">
+      <Filter>Header Files\Channels</Filter>
+    </ClInclude>
+    <ClInclude Include="Channels\WmiDeviceChannel.h">
+      <Filter>Header Files\Channels</Filter>
+    </ClInclude>
+    <ClInclude Include="Channels\IDeviceChannel.h">
+      <Filter>Header Files\Channels</Filter>
+    </ClInclude>
+    <ClInclude Include="Devices\KeyboardDevice.h">
+      <Filter>Header Files\Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="Devices\LightbarDevice.h">
+      <Filter>Header Files\Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="Devices\LogoDevice.h">
+      <Filter>Header Files\Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="Devices\stdafx.h">
+      <Filter>Header Files\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Animations\stdafx.h">
+      <Filter>Header Files\Channels</Filter>
+    </ClInclude>
+    <ClInclude Include="Animations\SunsetBreatheAnimation.h">
+      <Filter>Header Files\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="FramePatternGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RegUtils.h">
+    <ClInclude Include="Animations\SystemAnimationTranslator.h">
+      <Filter>Header Files\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Animations\SystemAnimation.h">
+      <Filter>Header Files\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Animations\AnimationFactory.h">
+      <Filter>Header Files\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Channels\DeviceChannelFactory.h">
+      <Filter>Header Files\Channels</Filter>
+    </ClInclude>
+    <ClInclude Include="Channels\DeviceChannelType.h">
+      <Filter>Header Files\Channels</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\CommandOperationsHandler.h">
+      <Filter>Header Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\CommandLine.h">
+      <Filter>Header Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\ThemeCommandLine.h">
+      <Filter>Header Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\RegUtils.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\FileUtils.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Identifier\LegacyModelIdRetriever.h">
+      <Filter>Header Files\Identifier</Filter>
+    </ClInclude>
+    <ClInclude Include="Identifier\IModelIdRetriever.h">
+      <Filter>Header Files\Identifier</Filter>
+    </ClInclude>
+    <ClInclude Include="Identifier\ModelIdentifier.h">
+      <Filter>Header Files\Identifier</Filter>
+    </ClInclude>
+    <ClInclude Include="Identifier\ModelIdRetriever.h">
+      <Filter>Header Files\Identifier</Filter>
+    </ClInclude>
+    <ClInclude Include="Identifier\ModelIds.h">
+      <Filter>Header Files\Identifier</Filter>
+    </ClInclude>
+    <ClInclude Include="Identifier\stdafx.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\stdafx.h">
+      <Filter>Header Files\Identifier</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\stdafx.h">
+      <Filter>Header Files\Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Channels\stdafx.h">
+      <Filter>Header Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\ComInitialiser.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\WbemClassEnumerator.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\WbemService.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\ScopedComPtr.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Devices\DeviceFactory.h">
+      <Filter>Header Files\Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="Devices\IDevice.h">
+      <Filter>Header Files\Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Zone.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\MathConstants.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\KeyboardType.h">
+      <Filter>Header Files\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Devices\DeviceMask.h">
+      <Filter>Header Files\Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\SingleInstanceEvent.h">
+      <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\ConsoleUtils.h">
+      <Filter>Header Files\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -218,79 +278,16 @@
     <ClCompile Include="FrameCollection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ColourShiftAnimation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WbemService.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BreatheAnimation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FreshBreatheAnimation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ColourTransformAnimation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PulsatingBlinkAnimation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LegacyModelIdRetriever.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DeviceChannelFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DebugDeviceChannel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WmiDeviceChannel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CommandLine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ColourFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="InsydeDeviceChannel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HeartbeatAnimation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ThemeCommandLine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SystemAnimationTranslator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CommandOperationsHandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ConsoleUtils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SakuraTransformAnimation.cpp">
+    <ClCompile Include="Utils\ConsoleUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FramePatternGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PinkBreatheAnimation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SunsetBreatheAnimation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SakuraSunsetAnimation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimationFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="KeyboardDevice.cpp">
+    <ClCompile Include="Animations\AnimationFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Animator.cpp">
@@ -302,44 +299,107 @@
     <ClCompile Include="HostFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LightbarDevice.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DeviceFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LogoDevice.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DeviceChannel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ModelIdentifier.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ModelIdRetriever.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WbemClassEnumerator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ComInitialiser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ColourWaveAnimation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AwesomeAnimation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FileUtils.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Animations\AwesomeAnimation.cpp">
+      <Filter>Source Files\Animations</Filter>
     </ClCompile>
-    <ClCompile Include="RegUtils.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Animations\BreatheAnimation.cpp">
+      <Filter>Source Files\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Animations\ColourShiftAnimation.cpp">
+      <Filter>Source Files\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Animations\ColourTransformAnimation.cpp">
+      <Filter>Source Files\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Animations\ColourWaveAnimation.cpp">
+      <Filter>Source Files\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Animations\PinkBreatheAnimation.cpp">
+      <Filter>Source Files\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Animations\PulsatingBlinkAnimation.cpp">
+      <Filter>Source Files\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Animations\SakuraSunsetAnimation.cpp">
+      <Filter>Source Files\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Animations\SakuraTransformAnimation.cpp">
+      <Filter>Source Files\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Animations\SunsetBreatheAnimation.cpp">
+      <Filter>Source Files\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Animations\FreshBreatheAnimation.cpp">
+      <Filter>Source Files\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Channels\DeviceChannel.cpp">
+      <Filter>Source Files\Channels</Filter>
+    </ClCompile>
+    <ClCompile Include="Channels\InsydeDeviceChannel.cpp">
+      <Filter>Source Files\Channels</Filter>
+    </ClCompile>
+    <ClCompile Include="Channels\WmiDeviceChannel.cpp">
+      <Filter>Source Files\Channels</Filter>
+    </ClCompile>
+    <ClCompile Include="Channels\DebugDeviceChannel.cpp">
+      <Filter>Source Files\Channels</Filter>
+    </ClCompile>
+    <ClCompile Include="Animations\HeartbeatAnimation.cpp">
+      <Filter>Source Files\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Devices\KeyboardDevice.cpp">
+      <Filter>Source Files\Devices</Filter>
+    </ClCompile>
+    <ClCompile Include="Devices\LightbarDevice.cpp">
+      <Filter>Source Files\Devices</Filter>
+    </ClCompile>
+    <ClCompile Include="Devices\LogoDevice.cpp">
+      <Filter>Source Files\Devices</Filter>
+    </ClCompile>
+    <ClCompile Include="Command\CommandOperationsHandler.cpp">
+      <Filter>Source Files\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Command\ThemeCommandLine.cpp">
+      <Filter>Source Files\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\WbemClassEnumerator.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\WbemService.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\RegUtils.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\FileUtils.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\ComInitialiser.cpp">
+      <Filter>Source Files\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Identifier\ModelIdentifier.cpp">
+      <Filter>Source Files\Identifier</Filter>
+    </ClCompile>
+    <ClCompile Include="Identifier\ModelIdRetriever.cpp">
+      <Filter>Source Files\Identifier</Filter>
+    </ClCompile>
+    <ClCompile Include="Identifier\LegacyModelIdRetriever.cpp">
+      <Filter>Source Files\Identifier</Filter>
+    </ClCompile>
+    <ClCompile Include="Devices\DeviceFactory.cpp">
+      <Filter>Source Files\Devices</Filter>
+    </ClCompile>
+    <ClCompile Include="Command\CommandLine.cpp">
+      <Filter>Source Files\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Channels\DeviceChannelFactory.cpp">
+      <Filter>Source Files\Channels</Filter>
+    </ClCompile>
+    <ClCompile Include="Animations\SystemAnimationTranslator.cpp">
+      <Filter>Source Files\Animations</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

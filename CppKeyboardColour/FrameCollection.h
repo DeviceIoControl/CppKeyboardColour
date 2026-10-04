@@ -2,7 +2,7 @@
 
 #pragma once
 #include "Frame.h"
-#include "DeviceMask.h"
+#include "Devices/DeviceMask.h"
 
 class FrameCollection
 {

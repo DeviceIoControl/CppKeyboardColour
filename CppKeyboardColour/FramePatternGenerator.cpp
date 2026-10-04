@@ -1,9 +1,9 @@
 // Created by DeviceIoControl
 
 #include "stdafx.h"
-#include "FramePatternGenerator.h"
 #include "ColourFactory.h"
-#include "MathConstants.h"
+#include "FramePatternGenerator.h"
+#include "Common/MathConstants.h"
 
 FrameCollection FramePatternGenerator::GenerateAscendingPattern(DeviceMask devices, const Colour& targetColour, uint32_t steps, uint32_t stepTimeMs)
 {

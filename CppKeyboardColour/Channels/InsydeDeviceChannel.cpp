@@ -1,0 +1,65 @@
+// Created by DeviceIoControl
+
+#include "stdafx.h"
+#include "InsydeDeviceChannel.h"
+#include "../Utils/ConsoleUtils.h"
+
+#define INSYDE_DLL L"InsydeDCHU.dll"
+
+namespace 
+{
+	HMODULE LoadInsydeDCHU_DLL() 
+	{
+		const auto hModule = LoadLibraryW(INSYDE_DLL);
+
+		if (!hModule || hModule == INVALID_HANDLE_VALUE)
+		{
+			PromptUserOnError(L"Cannot load InsydeDCHU.dll. Please ensure the DLL is within the same directory!\n");
+			std::exit(STATUS_DLL_NOT_FOUND);
+		}
+
+		return hModule;
+	}
+}
+
+InsydeDeviceChannel::InsydeDeviceChannel()
+{
+	m_hInsydeDHCU = LoadInsydeDCHU_DLL();
+
+	m_pfnSetDCHU_Data = reinterpret_cast<T_SetDCHU_Data>(GetProcAddress(m_hInsydeDHCU, "SetDCHU_Data"));
+	m_pfnWriteAppSettings = reinterpret_cast<T_WriteAppSettings>(GetProcAddress(m_hInsydeDHCU, "WriteAppSettings"));
+}
+
+bool InsydeDeviceChannel::SendCode(uint32_t code)
+{
+	if (!m_pfnSetDCHU_Data || !m_pfnWriteAppSettings)
+	{
+		return false;
+	}
+
+	// Found in CLEVO Control Center v6.053
+	const uint8_t mode = 8;
+	const auto colour = m_colourFactory.Convert(ColourFormat::B8R8G8, code & 0x00ffffff, ColourFormat::R8G8B8);
+
+	m_pfnSetDCHU_Data(0x67, xstd::adjust_ptr<const uint8_t>(&code, 0), sizeof(code));
+	m_pfnWriteAppSettings(2, 0x51, 3, xstd::adjust_ptr<const uint8_t>(&colour, 1));
+	m_pfnWriteAppSettings(2, 0x20, 1, &mode);
+
+	return true;
+}
+
+DeviceChannelType InsydeDeviceChannel::QueryType() const 
+{
+	return DeviceChannelType::Insyde;
+}
+
+InsydeDeviceChannel::~InsydeDeviceChannel()
+{
+	if (IS_HANDLE_VALID(m_hInsydeDHCU))
+	{
+		FreeLibrary(m_hInsydeDHCU);
+		m_pfnSetDCHU_Data = nullptr;
+		m_pfnWriteAppSettings = nullptr;
+	}
+}
+

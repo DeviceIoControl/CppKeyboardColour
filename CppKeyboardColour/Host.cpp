@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "Host.h"
 #include "ColourFactory.h"
-#include "DeviceChannelType.h"
+#include "Channels/DeviceChannelType.h"
 
 namespace 
 {

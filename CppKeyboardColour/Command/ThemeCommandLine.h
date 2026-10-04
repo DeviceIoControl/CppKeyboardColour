@@ -1,0 +1,33 @@
+// Created by DeviceIoControl
+
+#pragma once
+
+#include "../Animations/IAnimation.h"
+#include "../Animations/SystemAnimation.h"
+
+enum class CmdOperation
+{
+	FlagInvalid,
+	Animation,
+	InBuilt,
+	Backlight,
+	UserColour,
+	UserColour3,
+	Lightbar
+};
+
+enum class BacklightType
+{
+	Off,
+	On,
+	Invalid
+};
+
+CmdOperation ProcessCmdOperation(const std::vector<std::wstring>& cmdLines);
+BacklightType ProcessBacklightCommandLine(const std::vector<std::wstring>& cmdLines);
+SystemAnimation ProcessSystemAnimationCommandLine(const std::vector<std::wstring>& cmdLines);
+std::unique_ptr<IAnimation> ProcessThemeCommandLine(const std::vector<std::wstring>& cmdLines);
+std::optional<Colour> ProcessColourCommandLine(const std::vector<std::wstring>& cmdLines);
+std::optional<Colours> ProcessColoursCommandLine(const std::vector<std::wstring>& cmdLines);
+std::optional<Colour> ProcessLightbarCommandLine(const std::vector<std::wstring>& cmdLines);
+float ProcessSpeedCommandLine(const std::vector<std::wstring>& cmdLines);

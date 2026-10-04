@@ -1,11 +1,11 @@
 // Created by DeviceIoControl
 
 #include "stdafx.h"
-#include "CommandLine.h"
 #include "HostFactory.h"
-#include "SingleInstanceEvent.h"
-#include "CommandOperationsHandler.h"
-#include "ConsoleUtils.h"
+#include "Utils/ConsoleUtils.h"
+#include "Command/CommandLine.h"
+#include "Utils/SingleInstanceEvent.h"
+#include "Command/CommandOperationsHandler.h"
 
 #pragma warning(disable: 4995)
 

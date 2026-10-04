@@ -2,11 +2,11 @@
 
 #pragma once
 
-#include "DeviceMask.h"
-#include "KeyboardType.h"
-#include "Zone.h"
 #include "Colour.h"
-#include "DeviceChannelType.h"
+#include "Common/Zone.h"
+#include "Devices/DeviceMask.h"
+#include "Common/KeyboardType.h"
+#include "Channels/DeviceChannelType.h"
 
 class IHost 
 {
