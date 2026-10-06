@@ -287,9 +287,6 @@
     <ClCompile Include="FramePatternGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Animations\AnimationFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Animator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -399,6 +396,9 @@
       <Filter>Source Files\Channels</Filter>
     </ClCompile>
     <ClCompile Include="Animations\SystemAnimationTranslator.cpp">
+      <Filter>Source Files\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Animations\AnimationFactory.cpp">
       <Filter>Source Files\Animations</Filter>
     </ClCompile>
   </ItemGroup>
