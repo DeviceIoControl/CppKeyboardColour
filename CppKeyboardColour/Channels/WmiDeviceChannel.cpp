@@ -4,7 +4,7 @@
 #include "WmiDeviceChannel.h"
 #include "../Utils/FileUtils.h"
 #include "../Utils/RegUtils.h"
-#include "../Utils/ConsoleUtils.h"
+#include "../Console/ConsoleUtils.h"
 
 #define CLEVO_WMI_OBJECT_NAME L"CLEVO_GET"
 #define CLEVO_WMI_KB_METHOD_NAME L"SetKBLED"

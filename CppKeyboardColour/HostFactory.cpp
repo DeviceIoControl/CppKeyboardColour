@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "HostFactory.h"
+#include "Console/Logger.h"
 #include "Channels/DeviceChannelFactory.h"
 
 HostFactory::HostFactory(std::unique_ptr<ModelIdentifier> pModelId, bool enableDeviceMonitoring)
@@ -19,8 +20,8 @@ HostFactory::HostFactory(bool useDbgChannel /*= false*/, bool enableDeviceMonito
 
 std::unique_ptr<Host> HostFactory::Create()
 {
-	std::printf("Detected Model ID: 0x%08X\n", m_modelIdentifer->GetModelID());
-
+	KB_INFO("Detected Model ID: 0x%08X", m_modelIdentifer->GetModelID());
+	
 	const auto hostDevices = m_modelIdentifer->GetHostDevices();
 	if (hostDevices == DeviceMask::Unknown)
 	{

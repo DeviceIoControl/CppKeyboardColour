@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "ModelIds.h"
 #include "LegacyModelIdRetriever.h"
-#include "../Utils/ConsoleUtils.h"
+#include "../Console/ConsoleUtils.h"
 
 #define GET_PRODUCT_DLL L"GetProductID64.dll"
 #define FN_GETPRODUCT_NAME "GetProductID_PCI"

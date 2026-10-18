@@ -2,9 +2,12 @@
 
 #include "stdafx.h"
 #include "Console.h"
+#include "ConsoleLogger.h"
 
-Console::Console() 
+Console::Console(LogLevel level) 
+	: m_baseLoglevel(level)
 {
+	m_pLogger = std::make_unique<ConsoleLogger>();
 	m_hWnd = GetConsoleWindow();
 }
 

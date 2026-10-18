@@ -55,6 +55,15 @@
     <Filter Include="Source Files\Utils">
       <UniqueIdentifier>{ae17e394-855a-4d2b-903e-6346644a8d4b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Logging">
+      <UniqueIdentifier>{f7fc682e-809a-44b8-99eb-47be6dbeaede}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Console">
+      <UniqueIdentifier>{29e5c9e8-b244-4661-93fe-1a491f18daa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Console\Messages">
+      <UniqueIdentifier>{895e0997-008f-4b09-a835-2c6d7b88258b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -94,9 +103,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HostDeviceProperties.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Console.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Animations\ColourShiftAnimation.h">
@@ -264,8 +270,29 @@
     <ClInclude Include="Utils\SingleInstanceEvent.h">
       <Filter>Header Files\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Utils\ConsoleUtils.h">
+    <ClInclude Include="Console\ConsoleUtils.h">
       <Filter>Header Files\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Console\ConsoleColour.h">
+      <Filter>Header Files\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Console\Console.h">
+      <Filter>Header Files\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Console\ConsoleLogger.h">
+      <Filter>Header Files\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Console\Logger.h">
+      <Filter>Header Files\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Console\LogLevel.h">
+      <Filter>Header Files\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Console\ILogger.h">
+      <Filter>Header Files\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Console\stdafx.h">
+      <Filter>Header Files\Console</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -281,7 +308,7 @@
     <ClCompile Include="ColourFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Utils\ConsoleUtils.cpp">
+    <ClCompile Include="Console\ConsoleUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FramePatternGenerator.cpp">
@@ -296,7 +323,7 @@
     <ClCompile Include="HostFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Console.cpp">
+    <ClCompile Include="Console\Console.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Animations\AwesomeAnimation.cpp">
@@ -400,6 +427,9 @@
     </ClCompile>
     <ClCompile Include="Animations\AnimationFactory.cpp">
       <Filter>Source Files\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="Console\ConsoleLogger.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

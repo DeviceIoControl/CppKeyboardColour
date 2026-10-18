@@ -67,14 +67,75 @@ namespace xstd
 		}
 	}
 
-	constexpr float lerp(float a, float b, float t) noexcept 
+	template<typename ..._TArgs>
+	std::wstring format(const std::string& format, _TArgs&& ...args)
+	{
+		std::string allocated_string(0x7fff, 0);
+
+		const auto length = std::snprintf(nullptr, 0, format.c_str(), std::forward<_TArgs>(args)...);
+
+		if (allocated_string.size() < length)
+		{
+			allocated_string.resize(length);
+		}
+
+		std::sprintf(allocated_string.data(), format.c_str(), std::forward<_TArgs>(args)...);
+
+		allocated_string.shrink_to_fit();
+
+		return std::wstring{ allocated_string.cbegin(), allocated_string.cend() };
+	}
+
+	enum class date_format : uint16_t
+	{
+		dd_mm_yyyy,
+		mm_dd_yyyy,
+		yyyy_mm_dd,
+		dd_mm_yy,
+		mm_dd_yy,
+		yy_mm_dd
+	};
+
+	inline std::wstring to_wstring(const SYSTEMTIME& sys_time, date_format date_form = date_format::dd_mm_yyyy)
+	{
+		switch (date_form)
+		{
+		case date_format::dd_mm_yyyy:
+			return xstd::format("%02d/%02d/%04d - %02d:%02d:%02d.%04d",
+				sys_time.wDay, sys_time.wMonth, sys_time.wYear, sys_time.wHour, sys_time.wMinute, sys_time.wSecond, sys_time.wMilliseconds);
+
+		case date_format::mm_dd_yyyy:
+			return xstd::format("%02d/%02d/%04d - %02d:%02d:%02d.%04d",
+				sys_time.wMonth, sys_time.wDay, sys_time.wYear, sys_time.wHour, sys_time.wMinute, sys_time.wSecond, sys_time.wMilliseconds);
+
+		case date_format::yyyy_mm_dd:
+			return xstd::format("%04d/%02d/%02d - %02d:%02d:%02d.%04d",
+				sys_time.wYear, sys_time.wMonth, sys_time.wDay, sys_time.wHour, sys_time.wMinute, sys_time.wSecond, sys_time.wMilliseconds);
+
+		case date_format::dd_mm_yy:
+			return xstd::format("%02d/%02d/%02d - %02d:%02d:%02d.%04d",
+				sys_time.wDay, sys_time.wMonth, sys_time.wYear, sys_time.wHour, sys_time.wMinute, sys_time.wSecond, sys_time.wMilliseconds);
+
+		case date_format::mm_dd_yy:
+			return xstd::format("%02d/%02d/%02d - %02d:%02d:%02d.%04d",
+				sys_time.wMonth, sys_time.wDay, sys_time.wYear, sys_time.wHour, sys_time.wMinute, sys_time.wSecond, sys_time.wMilliseconds);
+
+		case date_format::yy_mm_dd:
+			return xstd::format("%02d/%02d/%02d - %02d:%02d:%02d.%04d",
+				sys_time.wYear, sys_time.wMonth, sys_time.wDay, sys_time.wHour, sys_time.wMinute, sys_time.wSecond, sys_time.wMilliseconds);
+		}
+
+		return {};
+	}
+
+	constexpr float lerp(float a, float b, float t) noexcept
 	{
 		return static_cast<float>(t == 1 ? b : (t * b + (1 - t) * a));
 	}
 
 } // namespace xstd
 
-inline bool operator&(DeviceMask a, DeviceMask b) 
+inline bool operator&(DeviceMask a, DeviceMask b)
 {
 	return (xstd::to_underlying(a) & xstd::to_underlying(b)) != 0;
 }

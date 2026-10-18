@@ -2,8 +2,9 @@
 
 #include "stdafx.h"
 #include "HostFactory.h"
-#include "Utils/ConsoleUtils.h"
+#include "Console/Logger.h"
 #include "Command/CommandLine.h"
+#include "Console/ConsoleUtils.h"
 #include "Utils/SingleInstanceEvent.h"
 #include "Command/CommandOperationsHandler.h"
 
@@ -37,7 +38,7 @@ int wmain(int argc, const wchar_t* argv[])
 
 	if (!IsSingleInstance())
 	{
-		std::cout << "You can only have 1 instance of this program running. Please close any other instances.\n";
+		KB_FATAL("You can only have 1 instance of this program running. Please close any other instances.");
 		WaitForEnterIfNeeded();
 		return ERROR_ALREADY_EXISTS;
 	}

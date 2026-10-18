@@ -2,7 +2,7 @@
 
 #include "stdafx.h"
 #include "InsydeDeviceChannel.h"
-#include "../Utils/ConsoleUtils.h"
+#include "../Console/ConsoleUtils.h"
 
 #define INSYDE_DLL L"InsydeDCHU.dll"
 

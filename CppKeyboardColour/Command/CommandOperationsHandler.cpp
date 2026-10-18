@@ -4,7 +4,7 @@
 #include "../Animator.h"
 #include "CommandLine.h"
 #include "ThemeCommandLine.h"
-#include "../Utils/ConsoleUtils.h"
+#include "../Console/ConsoleUtils.h"
 #include "../Devices/DeviceMask.h"
 #include "CommandOperationsHandler.h"
 
