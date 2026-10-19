@@ -4,7 +4,7 @@
 #include "../Animator.h"
 #include "CommandLine.h"
 #include "ThemeCommandLine.h"
-#include "../Console/ConsoleUtils.h"
+#include "../Console/Logger.h"
 #include "../Devices/DeviceMask.h"
 #include "CommandOperationsHandler.h"
 
@@ -20,12 +20,12 @@ static DWORD DoBacklightOperation(std::unique_ptr<IHost> pHost, BacklightType ba
 	switch (backlight)
 	{
 	case BacklightType::On:
-		std::cout << "Turning backlights on.\n";
+		KB_INFO("Turning backlights on.");
 		pHost->SetBacklightOn(DeviceMask::All);
 		break;
 
 	case BacklightType::Off:
-		std::cout << "Turning backlights off.\n";
+		KB_INFO("Turning backlights off.");
 		pHost->SetBacklightOff(DeviceMask::All);
 		break;
 	}
@@ -49,14 +49,13 @@ static DWORD DoThemeOperation(std::unique_ptr<IHost> pHost, std::unique_ptr<IAni
 
 	if (!animator.SetSpeedFactor(speedFactor))
 	{
-		std::cout << "Speed value out of range (1-250). Animation will not be played.\n";
-		WaitForEnterIfNeeded();
-		return ERROR_INVALID_PARAMETER;
+		KB_SET_FATAL_ERROR(ERROR_INVALID_PARAMETER);
+		KB_FATAL("Speed value out of range (1-250). Animation will not be played.");
 	}
 
 	if (speedFactor != 1.0f)
 	{
-		std::cout << "Custom speed: " << (100 * speedFactor) << "%\n";
+		KB_INFO("Custom speed: %0.f%%\n", (100 * speedFactor));
 	}
 
 	const auto bShouldLoop = !CommandLine::Contains(L"--once", cmdLines);
@@ -76,12 +75,12 @@ static DWORD DoSystemAnimationOperation(std::unique_ptr<IHost> pHost, SystemAnim
 	// NOTE: If no keyboard is found, we would recieve a DeviceChannelType::None here.
 	if (pHost->GetDeviceChannelType(DeviceMask::Keyboard) != DeviceChannelType::Wmi)
 	{
-		std::cout << "This operation is not supported on this system.\n";
-		return ERROR_NOT_SUPPORTED;
+		KB_SET_FATAL_ERROR(ERROR_NOT_SUPPORTED);
+		KB_FATAL("This operation is not supported on this system.");
 	}
 
-	std::cout << "Playing Inbuilt Keyboard animation...\n";
-
+	KB_INFO("Playing Inbuilt Keyboard animation...");
+	
 	return !pHost->SendDeviceCode(DeviceMask::Keyboard, xstd::to_underlying(sysAnimation)) 
 		? ERROR_NOT_SUPPORTED 
 		: ERROR_SUCCESS;
@@ -98,13 +97,13 @@ static DWORD DoUserColourOperation(std::unique_ptr<IHost> pHost, std::optional<C
 
 	if (!(pHost->GetDevices() & DeviceMask::Keyboard))
 	{
-		std::cout << "This operation is not supported on this system.\n";
-		return ERROR_NOT_SUPPORTED;
+		KB_SET_FATAL_ERROR(ERROR_NOT_SUPPORTED);
+		KB_FATAL("This operation is not supported on this system.");
 	}
 
-	std::cout << "Setting user provided colour...\n";
-
-	return pHost->SetColour(DeviceMask::Keyboard, Zone::ALL, colour.value())
+	KB_INFO("Setting user provided colour...");
+	
+	return !pHost->SetColour(DeviceMask::Keyboard, Zone::ALL, colour.value())
 		? ERROR_NOT_SUPPORTED
 		: ERROR_SUCCESS;
 }
@@ -115,19 +114,17 @@ static DWORD DoUserColour3Operation(std::unique_ptr<IHost> pHost, const std::opt
 
 	if (pHost->GetKeyboardType() != KeyboardType::TRIPLE_ZONE)
 	{
-		std::cout << "This operation is not supported on this keyboard type.\n";
-		WaitForEnterIfNeeded();
-		return ERROR_NOT_SUPPORTED;
+		KB_SET_FATAL_ERROR(ERROR_NOT_SUPPORTED);
+		KB_FATAL("This operation is not supported on this keyboard type.");
 	}
 
 	if (!colours.has_value() || colours->size() != 3)
 	{
-		std::cout << "Invalid argument: Must be 3 hexadecimal colours specified.\n";
-		WaitForEnterIfNeeded();
-		return ERROR_INVALID_PARAMETER;
+		KB_SET_FATAL_ERROR(ERROR_NOT_SUPPORTED);
+		KB_FATAL("Invalid argument: Must be 3 hexadecimal colours specified.");
 	}
 
-	std::cout << "Setting user provided zone colours...\n";
+	KB_INFO("Setting user provided zone colours...");
 
 	constexpr std::array zones = { Zone::LEFT, Zone::MID, Zone::RIGHT };
 
@@ -150,13 +147,13 @@ static DWORD DoLightbarOperation(std::unique_ptr<IHost> pHost, const std::option
 
 	if (!(pHost->GetDevices() & DeviceMask::Lightbar))
 	{
-		std::cout << "This operation is not supported on this system.\n";
-		return ERROR_NOT_SUPPORTED;
+		KB_SET_FATAL_ERROR(ERROR_NOT_SUPPORTED);
+		KB_FATAL("This operation is not supported on this system.");
 	}
 
-	std::cout << "Setting user provided lightbar colour...\n";
+	KB_INFO("Setting user provided lightbar colour...");
 
-	return pHost->SetColour(DeviceMask::Lightbar, Zone::ALL, colour.value())
+	return !pHost->SetColour(DeviceMask::Lightbar, Zone::ALL, colour.value())
 		? ERROR_NOT_SUPPORTED
 		: ERROR_SUCCESS;
 }
@@ -205,11 +202,11 @@ DWORD DoCommandOperation(std::unique_ptr<IHost> pHost, const std::vector<std::ws
 
 	// Logic from the caller should ensure that we NEVER reach here.
 	default:
-		std::cout << "An invalid command was provided.\n";
-		return ERROR_INVALID_OPERATION;
+		KB_SET_FATAL_ERROR(ERROR_INVALID_OPERATION);
+		KB_FATAL("An invalid command was provided.");
 	}
 
-	std::cout << "Exiting...\n";
+	KB_INFO("Exiting...");
 
 	return 1;
 }

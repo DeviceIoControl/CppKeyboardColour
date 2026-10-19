@@ -5,6 +5,7 @@
 #include "CommandLine.h"
 #include "ThemeCommandLine.h"
 #include "../ColourFactory.h"
+#include "../Console/Logger.h"
 #include "../Animations/AnimationFactory.h"
 #include "../Animations/SystemAnimationTranslator.h"
 
@@ -14,7 +15,7 @@ BacklightType ProcessBacklightCommandLine(const std::vector<std::wstring>& cmdLi
 
 	if (ourCmds.empty())
 	{
-		std::cout << "Invalid backlight operation command.\n";
+		KB_ERROR("Invalid backlight operation command.");
 		return BacklightType::Invalid;
 	}
 
@@ -28,7 +29,7 @@ BacklightType ProcessBacklightCommandLine(const std::vector<std::wstring>& cmdLi
 		return BacklightType::Off;
 	}
 
-	std::cout << "Invalid backlight operation was provided.\n";
+	KB_ERROR("Invalid backlight operation was provided.");
 
 	return BacklightType::Invalid;
 }
@@ -40,7 +41,7 @@ SystemAnimation ProcessSystemAnimationCommandLine(const std::vector<std::wstring
 
 	if (ourCmds.empty())
 	{
-		std::cout << "Invalid inbuilt animation command.\n";
+		KB_ERROR("Invalid inbuilt animation command.");
 		return SystemAnimation::KB_MODE_CUSTOM;
 	}
 
@@ -48,7 +49,7 @@ SystemAnimation ProcessSystemAnimationCommandLine(const std::vector<std::wstring
 
 	if (sysAnimation == SystemAnimation::KB_MODE_CUSTOM)
 	{
-		std::cout << "Invalid inbuilt animation name was provided.\n";
+		KB_ERROR("Invalid inbuilt animation name was provided.");
 	}
 
 	return sysAnimation;
@@ -60,7 +61,7 @@ std::unique_ptr<IAnimation> ProcessThemeCommandLine(const std::vector<std::wstri
 
 	if (ourCmds.empty())
 	{
-		std::cout << "Invalid theme command.\n";
+		KB_ERROR("Invalid theme command.");
 		return nullptr;
 	}
 
@@ -71,7 +72,7 @@ std::unique_ptr<IAnimation> ProcessThemeCommandLine(const std::vector<std::wstri
 		return pAnimation;
 	}
 
-	std::cout << "Invalid animation name was provided!\n";
+	KB_ERROR("Invalid animation name was provided!");
 
 	return nullptr;
 }
@@ -143,7 +144,7 @@ float ProcessSpeedCommandLine(const std::vector<std::wstring>& cmdLines)
 			return val.value() / 100.0f;
 		}
 
-		std::cout << "Failed to parse speed input! Fallback to default speed.\n";
+		KB_WARN("Failed to parse speed input! Fallback to default speed.");
 	}
 
 	return 1.0f; // default speed

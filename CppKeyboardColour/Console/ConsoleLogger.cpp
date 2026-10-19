@@ -14,23 +14,23 @@ namespace
 		{
 		case LogLevel::Debug:
 			SetConsoleTextAttribute(hStdOutput, xstd::to_underlying(ConsoleColour::LightGreen) & 0x0F);
-			return WriteConsoleW(hStdOutput, L"<DEBUG>: ", 10, &charsWritten, nullptr);
+			return WriteConsoleW(hStdOutput, L"[DEBUG]: ", 10, &charsWritten, nullptr);
 
 		case LogLevel::Info:
 			SetConsoleTextAttribute(hStdOutput, xstd::to_underlying(ConsoleColour::LightYellow) & 0x0F);
-			return WriteConsoleW(hStdOutput, L"<INFO>: ", 9, &charsWritten, nullptr);
+			return WriteConsoleW(hStdOutput, L"[INFO]: ", 9, &charsWritten, nullptr);
 
 		case LogLevel::Warning:
 			SetConsoleTextAttribute(hStdOutput, xstd::to_underlying(ConsoleColour::LightPurple) & 0x0F);
-			return WriteConsoleW(hStdOutput, L"<WARNING>: ", 12, &charsWritten, nullptr);
+			return WriteConsoleW(hStdOutput, L"[WARNING]: ", 12, &charsWritten, nullptr);
 
 		case LogLevel::Error:
 			SetConsoleTextAttribute(hStdOutput, xstd::to_underlying(ConsoleColour::LightRed) & 0x0F);
-			return WriteConsoleW(hStdOutput, L"<ERROR>: ", 10, &charsWritten, nullptr);
+			return WriteConsoleW(hStdOutput, L"[ERROR]: ", 10, &charsWritten, nullptr);
 
 		case LogLevel::Fatal:
 			SetConsoleTextAttribute(hStdOutput, xstd::to_underlying(ConsoleColour::LightRed) & 0x0F);
-			return WriteConsoleW(hStdOutput, L"<FATAL>: ", 10, &charsWritten, nullptr);
+			return WriteConsoleW(hStdOutput, L"\n[FATAL]: ", 10, &charsWritten, nullptr);
 		}
 
 		return true;

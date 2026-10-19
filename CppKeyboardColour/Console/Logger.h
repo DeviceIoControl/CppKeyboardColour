@@ -3,6 +3,8 @@
 #pragma once
 #include "ConsoleUtils.h"
 
+#define CONCATENATE(a, b) a ## b
+
 #define KB_LOG_WRITE(level, msg, ...) AppConsole().Log(level, msg, __VA_ARGS__)
 
 // Output message containing detailed internal information about the current execution status. 
@@ -26,3 +28,6 @@
 
 // Output a debug message displaying the corresponding function name and returned error code.
 #define KB_ERROR_STATUS(fnName, errorCode) KB_DEBUG("%s failed with error status: 0x%08x.", fnName, errorCode)
+
+// Sets the error code to return on a fatal log message.
+#define KB_SET_FATAL_ERROR(errCode) SetLastError(errCode)

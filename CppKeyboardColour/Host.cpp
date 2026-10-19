@@ -3,6 +3,7 @@
 #include "stdafx.h"
 #include "Host.h"
 #include "ColourFactory.h"
+#include "Console/Logger.h"
 #include "Channels/DeviceChannelType.h"
 
 namespace 
@@ -21,7 +22,7 @@ namespace
 	{
 		if (!pDevice)
 		{
-			std::cout << "Cannot communicate with the requested device.\n";
+			KB_ERROR("Cannot communicate with the requested device.");
 			return false;
 		}
 

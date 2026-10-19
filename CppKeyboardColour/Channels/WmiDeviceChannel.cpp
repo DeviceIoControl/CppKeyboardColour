@@ -4,7 +4,7 @@
 #include "WmiDeviceChannel.h"
 #include "../Utils/FileUtils.h"
 #include "../Utils/RegUtils.h"
-#include "../Console/ConsoleUtils.h"
+#include "../Console/Logger.h"
 
 #define CLEVO_WMI_OBJECT_NAME L"CLEVO_GET"
 #define CLEVO_WMI_KB_METHOD_NAME L"SetKBLED"
@@ -38,47 +38,42 @@ namespace
 		return true;
 	}
 
-	bool VerifyClevoMofRegistration()
+	void VerifyClevoMofRegistration()
 	{
 		const auto clevoMofRegisteredPath = GetClevoMofRegisteredPath();
 		
 		if (clevoMofRegisteredPath.empty())
 		{
-			PromptUserOnError(L"Cannot load clevomof.dll.\nPlease ensure the DLL is registered correctly.");
-			return false;
+			// Point of no return - No need for a return statement.
+			KB_FATAL("Cannot load clevomof.dll.\nPlease ensure the DLL is registered correctly.");
 		}
 		
 		if (!VerifyClevoMofRegisteredPath(clevoMofRegisteredPath)) 
 		{
-			PromptUserOnError(L"Cannot load clevomof.dll.\n");
-			return false;
+			// Point of no return - No need for a return statement.
+			KB_FATAL("Cannot load clevomof.dll.");
 		}
 
 		if (!File::Exists(CLEVO_MOF_PATH))
 		{
-			const std::wstring errMsg(L"Cannot load clevomof.dll.\nPlease ensure the DLL is at: " + clevoMofRegisteredPath);
-			PromptUserOnError(errMsg);
-			return false;
+			// Point of no return - No need for a return statement.
+			KB_FATAL("Cannot load clevomof.dll.\nPlease ensure the DLL is at: %S", clevoMofRegisteredPath.c_str());
 		}
-
-		return true;
 	}
 
 } // namespace 
 
 WmiDeviceChannel::WmiDeviceChannel()
 {	
-	if (!VerifyClevoMofRegistration())
-	{
-		std::exit(STATUS_DLL_NOT_FOUND);
-	}
-
+	// Will output a fatal message and exit on failure.
+	VerifyClevoMofRegistration();
+	
 	m_pClevoGetObject = m_wbemService.GetWbemClassObject(CLEVO_WMI_OBJECT_NAME);
 
 	if (!m_pClevoGetObject)
 	{
-		PromptUserOnError(L"CLEVOMOF.dll is registered - Failed to access code.\nPlease restart your system and try again.");
-		std::exit(ERROR_INVALID_OPERATION);
+		KB_FATAL("CLEVOMOF.dll is registered - Failed to access code.\nPlease restart your system and try again.");
+		SetLastError(ERROR_INVALID_OPERATION);
 	}
 
 	IWbemClassObject* pDataParameter = nullptr;

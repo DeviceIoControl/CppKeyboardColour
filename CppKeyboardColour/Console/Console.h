@@ -12,17 +12,19 @@ public:
 
 	void SetTitle(const std::wstring& title);
 
-	void Prompt(const std::wstring& message);
 	void Hide();
 	void Show();
 
 	template<typename... _TArgs>
 	bool Log(LogLevel level, const std::string& format, _TArgs&&... args)
 	{
-		return this->WriteInternal(level, format, std::forward<_TArgs>(args)...);
-	}
+		if (this->IsVisible())
+		{
+			return this->WriteInternal(level, format, std::forward<_TArgs>(args)...);
+		}
 
-	void OnErrorPrompt(const std::wstring& errMsg, std::optional<DWORD> exitCode);
+		return false;
+	}
 
 	bool IsVisible() const;
 
@@ -33,10 +35,11 @@ private:
 	std::unique_ptr<ILogger> m_pLogger;
 
 	// The process will terminate when this function is called.
-	[[noreturn]] void DisplayFatalErrorMessage()
+	[[noreturn]] void OnFatalMessage()
 	{
-		std::printf("\n\n%s\n", "Press ENTER to exit.");
-		std::quick_exit(std::getchar());
+		std::printf("\n%s\n", "Press ENTER to exit.");
+		std::getchar();
+		std::quick_exit(GetLastError());
 	}
 
 	inline bool CanLogOnLevel(LogLevel level) const
@@ -65,7 +68,7 @@ private:
 			if (level == LogLevel::Fatal)
 			{
 				// point of no return.
-				DisplayFatalErrorMessage();
+				OnFatalMessage();
 			}
 
 			return bSuccess;

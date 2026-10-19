@@ -2,7 +2,7 @@
 
 #include "stdafx.h"
 #include "InsydeDeviceChannel.h"
-#include "../Console/ConsoleUtils.h"
+#include "../Console/Logger.h"
 
 #define INSYDE_DLL L"InsydeDCHU.dll"
 
@@ -14,8 +14,8 @@ namespace
 
 		if (!hModule || hModule == INVALID_HANDLE_VALUE)
 		{
-			PromptUserOnError(L"Cannot load InsydeDCHU.dll. Please ensure the DLL is within the same directory!\n");
-			std::exit(STATUS_DLL_NOT_FOUND);
+			KB_SET_FATAL_ERROR(STATUS_DLL_NOT_FOUND);
+			KB_FATAL("Cannot load %S. Please ensure the DLL is within the same directory!", INSYDE_DLL);
 		}
 
 		return hModule;

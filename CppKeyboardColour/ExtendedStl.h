@@ -2,6 +2,7 @@
 
 #pragma once
 #include "Devices/DeviceMask.h"
+#include "Common/KeyboardType.h"
 
 namespace xstd
 {
@@ -74,6 +75,11 @@ namespace xstd
 
 		const auto length = std::snprintf(nullptr, 0, format.c_str(), std::forward<_TArgs>(args)...);
 
+		if (length == 0xffffffff) 
+		{
+			return L"";
+		}
+
 		if (allocated_string.size() < length)
 		{
 			allocated_string.resize(length);
@@ -84,48 +90,6 @@ namespace xstd
 		allocated_string.shrink_to_fit();
 
 		return std::wstring{ allocated_string.cbegin(), allocated_string.cend() };
-	}
-
-	enum class date_format : uint16_t
-	{
-		dd_mm_yyyy,
-		mm_dd_yyyy,
-		yyyy_mm_dd,
-		dd_mm_yy,
-		mm_dd_yy,
-		yy_mm_dd
-	};
-
-	inline std::wstring to_wstring(const SYSTEMTIME& sys_time, date_format date_form = date_format::dd_mm_yyyy)
-	{
-		switch (date_form)
-		{
-		case date_format::dd_mm_yyyy:
-			return xstd::format("%02d/%02d/%04d - %02d:%02d:%02d.%04d",
-				sys_time.wDay, sys_time.wMonth, sys_time.wYear, sys_time.wHour, sys_time.wMinute, sys_time.wSecond, sys_time.wMilliseconds);
-
-		case date_format::mm_dd_yyyy:
-			return xstd::format("%02d/%02d/%04d - %02d:%02d:%02d.%04d",
-				sys_time.wMonth, sys_time.wDay, sys_time.wYear, sys_time.wHour, sys_time.wMinute, sys_time.wSecond, sys_time.wMilliseconds);
-
-		case date_format::yyyy_mm_dd:
-			return xstd::format("%04d/%02d/%02d - %02d:%02d:%02d.%04d",
-				sys_time.wYear, sys_time.wMonth, sys_time.wDay, sys_time.wHour, sys_time.wMinute, sys_time.wSecond, sys_time.wMilliseconds);
-
-		case date_format::dd_mm_yy:
-			return xstd::format("%02d/%02d/%02d - %02d:%02d:%02d.%04d",
-				sys_time.wDay, sys_time.wMonth, sys_time.wYear, sys_time.wHour, sys_time.wMinute, sys_time.wSecond, sys_time.wMilliseconds);
-
-		case date_format::mm_dd_yy:
-			return xstd::format("%02d/%02d/%02d - %02d:%02d:%02d.%04d",
-				sys_time.wMonth, sys_time.wDay, sys_time.wYear, sys_time.wHour, sys_time.wMinute, sys_time.wSecond, sys_time.wMilliseconds);
-
-		case date_format::yy_mm_dd:
-			return xstd::format("%02d/%02d/%02d - %02d:%02d:%02d.%04d",
-				sys_time.wYear, sys_time.wMonth, sys_time.wDay, sys_time.wHour, sys_time.wMinute, sys_time.wSecond, sys_time.wMilliseconds);
-		}
-
-		return {};
 	}
 
 	constexpr float lerp(float a, float b, float t) noexcept
@@ -159,3 +123,46 @@ inline bool operator!(DeviceMask a)
 {
 	return xstd::to_underlying(a) != 0;
 }
+
+namespace xstd 
+{
+	inline std::wstring to_wstring(KeyboardType kbType)
+	{
+		switch (kbType)
+		{
+		case KeyboardType::SINGLE_ZONE:
+			return L"Single Zone";
+
+		case KeyboardType::TRIPLE_ZONE:
+			return L"Triple Zone";
+
+		case KeyboardType::PER_KEY:
+			return L"Per-Key";
+		}
+
+		return L"";
+	}
+
+	inline std::wstring to_wstring(DeviceMask devices)
+	{
+		std::wstring result{};
+
+		if (!!(devices & DeviceMask::Keyboard))
+		{
+			result.append(L"[Keyboard] ");
+		}
+
+		if (!!(devices & DeviceMask::Lightbar))
+		{
+			result.append(L"[Lightbar] ");
+		}
+
+		if (!!(devices & DeviceMask::Logo))
+		{
+			result.append(L"[Logo] ");
+		}
+
+		return result;
+	}
+
+} // namespace 

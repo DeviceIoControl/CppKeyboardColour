@@ -16,15 +16,6 @@ void Console::SetTitle(const std::wstring& title)
 	SetConsoleTitleW(title.c_str());
 }
 
-void Console::Prompt(const std::wstring& message)
-{
-	if (this->IsVisible())
-	{
-		std::wcout << message << "\n";
-		std::getchar();
-	}
-}
-
 void Console::Hide() 
 {
 	ShowWindow(m_hWnd, this->IsVisible() ? SW_HIDE : SW_NORMAL);
@@ -33,16 +24,6 @@ void Console::Hide()
 void Console::Show() 
 {
 	ShowWindow(m_hWnd, !this->IsVisible() ? SW_SHOW : SW_NORMAL);
-}
-
-void Console::OnErrorPrompt(const std::wstring& errMsg, std::optional<DWORD> exitCode)
-{
-	this->Prompt(errMsg + L"\nPress Enter to exit.");
-
-	if (exitCode.has_value())
-	{
-		std::exit(exitCode.value());
-	}
 }
 
 bool Console::IsVisible() const

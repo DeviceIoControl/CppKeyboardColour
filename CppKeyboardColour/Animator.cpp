@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "Animator.h"
+#include "Console/Logger.h"
 
 namespace
 {
@@ -25,15 +26,15 @@ bool Animator::Play(IAnimation* pAnimation, bool bShouldLoop)
 
 	if (!pAnimation->IsHostSupported(m_pHost.get()))
 	{
-		std::wcout << L"'" << pAnimation->GetName() << L"' animation is not supported on this system.\n";
+		KB_ERROR("'%S' animation is not supported on this system.", pAnimation->GetName().c_str());
 		return false;
 	}
 
 	// Reset colours on all devices before playing animation.
 	m_pHost->SetBacklightOff(DeviceMask::All);
 
-	std::wcout << L"Playing '" << pAnimation->GetName() << L"' animation...\n\n";
-
+	KB_INFO("Playing '%S' animation\n", pAnimation->GetName().c_str());
+	
 	do
 	{
 		this->Animate(pAnimation);

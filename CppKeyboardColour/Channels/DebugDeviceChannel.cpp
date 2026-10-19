@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "../Common/Zone.h"
+#include "../Console/Logger.h"
 #include "DebugDeviceChannel.h"
 
 namespace
@@ -40,7 +41,7 @@ bool DebugDeviceChannel::SendCode(uint32_t code)
 	const auto rgbColour = m_colourFactory.Convert(ColourFormat::B8R8G8, code & 0x00ffffff, ColourFormat::R8G8B8);
 	const auto colourObject = m_colourFactory.Create(rgbColour);
 
-	std::printf("Code: 0x%08X -> %s Colour: (RED: 0x%08X), (GREEN: 0x%08X), (BLUE: 0x%08X)\n", 
+	KB_DEBUG("Code: 0x%08X -> %s Colour: (RED: 0x%08X), (GREEN: 0x%08X), (BLUE: 0x%08X)", 
 		code, 
 		GetZoneString(m_kbType, code).data(),
 		colourObject[INDEX_COLOUR_RED],
