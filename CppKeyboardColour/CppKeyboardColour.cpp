@@ -52,18 +52,18 @@ int wmain(int argc, const wchar_t* argv[])
 	if (!pHost)
 	{
 		KB_SET_FATAL_ERROR(ERROR_NOT_SUPPORTED);
-		KB_FATAL("This system is not supported.\n\nPlease request for support using the following URL: https://github.com/DeviceIoControl/CppKeyboardColour/issues/new/choose.");
+		KB_FATAL("This system is not supported.\nPlease request for support using the following URL: https://github.com/DeviceIoControl/CppKeyboardColour/issues/new/choose.");
 	}
 
 	DisplayHostInformation(pHost.get());
 
-	if (enableHiddenMode)
+	if (enableDeviceMonitorMode)
 	{
-		KB_WARN("Cannot enable hidden mode with Device monitor mode enabled.");
+		KB_WARN("Device monitor mode enabled! (Performance may be affected)");
 
-		if (enableDeviceMonitorMode)
+		if (enableHiddenMode)
 		{
-			KB_WARN("WARNING: Device monitor mode enabled! (Performance may be affected)");
+			KB_WARN("Cannot enable hidden mode with Device monitor mode enabled.");
 		}
 	}
 

@@ -29,7 +29,7 @@ This is a cleaner, more organized, and efficient version of the initial program.
 
 **How do I report a software bug?** - *Please create a bug report for it [here](https://github.com/DeviceIoControl/CppKeyboardColour/issues/new/choose).*
 
-**What systems are supported?** - *This program is built for laptops based off of the CLEVO / Tongfang ODM design - For a list of supported CLEVO Models, please take a look at the [releases](https://github.com/DeviceIoControl/CppKeyboardColour/releases/latest).*
+**Is my laptop supported?** - *This program is built for laptops based off of the CLEVO / Tongfang ODM design - For a list of supported CLEVO Models, please take a look at the [releases](https://github.com/DeviceIoControl/CppKeyboardColour/releases/latest).*
 
 **How do I get more themes?** - *Please create an issue and request for it [here](https://github.com/DeviceIoControl/CppKeyboardColour/issues/new/choose).*
 

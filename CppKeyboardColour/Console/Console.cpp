@@ -3,12 +3,17 @@
 #include "stdafx.h"
 #include "Console.h"
 #include "ConsoleLogger.h"
+#include "Translators/TranslatorFactory.h"
 
-Console::Console(LogLevel level) 
+Console::Console(LogLevel level)
 	: m_baseLoglevel(level)
 {
-	m_pLogger = std::make_unique<ConsoleLogger>();
+	TranslatorFactory factory{};
 	m_hWnd = GetConsoleWindow();
+
+	auto pTranslator = factory.Create(GetUserDefaultLangID());
+
+	m_pLogger = std::make_unique<ConsoleLogger>(std::move(pTranslator));
 }
 
 void Console::SetTitle(const std::wstring& title) 

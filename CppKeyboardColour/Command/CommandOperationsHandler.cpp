@@ -46,14 +46,14 @@ static DWORD DoThemeOperation(std::unique_ptr<IHost> pHost, std::unique_ptr<IAni
 
 	// "--speed" command-line is only valid with an animation.
 	const auto speedFactor = ProcessSpeedCommandLine(cmdLines);
+	const auto setSpeedFactorSuccess = animator.SetSpeedFactor(speedFactor);
 
-	if (!animator.SetSpeedFactor(speedFactor))
+	if (!setSpeedFactorSuccess)
 	{
-		KB_SET_FATAL_ERROR(ERROR_INVALID_PARAMETER);
-		KB_FATAL("Speed value out of range (1-250). Animation will not be played.");
+		KB_WARN("Speed value out of range (1-250) - Will use default speed.");
 	}
 
-	if (speedFactor != 1.0f)
+	if (setSpeedFactorSuccess && speedFactor != 1.0f)
 	{
 		KB_INFO("Custom speed: %0.f%%\n", (100 * speedFactor));
 	}

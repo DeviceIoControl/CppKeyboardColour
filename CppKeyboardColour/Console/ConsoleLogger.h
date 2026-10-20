@@ -1,20 +1,20 @@
 // Created by DeviceIoControl
 
 #pragma once
-#include "ILogger.h"
+#include "BaseLogger.h"
+#include "Translators/ITranslator.h"
 
 class ConsoleLogger
-	: public ILogger
+	: public BaseLogger
 {
 public:
-	ConsoleLogger(HANDLE hConsoleOutput);
-
-	ConsoleLogger();
-
-	bool Write(LogLevel level, const std::wstring& output) override;
+	ConsoleLogger(HANDLE hConsoleOutput, std::unique_ptr<ITranslator> pTranslator);
+	ConsoleLogger(std::unique_ptr<ITranslator> pTranslator);
 
 	~ConsoleLogger() override = default;
 
 private:
-	const HANDLE m_hConsoleOutput;
+	HANDLE m_hConsoleOutput;
+
+	bool OnWrite(LogLevel level, const std::wstring& logmsg) override;
 };

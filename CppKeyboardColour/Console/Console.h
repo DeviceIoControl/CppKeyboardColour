@@ -4,6 +4,7 @@
 #include "LogLevel.h"
 #include "ILogger.h"
 
+
 class Console 
 {
 public:

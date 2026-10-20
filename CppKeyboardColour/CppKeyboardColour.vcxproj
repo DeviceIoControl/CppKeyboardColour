@@ -273,6 +273,11 @@
     <ClInclude Include="Animations\BreatheAnimation.h" />
     <ClInclude Include="Animations\ColourWaveAnimation.h" />
     <ClInclude Include="Command\stdafx.h" />
+    <ClInclude Include="Console\BaseLogger.h" />
+    <ClInclude Include="Console\Translators\EnglishTranslator.h" />
+    <ClInclude Include="Console\Translators\ITranslator.h" />
+    <ClInclude Include="Console\Translators\stdafx.h" />
+    <ClInclude Include="Console\Translators\TranslatorFactory.h" />
     <ClInclude Include="Identifier\stdafx.h" />
     <ClInclude Include="Console\ConsoleColour.h" />
     <ClInclude Include="Console\ConsoleLogger.h" />
@@ -347,7 +352,10 @@
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="Animations\BreatheAnimation.cpp" />
     <ClCompile Include="Animations\ColourWaveAnimation.cpp" />
+    <ClCompile Include="Console\BaseLogger.cpp" />
     <ClCompile Include="Console\ConsoleLogger.cpp" />
+    <ClCompile Include="Console\Translators\EnglishTranslator.cpp" />
+    <ClCompile Include="Console\Translators\TranslatorFactory.cpp" />
     <ClCompile Include="Utils\ComInitialiser.cpp" />
     <ClCompile Include="Console\Console.cpp" />
     <ClCompile Include="Console\ConsoleUtils.cpp" />
