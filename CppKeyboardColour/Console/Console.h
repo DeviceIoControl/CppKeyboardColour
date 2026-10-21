@@ -3,6 +3,7 @@
 #pragma once
 #include "LogLevel.h"
 #include "ILogger.h"
+#include "Translators/ITranslator.h"
 
 class Console 
 {
@@ -33,25 +34,23 @@ private:
 	LogLevel m_baseLoglevel;
 	std::mutex m_outputLock{};
 	std::unique_ptr<ILogger> m_pLogger;
+	std::unique_ptr<ITranslator> m_pTranslator;
 
 	// The process will terminate when this function is called.
-	[[noreturn]] void OnFatalMessage()
-	{
-		std::printf("\n%s\n", "Press ENTER to exit.");
-		std::getchar();
-		std::quick_exit(GetLastError());
-	}
+	[[noreturn]] void OnFatalMessage();
 
-	inline bool CanLogOnLevel(LogLevel level) const
-	{
-		return (level >= m_baseLoglevel) ? true : false;
-	}
+	bool CanLogOnLevel(LogLevel level) const;
 
-	inline SYSTEMTIME GetCurrentSystemTime() const
+	SYSTEMTIME GetCurrentSystemTime() const;
+
+	template<typename ..._TArgs>
+	std::wstring OnPreFormatAndPreTranslation(LogLevel level, const std::wstring& format, _TArgs&&... args)
 	{
-		SYSTEMTIME currentSysTime = { 0 };
-		GetSystemTime(&currentSysTime);
-		return currentSysTime;
+		const auto translatedLogLevel = m_pTranslator->Translate(level);
+		const auto translatedPreformatMsg = m_pTranslator->Translate(format);
+		const auto translatedPostFormatMsg = xstd::format(translatedPreformatMsg, std::forward<_TArgs>(args)...);
+
+		return xstd::format(L"[%s]: %s", translatedLogLevel.c_str(), translatedPostFormatMsg.c_str());
 	}
 
 	template<typename ..._TArgs>
@@ -59,11 +58,11 @@ private:
 	{
 		if (CanLogOnLevel(level))
 		{
-			const auto strFormattedMsg = xstd::format(format, std::forward<_TArgs>(args)...);
+			const auto logMessage = OnPreFormatAndPreTranslation(level, format, std::forward<_TArgs>(args)...);
 
 			std::scoped_lock mutex_guard(m_outputLock);
 
-			const auto bSuccess = m_pLogger->Write(level, strFormattedMsg);
+			const auto bSuccess = m_pLogger->Write(level, logMessage);
 
 			if (level == LogLevel::Fatal)
 			{

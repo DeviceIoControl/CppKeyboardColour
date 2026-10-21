@@ -300,9 +300,6 @@
     <ClInclude Include="Console\Translators\ITranslator.h">
       <Filter>Header Files\Console\Translators</Filter>
     </ClInclude>
-    <ClInclude Include="Console\BaseLogger.h">
-      <Filter>Header Files\Console</Filter>
-    </ClInclude>
     <ClInclude Include="Console\Translators\EnglishTranslator.h">
       <Filter>Header Files\Console\Translators</Filter>
     </ClInclude>
@@ -450,9 +447,6 @@
       <Filter>Source Files\Console</Filter>
     </ClCompile>
     <ClCompile Include="Console\ConsoleUtils.cpp">
-      <Filter>Source Files\Console</Filter>
-    </ClCompile>
-    <ClCompile Include="Console\BaseLogger.cpp">
       <Filter>Source Files\Console</Filter>
     </ClCompile>
     <ClCompile Include="Console\Translators\EnglishTranslator.cpp">

@@ -19,7 +19,7 @@ static void DisplayHostInformation(const IHost* pHost)
 		KB_INFO(L"Keyboard Type: %s", xstd::to_wstring(pHost->GetKeyboardType()).c_str());
 	}
 
-	KB_INFO(L"Keyboard Type: %s", pHost->GetModelName().c_str());
+	KB_INFO(L"Model Name: %s", pHost->GetModelName().c_str());
 }
 
 static bool ShouldEnableDMM(const std::vector<std::wstring>& cmdLines)

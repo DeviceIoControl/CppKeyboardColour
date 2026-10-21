@@ -1,7 +1,6 @@
 // Created by DeviceIoControl
 
 #include "stdafx.h"
-
 #include "CommandLine.h"
 #include "ThemeCommandLine.h"
 #include "../ColourFactory.h"

@@ -48,18 +48,17 @@ namespace
 
 } // namespace
 
-ConsoleLogger::ConsoleLogger(HANDLE hConsoleOutput, std::unique_ptr<ITranslator> pTranslator)
-	: BaseLogger(std::move(pTranslator))
-{
-	m_hConsoleOutput = hConsoleOutput;
-}
-
-ConsoleLogger::ConsoleLogger(std::unique_ptr<ITranslator> pTranslator)
-	: ConsoleLogger(GetStdHandle(STD_OUTPUT_HANDLE), std::move(pTranslator))
+ConsoleLogger::ConsoleLogger(HANDLE hConsoleOutput)
+	: m_hConsoleOutput(hConsoleOutput)
 {
 }
 
-bool ConsoleLogger::OnWrite(LogLevel level, const std::wstring& logmsg)
+ConsoleLogger::ConsoleLogger()
+	: ConsoleLogger(GetStdHandle(STD_OUTPUT_HANDLE))
+{
+}
+
+bool ConsoleLogger::Write(LogLevel level, const std::wstring& logmsg)
 {
 	return DoConsoleWrite(m_hConsoleOutput, level, logmsg);
 }
