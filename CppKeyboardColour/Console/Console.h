@@ -4,7 +4,6 @@
 #include "LogLevel.h"
 #include "ILogger.h"
 
-
 class Console 
 {
 public:
@@ -17,7 +16,7 @@ public:
 	void Show();
 
 	template<typename... _TArgs>
-	bool Log(LogLevel level, const std::string& format, _TArgs&&... args)
+	bool Log(LogLevel level, const std::wstring& format, _TArgs&&... args)
 	{
 		if (this->IsVisible())
 		{
@@ -56,7 +55,7 @@ private:
 	}
 
 	template<typename ..._TArgs>
-	bool WriteInternal(LogLevel level, const std::string& format, _TArgs&&... args)
+	bool WriteInternal(LogLevel level, const std::wstring& format, _TArgs&&... args)
 	{
 		if (CanLogOnLevel(level))
 		{

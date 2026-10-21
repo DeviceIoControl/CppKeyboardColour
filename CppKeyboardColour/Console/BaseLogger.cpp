@@ -18,7 +18,7 @@ bool BaseLogger::Write(LogLevel level, const std::wstring& msg) /* final */
 {
 	const auto translatedLogLevel = m_pTranslator->Translate(level);
 	const auto translatedMessage = m_pTranslator->Translate(msg);
-	const auto logMessage = xstd::format("[%S]: %S", translatedLogLevel.c_str(), translatedMessage.c_str());
+	const auto logMessage = xstd::format(L"[%s]: %s", translatedLogLevel.c_str(), translatedMessage.c_str());
 
 	return this->OnWrite(level, logMessage);
 }

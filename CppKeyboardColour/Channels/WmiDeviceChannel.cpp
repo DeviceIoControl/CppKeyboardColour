@@ -45,19 +45,19 @@ namespace
 		if (clevoMofRegisteredPath.empty())
 		{
 			// Point of no return - No need for a return statement.
-			KB_FATAL("Cannot load clevomof.dll.\nPlease ensure the DLL is registered correctly.");
+			KB_FATAL(L"Cannot load clevomof.dll.\nPlease ensure the DLL is registered correctly.");
 		}
 		
 		if (!VerifyClevoMofRegisteredPath(clevoMofRegisteredPath)) 
 		{
 			// Point of no return - No need for a return statement.
-			KB_FATAL("Cannot load clevomof.dll.");
+			KB_FATAL(L"Cannot load clevomof.dll.");
 		}
 
 		if (!File::Exists(CLEVO_MOF_PATH))
 		{
 			// Point of no return - No need for a return statement.
-			KB_FATAL("Cannot load clevomof.dll.\nPlease ensure the DLL is at: %S", clevoMofRegisteredPath.c_str());
+			KB_FATAL(L"Cannot load clevomof.dll.\nPlease ensure the DLL is at: %s", clevoMofRegisteredPath.c_str());
 		}
 	}
 
@@ -72,7 +72,7 @@ WmiDeviceChannel::WmiDeviceChannel()
 
 	if (!m_pClevoGetObject)
 	{
-		KB_FATAL("CLEVOMOF.dll is registered - Failed to access code.\nPlease restart your system and try again.");
+		KB_FATAL(L"CLEVOMOF.dll is registered - Failed to access code.\nPlease restart your system and try again.");
 		SetLastError(ERROR_INVALID_OPERATION);
 	}
 

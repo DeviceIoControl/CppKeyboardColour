@@ -7,27 +7,27 @@
 
 namespace
 {
-	std::string_view GetZoneString(KeyboardType kbType, uint32_t code)
+	std::wstring_view GetZoneString(KeyboardType kbType, uint32_t code)
 	{
 		switch ((code & 0xff000000) >> 24)
 		{
 		case xstd::to_underlying(Zone::LEFT):
-			return (kbType == KeyboardType::SINGLE_ZONE) ? "Keyboard Zone: All," : "Keyboard Zone: Left,";
+			return (kbType == KeyboardType::SINGLE_ZONE) ? L"Keyboard Zone: All," : L"Keyboard Zone: Left,";
 
 		case xstd::to_underlying(Zone::MID):
-			return "Keyboard Zone: Middle,";
+			return L"Keyboard Zone: Middle,";
 
 		case xstd::to_underlying(Zone::RIGHT):
-			return "Keyboard Zone: Right,";
+			return L"Keyboard Zone: Right,";
 
 		case 0xF3:
-			return "Lightbar,";
+			return L"Lightbar,";
 
 		case 0xF4:
-			return "Logo,";
+			return L"Logo,";
 		}
 
-		return "N/A";
+		return L"N/A";
 	}
 } // namespace
 
@@ -41,8 +41,8 @@ bool DebugDeviceChannel::SendCode(uint32_t code)
 	const auto rgbColour = m_colourFactory.Convert(ColourFormat::B8R8G8, code & 0x00ffffff, ColourFormat::R8G8B8);
 	const auto colourObject = m_colourFactory.Create(rgbColour);
 
-	KB_DEBUG("Code: 0x%08X -> %s Colour: (RED: 0x%08X), (GREEN: 0x%08X), (BLUE: 0x%08X)", 
-		code, 
+	KB_DEBUG(L"Code: 0x%08X -> %s Colour: (RED: 0x%08X), (GREEN: 0x%08X), (BLUE: 0x%08X)",
+		code,
 		GetZoneString(m_kbType, code).data(),
 		colourObject[INDEX_COLOUR_RED],
 		colourObject[INDEX_COLOUR_GREEN],

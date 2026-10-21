@@ -15,7 +15,7 @@ BacklightType ProcessBacklightCommandLine(const std::vector<std::wstring>& cmdLi
 
 	if (ourCmds.empty())
 	{
-		KB_ERROR("Invalid backlight operation command.");
+		KB_ERROR(L"Invalid backlight operation command.");
 		return BacklightType::Invalid;
 	}
 
@@ -29,7 +29,7 @@ BacklightType ProcessBacklightCommandLine(const std::vector<std::wstring>& cmdLi
 		return BacklightType::Off;
 	}
 
-	KB_ERROR("Invalid backlight operation was provided.");
+	KB_ERROR(L"Invalid backlight operation was provided.");
 
 	return BacklightType::Invalid;
 }
@@ -41,7 +41,7 @@ SystemAnimation ProcessSystemAnimationCommandLine(const std::vector<std::wstring
 
 	if (ourCmds.empty())
 	{
-		KB_ERROR("Invalid inbuilt animation command.");
+		KB_ERROR(L"Invalid inbuilt animation command.");
 		return SystemAnimation::KB_MODE_CUSTOM;
 	}
 
@@ -49,7 +49,7 @@ SystemAnimation ProcessSystemAnimationCommandLine(const std::vector<std::wstring
 
 	if (sysAnimation == SystemAnimation::KB_MODE_CUSTOM)
 	{
-		KB_ERROR("Invalid inbuilt animation name was provided.");
+		KB_ERROR(L"Invalid inbuilt animation name was provided.");
 	}
 
 	return sysAnimation;
@@ -61,7 +61,7 @@ std::unique_ptr<IAnimation> ProcessThemeCommandLine(const std::vector<std::wstri
 
 	if (ourCmds.empty())
 	{
-		KB_ERROR("Invalid theme command.");
+		KB_ERROR(L"Invalid theme command.");
 		return nullptr;
 	}
 
@@ -72,7 +72,7 @@ std::unique_ptr<IAnimation> ProcessThemeCommandLine(const std::vector<std::wstri
 		return pAnimation;
 	}
 
-	KB_ERROR("Invalid animation name was provided!");
+	KB_ERROR(L"Invalid animation name was provided!");
 
 	return nullptr;
 }
@@ -144,7 +144,7 @@ float ProcessSpeedCommandLine(const std::vector<std::wstring>& cmdLines)
 			return val.value() / 100.0f;
 		}
 
-		KB_WARN("Failed to parse speed input! Fallback to default speed.");
+		KB_WARN(L"Failed to parse speed input! Fallback to default speed.");
 	}
 
 	return 1.0f; // default speed

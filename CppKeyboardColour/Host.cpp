@@ -22,7 +22,7 @@ namespace
 	{
 		if (!pDevice)
 		{
-			KB_ERROR("Cannot communicate with the requested device.");
+			KB_ERROR(L"Cannot communicate with the requested device.");
 			return false;
 		}
 

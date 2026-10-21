@@ -17,7 +17,7 @@ namespace
 		if (!hModule || hModule == INVALID_HANDLE_VALUE)
 		{
 			SetLastError(STATUS_DLL_NOT_FOUND);
-			KB_FATAL("Cannot load %S. Please ensure the DLL is within the same directory!", GET_PRODUCT_DLL);
+			KB_FATAL(L"Cannot load %s. Please ensure the DLL is within the same directory!", GET_PRODUCT_DLL);
 		}
 
 		return hModule;

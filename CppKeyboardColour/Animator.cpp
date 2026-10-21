@@ -26,14 +26,14 @@ bool Animator::Play(IAnimation* pAnimation, bool bShouldLoop)
 
 	if (!pAnimation->IsHostSupported(m_pHost.get()))
 	{
-		KB_ERROR("'%S' animation is not supported on this system.", pAnimation->GetName().c_str());
+		KB_ERROR(L"'%s' animation is not supported on this system.", pAnimation->GetName().c_str());
 		return false;
 	}
 
 	// Reset colours on all devices before playing animation.
 	m_pHost->SetBacklightOff(DeviceMask::All);
 
-	KB_INFO("Playing '%S' animation\n", pAnimation->GetName().c_str());
+	KB_INFO(L"Playing '%s' animation\n", pAnimation->GetName().c_str());
 	
 	do
 	{

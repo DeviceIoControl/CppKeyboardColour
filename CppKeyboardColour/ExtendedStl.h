@@ -69,11 +69,23 @@ namespace xstd
 	}
 
 	template<typename ..._TArgs>
-	std::wstring format(const std::string& format, _TArgs&& ...args)
+	int snwprintf(wchar_t* _Buffer, size_t _BufferCount, wchar_t const* _Format, _TArgs&& ...args)
 	{
-		std::string allocated_string(0x7fff, 0);
+		return _snwprintf(_Buffer, _BufferCount, _Format, args...);
+	}
 
-		const auto length = std::snprintf(nullptr, 0, format.c_str(), std::forward<_TArgs>(args)...);
+	template<typename ..._TArgs>
+	int swprintf(wchar_t* _Buffer, wchar_t const* _Format, _TArgs&& ...args)
+	{
+		return _swprintf(_Buffer, _Format, args...);
+	}
+
+	template<typename ..._TArgs>
+	std::wstring format(const std::wstring& format, _TArgs&& ...args)
+	{
+		std::wstring allocated_string(0x7fff, 0);
+
+		const auto length = xstd::snwprintf(nullptr, 0, format.c_str(), std::forward<_TArgs>(args)...);
 
 		if (length == 0xffffffff) 
 		{
@@ -85,11 +97,11 @@ namespace xstd
 			allocated_string.resize(length);
 		}
 
-		std::sprintf(allocated_string.data(), format.c_str(), std::forward<_TArgs>(args)...);
+		xstd::swprintf(allocated_string.data(), format.c_str(), std::forward<_TArgs>(args)...);
 
 		allocated_string.shrink_to_fit();
 
-		return std::wstring{ allocated_string.cbegin(), allocated_string.cend() };
+		return allocated_string;
 	}
 
 	constexpr float lerp(float a, float b, float t) noexcept

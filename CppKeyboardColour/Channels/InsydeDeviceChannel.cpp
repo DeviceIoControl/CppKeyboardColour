@@ -15,7 +15,7 @@ namespace
 		if (!hModule || hModule == INVALID_HANDLE_VALUE)
 		{
 			KB_SET_FATAL_ERROR(STATUS_DLL_NOT_FOUND);
-			KB_FATAL("Cannot load %S. Please ensure the DLL is within the same directory!", INSYDE_DLL);
+			KB_FATAL(L"Cannot load %s. Please ensure the DLL is within the same directory!", INSYDE_DLL);
 		}
 
 		return hModule;
