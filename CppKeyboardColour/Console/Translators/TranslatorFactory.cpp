@@ -11,7 +11,7 @@ std::unique_ptr<ITranslator> TranslatorFactory::Create(LANGID langId)
 	case MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_US):
 	case MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_UK):
 		return std::make_unique<EnglishTranslator>();
-	
+
 	}
 
 	return std::make_unique<EnglishTranslator>();

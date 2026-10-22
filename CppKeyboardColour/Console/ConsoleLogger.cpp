@@ -9,7 +9,7 @@ namespace
 	bool OnWriteMessage(HANDLE hStdOutput, const std::wstring& msg)
 	{
 		DWORD charsWritten = 0;
-
+		
 		return WriteConsoleW(hStdOutput, msg.c_str(), static_cast<DWORD>(msg.size()) + 1, &charsWritten, nullptr)
 			&& WriteConsoleW(hStdOutput, L"\n", 2, &charsWritten, nullptr)
 			&& SetConsoleTextAttribute(hStdOutput, xstd::to_underlying(ConsoleColour::White) & 0x0F);
@@ -21,6 +21,10 @@ namespace
 
 		switch (level)
 		{
+		case LogLevel::None:
+			SetConsoleTextAttribute(hStdOutput, xstd::to_underlying(ConsoleColour::White) & 0x0F);
+			break;
+
 		case LogLevel::Debug:
 			SetConsoleTextAttribute(hStdOutput, xstd::to_underlying(ConsoleColour::LightGreen) & 0x0F);
 			break;

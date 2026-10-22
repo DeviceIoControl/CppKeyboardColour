@@ -1,7 +1,5 @@
 // Created by DeviceIoControl
 
-// Created by DeviceIoControl
-
 #pragma once
 #include "ConsoleUtils.h"
 

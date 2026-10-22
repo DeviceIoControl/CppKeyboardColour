@@ -5,7 +5,7 @@
 #include "ILogger.h"
 #include "Translators/ITranslator.h"
 
-class Console 
+class Console
 {
 public:
 	Console(LogLevel level = LogLevel::Debug);

@@ -3,6 +3,7 @@
 #pragma once
 #include "Devices/DeviceMask.h"
 #include "Common/KeyboardType.h"
+#include <codecvt>
 
 namespace xstd
 {
@@ -71,13 +72,13 @@ namespace xstd
 	template<typename ..._TArgs>
 	int snwprintf(wchar_t* _Buffer, size_t _BufferCount, wchar_t const* _Format, _TArgs&& ...args)
 	{
-		return _snwprintf(_Buffer, _BufferCount, _Format, args...);
+		return _snwprintf(_Buffer, _BufferCount, _Format, std::forward<_TArgs>(args)...);
 	}
 
 	template<typename ..._TArgs>
 	int swprintf(wchar_t* _Buffer, wchar_t const* _Format, _TArgs&& ...args)
 	{
-		return _swprintf(_Buffer, _Format, args...);
+		return _swprintf(_Buffer, _Format, std::forward<_TArgs>(args)...);
 	}
 
 	template<typename ..._TArgs>
@@ -143,10 +144,10 @@ namespace xstd
 		switch (kbType)
 		{
 		case KeyboardType::SINGLE_ZONE:
-			return L"Single Zone";
+			return L"Single-Zone";
 
 		case KeyboardType::TRIPLE_ZONE:
-			return L"Triple Zone";
+			return L"Triple-Zone";
 
 		case KeyboardType::PER_KEY:
 			return L"Per-Key";

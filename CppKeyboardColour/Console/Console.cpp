@@ -9,6 +9,7 @@ Console::Console(LogLevel level)
 	: m_baseLoglevel(level)
 {
 	TranslatorFactory factory{};
+	SetConsoleOutputCP(CP_UTF16);
 
 	m_hWnd = GetConsoleWindow();
 	m_pTranslator = factory.Create(GetUserDefaultLangID());
@@ -17,7 +18,10 @@ Console::Console(LogLevel level)
 
 void Console::SetTitle(const std::wstring& title) 
 {
-	SetConsoleTitleW(title.c_str());
+	const auto translatedTitle = m_pTranslator->Translate(title).append(L"\n");
+	SetConsoleTitleW(translatedTitle.c_str());
+
+	m_pLogger->Write(LogLevel::None, translatedTitle);
 }
 
 void Console::Hide() 

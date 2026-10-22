@@ -34,7 +34,6 @@ static bool ShouldEnableDMM(const std::vector<std::wstring>& cmdLines)
 int wmain(int argc, const wchar_t* argv[])
 {
 	AppConsole().SetTitle(PROGRAM_BOOTSTRAP_STRING);
-	std::wprintf(L"%s\n\n", PROGRAM_BOOTSTRAP_STRING);
 
 	if (!IsSingleInstance())
 	{

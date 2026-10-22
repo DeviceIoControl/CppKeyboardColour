@@ -19,5 +19,5 @@ private:
 	float m_speedFactor = 1.0f;
 	std::unique_ptr<IHost> m_pHost;
 
-	bool Animate(IAnimation* pAnimation);
+	void Animate(IAnimation* pAnimation);
 };

@@ -33,7 +33,7 @@ bool Animator::Play(IAnimation* pAnimation, bool bShouldLoop)
 	// Reset colours on all devices before playing animation.
 	m_pHost->SetBacklightOff(DeviceMask::All);
 
-	KB_INFO(L"Playing '%s' animation\n", pAnimation->GetName().c_str());
+	KB_INFO(L"Playing '%s' animation...", pAnimation->GetName().c_str());
 	
 	do
 	{
@@ -55,7 +55,7 @@ bool Animator::SetSpeedFactor(float factor)
 	return false;
 }
 
-bool Animator::Animate(IAnimation* pAnimation)
+void Animator::Animate(IAnimation* pAnimation)
 {
 	for (size_t i = 0; i < pAnimation->Size(); ++i)
 	{
@@ -65,6 +65,4 @@ bool Animator::Animate(IAnimation* pAnimation)
 			std::this_thread::sleep_for(to_ms(frame->ms_time / m_speedFactor));
 		}
 	}
-
-	return true;
 }

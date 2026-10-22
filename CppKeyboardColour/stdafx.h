@@ -31,6 +31,8 @@
 #define USE_LEGACY_MODEL_RETRIEVER false
 #define IS_HANDLE_VALID(handle) (handle && handle != INVALID_HANDLE_VALUE)
 
+#define CP_UTF16 65001
+
 #if defined(DEBUG_BUILD)
 #define USE_DEBUGGABLE_HOST true
 #define PROGRAM_BOOTSTRAP_STRING L"CLEVO Keyboard Colours Tool 1.26.XXXX (Debug Build) - Created by DeviceIoControl."
@@ -39,6 +41,6 @@
 #define PROGRAM_BOOTSTRAP_STRING L"CLEVO Keyboard Colours Tool 1.26.XXXX (Test Build) - Created by DeviceIoControl."
 #elif defined (RELEASE_BUILD)
 #define USE_DEBUGGABLE_HOST false
-#define PROGRAM_BOOTSTRAP_STRING L"CLEVO Keyboard Colours Tool 1.26.1027 - Created by DeviceIoControl."
+#define PROGRAM_BOOTSTRAP_STRING L"CLEVO Keyboard Colours Tool 1.26.1023 - Created by DeviceIoControl."
 #endif
 
