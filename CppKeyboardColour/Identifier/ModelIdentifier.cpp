@@ -13,7 +13,13 @@ namespace
 		MODEL_ID_NP50RXX, MODEL_ID_NH70XX, MODEL_ID_NKNP50XX,
 		MODEL_ID_PC50DXX, MODEL_ID_A715XX, MODEL_ID_NP50SXX,
 		MODEL_ID_CV15XX, MODEL_ID_NP60SXX, MODEL_ID_V360EXX,
-		MODEL_ID_NP50PXX, MODEL_ID_V175RXX  //, MODEL_ID_NH77XX
+		MODEL_ID_NP50PXX, MODEL_ID_V175RXX, MODEL_ID_V265RXX
+		//, MODEL_ID_NH77XX
+	};
+
+	std::array constexpr g_TripleZoneWmiModelIds
+	{
+		 MODEL_ID_P650RS_GH, MODEL_ID_P650RS_GD, MODEL_ID_P775TXX 
 	};
 
 	template<typename TModelIdRetriever>
@@ -79,7 +85,7 @@ void ModelIdentifier::InitializeSingleZoneKBs()
 
 void ModelIdentifier::InitializeTripleZoneKBs()
 {
-	for (const auto currentModelId : { MODEL_ID_P650RS_GH, MODEL_ID_P650RS_GD, MODEL_ID_P775TXX })
+	for (const auto currentModelId : g_TripleZoneWmiModelIds)
 	{
 		m_modelIdToDevProps[currentModelId].devices = DeviceMask::Keyboard;
 		m_modelIdToDevProps[currentModelId].kbType = KeyboardType::TRIPLE_ZONE;
@@ -139,6 +145,9 @@ std::wstring_view ModelIdentifier::ConvertModelIdToString(uint32_t modelId)
 
 	case MODEL_ID_V175RXX:
 		return L"CLEVO V175RXX Series";
+
+	case MODEL_ID_V265RXX:
+		return L"CLEVO V265RXX Series";
 
 	case MODEL_ID_DEBUG:
 		return L"CLEVO XXXXXX Series";

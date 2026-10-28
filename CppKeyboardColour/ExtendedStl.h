@@ -3,7 +3,6 @@
 #pragma once
 #include "Devices/DeviceMask.h"
 #include "Common/KeyboardType.h"
-#include <codecvt>
 
 namespace xstd
 {
@@ -84,11 +83,11 @@ namespace xstd
 	template<typename ..._TArgs>
 	std::wstring format(const std::wstring& format, _TArgs&& ...args)
 	{
-		std::wstring allocated_string(0x7fff, 0);
+		std::wstring allocated_string(0x1ff, 0);
 
-		const auto length = xstd::snwprintf(nullptr, 0, format.c_str(), std::forward<_TArgs>(args)...);
+		const auto length = xstd::snwprintf(nullptr, 0, format.c_str(), args...);
 
-		if (length == 0xffffffff) 
+		if (length == 0xffffffff)
 		{
 			return L"";
 		}
@@ -100,7 +99,11 @@ namespace xstd
 
 		xstd::swprintf(allocated_string.data(), format.c_str(), std::forward<_TArgs>(args)...);
 
-		allocated_string.shrink_to_fit();
+		// Shrink the buffer, if it is too big.
+		if (allocated_string.size() > length)
+		{
+			allocated_string.shrink_to_fit();
+		}
 
 		return allocated_string;
 	}

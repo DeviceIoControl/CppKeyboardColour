@@ -56,23 +56,23 @@ private:
 	template<typename ..._TArgs>
 	bool WriteInternal(LogLevel level, const std::wstring& format, _TArgs&&... args)
 	{
-		if (CanLogOnLevel(level))
+		if (!CanLogOnLevel(level))
 		{
-			const auto logMessage = OnPreFormatAndPreTranslation(level, format, std::forward<_TArgs>(args)...);
-
-			std::scoped_lock mutex_guard(m_outputLock);
-
-			const auto bSuccess = m_pLogger->Write(level, logMessage);
-
-			if (level == LogLevel::Fatal)
-			{
-				// point of no return.
-				OnFatalMessage();
-			}
-
-			return bSuccess;
+			return false; // ERROR: Cannot log on this level.
 		}
 
-		return false; // ERROR: Cannot log on this level.
+		const auto logMessage = OnPreFormatAndPreTranslation(level, format, std::forward<_TArgs>(args)...);
+
+		std::scoped_lock mutex_guard(m_outputLock);
+
+		const auto bSuccess = m_pLogger->Write(level, logMessage);
+
+		if (level == LogLevel::Fatal)
+		{
+			// point of no return.
+			OnFatalMessage();
+		}
+
+		return bSuccess;
 	}
 };
