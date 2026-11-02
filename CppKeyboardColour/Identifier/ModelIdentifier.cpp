@@ -1,10 +1,11 @@
 // Created by DeviceIoControl
 
 #include "stdafx.h"
-#include "ModelIdentifier.h"
 #include "ModelIds.h"
+#include "ModelIdentifier.h"
 #include "ModelIdRetriever.h"
 #include "LegacyModelIdRetriever.h"
+#include "../Console/Logger.h"
 
 namespace
 {
@@ -13,8 +14,8 @@ namespace
 		MODEL_ID_NP50RXX, MODEL_ID_NH70XX, MODEL_ID_NKNP50XX,
 		MODEL_ID_PC50DXX, MODEL_ID_A715XX, MODEL_ID_NP50SXX,
 		MODEL_ID_CV15XX, MODEL_ID_NP60SXX, MODEL_ID_V360EXX,
-		MODEL_ID_NP50PXX, MODEL_ID_V175RXX, MODEL_ID_V265RXX
-		//, MODEL_ID_NH77XX
+		MODEL_ID_NP50PXX, MODEL_ID_V175RXX, MODEL_ID_V265RXX,
+		MODEL_ID_NP70RXX //, MODEL_ID_NH77XX
 	};
 
 	std::array constexpr g_TripleZoneWmiModelIds
@@ -31,6 +32,12 @@ namespace
 
 ModelIdentifier::ModelIdentifier(std::unique_ptr<IModelIdRetriever> pModelRetriever)
 {
+	if (!pModelRetriever)
+	{
+		// Point of no return.
+		KB_FATAL(L"Failed to detected Model ID.");
+	}
+
 	this->InitializeSingleZoneKBs();
 	this->InitializeTripleZoneKBs();
 	this->InitializeTripleZoneKBsWithPeripherals();
@@ -142,6 +149,9 @@ std::wstring_view ModelIdentifier::ConvertModelIdToString(uint32_t modelId)
 
 	case MODEL_ID_NP50PXX:
 		return L"CLEVO NP50PXX Series";
+
+	case MODEL_ID_NP70RXX:
+		return L"CLEVO NP70RXX Series";
 
 	case MODEL_ID_V175RXX:
 		return L"CLEVO V175RXX Series";

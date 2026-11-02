@@ -16,8 +16,8 @@
 // CLEVO Keyboard Colour will continue to run, but this could be a symptom of upcoming failures later on.
 #define KB_WARN(msg, ...) KB_LOG_WRITE(LogLevel::Warning, msg, __VA_ARGS__)
 
-// Output message for non-fatal isolated errors that have occurred in an operation.
-// CLEVO Keyboard Colour will continue to run, but this failure could have severe consequences later in program execution.
+// Output message for non-fatal isolated errors that have occurred during an operation.
+// CLEVO Keyboard Colour will continue to run, but this failure could have more severe consequences in later program execution.
 #define KB_ERROR(msg, ...) KB_LOG_WRITE(LogLevel::Error, msg, __VA_ARGS__)
 
 // Output message for errors that affect the entire program execution. 
