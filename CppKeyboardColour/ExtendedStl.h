@@ -83,7 +83,7 @@ namespace xstd
 	template<typename ..._TArgs>
 	std::wstring format(const std::wstring& format, _TArgs&& ...args)
 	{
-		std::wstring allocated_string(0x1ff, 0);
+		std::wstring allocated_string(0x200, 0);
 
 		const auto length = xstd::snwprintf(nullptr, 0, format.c_str(), args...);
 
