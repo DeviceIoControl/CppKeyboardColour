@@ -25,7 +25,7 @@ private:
 		{ L"Device monitor mode enabled! (Performance may be affected)", L"Включен режим мониторинга устройства! (Производительность может снизиться)"},
 		{ L"{%s} - Code: 0x%08X -> %s Colour: (RED: 0x%08X), (GREEN: 0x%08X), (BLUE: 0x%08X)", L"{%s} - Код: 0x%08X -> %s Цвет: (КРАСНЫЙ: 0x%08X), (ЗЕЛЕНЫЙ: 0x%08X), (СИНИЙ: 0x%08X)"},
 		{ L"Speed value out of range (1-250) - Will use default speed.", L"Значение скорости вне допустимого диапазона (1–250) - будет использована скорость по умолчанию."},
-		{ L"Playing '%s' animation", L"Воспроизведение анимации '%s'"},
+		{ L"Playing '%s' animation...", L"Воспроизведение анимации '%s'..."},
 		{ L"'%s' animation is not supported on this system.", L"Анимация '%s' не поддерживается в этой системе."},
 		{ L"Cannot load %s. Please ensure the DLL is within the same directory!", L"Не удается загрузить %s. Убедитесь, что DLL-файл находится в той же директории!" },
 		{ L"Cannot load clevomof.dll.\nPlease ensure the DLL is registered correctly.", L"Не удается загрузить clevomof.dll.\nПожалуйста, убедитесь, что этот DLL-файл правильно зарегистрирован."},
