@@ -1,7 +1,6 @@
 // Created by DeviceIoControl
 
 #pragma once
-
 #include "ITranslator.h"
 
 class TranslatorFactory 

@@ -3,28 +3,19 @@
 #include "stdafx.h"
 #include "HostFactory.h"
 #include "Console/Logger.h"
-#include "Channels/DeviceChannelFactory.h"
 
-HostFactory::HostFactory(std::unique_ptr<ModelIdentifier> pModelId, bool enableDeviceMonitoring)
-	: m_modelIdentifer(std::move(pModelId)),
-	m_enableDeviceMonitoring(enableDeviceMonitoring)
+HostFactory::HostFactory(std::unique_ptr<ModelIdentifier> pModelId, HostFactoryFlags flags)
+	: m_modelIdentifer(std::move(pModelId))
 {
-	DeviceChannelFactory devChannelFactory(m_modelIdentifer->GetKeyboardType(), enableDeviceMonitoring);
-	m_devFactory = std::make_unique<DeviceFactory>(devChannelFactory.Create(m_modelIdentifer->GetDeviceChannelType()));
-}
-
-HostFactory::HostFactory(bool useDbgChannel /*= false*/, bool enableDeviceMonitoring /*= false*/)
-	: HostFactory(std::make_unique<ModelIdentifier>(USE_LEGACY_MODEL_RETRIEVER, useDbgChannel), enableDeviceMonitoring)
-{
+	m_devFactory = std::make_unique<DeviceFactory>(m_modelIdentifer, !!(flags & HostFactoryFlags::EnableDeviceMonitorMode));
 }
 
 std::unique_ptr<Host> HostFactory::Create()
 {
-	KB_INFO(L"Detected Model ID: 0x%08X", m_modelIdentifer->GetModelID());
-	
 	const auto hostDevices = m_modelIdentifer->GetHostDevices();
 	if (hostDevices == DeviceMask::Unknown)
 	{
+		KB_ERROR(L"Failed to detect the host's devices.");
 		return nullptr;
 	}
 
@@ -38,8 +29,7 @@ std::vector<std::shared_ptr<IDevice>> HostFactory::CreateRequiredDevices(DeviceM
 
 	if (!!(deviceTypes & DeviceMask::Keyboard))
 	{
-		const auto keyboardType = m_modelIdentifer->GetKeyboardType();
-		devices.emplace_back(m_devFactory->CreateKeyboard(keyboardType));
+		devices.emplace_back(m_devFactory->CreateKeyboard());
 	}
 
 	if (!!(deviceTypes & DeviceMask::Lightbar))

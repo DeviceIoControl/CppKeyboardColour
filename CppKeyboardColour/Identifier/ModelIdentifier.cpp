@@ -15,12 +15,13 @@ namespace
 		MODEL_ID_PC50DXX, MODEL_ID_A715XX, MODEL_ID_NP50SXX,
 		MODEL_ID_CV15XX, MODEL_ID_NP60SXX, MODEL_ID_V360EXX,
 		MODEL_ID_NP50PXX, MODEL_ID_V175RXX, MODEL_ID_V265RXX,
-		MODEL_ID_NP70RXX //, MODEL_ID_NH77XX
+		MODEL_ID_NP70RXX, MODEL_ID_W230SXX, MODEL_ID_V370EXX,
+		MODEL_ID_V150RXX //, MODEL_ID_NH77XX
 	};
 
 	std::array constexpr g_TripleZoneWmiModelIds
 	{
-		 MODEL_ID_P650RS_GH, MODEL_ID_P650RS_GD, MODEL_ID_P775TXX 
+		 MODEL_ID_P650RS_GH, MODEL_ID_P650RS_GD, MODEL_ID_P775TXX
 	};
 
 	template<typename TModelIdRetriever>
@@ -159,9 +160,19 @@ std::wstring_view ModelIdentifier::ConvertModelIdToString(uint32_t modelId)
 	case MODEL_ID_V265RXX:
 		return L"CLEVO V265RXX Series";
 
+	case MODEL_ID_W230SXX:
+		return L"CLEVO W230SXX Series";
+
+	case MODEL_ID_V370EXX:
+		return L"CLEVO V370EXX Series";
+
+	case MODEL_ID_V150RXX:
+		return L"CLEVO V150RXX Series";
+
 	case MODEL_ID_DEBUG:
 		return L"CLEVO XXXXXX Series";
 	}
 
+	// In theory we should never reach here but, to keep the static analyzer quiet, this is how we handle that scenario.
 	return L"Unsupported device";
 }

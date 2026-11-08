@@ -2,18 +2,21 @@
 
 #include "stdafx.h"
 #include "DeviceFactory.h"
+#include "../Devices/LogoDevice.h"
 #include "../Devices/KeyboardDevice.h"
 #include "../Devices/LightbarDevice.h"
-#include "../Devices/LogoDevice.h"
+#include "../Channels/DeviceChannelFactory.h"
 
-DeviceFactory::DeviceFactory(std::shared_ptr<IDeviceChannel> pDevChannel)
-	: m_pDevChannel(std::move(pDevChannel))
+DeviceFactory::DeviceFactory(std::shared_ptr<ModelIdentifier> pDevModelId, bool enableDeviceMonitorMode)
+	: m_pModelIdentifier(std::move(pDevModelId))
 {
+	DeviceChannelFactory devChannelFactory(m_pModelIdentifier->GetKeyboardType(), enableDeviceMonitorMode);
+	m_pDevChannel = devChannelFactory.Create(m_pModelIdentifier->GetDeviceChannelType());
 }
 
-std::unique_ptr<IDevice> DeviceFactory::CreateKeyboard(KeyboardType kbType)
+std::unique_ptr<IDevice> DeviceFactory::CreateKeyboard()
 {
-	return std::make_unique<KeyboardDevice>(kbType, m_pDevChannel);
+	return std::make_unique<KeyboardDevice>(m_pModelIdentifier->GetKeyboardType(), m_pDevChannel);
 }
 
 std::unique_ptr<IDevice> DeviceFactory::CreateLightbar()

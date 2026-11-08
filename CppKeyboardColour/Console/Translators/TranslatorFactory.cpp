@@ -2,16 +2,73 @@
 
 #include "stdafx.h"
 #include "TranslatorFactory.h"
-#include "EnglishTranslator.h"
+#include "Translators.h"
+
+namespace
+{
+	std::unique_ptr<ITranslator> CreateTranslator(LANGID langId)
+	{
+		switch (langId)
+		{
+		case MAKELANGID(LANG_RUSSIAN, SUBLANG_RUSSIAN_RUSSIA):
+			return std::make_unique<RussianTranslator>();
+
+		case MAKELANGID(LANG_UKRAINIAN, SUBLANG_UKRAINIAN_UKRAINE):
+			return std::make_unique<UkrainianTranslator>();
+
+		case MAKELANGID(LANG_DUTCH, SUBLANG_DUTCH):
+		case MAKELANGID(LANG_DUTCH, SUBLANG_DUTCH_BELGIAN):
+			return std::make_unique<DutchTranslator>();
+
+		case MAKELANGID(LANG_FRENCH, SUBLANG_FRENCH):
+		case MAKELANGID(LANG_FRENCH, SUBLANG_FRENCH_CANADIAN):
+		case MAKELANGID(LANG_FRENCH, SUBLANG_FRENCH_LUXEMBOURG):
+		case MAKELANGID(LANG_FRENCH, SUBLANG_FRENCH_MONACO):
+			return std::make_unique<FrenchTranslator>();
+
+		case MAKELANGID(LANG_GERMAN, SUBLANG_GERMAN):
+		case MAKELANGID(LANG_GERMAN, SUBLANG_GERMAN_AUSTRIAN):
+			return std::make_unique<GermanTranslator>();
+
+		case MAKELANGID(LANG_ITALIAN, SUBLANG_ITALIAN):
+			return std::make_unique<ItalianTranslator>();
+
+		case MAKELANGID(LANG_SWEDISH, SUBLANG_SWEDISH):
+		case MAKELANGID(LANG_SWEDISH, SUBLANG_SWEDISH_FINLAND):
+			return std::make_unique<SwedishTranslator>();
+
+		case MAKELANGID(LANG_SPANISH, SUBLANG_SPANISH):
+		case MAKELANGID(LANG_SPANISH, SUBLANG_SPANISH_US):
+		case MAKELANGID(LANG_SPANISH, SUBLANG_SPANISH_MODERN):
+		case MAKELANGID(LANG_SPANISH, SUBLANG_SPANISH_DOMINICAN_REPUBLIC):
+		case MAKELANGID(LANG_SPANISH, SUBLANG_SPANISH_ARGENTINA):
+		case MAKELANGID(LANG_SPANISH, SUBLANG_SPANISH_BOLIVIA):
+		case MAKELANGID(LANG_SPANISH, SUBLANG_SPANISH_CHILE):
+		case MAKELANGID(LANG_SPANISH, SUBLANG_SPANISH_COLOMBIA):
+		case MAKELANGID(LANG_SPANISH, SUBLANG_SPANISH_COSTA_RICA):
+		case MAKELANGID(LANG_SPANISH, SUBLANG_SPANISH_ECUADOR):
+		case MAKELANGID(LANG_SPANISH, SUBLANG_SPANISH_EL_SALVADOR):
+		case MAKELANGID(LANG_SPANISH, SUBLANG_SPANISH_GUATEMALA):
+		case MAKELANGID(LANG_SPANISH, SUBLANG_SPANISH_HONDURAS):
+		case MAKELANGID(LANG_SPANISH, SUBLANG_SPANISH_NICARAGUA):
+		case MAKELANGID(LANG_SPANISH, SUBLANG_SPANISH_PANAMA):
+		case MAKELANGID(LANG_SPANISH, SUBLANG_SPANISH_PARAGUAY):
+		case MAKELANGID(LANG_SPANISH, SUBLANG_SPANISH_PERU):
+		case MAKELANGID(LANG_SPANISH, SUBLANG_SPANISH_PUERTO_RICO):
+		case MAKELANGID(LANG_SPANISH, SUBLANG_SPANISH_URUGUAY):
+		case MAKELANGID(LANG_SPANISH, SUBLANG_SPANISH_VENEZUELA):
+			return std::make_unique<SpanishTranslator>();
+		}
+
+		return nullptr;
+	}
+} // namespace
 
 std::unique_ptr<ITranslator> TranslatorFactory::Create(LANGID langId)
 {	
-	switch (langId)
+	if (auto pTranslator = CreateTranslator(langId))
 	{
-	case MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_US):
-	case MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_UK):
-		return std::make_unique<EnglishTranslator>();
-
+		return pTranslator;
 	}
 
 	return std::make_unique<EnglishTranslator>();

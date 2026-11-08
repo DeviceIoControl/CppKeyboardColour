@@ -18,6 +18,9 @@
 #define MODEL_ID_V175RXX 0x00002566
 #define MODEL_ID_V265RXX 0x00002564
 #define MODEL_ID_NP70RXX 0x00000156
+#define MODEL_ID_W230SXX 0x00008535
+#define MODEL_ID_V370EXX 0x00000255
+#define MODEL_ID_V150RXX 0x0000015A
 #define MODEL_ID_DEBUG 0x12345678
 
 // #define MODEL_ID_NH77XX - User did not respond with the appropriate information.

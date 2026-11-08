@@ -18,7 +18,7 @@ namespace
 			return {};
 		}
 
-		if (var.vt != VT_BSTR)
+		if (var.vt != VT_BSTR || !var.bstrVal )
 		{
 			return {};
 		}

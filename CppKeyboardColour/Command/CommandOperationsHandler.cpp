@@ -21,16 +21,18 @@ static DWORD DoBacklightOperation(std::unique_ptr<IHost> pHost, BacklightType ba
 	{
 	case BacklightType::On:
 		KB_INFO(L"Turning backlights on.");
-		pHost->SetBacklightOn(DeviceMask::All);
-		break;
+		return !pHost->SetBacklightOn(DeviceMask::All) 
+			? ERROR_NOT_SUPPORTED
+			: ERROR_SUCCESS;
 
 	case BacklightType::Off:
 		KB_INFO(L"Turning backlights off.");
-		pHost->SetBacklightOff(DeviceMask::All);
-		break;
+		return !pHost->SetBacklightOff(DeviceMask::All) 
+			? ERROR_NOT_SUPPORTED 
+			: ERROR_SUCCESS;
 	}
 
-	return 0;
+	return ERROR_NOT_SUPPORTED;
 }
 
 static DWORD DoThemeOperation(std::unique_ptr<IHost> pHost, std::unique_ptr<IAnimation> pAnimation, const std::vector<std::wstring>& cmdLines)
@@ -121,7 +123,7 @@ static DWORD DoUserColour3Operation(std::unique_ptr<IHost> pHost, const std::opt
 	if (!colours.has_value() || colours->size() != 3)
 	{
 		KB_SET_FATAL_ERROR(ERROR_NOT_SUPPORTED);
-		KB_FATAL(L"Invalid argument: Must be 3 hexadecimal colours specified.");
+		KB_FATAL(L"Invalid argument: Must specify 3 hexadecimal colour values.");
 	}
 
 	KB_INFO(L"Setting user provided zone colours...");

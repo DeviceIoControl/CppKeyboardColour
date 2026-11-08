@@ -10,42 +10,55 @@
 
 #pragma warning(disable: 4995)
 
-static void DisplayHostInformation(const IHost* pHost)
+namespace
 {
-	KB_INFO(L"Host Devices: %s", xstd::to_wstring(pHost->GetDevices()).c_str());
-
-	if (!!(pHost->GetDevices() & DeviceMask::Keyboard))
+	void DisplayHostInformation(const IHost* pHost)
 	{
-		KB_INFO(L"Keyboard Type: %s", xstd::to_wstring(pHost->GetKeyboardType()).c_str());
+		KB_INFO(L"Host Devices: %s", xstd::to_wstring(pHost->GetDevices()).c_str());
+
+		if (!!(pHost->GetDevices() & DeviceMask::Keyboard))
+		{
+			KB_INFO(L"Keyboard Type: %s", xstd::to_wstring(pHost->GetKeyboardType()).c_str());
+		}
+
+		KB_INFO(L"Model Name: %s", pHost->GetModelName().c_str());
 	}
 
-	KB_INFO(L"Model Name: %s", pHost->GetModelName().c_str());
-}
+	bool ShouldEnableDMM(const std::vector<std::wstring>& cmdLines)
+	{
+	#ifdef TEST_BUILD
+		return true;
+	#else
+		return CommandLine::Contains(L"--dmm", cmdLines);
+	#endif
+	}
 
-static bool ShouldEnableDMM(const std::vector<std::wstring>& cmdLines)
-{
-#ifdef TEST_BUILD
-	return true;
-#else
-	return CommandLine::Contains(L"--dmm", cmdLines);
-#endif
-}
+	std::unique_ptr<ModelIdentifier> CreateModelIdentifier(bool useLegacyModelRetriever, bool useDebugModel)
+	{
+		return std::make_unique<ModelIdentifier>(useLegacyModelRetriever, useDebugModel);
+	}
+
+} // namespace
 
 int wmain(int argc, const wchar_t* argv[])
 {
-	AppConsole().SetTitle(PROGRAM_BOOTSTRAP_STRING);
+	KB_CONSOLE_TITLE(PROGRAM_BOOTSTRAP_STRING);
 
 	if (!IsSingleInstance())
 	{
 		KB_SET_FATAL_ERROR(ERROR_ALREADY_EXISTS);
 		KB_FATAL(L"You can only have 1 instance of this program running. Please close any other instances.");
 	}
-	
+
 	const auto cmdLines = CommandLine::GetCommandLines(argc, argv);
 	const auto enableDeviceMonitorMode = ShouldEnableDMM(cmdLines);
 	const auto enableHiddenMode = CommandLine::Contains(L"--hide", cmdLines);
 
-	HostFactory hostFactory(USE_DEBUGGABLE_HOST, enableDeviceMonitorMode);
+	auto pModelIdentifier = CreateModelIdentifier(USE_LEGACY_MODEL_RETRIEVER, USE_DEBUGGABLE_HOST);
+	KB_INFO(L"Detected Model ID: 0x%08X", pModelIdentifier->GetModelID());
+
+	const auto hostFactoryFlags = enableDeviceMonitorMode ? HostFactoryFlags::EnableDeviceMonitorMode : HostFactoryFlags::None;
+	HostFactory hostFactory(std::move(pModelIdentifier), hostFactoryFlags);
 	auto pHost = hostFactory.Create();
 
 	if (!pHost)
