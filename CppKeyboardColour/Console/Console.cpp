@@ -9,7 +9,7 @@
 #define KB_CONFIG_REGKEY L"SOFTWARE\\CLEVO_KeyboardColour"
 #define KB_CONFIG_TRANSLATION_VALUE L"EnableTranslation"
 
-namespace 
+namespace
 {
 	bool IsTranslationEnabled()
 	{
@@ -24,18 +24,16 @@ Console::Console(LogLevel level)
 	TranslatorFactory factory{};
 	SetConsoleOutputCP(CP_UTF16);
 
-	// m_currentLanguage = !IsTranslationEnabled()
-	// 	? MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_UK)
-	// 	: GetUserDefaultLangID();
-
-	m_currentLanguage = MAKELANGID(LANG_SWEDISH, SUBLANG_SWEDISH);
+	m_currentLanguage = !IsTranslationEnabled()
+		? MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_UK)
+		: GetUserDefaultLangID();
 
 	m_hWnd = GetConsoleWindow();
 	m_pTranslator = factory.Create(m_currentLanguage);
 	m_pLogger = std::make_unique<ConsoleLogger>();
 }
 
-void Console::SetTitle(const std::wstring& title) 
+void Console::SetTitle(const std::wstring& title)
 {
 	const auto translatedTitle = m_pTranslator->Translate(title).append(L"\n");
 	SetConsoleTitleW(translatedTitle.c_str());
@@ -59,7 +57,7 @@ void Console::Hide()
 	m_isVisible = !ShowWindow(m_hWnd, this->IsVisible() ? SW_HIDE : SW_NORMAL);
 }
 
-void Console::Show() 
+void Console::Show()
 {
 	m_isVisible = ShowWindow(m_hWnd, !this->IsVisible() ? SW_SHOW : SW_NORMAL);
 }
