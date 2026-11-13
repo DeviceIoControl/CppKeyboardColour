@@ -4,6 +4,8 @@
 #include "ITranslator.h"
 #include "../LogLevel.h"
 
+#define ITALIAN_PROGRAM_NAME L"Strumento per il colore della tastiera CLEVO"
+
 class ItalianTranslator
 	: public ITranslator
 {
@@ -18,9 +20,9 @@ public:
 private:
 	std::map<std::wstring, std::wstring> m_mapping
 	{
-		{ RELEASE_BUILD_STRING, L"" },
-		{ TEST_BUILD_STRING, L"CLEVO Keyboard Colours Tool 1.26.XXXX (Versione di test) - Creato da DeviceIoControl." },
-		{ DEBUG_BUILD_STRING, L"CLEVO Keyboard Colours Tool 1.26.XXXX (Build di debug) - Creato da DeviceIoControl."},
+		{ RELEASE_BUILD_STRING, MAKE_RELEASE_BUILD_STRING(ITALIAN_PROGRAM_NAME, L"Creato tramite DeviceIoControl.")},
+		{ TEST_BUILD_STRING, MAKE_NONRELEASE_BUILD_STRING(ITALIAN_PROGRAM_NAME, L"Versione di test", L"Creato tramite DeviceIoControl.")},
+		{ DEBUG_BUILD_STRING, MAKE_NONRELEASE_BUILD_STRING(ITALIAN_PROGRAM_NAME, L"Build di debug", L"Creato tramite DeviceIoControl.")},
 		{ L"Detected Model ID: 0x%08X", L"ID modello rilevato: 0x%08X" },
 		{ L"Host Devices: %s", L"Dispositivi host: %s" },
 		{ L"Keyboard Type: %s", L"Tipo di tastiera: %s" },

@@ -16,7 +16,7 @@ std::wstring SpanishTranslator::Translate(LogLevel level)
 		return L"Informazioni";
 
 	case LogLevel::Debug:
-		return L"Debug";
+		return L"Depurar";
 
 	case LogLevel::Error:
 		return L"Errore";

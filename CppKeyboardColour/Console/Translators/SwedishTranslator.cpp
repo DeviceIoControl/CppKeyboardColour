@@ -13,7 +13,7 @@ std::wstring SwedishTranslator::Translate(LogLevel level)
 	switch (level)
 	{
 	case LogLevel::Info:
-		return L"Info";
+		return L"Uppgifter";
 
 	case LogLevel::Debug:
 		return L"Felsök";

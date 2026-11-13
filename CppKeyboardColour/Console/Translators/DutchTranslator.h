@@ -4,6 +4,8 @@
 #include "ITranslator.h"
 #include "../LogLevel.h"
 
+#define DUTCH_PROGRAM_NAME L"CLEVO-toetsenkleurentool"
+
 class DutchTranslator
 	: public ITranslator
 {
@@ -18,9 +20,9 @@ public:
 private:
 	std::map<std::wstring, std::wstring> m_mapping
 	{
-		{ RELEASE_BUILD_STRING, L"" },
-		{ TEST_BUILD_STRING, L"CLEVO Keyboard Colours Tool 1.26.XXXX (Testversie) - Gemaakt door DeviceIoControl." },
-		{ DEBUG_BUILD_STRING, L"CLEVO Keyboard Colours Tool 1.26.XXXX (Debug-versie) - Gemaakt door DeviceIoControl."},
+		{ RELEASE_BUILD_STRING, MAKE_RELEASE_BUILD_STRING(DUTCH_PROGRAM_NAME, L"Gemaakt door DeviceIoControl.")},
+		{ TEST_BUILD_STRING, MAKE_NONRELEASE_BUILD_STRING(DUTCH_PROGRAM_NAME, L"Testversie", L"Gemaakt door DeviceIoControl.") },
+		{ DEBUG_BUILD_STRING, MAKE_NONRELEASE_BUILD_STRING(DUTCH_PROGRAM_NAME, L"Debug-versie", L"Gemaakt door DeviceIoControl.") },
 		{ L"Detected Model ID: 0x%08X", L"Gedetecteerde model-ID: 0x%08X" },
 		{ L"Host Devices: %s", L"Hostapparaten: %s" },
 		{ L"Keyboard Type: %s", L"Toetsenbordtype: %s" },

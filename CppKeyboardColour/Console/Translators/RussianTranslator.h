@@ -4,6 +4,8 @@
 #include "ITranslator.h"
 #include "../LogLevel.h"
 
+#define RUSSIAN_PROGRAM_NAME L"Утилита для настройки цвета клавиатуры CLEVO"
+
 class RussianTranslator
 	: public ITranslator
 {
@@ -18,9 +20,9 @@ public:
 private:
 	std::map<std::wstring, std::wstring> m_mapping
 	{
-		{ RELEASE_BUILD_STRING, L"" },
-		{ TEST_BUILD_STRING, L"CLEVO Keyboard Colours Tool 1.26.XXXX (тестовая сборка) — автор: DeviceIoControl." },
-		{ DEBUG_BUILD_STRING, L"Утилита для настройки цвета клавиатуры CLEVO 1.26.XXXX (отладочная сборка) - создано с помощью DeviceIoControl."},
+		{ RELEASE_BUILD_STRING, MAKE_RELEASE_BUILD_STRING(RUSSIAN_PROGRAM_NAME, L"Создано с помощью DeviceIoControl.") },
+		{ TEST_BUILD_STRING, MAKE_NONRELEASE_BUILD_STRING(RUSSIAN_PROGRAM_NAME, L"тестовая сборка" , L"Создано с помощью DeviceIoControl.") },
+		{ DEBUG_BUILD_STRING, MAKE_NONRELEASE_BUILD_STRING(RUSSIAN_PROGRAM_NAME, L"отладочная сборка" , L"Создано с помощью DeviceIoControl.") },
 		{ L"Detected Model ID: 0x%08X", L"Идентификатор обнаруженной модели: 0x%08X"},
 		{ L"Host Devices: %s", L"Хост-устройства: %s"},
 		{ L"Keyboard Type: %s", L"Тип клавиатуры: %s" },

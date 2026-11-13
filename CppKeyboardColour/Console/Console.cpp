@@ -24,9 +24,11 @@ Console::Console(LogLevel level)
 	TranslatorFactory factory{};
 	SetConsoleOutputCP(CP_UTF16);
 
-	m_currentLanguage = !IsTranslationEnabled()
-		? MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_UK)
-		: GetUserDefaultLangID();
+	// m_currentLanguage = !IsTranslationEnabled()
+	// 	? MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_UK)
+	// 	: GetUserDefaultLangID();
+
+	m_currentLanguage = MAKELANGID(LANG_SWEDISH, SUBLANG_SWEDISH);
 
 	m_hWnd = GetConsoleWindow();
 	m_pTranslator = factory.Create(m_currentLanguage);

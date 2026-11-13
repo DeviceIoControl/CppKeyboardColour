@@ -4,6 +4,8 @@
 #include "ITranslator.h"
 #include "../LogLevel.h"
 
+#define SWEDISH_PROGRAM_NAME L"Verktyg för CLEVO-tangentbordsfärger"
+
 class SwedishTranslator
 	: public ITranslator
 {
@@ -18,9 +20,9 @@ public:
 private:
 	std::map<std::wstring, std::wstring> m_mapping
 	{
-		{ RELEASE_BUILD_STRING, L"" },
-		{ TEST_BUILD_STRING, L"CLEVO Keyboard Colours Tool 1.26.XXXX (testversion) – skapad av DeviceIoControl." },
-		{ DEBUG_BUILD_STRING, L"CLEVO Keyboard Colours Tool 1.26.XXXX (felsökningsversion) – Skapad av DeviceIoControl."},
+		{ RELEASE_BUILD_STRING, MAKE_RELEASE_BUILD_STRING(SWEDISH_PROGRAM_NAME, L"skapad av DeviceIoControl.") },
+		{ TEST_BUILD_STRING, MAKE_NONRELEASE_BUILD_STRING(SWEDISH_PROGRAM_NAME, L"testversion" , L"skapad av DeviceIoControl.") },
+		{ DEBUG_BUILD_STRING, MAKE_NONRELEASE_BUILD_STRING(SWEDISH_PROGRAM_NAME, L"felsökningsversion", L"skapad av DeviceIoControl.") },
 		{ L"Detected Model ID: 0x%08X", L"Identifierat modell-ID: 0x%08X" },
 		{ L"Host Devices: %s", L"Värdenheter: %s" },
 		{ L"Keyboard Type: %s", L"Tangentbordstyp: %s" },
