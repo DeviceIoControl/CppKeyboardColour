@@ -30,3 +30,8 @@ std::wstring RussianTranslator::Translate(LogLevel level)
 
 	return L"???";
 }
+
+bool RussianTranslator::IsCompatible(LANGID langId) const 
+{
+	return langId == MAKELANGID(LANG_RUSSIAN, SUBLANG_RUSSIAN_RUSSIA);
+}

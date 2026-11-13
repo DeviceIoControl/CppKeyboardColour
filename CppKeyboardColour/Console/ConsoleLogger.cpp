@@ -10,8 +10,8 @@ namespace
 	{
 		DWORD charsWritten = 0;
 		
-		return WriteConsoleW(hStdOutput, msg.c_str(), static_cast<DWORD>(msg.size()) + 1, &charsWritten, nullptr)
-			&& WriteConsoleW(hStdOutput, L"\n", 2, &charsWritten, nullptr)
+		return WriteConsoleW(hStdOutput, msg.c_str(), static_cast<DWORD>(msg.length()), &charsWritten, nullptr)
+			&& WriteConsoleW(hStdOutput, L"\n", 1, &charsWritten, nullptr)
 			&& SetConsoleTextAttribute(hStdOutput, xstd::to_underlying(ConsoleColour::White) & 0x0F);
 	}
 
@@ -43,7 +43,7 @@ namespace
 
 		case LogLevel::Fatal:
 			SetConsoleTextAttribute(hStdOutput, xstd::to_underlying(ConsoleColour::LightRed) & 0x0F);
-			WriteConsoleW(hStdOutput, L"\n", 2, &charsWritten, nullptr);
+			WriteConsoleW(hStdOutput, L"\n", 1, &charsWritten, nullptr);
 			break;
 		}
 

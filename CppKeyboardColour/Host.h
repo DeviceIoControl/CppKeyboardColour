@@ -32,7 +32,9 @@ private:
 	uint32_t m_modelId{};
 	std::wstring m_modelName{};
 	DeviceChannelType m_devChannelType;
+	std::shared_ptr<IDevice> m_pLogo;
 	std::shared_ptr<IDevice> m_pKeyboard;
 	std::shared_ptr<IDevice> m_pLightbar;
-	std::shared_ptr<IDevice> m_pLogo;
+
+	void AddDevices(const std::vector<std::shared_ptr<IDevice>>& devices);
 };

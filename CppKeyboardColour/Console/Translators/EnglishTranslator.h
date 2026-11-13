@@ -13,4 +13,5 @@ public:
 
 	std::wstring Translate(const std::wstring& msg) override;
 	std::wstring Translate(LogLevel level) override;
+	bool IsCompatible(LANGID langId) const override;
 };

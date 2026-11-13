@@ -30,3 +30,9 @@ std::wstring GermanTranslator::Translate(LogLevel level)
 
 	return L"???";
 }
+
+bool GermanTranslator::IsCompatible(LANGID langId) const
+{
+	return langId == MAKELANGID(LANG_GERMAN, SUBLANG_GERMAN)
+		|| langId == MAKELANGID(LANG_GERMAN, SUBLANG_GERMAN_AUSTRIAN);
+}

@@ -33,14 +33,18 @@
 
 #define CP_UTF16 65001
 
+#define DEBUG_BUILD_STRING L"CLEVO Keyboard Colours Tool 1.26.XXXX (Debug Build) - Created by DeviceIoControl."
+#define TEST_BUILD_STRING L"CLEVO Keyboard Colours Tool 1.26.XXXX (Test Build) - Created by DeviceIoControl."
+#define RELEASE_BUILD_STRING L"CLEVO Keyboard Colours Tool 1.26.1102 - Created by DeviceIoControl."
+
 #if defined(DEBUG_BUILD)
 #define USE_DEBUGGABLE_HOST true
-#define PROGRAM_BOOTSTRAP_STRING L"CLEVO Keyboard Colours Tool 1.26.XXXX (Debug Build) - Created by DeviceIoControl."
+#define PROGRAM_BOOTSTRAP_STRING DEBUG_BUILD_STRING
 #elif defined (TEST_BUILD)
 #define USE_DEBUGGABLE_HOST false
-#define PROGRAM_BOOTSTRAP_STRING L"CLEVO Keyboard Colours Tool 1.26.XXXX (Test Build) - Created by DeviceIoControl."
+#define PROGRAM_BOOTSTRAP_STRING TEST_BUILD_STRING
 #elif defined (RELEASE_BUILD)
 #define USE_DEBUGGABLE_HOST false
-#define PROGRAM_BOOTSTRAP_STRING L"CLEVO Keyboard Colours Tool 1.26.1102 - Created by DeviceIoControl."
+#define PROGRAM_BOOTSTRAP_STRING RELEASE_BUILD_STRING
 #endif
 

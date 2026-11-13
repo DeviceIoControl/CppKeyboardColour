@@ -72,8 +72,8 @@ WmiDeviceChannel::WmiDeviceChannel()
 
 	if (!m_pClevoGetObject)
 	{
+		KB_SET_FATAL_ERROR(ERROR_INVALID_OPERATION);
 		KB_FATAL(L"CLEVOMOF.dll is registered - Failed to access code.\nPlease restart your system and try again.");
-		SetLastError(ERROR_INVALID_OPERATION);
 	}
 
 	IWbemClassObject* pDataParameter = nullptr;

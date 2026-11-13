@@ -30,3 +30,8 @@ std::wstring UkrainianTranslator::Translate(LogLevel level)
 
 	return L"???";
 }
+
+bool UkrainianTranslator::IsCompatible(LANGID langId) const
+{
+	return langId == MAKELANGID(LANG_UKRAINIAN, SUBLANG_UKRAINIAN_UKRAINE);
+}

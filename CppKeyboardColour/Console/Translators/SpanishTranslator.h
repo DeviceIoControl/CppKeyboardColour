@@ -13,11 +13,14 @@ public:
 
 	std::wstring Translate(const std::wstring& msg) override;
 	std::wstring Translate(LogLevel level) override;
+	bool IsCompatible(LANGID langId) const override;
 
 private:
 	std::map<std::wstring, std::wstring> m_mapping
 	{
-		{ L"CLEVO Keyboard Colours Tool 1.26.XXXX (Debug Build) - Created by DeviceIoControl.", L"CLEVO Keyboard Colours Tool 1.26.XXXX (versión de depuración) - Creada por DeviceIoControl."},
+		{ RELEASE_BUILD_STRING, L"" },
+		{ TEST_BUILD_STRING, L"CLEVO Keyboard Colours Tool 1.26.XXXX (Versión de prueba) - Creada por DeviceIoControl." },
+		{ DEBUG_BUILD_STRING, L"CLEVO Keyboard Colours Tool 1.26.XXXX (versión de depuración) - Creada por DeviceIoControl."},
 		{ L"Detected Model ID: 0x%08X", L"ID de modelo detectado: 0x%08X" },
 		{ L"Host Devices: %s", L"Dispositivos anfitriones: %s" },
 		{ L"Keyboard Type: %s", L"Tipo de teclado: %s" },
@@ -52,7 +55,7 @@ private:
 		{ L"Cannot enable hidden mode with Device monitor mode enabled.", L"No es posible activar el modo oculto mientras el modo de supervisión del dispositivo está habilitado." },
 		{ L"Invalid command line. Command is: CLEVO_KeyboardColour.exe theme/inbuilt/backlight/lightbar/colour(s) [<themeName>/<hexColour>] [--once] [--speed] <speed> [--dmm] [--hide]", L"Línea de comandos no válida. El comando es: CLEVO_KeyboardColour.exe theme/inbuilt/backlight/lightbar/colour(s) [<nombreDelTema>/<colorHexadecimal>] [--once] [--speed] <velocidad> [--dmm] [--hide]" },
 		{ L"Cannot communicate with the requested device.", L"No es posible comunicarse con el dispositivo solicitado." },
-		{ L"Failed to detect the host's devices.", L"No se pudieron detectar los dispositivos del host." },
+		{ L"Failed to detect the host's RGB devices.", L"No se pudieron detectar los dispositivos RGB del equipo." },
 		{ L"Failed to detected Model ID.", L"No se pudo detectar el ID del modelo." }
 	};
 };

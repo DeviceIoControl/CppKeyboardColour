@@ -34,7 +34,10 @@ private:
 	LogLevel m_baseLoglevel;
 	std::mutex m_outputLock{};
 	std::unique_ptr<ILogger> m_pLogger;
+	std::atomic<bool> m_isVisible = true;
 	std::unique_ptr<ITranslator> m_pTranslator;
+
+	LANGID m_currentLanguage = GetUserDefaultLangID();
 
 	// The process will terminate when this function is called.
 	[[noreturn]] void OnFatalMessage();
@@ -44,11 +47,11 @@ private:
 	SYSTEMTIME GetCurrentSystemTime() const;
 
 	template<typename ..._TArgs>
-	std::wstring OnPreFormatAndPreTranslation(LogLevel level, const std::wstring& format, _TArgs&&... args)
+	std::wstring OnPreWrite(LogLevel level, const std::wstring& format, _TArgs&&... args)
 	{
 		const auto translatedLogLevel = m_pTranslator->Translate(level);
-		const auto translatedPreformatMsg = m_pTranslator->Translate(format);
-		const auto translatedPostFormatMsg = xstd::format(translatedPreformatMsg, std::forward<_TArgs>(args)...);
+		const auto translatedPreFormatMsg = m_pTranslator->Translate(format);
+		const auto translatedPostFormatMsg = xstd::format(translatedPreFormatMsg, std::forward<_TArgs>(args)...);
 
 		return xstd::format(L"[%s]: %s", translatedLogLevel.c_str(), translatedPostFormatMsg.c_str());
 	}
@@ -61,7 +64,7 @@ private:
 			return false; // ERROR: Cannot log on this level.
 		}
 
-		const auto logMessage = OnPreFormatAndPreTranslation(level, format, std::forward<_TArgs>(args)...);
+		const auto logMessage = OnPreWrite(level, format, std::forward<_TArgs>(args)...);
 
 		std::scoped_lock mutex_guard(m_outputLock);
 

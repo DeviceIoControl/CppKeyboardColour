@@ -30,3 +30,8 @@ std::wstring ItalianTranslator::Translate(LogLevel level)
 
 	return L"???";
 }
+
+bool ItalianTranslator::IsCompatible(LANGID langId) const
+{
+	return langId == MAKELANGID(LANG_ITALIAN, SUBLANG_ITALIAN);
+}

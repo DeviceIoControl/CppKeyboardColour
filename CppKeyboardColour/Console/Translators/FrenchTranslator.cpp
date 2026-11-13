@@ -30,3 +30,11 @@ std::wstring FrenchTranslator::Translate(LogLevel level)
 
 	return L"???";
 }
+
+bool FrenchTranslator::IsCompatible(LANGID langId) const
+{
+	return langId == MAKELANGID(LANG_FRENCH, SUBLANG_FRENCH)
+		|| langId == MAKELANGID(LANG_FRENCH, SUBLANG_FRENCH_CANADIAN)
+		|| langId == MAKELANGID(LANG_FRENCH, SUBLANG_FRENCH_LUXEMBOURG)
+		|| langId == MAKELANGID(LANG_FRENCH, SUBLANG_FRENCH_MONACO);
+}

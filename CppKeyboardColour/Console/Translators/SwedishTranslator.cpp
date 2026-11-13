@@ -30,3 +30,9 @@ std::wstring SwedishTranslator::Translate(LogLevel level)
 
 	return L"???";
 }
+
+bool SwedishTranslator::IsCompatible(LANGID langId) const 
+{
+	return langId == MAKELANGID(LANG_SWEDISH, SUBLANG_SWEDISH)
+		|| langId == MAKELANGID(LANG_SWEDISH, SUBLANG_SWEDISH_FINLAND);
+}

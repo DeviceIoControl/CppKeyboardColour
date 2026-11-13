@@ -24,4 +24,14 @@ namespace Registry
 		return regSzValue;
 	}
 
+	std::optional<uint32_t> GetRegDWORDValue(HKEY hHive, const std::wstring& path, const std::wstring& valueName) 
+	{
+		DWORD regDwordValue = 0;
+		if (RegGetValueW(hHive, path.c_str(), valueName.c_str(), RRF_RT_REG_DWORD, nullptr, &regDwordValue, nullptr) != ERROR_SUCCESS) 
+		{
+			return std::nullopt;
+		}
+
+		return regDwordValue;
+	}
 } // namespace Registry

@@ -15,7 +15,7 @@ std::unique_ptr<Host> HostFactory::Create()
 	const auto hostDevices = m_modelIdentifer->GetHostDevices();
 	if (hostDevices == DeviceMask::Unknown)
 	{
-		KB_ERROR(L"Failed to detect the host's devices.");
+		KB_ERROR(L"Failed to detect the host's RGB devices.");
 		return nullptr;
 	}
 

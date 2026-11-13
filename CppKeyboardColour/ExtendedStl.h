@@ -92,18 +92,12 @@ namespace xstd
 			return L"";
 		}
 
-		if (allocated_string.size() < length)
+		if (allocated_string.size() != length)
 		{
 			allocated_string.resize(length);
 		}
 
 		xstd::swprintf(allocated_string.data(), format.c_str(), std::forward<_TArgs>(args)...);
-
-		// Shrink the buffer, if it is too big.
-		if (allocated_string.size() > length)
-		{
-			allocated_string.shrink_to_fit();
-		}
 
 		return allocated_string;
 	}

@@ -21,6 +21,7 @@
 #define MODEL_ID_W230SXX 0x00008535
 #define MODEL_ID_V370EXX 0x00000255
 #define MODEL_ID_V150RXX 0x0000015A
+#define MODEL_ID_NP55HXX 0x00008511
 #define MODEL_ID_DEBUG 0x12345678
 
 // #define MODEL_ID_NH77XX - User did not respond with the appropriate information.

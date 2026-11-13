@@ -36,31 +36,7 @@ Host::Host(std::shared_ptr<ModelIdentifier> pModelId, const std::vector<std::sha
 	m_modelName(pModelId->GetModelName()),
 	m_devChannelType(pModelId->GetDeviceChannelType())
 {
-	for (const auto& pDevice : devices)
-	{
-		if (!pDevice)
-		{
-			continue;
-		}
-
-		switch (QueryDeviceType(pDevice))
-		{
-		case DeviceMask::Keyboard:
-			m_pKeyboard = pDevice;
-			break;
-
-		case DeviceMask::Lightbar:
-			m_pLightbar = pDevice;
-			break;
-
-		case DeviceMask::Logo:
-			m_pLogo = pDevice;
-			break;
-
-		case DeviceMask::Unknown:
-			continue;
-		}
-	}
+	this->AddDevices(devices);
 }
 
 DeviceMask Host::GetDevices() const
@@ -171,4 +147,33 @@ bool Host::SendDeviceCode(DeviceMask devices, uint32_t code)
 	}
 
 	return true;
+}
+
+void Host::AddDevices(const std::vector<std::shared_ptr<IDevice>>& devices) 
+{
+	for (const auto& pDevice : devices)
+	{
+		if (!pDevice)
+		{
+			continue;
+		}
+
+		switch (QueryDeviceType(pDevice))
+		{
+		case DeviceMask::Keyboard:
+			m_pKeyboard = pDevice;
+			break;
+
+		case DeviceMask::Lightbar:
+			m_pLightbar = pDevice;
+			break;
+
+		case DeviceMask::Logo:
+			m_pLogo = pDevice;
+			break;
+
+		case DeviceMask::Unknown:
+			continue;
+		}
+	}
 }

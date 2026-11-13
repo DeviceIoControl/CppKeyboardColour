@@ -30,3 +30,9 @@ std::wstring DutchTranslator::Translate(LogLevel level)
 
 	return L"???";
 }
+
+bool DutchTranslator::IsCompatible(LANGID langId) const
+{
+	return langId == MAKELANGID(LANG_DUTCH, SUBLANG_DUTCH) 
+		|| langId == MAKELANGID(LANG_DUTCH, SUBLANG_DUTCH_BELGIAN);
+}
