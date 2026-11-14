@@ -11,3 +11,4 @@
 #include "ItalianTranslator.h"
 #include "SpanishTranslator.h"
 #include "UkrainianTranslator.h"
+#include "PortugueseTranslator.h"

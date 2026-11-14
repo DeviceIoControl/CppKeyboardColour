@@ -58,6 +58,10 @@ namespace
 		case MAKELANGID(LANG_SPANISH, SUBLANG_SPANISH_PUERTO_RICO):
 		case MAKELANGID(LANG_SPANISH, SUBLANG_SPANISH_URUGUAY):
 			return std::make_unique<SpanishTranslator>();
+
+		case MAKELANGID(LANG_PORTUGUESE, SUBLANG_PORTUGUESE):
+		case MAKELANGID(LANG_PORTUGUESE, SUBLANG_PORTUGUESE_BRAZILIAN):
+			return std::make_unique<PortugueseTranslator>();
 		}
 
 		return nullptr;
