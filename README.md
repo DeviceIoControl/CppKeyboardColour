@@ -66,7 +66,7 @@ It is designed to provide additional animations for CLEVO & Tongfang based lapto
 
 **Does this program have a GUI?** - *No. The intention of this program is to be a lightweight app to enable keyboard themes on your system without the need for the bloatware included with the Control Center. This program does not intend to be a complete replacement of the software shipped with your system.*
 
-**How do I hide the command window?** - *Please refer to the 'Background Modes' section of the README for more information.*
+**How do I hide the command window?** - *Please refer to the ['Background Modes'](https://github.com/DeviceIoControl/CppKeyboardColour#-background-modes) section of the README for more information.*
 
 **How long does it take to add support for my system?** - *Depends on your device. In most cases (If GitHub notifications worked properly), I can add support for certain models of laptop and create a new release within an hour. On certain occassions (depending on the device) it can take 24-hours or more, but I will ensure you are informed about this when that is the case.*
 
