@@ -70,9 +70,11 @@ It is designed to provide additional animations for CLEVO & Tongfang based lapto
 
 **How long does it take to add support for my system?** - *Depends on your device. In most cases (If GitHub notifications worked properly), I can add support for certain models of laptop and create a new release within an hour. On certain occassions (depending on the device) it can take 24-hours or more, but I will ensure you are informed about this when that is the case.*
 
-**How do I fix this error?** - *Please refer to the 'Common Errors' section of the README for more information.*
+**How do I fix this error?** - *Please refer to the ['Common Errors'](https://github.com/DeviceIoControl/CppKeyboardColour#common-errors) section of the README for more information.*
 
-**NOTE:** Please bear in mind, I am the sole developer for this project, and although occassionly a few minor code contributions do appear, the majority of the time, it's *only me* adding support and servicing requests for this project. **So, please understand that some requests may take longer than expected, if I am not available or busy. Thank you for your understanding!**
+**NOTE:** Please bear in mind, I am the sole developer for this project, and although occassionly a few minor code contributions do appear, the majority of the time, it's *only me* adding support and servicing requests for this project. 
+
+**So, please understand that some requests may take longer than expected, if I am not available or busy. Thank you for your understanding!**
 
 ---
 
