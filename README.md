@@ -2,7 +2,7 @@
 
 **A command-line RGB Keyboard backlight control program for CLEVO & Tongfang based laptops.**
 
-This is the successor to the original "keyboard-colour-program" application. 
+This project is the successor to the original "keyboard-colour-program" application. 
 
 It is designed to provide additional animations for CLEVO & Tongfang based laptop keyboards with **RGB** lighting, supporting devices with **1-zone**, **3-zone** keyboards and devices with **RGB Lightbars**. The program includes a variety of custom animated effects to enhance your RGB experience for your system.
 
@@ -40,7 +40,7 @@ It is designed to provide additional animations for CLEVO & Tongfang based lapto
 | [Custom Keyboard Colour Commands](https://github.com/DeviceIoControl/CppKeyboardColour#%EF%B8%8F-custom-colour-operations)
 | [Custom Lightbar Colour Commands](https://github.com/DeviceIoControl/CppKeyboardColour#-custom-lightbar-colour-operations)
  
-- [Animations Commands](https://github.com/DeviceIoControl/CppKeyboardColour#-supported-animations)
+- [Predefined Animations Commands](https://github.com/DeviceIoControl/CppKeyboardColour#-supported-animations)
 | [Inbuilt Animation Commands (3-Zone only)](https://github.com/DeviceIoControl/CppKeyboardColour#%EF%B8%8F-inbuilt-themes-3-zone-keyboards-only)
 | [Custom Animation Speed Commands](https://github.com/DeviceIoControl/CppKeyboardColour#%EF%B8%8F-custom-speed)
 
@@ -351,7 +351,7 @@ If you wish to run this program on (in the background), there are multiple appro
 ---
 ## 🗣️Translations
 
-We now support outputting multiple languages to the console. CLEVO Keyboard Colour will detect the current language set on the logged on user and the  console output will be in the detected language (if supported).
+We now support outputting multiple languages to the console. CLEVO Keyboard Colour will detect the current language set on the logged on user and the console output will be in the detected language (if supported).
 
 **To enable this feature, run the `Scripts\EnableTranslations.cmd` command script and restart the program for settings to take effect.**
 
@@ -367,6 +367,8 @@ The following additional languages are now supported:
 - **Portuguese**
 
 **To disable this feature, run the `Scripts\DisableTranslations.cmd` command script and restart the program for the settings to take effect.**
+
+*NOTE: Certain strings cannot be translated (yet), but these translations will improve in subsequent future releases.*
 
 ---
 
