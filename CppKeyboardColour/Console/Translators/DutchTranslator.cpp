@@ -13,7 +13,7 @@ std::wstring DutchTranslator::Translate(LogLevel level)
 	switch (level)
 	{
 	case LogLevel::Info:
-		return L"Info";
+		return L"Informatie";
 
 	case LogLevel::Debug:
 		return L"Fouten opsporen";
