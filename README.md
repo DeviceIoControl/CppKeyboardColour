@@ -364,6 +364,7 @@ The following additional languages are now supported:
 - **Italian**
 - **French**
 - **German**
+- **Portuguese**
 
 **To disable this feature, run the `Scripts\DisableTranslations.cmd` command script and restart the program for the settings to take effect.**
 
