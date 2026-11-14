@@ -7,7 +7,7 @@
 #include "Translators/TranslatorFactory.h"
 
 #define KB_CONFIG_REGKEY L"SOFTWARE\\CLEVO_KeyboardColour"
-#define KB_CONFIG_TRANSLATION_VALUE L"EnableTranslation"
+#define KB_CONFIG_TRANSLATION_VALUE L"EnableTranslations"
 
 namespace
 {

@@ -2,7 +2,9 @@
 
 **A command-line RGB Keyboard backlight control program for CLEVO & Tongfang based laptops.**
 
-This is a cleaner, more organized, and efficient version of the initial program. It is designed to provide enhanced features for customizing CLEVO & Tongfang based laptop keyboards with **RGB** lighting, supporting devices with **1-zone**, **3-zone** keyboards and devices with **RGB Lightbars**. The program also includes a variety of animated effects to enhance your keyboard’s visual experience.
+This is the successor to the original "keyboard-colour-program" application. 
+
+It is designed to provide additional animations for CLEVO & Tongfang based laptop keyboards with **RGB** lighting, supporting devices with **1-zone**, **3-zone** keyboards and devices with **RGB Lightbars**. The program includes a variety of custom animated effects to enhance your RGB experience for your system.
 
 ---
 
@@ -21,6 +23,33 @@ This is a cleaner, more organized, and efficient version of the initial program.
 
 ⚠️ **Warning:** Certain themes may utilize **~15% of CPU** at certain times.
 
+---
+## 📖 README Index
+
+- [Frequently Asked Question (FAQ)](https://github.com/DeviceIoControl/CppKeyboardColour#faq---frequently-asked-questions)
+
+- [Requirements](https://github.com/DeviceIoControl/CppKeyboardColour#-requirements)
+
+- [How To Use](https://github.com/DeviceIoControl/CppKeyboardColour#%EF%B8%8F-how-to-use) 
+| [Functional Commands](https://github.com/DeviceIoControl/CppKeyboardColour#-functional-commands)
+| [General Syntax](https://github.com/DeviceIoControl/CppKeyboardColour#%EF%B8%8F-general-syntax)
+
+- [Translations](https://github.com/DeviceIoControl/CppKeyboardColour#%EF%B8%8Ftranslations)
+
+- [Backlight Commands](https://github.com/DeviceIoControl/CppKeyboardColour#%EF%B8%8F-backlight-operations)
+| [Custom Keyboard Colour Commands](https://github.com/DeviceIoControl/CppKeyboardColour#%EF%B8%8F-custom-colour-operations)
+| [Custom Lightbar Colour Commands](https://github.com/DeviceIoControl/CppKeyboardColour#-custom-lightbar-colour-operations)
+ 
+- [Animations Commands](https://github.com/DeviceIoControl/CppKeyboardColour#-supported-animations)
+| [Inbuilt Animation Commands (3-Zone only)](https://github.com/DeviceIoControl/CppKeyboardColour#%EF%B8%8F-inbuilt-themes-3-zone-keyboards-only)
+| [Custom Animation Speed Commands](https://github.com/DeviceIoControl/CppKeyboardColour#%EF%B8%8F-custom-speed)
+
+- [Debugging Commands](https://github.com/DeviceIoControl/CppKeyboardColour#-device-monitor-mode)
+| [Common Error](https://github.com/DeviceIoControl/CppKeyboardColour#common-errors)
+
+- [Console Visibility Commands](https://github.com/DeviceIoControl/CppKeyboardColour#-background-modes)
+
+- [Legal / Disclaimer](https://github.com/DeviceIoControl/CppKeyboardColour#legal--disclaimer)
 ---
 
 ## ❓FAQ - Frequently asked questions:
@@ -41,7 +70,7 @@ This is a cleaner, more organized, and efficient version of the initial program.
 
 **How do I fix this error?** - *Please refer to the 'Common Errors' section of the README for more information.*
 
-**NOTE:** Please bear in mind, I am the sole developer for this project, and although there may be a few minor code contributions on occassion, the majority of the time, it's *only me* adding support and servicing requests for this project. **So, please understand that some requests may take longer than expected, if I am not available or busy. Thank you for your understanding!**
+**NOTE:** Please bear in mind, I am the sole developer for this project, and although occassionly a few minor code contributions do appear, the majority of the time, it's *only me* adding support and servicing requests for this project. **So, please understand that some requests may take longer than expected, if I am not available or busy. Thank you for your understanding!**
 
 ---
 
@@ -314,6 +343,25 @@ If you wish to run this program on (in the background), there are multiple appro
 **NOTE:** Please use Task Manager to locate close the application to play other themes.
 
 ⚠️ **WARNING:** This argument cannot be used in conjunction with the "--dmm" (Device monitor mode) argument.
+
+---
+## 🗣️Translations
+
+We now support outputting multiple languages to the console. CLEVO Keyboard Colour will detect the current language set on the logged on user and the  console output will be in the detected language (if supported).
+
+**To enable this feature, run the `Scripts\EnableTranslations.cmd` command script and restart the program for settings to take effect.**
+
+The following additional languages are now supported: 
+- **Dutch**
+- **Russian**
+- **Ukrainian**
+- **Swedish**
+- **Spanish**
+- **Italian**
+- **French**
+- **German**
+
+**To disable this feature, run the `Scripts\DisableTranslations.cmd` command script and restart the program for the settings to take effect.**
 
 ---
 
