@@ -25,7 +25,7 @@ std::wstring PortugueseTranslator::Translate(LogLevel level)
 		return L"Aviso";
 
 	case LogLevel::Fatal:
-		return L"funesto";
+		return L"Funesto";
 	}
 
 	return L"???";

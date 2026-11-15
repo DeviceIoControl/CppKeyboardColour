@@ -13,7 +13,7 @@ std::wstring GermanTranslator::Translate(LogLevel level)
 	switch (level)
 	{
 	case LogLevel::Info:
-		return L"die Angaben";
+		return L"Die Angaben";
 
 	case LogLevel::Debug:
 		return L"Debuggen";
