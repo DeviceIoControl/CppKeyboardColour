@@ -33,5 +33,5 @@ std::wstring JapaneseTranslator::Translate(LogLevel level)
 
 bool JapaneseTranslator::IsCompatible(LANGID langId) const
 {
-	return langId == MAKELANGID(LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED);
+	return langId == MAKELANGID(LANG_JAPANESE, SUBLANG_JAPANESE_JAPAN);
 }

@@ -24,11 +24,9 @@ Console::Console(LogLevel level)
 	TranslatorFactory factory{};
 	SetConsoleOutputCP(CP_UTF16);
 
-	// m_currentLanguage = !IsTranslationEnabled()
-	// 	? MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_UK)
-	// 	: GetUserDefaultLangID();
-
-	m_currentLanguage = MAKELANGID(LANG_JAPANESE, SUBLANG_JAPANESE_JAPAN);
+	m_currentLanguage = !IsTranslationEnabled()
+		? MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_UK)
+		: GetUserDefaultLangID();
 
 	m_hWnd = GetConsoleWindow();
 	m_pTranslator = factory.Create(m_currentLanguage);
@@ -38,19 +36,19 @@ Console::Console(LogLevel level)
 void Console::SetTitle(const std::wstring& title)
 {
 	const auto translatedTitle = m_pTranslator->Translate(title).append(L"\n");
-	SetConsoleTitleW(translatedTitle.c_str());
+	std::ignore = SetConsoleTitleW(translatedTitle.c_str());
 
 	m_pLogger->Write(LogLevel::None, translatedTitle);
 
 	// Check if the current translator is compatible with the detected language ID.
-	// If not, that means we are using the fallback language. 
+	// If not, that means we are using the fallback language.
 	// We confirm this by verifying the translator is any dialect of English (We check for British English).
 	const auto isUsingFallbackLang = !m_pTranslator->IsCompatible(m_currentLanguage)
 		&& m_pTranslator->IsCompatible(MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_UK));
 
 	if (isUsingFallbackLang)
 	{
-		m_pLogger->Write(LogLevel::Warning, L"Current language is not supported, defaulting to English.");
+		this->Log(LogLevel::Warning, L"Current language is not supported, defaulting to English.");
 	}
 }
 
