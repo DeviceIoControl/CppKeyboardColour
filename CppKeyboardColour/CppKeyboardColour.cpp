@@ -53,9 +53,16 @@ int wmain(int argc, const wchar_t* argv[])
 	const auto cmdLines = CommandLine::GetCommandLines(argc, argv);
 	const auto enableDeviceMonitorMode = ShouldEnableDMM(cmdLines);
 	const auto enableHiddenMode = CommandLine::Contains(L"--hide", cmdLines);
+	const auto displayModelIdOnly = CommandLine::Contains(L"--model", cmdLines);
 
 	auto pModelIdentifier = CreateModelIdentifier(USE_LEGACY_MODEL_RETRIEVER, USE_DEBUGGABLE_HOST);
 	KB_INFO(L"Detected Model ID: 0x%08X", pModelIdentifier->GetModelID());
+
+	if (displayModelIdOnly)
+	{
+		KB_PROMPT(L"\nPress ENTER to exit.");
+		return ERROR_SUCCESS;
+	}
 
 	const auto hostFactoryFlags = enableDeviceMonitorMode ? HostFactoryFlags::EnableDeviceMonitorMode : HostFactoryFlags::None;
 	HostFactory hostFactory(std::move(pModelIdentifier), hostFactoryFlags);

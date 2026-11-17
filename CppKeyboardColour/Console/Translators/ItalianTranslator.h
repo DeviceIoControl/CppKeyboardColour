@@ -27,6 +27,7 @@ private:
 		{ L"Host Devices: %s", L"Dispositivi host: %s" },
 		{ L"Keyboard Type: %s", L"Tipo di tastiera: %s" },
 		{ L"Model Name: %s", L"Nome del modello: %s" },
+		{ L"Custom speed: %0.f%%\n", L"Velocità personalizzata: %0.f%%\n" },
 		{ L"Device monitor mode enabled! (Performance may be affected)", L"Modalità monitoraggio dispositivo attivata! (Le prestazioni potrebbero risentirne)"},
 		{ L"{%s} - Code: 0x%08X -> %s Colour: (RED: 0x%08X), (GREEN: 0x%08X), (BLUE: 0x%08X)", L"{%s} - Codice: 0x%08X -> %s Colore: (ROSSO: 0x%08X), (VERDE: 0x%08X), (BLU: 0x%08X)"},
 		{ L"Speed value out of range (1-250) - Will use default speed.", L"Valore di velocità fuori intervallo (1-250) - Verrà utilizzata la velocità predefinita."},
@@ -58,6 +59,7 @@ private:
 		{ L"Invalid command line. Command is: CLEVO_KeyboardColour.exe theme/inbuilt/backlight/lightbar/colour(s) [<themeName>/<hexColour>] [--once] [--speed] <speed> [--dmm] [--hide]", L"Riga di comando non valida. Il comando è: CLEVO_KeyboardColour.exe theme/inbuilt/backlight/lightbar/colour(s) [<nomeTema>/<coloreEsadecimale>] [--once] [--speed] <velocità> [--dmm] [--hide]" },
 		{ L"Cannot communicate with the requested device.", L"Impossibile comunicare con il dispositivo richiesto." },
 		{ L"Failed to detect the host's RGB devices.", L"Impossibile rilevare i dispositivi RGB dell'host." },
-		{ L"Failed to detected Model ID.", L"Impossibile rilevare l'ID modello." }
+		{ L"Failed to detected Model ID.", L"Impossibile rilevare l'ID modello." },
+		{ L"\nPress ENTER to exit.", L"\nPremi INVIO per uscire." }
 	};
 };

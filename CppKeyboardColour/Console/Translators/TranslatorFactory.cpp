@@ -62,6 +62,18 @@ namespace
 		case MAKELANGID(LANG_PORTUGUESE, SUBLANG_PORTUGUESE):
 		case MAKELANGID(LANG_PORTUGUESE, SUBLANG_PORTUGUESE_BRAZILIAN):
 			return std::make_unique<PortugueseTranslator>();
+
+		case MAKELANGID(LANG_CHINESE_SIMPLIFIED, SUBLANG_CHINESE_SIMPLIFIED):
+			return std::make_unique<ChineseSimplifiedTranslator>();
+
+		case MAKELANGID(LANG_CHINESE_TRADITIONAL, SUBLANG_CHINESE_TRADITIONAL):
+			return std::make_unique<ChineseTraditionalTranslator>();
+
+		case MAKELANGID(LANG_KOREAN, SUBLANG_KOREAN):
+			return std::make_unique<KoreanTranslator>();
+
+		case MAKELANGID(LANG_JAPANESE, SUBLANG_JAPANESE_JAPAN):
+			return std::make_unique<JapaneseTranslator>();
 		}
 
 		return nullptr;

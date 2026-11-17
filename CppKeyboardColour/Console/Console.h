@@ -27,6 +27,16 @@ public:
 		return false;
 	}
 
+	void Prompt(const std::wstring& msg)
+	{
+		if (this->IsVisible())
+		{
+			const auto translatedPrompt = m_pTranslator->Translate(msg);
+			m_pLogger->Write(LogLevel::None, translatedPrompt);
+			std::ignore = std::getchar();
+		}
+	}
+
 	bool IsVisible() const;
 
 private:

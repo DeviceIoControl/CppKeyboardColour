@@ -27,6 +27,8 @@
 // Output a debug message displaying the corresponding function name and returned error code.
 #define KB_ERROR_STATUS(fnName, errorCode) KB_DEBUG(L"%s failed with error status: 0x%08x.", fnName, errorCode)
 
+#define KB_PROMPT(msg) AppConsole().Prompt(msg);
+
 // Sets the console window title.
 #define KB_CONSOLE_TITLE(msg) AppConsole().SetTitle(msg);
 

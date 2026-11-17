@@ -27,6 +27,7 @@ private:
 		{ L"Host Devices: %s", L"Хост-пристрої: %s"},
 		{ L"Keyboard Type: %s", L"Тип клавіатури: %s" },
 		{ L"Model Name: %s", L"Назва моделі: %s"},
+		{ L"Custom speed: %0.f%%\n", L"Власна швидкість: %0.f%%\n" },
 		{ L"Device monitor mode enabled! (Performance may be affected)", L"Увімкнено режим моніторингу пристрою! (Це може вплинути на продуктивність)"},
 		{ L"{%s} - Code: 0x%08X -> %s Colour: (RED: 0x%08X), (GREEN: 0x%08X), (BLUE: 0x%08X)", L"{%s} — Код: 0x%08X -> %s Колір: (ЧЕРВОНИЙ: 0x%08X), (ЗЕЛЕНИЙ: 0x%08X), (СИНІЙ: 0x%08X)"},
 		{ L"Speed value out of range (1-250) - Will use default speed.", L"Значення швидкості поза межами діапазону (1–250) — буде використано швидкість за замовчуванням."},
@@ -58,6 +59,7 @@ private:
 		{ L"Invalid command line. Command is: CLEVO_KeyboardColour.exe theme/inbuilt/backlight/lightbar/colour(s) [<themeName>/<hexColour>] [--once] [--speed] <speed> [--dmm] [--hide]", L"Неприпустимий командний рядок. Команда: CLEVO_KeyboardColour.exe theme/inbuilt/backlight/lightbar/colour(s) [<назва_теми>/<шістнадцятковий_код_кольору>] [--once] [--speed] <швидкість> [--dmm] [--hide]" },
 		{ L"Cannot communicate with the requested device.", L"Не вдається зв’язатися із запитаним пристроєм." },
 		{ L"Failed to detect the host's RGB devices.", L"Не вдалося виявити RGB-пристрої хоста." },
-		{ L"Failed to detected Model ID.", L"Не вдалося визначити ідентифікатор моделі." }
+		{ L"Failed to detected Model ID.", L"Не вдалося визначити ідентифікатор моделі." },
+		{ L"\nPress ENTER to exit.", L"\nНатисніть ENTER, щоб вийти." }
 	};
 };

@@ -27,6 +27,7 @@ private:
 		{ L"Host Devices: %s", L"Appareils hôtes: %s" },
 		{ L"Keyboard Type: %s", L"Type de clavier: %s" },
 		{ L"Model Name: %s", L"Nom du modèle : %s" },
+		{ L"Custom speed: %0.f%%\n", L"Vitesse personnalisée: %0.f%%\n" },
 		{ L"Device monitor mode enabled! (Performance may be affected)", L"Mode de surveillance de l'appareil activé ! (Les performances peuvent en être affectées)"},
 		{ L"{%s} - Code: 0x%08X -> %s Colour: (RED: 0x%08X), (GREEN: 0x%08X), (BLUE: 0x%08X)", L"{%s} - Code : 0x%08X -> %s Couleur : (ROUGE : 0x%08X), (VERT : 0x%08X), (BLEU : 0x%08X)"},
 		{ L"Speed value out of range (1-250) - Will use default speed.", L"Valeur de vitesse hors plage (1-250) – La vitesse par défaut sera utilisée." },
@@ -58,6 +59,7 @@ private:
 		{ L"Invalid command line. Command is: CLEVO_KeyboardColour.exe theme/inbuilt/backlight/lightbar/colour(s) [<themeName>/<hexColour>] [--once] [--speed] <speed> [--dmm] [--hide]", L"Ligne de commande non valide. La commande est : CLEVO_KeyboardColour.exe theme/inbuilt/backlight/lightbar/colour(s) [<nomDuThème>/<couleurHexadécimale>] [--once] [--speed] <vitesse> [--dmm] [--hide]" },
 		{ L"Cannot communicate with the requested device.", L"Impossible de communiquer avec l’appareil demandé." },
 		{ L"Failed to detect the host's RGB devices.", L"Échec de la détection des périphériques RGB de l'hôte." },
-		{ L"Failed to detected Model ID.", L"Impossible de détecter l’identifiant du modèle." }
+		{ L"Failed to detected Model ID.", L"Impossible de détecter l’identifiant du modèle." },
+		{ L"\nPress ENTER to exit.", L"\nAppuyez sur ENTRÉE pour quitter." }
 	};
 };

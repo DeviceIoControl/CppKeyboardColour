@@ -24,9 +24,11 @@ Console::Console(LogLevel level)
 	TranslatorFactory factory{};
 	SetConsoleOutputCP(CP_UTF16);
 
-	m_currentLanguage = !IsTranslationEnabled()
-		? MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_UK)
-		: GetUserDefaultLangID();
+	// m_currentLanguage = !IsTranslationEnabled()
+	// 	? MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_UK)
+	// 	: GetUserDefaultLangID();
+
+	m_currentLanguage = MAKELANGID(LANG_JAPANESE, SUBLANG_JAPANESE_JAPAN);
 
 	m_hWnd = GetConsoleWindow();
 	m_pTranslator = factory.Create(m_currentLanguage);
@@ -69,9 +71,8 @@ bool Console::IsVisible() const
 
 void Console::OnFatalMessage()
 {
-	std::printf("\n%s\n", "Press ENTER to exit.");
-	std::getchar();
-	std::quick_exit(GetLastError());
+	this->Prompt(L"\nPress ENTER to exit.");
+	std::exit(GetLastError());
 }
 
 bool Console::CanLogOnLevel(LogLevel level) const

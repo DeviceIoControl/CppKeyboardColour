@@ -339,6 +339,18 @@
     <ClInclude Include="Console\Translators\PortugueseTranslator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Console\Translators\ChineseSimplifiedTranslator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Console\Translators\ChineseTraditionalTranslator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Console\Translators\KoreanTranslator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Console\Translators\JapaneseTranslator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -507,6 +519,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Console\Translators\PortugueseTranslator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Console\Translators\ChineseSimplifiedTranslator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Console\Translators\ChineseTraditionalTranslator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Console\Translators\KoreanTranslator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Console\Translators\JapaneseTranslator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

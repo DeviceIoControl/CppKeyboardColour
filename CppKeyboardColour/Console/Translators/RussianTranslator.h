@@ -27,6 +27,7 @@ private:
 		{ L"Host Devices: %s", L"Хост-устройства: %s"},
 		{ L"Keyboard Type: %s", L"Тип клавиатуры: %s" },
 		{ L"Model Name: %s", L"Название модели: %s"},
+		{ L"Custom speed: %0.f%%\n", L"Произвольная скорость: %0.f%%\n" },
 		{ L"Device monitor mode enabled! (Performance may be affected)", L"Включен режим мониторинга устройства! (Производительность может снизиться)"},
 		{ L"{%s} - Code: 0x%08X -> %s Colour: (RED: 0x%08X), (GREEN: 0x%08X), (BLUE: 0x%08X)", L"{%s} - Код: 0x%08X -> %s Цвет: (КРАСНЫЙ: 0x%08X), (ЗЕЛЕНЫЙ: 0x%08X), (СИНИЙ: 0x%08X)"},
 		{ L"Speed value out of range (1-250) - Will use default speed.", L"Значение скорости вне допустимого диапазона (1–250) - будет использована скорость по умолчанию."},
@@ -58,6 +59,7 @@ private:
 		{ L"Invalid command line. Command is: CLEVO_KeyboardColour.exe theme/inbuilt/backlight/lightbar/colour(s) [<themeName>/<hexColour>] [--once] [--speed] <speed> [--dmm] [--hide]", L"Некорректная командная строка. Команда: CLEVO_KeyboardColour.exe theme/inbuilt/backlight/lightbar/colour(s) [<имя_темы>/<hex-код_цвета>] [--once] [--speed] <скорость> [--dmm] [--hide]" },
 		{ L"Cannot communicate with the requested device.", L"Не удается установить связь с запрошенным устройством." },
 		{ L"Failed to detect the host's RGB devices.", L"Не удалось обнаружить RGB-устройства хоста." },
-		{ L"Failed to detected Model ID.", L"Не удалось определить идентификатор модели." }
+		{ L"Failed to detected Model ID.", L"Не удалось определить идентификатор модели." },
+		{ L"\nPress ENTER to exit.", L"\nНажмите ENTER для выхода." }
 	};
 };

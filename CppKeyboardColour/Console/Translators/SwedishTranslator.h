@@ -27,6 +27,7 @@ private:
 		{ L"Host Devices: %s", L"Värdenheter: %s" },
 		{ L"Keyboard Type: %s", L"Tangentbordstyp: %s" },
 		{ L"Model Name: %s", L"Modellnamn: %s" },
+		{ L"Custom speed: %0.f%%\n", L"Anpassad hastighet: %0.f%%\n" },
 		{ L"Device monitor mode enabled! (Performance may be affected)", L"Enhetsövervakningsläge aktiverat! (Prestandan kan påverkas)"},
 		{ L"{%s} - Code: 0x%08X -> %s Colour: (RED: 0x%08X), (GREEN: 0x%08X), (BLUE: 0x%08X)", L"{%s} – Kod: 0x%08X -> %s Färg: (RÖD: 0x%08X), (GRÖN: 0x%08X), (BLÅ: 0x%08X)"},
 		{ L"Speed value out of range (1-250) - Will use default speed.", L"Hastighetsvärdet ligger utanför intervallet (1–250) – standardhastighet används."},
@@ -58,6 +59,7 @@ private:
 		{ L"Invalid command line. Command is: CLEVO_KeyboardColour.exe theme/inbuilt/backlight/lightbar/colour(s) [<themeName>/<hexColour>] [--once] [--speed] <speed> [--dmm] [--hide]", L"Ogiltig kommandorad. Kommandot är: CLEVO_KeyboardColour.exe theme/inbuilt/backlight/lightbar/colour(s) [<temanamn>/<hex-färg>] [--once] [--speed] <hastighet> [--dmm] [--hide]" },
 		{ L"Cannot communicate with the requested device.", L"Det går inte att kommunicera med den begärda enheten." },
 		{ L"Failed to detect the host's RGB devices.", L"Det gick inte att identifiera värddatorns RGB-enheter." },
-		{ L"Failed to detected Model ID.", L"Kunde inte identifiera modell-ID." }
+		{ L"Failed to detected Model ID.", L"Kunde inte identifiera modell-ID." },
+		{ L"\nPress ENTER to exit.", L"\nTryck på ENTER för att avsluta." }
 	};
 };
