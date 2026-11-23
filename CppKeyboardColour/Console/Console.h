@@ -5,12 +5,16 @@
 #include "ILogger.h"
 #include "Translators/ITranslator.h"
 
+class TranslatorFactory;
+
 class Console
 {
 public:
-	Console(LogLevel level = LogLevel::Debug);
+	Console(std::unique_ptr<TranslatorFactory> pTranslatorFactory);
+	Console();
 	~Console() = default;
 
+	bool CanLogOnLevel(LogLevel level) const;
 	void SetTitle(const std::wstring& title);
 
 	void Hide();
@@ -27,15 +31,7 @@ public:
 		return false;
 	}
 
-	void Prompt(const std::wstring& msg)
-	{
-		if (this->IsVisible())
-		{
-			const auto translatedPrompt = m_pTranslator->Translate(msg);
-			m_pLogger->Write(LogLevel::None, translatedPrompt);
-			std::ignore = std::getchar();
-		}
-	}
+	void Prompt(const std::wstring& msg);
 
 	bool IsVisible() const;
 
@@ -43,18 +39,14 @@ private:
 	HWND m_hWnd{};
 	LogLevel m_baseLoglevel;
 	std::mutex m_outputLock{};
+	std::atomic<bool> m_isVisible{};
 	std::unique_ptr<ILogger> m_pLogger;
-	std::atomic<bool> m_isVisible = true;
 	std::unique_ptr<ITranslator> m_pTranslator;
 
 	LANGID m_currentLanguage = GetUserDefaultLangID();
 
 	// The process will terminate when this function is called.
 	[[noreturn]] void OnFatalMessage();
-
-	bool CanLogOnLevel(LogLevel level) const;
-
-	SYSTEMTIME GetCurrentSystemTime() const;
 
 	template<typename ..._TArgs>
 	std::wstring OnPreWrite(LogLevel level, const std::wstring& format, _TArgs&&... args)

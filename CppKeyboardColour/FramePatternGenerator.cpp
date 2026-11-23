@@ -7,8 +7,8 @@
 
 FrameCollection FramePatternGenerator::GenerateAscendingPattern(DeviceMask devices, const Colour& targetColour, uint32_t steps, uint32_t stepTimeMs)
 {
-	FrameCollection frames{};
 	ColourFactory factory{};
+	FrameCollection frames{};
 
 	for (size_t i = 0; i < steps; ++i)
 	{
@@ -28,8 +28,8 @@ FrameCollection FramePatternGenerator::GenerateAscendingPattern(DeviceMask devic
 
 FrameCollection FramePatternGenerator::GenerateDescendingPattern(DeviceMask devices, const Colour& targetColour, uint32_t steps, uint32_t stepTimeMs)
 {
-	FrameCollection frames{};
 	ColourFactory factory{};
+	FrameCollection frames{};
 
 	for (size_t i = steps; i > 0; --i)
 	{

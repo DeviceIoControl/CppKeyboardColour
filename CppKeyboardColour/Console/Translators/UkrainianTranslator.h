@@ -18,7 +18,7 @@ public:
 	bool IsCompatible(LANGID langId) const override;
 
 private:
-	std::map<std::wstring, std::wstring> m_mapping
+	std::unordered_map<std::wstring, std::wstring> m_mapping
 	{
 		{ RELEASE_BUILD_STRING, MAKE_RELEASE_BUILD_STRING(UKRAINIAN_PROGRAM_NAME, L"створено DeviceIoControl.") },
 		{ TEST_BUILD_STRING, MAKE_NONRELEASE_BUILD_STRING(UKRAINIAN_PROGRAM_NAME, L"тестова збірка" , L"створено DeviceIoControl.") },
@@ -60,6 +60,8 @@ private:
 		{ L"Cannot communicate with the requested device.", L"Не вдається зв’язатися із запитаним пристроєм." },
 		{ L"Failed to detect the host's RGB devices.", L"Не вдалося виявити RGB-пристрої хоста." },
 		{ L"Failed to detected Model ID.", L"Не вдалося визначити ідентифікатор моделі." },
-		{ L"\nPress ENTER to exit.", L"\nНатисніть ENTER, щоб вийти." }
+		{ L"\nPress ENTER to exit.", L"\nНатисніть ENTER, щоб вийти." },
+		{ L"Device monitor mode is not configured correctly! Fallback to default mode.", L"Режим моніторингу пристрою налаштовано неправильно! Використовується режим за замовчуванням." },
+		{ L"{%s} - %s failed with error status: 0x%08x.", L"{%s} - %s завершилося з помилковим статусом: 0x%08x." }
 	};
 };

@@ -19,6 +19,7 @@
 #include <cwctype>
 #include <type_traits>
 
+#include <assert.h>
 #include <Windows.h>
 #include <comdef.h>
 #include <wbemidl.h>
@@ -41,12 +42,15 @@
 #define RELEASE_BUILD_STRING MAKE_RELEASE_BUILD_STRING(L"CLEVO Keyboard Colours Tool", L"Created by DeviceIoControl.")
 
 #if defined(DEBUG_BUILD)
+#define CONSOLE_BASE_LOGLEVEL LogLevel::Debug
 #define USE_DEBUGGABLE_HOST true
 #define PROGRAM_BOOTSTRAP_STRING DEBUG_BUILD_STRING
 #elif defined (TEST_BUILD)
+#define CONSOLE_BASE_LOGLEVEL LogLevel::Debug
 #define USE_DEBUGGABLE_HOST false
 #define PROGRAM_BOOTSTRAP_STRING TEST_BUILD_STRING
 #elif defined (RELEASE_BUILD)
+#define CONSOLE_BASE_LOGLEVEL LogLevel::Info
 #define USE_DEBUGGABLE_HOST false
 #define PROGRAM_BOOTSTRAP_STRING RELEASE_BUILD_STRING
 #endif

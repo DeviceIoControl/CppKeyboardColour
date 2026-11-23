@@ -18,11 +18,11 @@ public:
 	bool IsCompatible(LANGID langId) const override;
 
 private:
-	std::map<std::wstring, std::wstring> m_mapping
+	std::unordered_map<std::wstring, std::wstring> m_mapping
 	{
-		{ RELEASE_BUILD_STRING, MAKE_RELEASE_BUILD_STRING(PORTUGUESE_PROGRAM_NAME, L"Criado por DeviceIoControl")},
-		{ TEST_BUILD_STRING, MAKE_NONRELEASE_BUILD_STRING(PORTUGUESE_PROGRAM_NAME, L"Versão de teste", L"Criado por DeviceIoControl") },
-		{ DEBUG_BUILD_STRING, MAKE_NONRELEASE_BUILD_STRING(PORTUGUESE_PROGRAM_NAME, L"Compilação de depuração", L"Criado por DeviceIoControl") },
+		{ RELEASE_BUILD_STRING, MAKE_RELEASE_BUILD_STRING(PORTUGUESE_PROGRAM_NAME, L"Criado por DeviceIoControl.")},
+		{ TEST_BUILD_STRING, MAKE_NONRELEASE_BUILD_STRING(PORTUGUESE_PROGRAM_NAME, L"Versão de teste", L"Criado por DeviceIoControl.") },
+		{ DEBUG_BUILD_STRING, MAKE_NONRELEASE_BUILD_STRING(PORTUGUESE_PROGRAM_NAME, L"Compilação de depuração", L"Criado por DeviceIoControl.") },
 		{ L"Detected Model ID: 0x%08X", L"ID do modelo detectado: 0x%08X" },
 		{ L"Host Devices: %s", L"Dispositivos host: %s" },
 		{ L"Keyboard Type: %s", L"Tipo de teclado: %s" },
@@ -60,6 +60,8 @@ private:
 		{ L"Cannot communicate with the requested device.", L"Não é possível comunicar-se com o dispositivo solicitado." },
 		{ L"Failed to detect the host's RGB devices.", L"Não foi possível detectar os dispositivos RGB do host." },
 		{ L"Failed to detected Model ID.", L"Não foi possível detectar o ID do modelo." },
-		{ L"\nPress ENTER to exit.", L"\nPressione ENTER para sair." }
+		{ L"\nPress ENTER to exit.", L"\nPressione ENTER para sair." },
+		{ L"Device monitor mode is not configured correctly! Fallback to default mode.", L"O modo de monitoramento do dispositivo não está configurado corretamente! Retornando ao modo padrão." },
+		{ L"{%s} - %s failed with error status: 0x%08x.", L"{%s} - %s falhou com status de erro: 0x%08x." }
 	};
 };

@@ -10,20 +10,36 @@ WbemService::WbemService(const std::wstring& wbemNamespace /* = L"ROOT\\WMI" */)
 
 	m_pWbemLocator.Reset(this->CreateWbemLocator());
 	m_pWbemServices.Reset(this->CreateNativeWbemServices(wbemNamespace));
+
+	if (!m_pWbemLocator || !m_pWbemServices)
+	{
+		KB_SET_FATAL_ERROR(ERROR_API_UNAVAILABLE);
+		KB_FATAL(L"Failed to initialize WMI.");
+	}
 }
 
 ScopedComPtr<IWbemClassObject> WbemService::GetWbemClassObject(const std::wstring& strObjectPath)
 {
 	IWbemClassObject* pWbemClassObject = nullptr;
-	m_pWbemServices->GetObjectW((BSTR)strObjectPath.c_str(), NULL, nullptr, &pWbemClassObject, nullptr);
+	const auto hr = m_pWbemServices->GetObjectW((BSTR)strObjectPath.c_str(), NULL, nullptr, &pWbemClassObject, nullptr);
 	
+	if (FAILED(hr))
+	{
+		KB_ERROR_STATUS(L"IWbemServices::GetObjectW", hr);
+	}
+
 	return ScopedComPtr<IWbemClassObject>(pWbemClassObject);
 }
 
 ScopedComPtr<IEnumWbemClassObject> WbemService::GetWbemInstanceEnumerator(const std::wstring& strFilter) 
 {
 	IEnumWbemClassObject* pWbemClassEnum = nullptr;
-	m_pWbemServices->CreateInstanceEnum((BSTR)strFilter.c_str(), WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY, nullptr, &pWbemClassEnum);
+	const auto hr = m_pWbemServices->CreateInstanceEnum((BSTR)strFilter.c_str(), WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY, nullptr, &pWbemClassEnum);
+
+	if (FAILED(hr))
+	{
+		KB_ERROR_STATUS(L"IWbemServices::CreateInstanceEnum", hr);
+	}
 
 	return ScopedComPtr<IEnumWbemClassObject>(pWbemClassEnum);
 }
@@ -51,6 +67,11 @@ IWbemLocator* WbemService::CreateWbemLocator()
 	const auto hError = CoCreateInstance(__uuidof(WbemLocator), nullptr,
 		CLSCTX_INPROC_SERVER, IID_IWbemLocator, (void**)&pWbemLocator);
 
+	if (FAILED(hError))
+	{
+		KB_ERROR_STATUS(L"CoCreateInstance", hError);
+	}
+
 	return SUCCEEDED(hError) ? pWbemLocator : nullptr;
 }
 
@@ -61,6 +82,11 @@ IWbemServices* WbemService::CreateNativeWbemServices(const std::wstring& strName
 	const auto hError = m_pWbemLocator->ConnectServer(
 		(BSTR)strNamespace.c_str(), nullptr, nullptr, nullptr, NULL, nullptr, nullptr, &pWbemServices
 	);
+
+	if (FAILED(hError))
+	{
+		KB_ERROR_STATUS(L"IWbemLocation::ConnectServer", hError);
+	}
 
 	return SUCCEEDED(hError) ? pWbemServices : nullptr;
 }

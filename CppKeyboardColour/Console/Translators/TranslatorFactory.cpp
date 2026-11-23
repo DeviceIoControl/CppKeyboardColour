@@ -74,6 +74,9 @@ namespace
 
 		case MAKELANGID(LANG_JAPANESE, SUBLANG_JAPANESE_JAPAN):
 			return std::make_unique<JapaneseTranslator>();
+
+		case MAKELANGID(LANG_POLISH, SUBLANG_POLISH_POLAND):
+			return std::make_unique<PolishTranslator>();
 		}
 
 		return nullptr;

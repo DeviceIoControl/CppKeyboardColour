@@ -14,6 +14,8 @@ namespace
 {
 	void DisplayHostInformation(const IHost* pHost)
 	{
+		assert(pHost != nullptr, L"pHost was a nullptr");
+
 		KB_INFO(L"Host Devices: %s", xstd::to_wstring(pHost->GetDevices()).c_str());
 
 		if (!!(pHost->GetDevices() & DeviceMask::Keyboard))
@@ -43,7 +45,7 @@ namespace
 int wmain(int argc, const wchar_t* argv[])
 {
 	KB_CONSOLE_TITLE(PROGRAM_BOOTSTRAP_STRING);
-
+	
 	if (!IsSingleInstance())
 	{
 		KB_SET_FATAL_ERROR(ERROR_ALREADY_EXISTS);
@@ -52,6 +54,7 @@ int wmain(int argc, const wchar_t* argv[])
 
 	const auto cmdLines = CommandLine::GetCommandLines(argc, argv);
 	const auto enableDeviceMonitorMode = ShouldEnableDMM(cmdLines);
+	const auto debugLogLevelConfigured = AppConsole().CanLogOnLevel(LogLevel::Debug);
 	const auto enableHiddenMode = CommandLine::Contains(L"--hide", cmdLines);
 	const auto displayModelIdOnly = CommandLine::Contains(L"--model", cmdLines);
 
@@ -64,7 +67,10 @@ int wmain(int argc, const wchar_t* argv[])
 		return ERROR_SUCCESS;
 	}
 
-	const auto hostFactoryFlags = enableDeviceMonitorMode ? HostFactoryFlags::EnableDeviceMonitorMode : HostFactoryFlags::None;
+	const auto hostFactoryFlags = (enableDeviceMonitorMode && debugLogLevelConfigured)
+		? HostFactoryFlags::EnableDeviceMonitorMode
+		: HostFactoryFlags::None;
+
 	HostFactory hostFactory(std::move(pModelIdentifier), hostFactoryFlags);
 	auto pHost = hostFactory.Create();
 
@@ -76,7 +82,7 @@ int wmain(int argc, const wchar_t* argv[])
 
 	DisplayHostInformation(pHost.get());
 
-	if (enableDeviceMonitorMode)
+	if (enableDeviceMonitorMode && debugLogLevelConfigured)
 	{
 		KB_WARN(L"Device monitor mode enabled! (Performance may be affected)");
 
@@ -84,6 +90,11 @@ int wmain(int argc, const wchar_t* argv[])
 		{
 			KB_WARN(L"Cannot enable hidden mode with Device monitor mode enabled.");
 		}
+	}
+
+	if (enableDeviceMonitorMode && !debugLogLevelConfigured)
+	{
+		KB_WARN(L"Device monitor mode is not configured correctly! Fallback to default mode.");
 	}
 
 	if (!CommandLine::ExclusiveContains({ L"theme", L"inbuilt", L"backlight", L"colour", L"colours", L"lightbar" }, cmdLines))

@@ -10,7 +10,7 @@ std::wstring EnglishTranslator::Translate(const std::wstring& msg)
 
 std::wstring EnglishTranslator::Translate(LogLevel level) 
 {
-	switch (level) 
+	switch (level)
 	{
 	case LogLevel::Info:
 		return L"INFO";

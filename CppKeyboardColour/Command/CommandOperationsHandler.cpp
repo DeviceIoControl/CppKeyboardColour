@@ -10,7 +10,7 @@
 
 static DWORD DoBacklightOperation(std::unique_ptr<IHost> pHost, BacklightType backlight)
 {
-	// Somewhat unsafe, but pHost should always be valid before we get here.
+	assert(pHost.get() != nullptr, L"pHost should not be a nullptr.");
 
 	if (backlight == BacklightType::Invalid)
 	{
@@ -37,7 +37,7 @@ static DWORD DoBacklightOperation(std::unique_ptr<IHost> pHost, BacklightType ba
 
 static DWORD DoThemeOperation(std::unique_ptr<IHost> pHost, std::unique_ptr<IAnimation> pAnimation, const std::vector<std::wstring>& cmdLines)
 {
-	// Somewhat unsafe, but pHost should always be valid before we get here.
+	assert(pHost.get() != nullptr, L"pHost should not be a nullptr.");
 
 	if (!pAnimation)
 	{
@@ -66,15 +66,21 @@ static DWORD DoThemeOperation(std::unique_ptr<IHost> pHost, std::unique_ptr<IAni
 
 static DWORD DoSystemAnimationOperation(std::unique_ptr<IHost> pHost, SystemAnimation sysAnimation)
 {
-	// Somewhat unsafe, but pHost should always be valid before we get here.
+	assert(pHost.get() != nullptr, L"pHost should not be a nullptr.");
 
 	if (sysAnimation == SystemAnimation::KB_MODE_CUSTOM)
 	{
-		return ERROR_INVALID_PARAMETER;
+		KB_SET_FATAL_ERROR(ERROR_INVALID_PARAMETER);
+		KB_FATAL(L"This operation is not supported on this system.");
 	}
 
-	// Restrict direct SendCode ability to WMI devices only (for now).
+	//
+	// Restrict direct SendCode ability to WMI devices only (*for now).
 	// NOTE: If no keyboard is found, we would recieve a DeviceChannelType::None here.
+	// 
+	// *NOTE: The technical restrictions for this limitation been resolved, so an
+	// investigation needs to take place to determine the viability for removing this gate.
+	// 
 	if (pHost->GetDeviceChannelType(DeviceMask::Keyboard) != DeviceChannelType::Wmi)
 	{
 		KB_SET_FATAL_ERROR(ERROR_NOT_SUPPORTED);
@@ -84,13 +90,13 @@ static DWORD DoSystemAnimationOperation(std::unique_ptr<IHost> pHost, SystemAnim
 	KB_INFO(L"Playing Inbuilt Keyboard animation...");
 	
 	return !pHost->SendDeviceCode(DeviceMask::Keyboard, xstd::to_underlying(sysAnimation)) 
-		? ERROR_NOT_SUPPORTED 
+		? ERROR_NOT_SUPPORTED
 		: ERROR_SUCCESS;
 }
 
 static DWORD DoUserColourOperation(std::unique_ptr<IHost> pHost, std::optional<Colour> colour)
 {
-	// Somewhat unsafe, but pHost should always be valid before we get here.
+	assert(pHost.get() != nullptr, L"pHost should not be a nullptr.");
 
 	if (!colour.has_value())
 	{
@@ -112,7 +118,7 @@ static DWORD DoUserColourOperation(std::unique_ptr<IHost> pHost, std::optional<C
 
 static DWORD DoUserColour3Operation(std::unique_ptr<IHost> pHost, const std::optional<Colours>& colours)
 {
-	// Somewhat unsafe, but pHost should always be valid before we get here.
+	assert(pHost.get() != nullptr, L"pHost should not be a nullptr.");
 
 	if (pHost->GetKeyboardType() != KeyboardType::TRIPLE_ZONE)
 	{
@@ -140,7 +146,7 @@ static DWORD DoUserColour3Operation(std::unique_ptr<IHost> pHost, const std::opt
 
 static DWORD DoLightbarOperation(std::unique_ptr<IHost> pHost, const std::optional<Colour>& colour) 
 {
-	// Somewhat unsafe, but pHost should always be valid before we get here.
+	assert(pHost.get() != nullptr, L"pHost should not be a nullptr.");
 
 	if (!colour.has_value())
 	{
@@ -162,7 +168,7 @@ static DWORD DoLightbarOperation(std::unique_ptr<IHost> pHost, const std::option
 
 DWORD DoCommandOperation(std::unique_ptr<IHost> pHost, const std::vector<std::wstring>& cmdLines)
 {
-	// pHost will always be valid before reaching here, so no need to check the pointer again.
+	assert(pHost.get() != nullptr, L"pHost should not be a nullptr.");
 
 	switch (ProcessCmdOperation(cmdLines))
 	{

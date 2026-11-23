@@ -303,6 +303,7 @@
     <ClInclude Include="Console\Translators\ITranslator.h" />
     <ClInclude Include="Console\Translators\JapaneseTranslator.h" />
     <ClInclude Include="Console\Translators\KoreanTranslator.h" />
+    <ClInclude Include="Console\Translators\PolishTranslator.h" />
     <ClInclude Include="Console\Translators\PortugueseTranslator.h" />
     <ClInclude Include="Console\Translators\RussianTranslator.h" />
     <ClInclude Include="Console\Translators\SpanishTranslator.h" />
@@ -395,6 +396,7 @@
     <ClCompile Include="Console\Translators\ItalianTranslator.cpp" />
     <ClCompile Include="Console\Translators\JapaneseTranslator.cpp" />
     <ClCompile Include="Console\Translators\KoreanTranslator.cpp" />
+    <ClCompile Include="Console\Translators\PolishTranslator.cpp" />
     <ClCompile Include="Console\Translators\PortugueseTranslator.cpp" />
     <ClCompile Include="Console\Translators\RussianTranslator.cpp" />
     <ClCompile Include="Console\Translators\SpanishTranslator.cpp" />

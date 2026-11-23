@@ -22,6 +22,17 @@ namespace
 
 		return hModule;
 	}
+
+	// NOTE: GetProductID64 (A.K.A GetProductdll.dll) is buggy and unintializes COM multiples times,
+	// even though only one call to CoInitialize succeeds.
+	uint32_t GetProductIDWorker(Detail::T_GetProductID_PCI pfnGetProductID)
+	{
+		// Initialize COM here to rebalance the COM Initialisation ref count when the function returns.
+		std::ignore = CoInitializeEx(nullptr, COINIT::COINIT_APARTMENTTHREADED);
+
+		return pfnGetProductID();
+	}
+
 } // namespace
 
 LegacyModelIdRetriever::LegacyModelIdRetriever(bool useDebugModel /*= false*/)
@@ -40,19 +51,11 @@ uint32_t LegacyModelIdRetriever::GetModelID()
 		return std::async(std::launch::async, GetProductIDWorker, m_pfnGetProductID).get();
 	}
 	
-	return m_useDebugModel ? MODEL_ID_DEBUG : 0xFFFFFFFF;
+	return m_useDebugModel ? MODEL_ID_DEBUG : 0x00000000;
 }
 
 LegacyModelIdRetriever::~LegacyModelIdRetriever()
 {
 	m_pfnGetProductID = nullptr;
 	FreeLibrary(m_hGetProductDLL);
-}
-
-/* static */ uint32_t LegacyModelIdRetriever::GetProductIDWorker(Detail::T_GetProductID_PCI fnGetProductID)
-{
-	// Initialize COM to rebalance the COM Init ref count when the function returns.
-	std::ignore = CoInitializeEx(nullptr, COINIT::COINIT_APARTMENTTHREADED);
-
-	return fnGetProductID();
 }

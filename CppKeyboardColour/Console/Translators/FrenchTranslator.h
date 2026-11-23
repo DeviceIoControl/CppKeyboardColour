@@ -18,7 +18,7 @@ public:
 	bool IsCompatible(LANGID langId) const override;
 
 private:
-	std::map<std::wstring, std::wstring> m_mapping
+	std::unordered_map<std::wstring, std::wstring> m_mapping
 	{
 		{ RELEASE_BUILD_STRING, MAKE_RELEASE_BUILD_STRING(FRENCH_PROGRAM_NAME, L"Créé par DeviceIoControl.") },
 		{ TEST_BUILD_STRING, MAKE_NONRELEASE_BUILD_STRING(FRENCH_PROGRAM_NAME, L"version de test" , L"Créé par DeviceIoControl.")},
@@ -60,6 +60,8 @@ private:
 		{ L"Cannot communicate with the requested device.", L"Impossible de communiquer avec l’appareil demandé." },
 		{ L"Failed to detect the host's RGB devices.", L"Échec de la détection des périphériques RGB de l'hôte." },
 		{ L"Failed to detected Model ID.", L"Impossible de détecter l’identifiant du modèle." },
-		{ L"\nPress ENTER to exit.", L"\nAppuyez sur ENTRÉE pour quitter." }
+		{ L"\nPress ENTER to exit.", L"\nAppuyez sur ENTRÉE pour quitter." },
+		{ L"Device monitor mode is not configured correctly! Fallback to default mode.", L"Le mode de surveillance de l’appareil n’est pas configuré correctement ! Retour au mode par défaut." },
+		{ L"{%s} - %s failed with error status: 0x%08x.", L"{%s} - %s a échoué avec un état d'erreur: 0x%08x." }
 	};
 };

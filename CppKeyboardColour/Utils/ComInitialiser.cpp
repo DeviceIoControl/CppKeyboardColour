@@ -2,10 +2,16 @@
 
 #include "stdafx.h"
 #include "ComInitialiser.h"
+#include "../Console/Logger.h"
 
 ComInitialiser::ComInitialiser(COINIT coInit /*= COINIT::COINIT_APARTMENTTHREADED*/)
 {
-	CoInitializeEx(nullptr, coInit);
+	const auto hr = CoInitializeEx(nullptr, coInit);
+
+	if (FAILED(hr)) 
+	{
+		KB_ERROR_STATUS(L"CoInitialize", hr);
+	}
 }
 
 bool ComInitialiser::InitialiseSecurity(DWORD dwAuthnLevel, DWORD dwImpLevel)

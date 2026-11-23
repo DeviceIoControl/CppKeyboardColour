@@ -8,6 +8,7 @@
 
 #define KB_CONFIG_REGKEY L"SOFTWARE\\CLEVO_KeyboardColour"
 #define KB_CONFIG_TRANSLATION_VALUE L"EnableTranslations"
+#define KB_CONFIG_CONSOLE_LOGLEVEL L"ConsoleLogLevel"
 
 namespace
 {
@@ -16,12 +17,16 @@ namespace
 		return Registry::GetRegDWORDValue(HKEY_CURRENT_USER, KB_CONFIG_REGKEY, KB_CONFIG_TRANSLATION_VALUE).value_or(0) == 1;
 	}
 
-} // namespace 
+	LogLevel GetConsoleBaseLogLevel()
+	{
+		const auto level = Registry::GetRegDWORDValue(HKEY_CURRENT_USER, KB_CONFIG_REGKEY, KB_CONFIG_CONSOLE_LOGLEVEL);
+		return static_cast<LogLevel>(std::min<uint32_t>(level.value_or(xstd::to_underlying(CONSOLE_BASE_LOGLEVEL)), xstd::to_underlying(LogLevel::Fatal)));
+	}
 
-Console::Console(LogLevel level)
-	: m_baseLoglevel(level)
+} // namespace
+
+Console::Console(std::unique_ptr<TranslatorFactory> pTranslatorFactory)
 {
-	TranslatorFactory factory{};
 	SetConsoleOutputCP(CP_UTF16);
 
 	m_currentLanguage = !IsTranslationEnabled()
@@ -29,14 +34,26 @@ Console::Console(LogLevel level)
 		: GetUserDefaultLangID();
 
 	m_hWnd = GetConsoleWindow();
-	m_pTranslator = factory.Create(m_currentLanguage);
+	m_baseLoglevel = GetConsoleBaseLogLevel();
 	m_pLogger = std::make_unique<ConsoleLogger>();
+	m_pTranslator = pTranslatorFactory->Create(m_currentLanguage);
+	m_isVisible = !!(GetWindowLongPtrW(m_hWnd, GWL_STYLE) & WS_VISIBLE);
+}
+
+Console::Console()
+	: Console(std::make_unique<TranslatorFactory>())
+{
 }
 
 void Console::SetTitle(const std::wstring& title)
 {
 	const auto translatedTitle = m_pTranslator->Translate(title).append(L"\n");
 	std::ignore = SetConsoleTitleW(translatedTitle.c_str());
+
+	if (!this->IsVisible())
+	{
+		this->Show();
+	}
 
 	m_pLogger->Write(LogLevel::None, translatedTitle);
 
@@ -62,6 +79,16 @@ void Console::Show()
 	m_isVisible = ShowWindow(m_hWnd, !this->IsVisible() ? SW_SHOW : SW_NORMAL);
 }
 
+void Console::Prompt(const std::wstring& msg)
+{
+	if (this->IsVisible())
+	{
+		const auto translatedPrompt = m_pTranslator->Translate(msg);
+		m_pLogger->Write(LogLevel::None, translatedPrompt);
+		std::ignore = std::getchar();
+	}
+}
+
 bool Console::IsVisible() const
 {
 	return m_isVisible;
@@ -76,11 +103,4 @@ void Console::OnFatalMessage()
 bool Console::CanLogOnLevel(LogLevel level) const
 {
 	return (level >= m_baseLoglevel) ? true : false;
-}
-
-SYSTEMTIME Console::GetCurrentSystemTime() const
-{
-	SYSTEMTIME currentSysTime = { 0 };
-	GetSystemTime(&currentSysTime);
-	return currentSysTime;
 }

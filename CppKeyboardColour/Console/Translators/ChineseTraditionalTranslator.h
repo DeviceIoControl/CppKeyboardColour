@@ -18,7 +18,7 @@ public:
 	bool IsCompatible(LANGID langId) const override;
 
 private:
-	std::map<std::wstring, std::wstring> m_mapping
+	std::unordered_map<std::wstring, std::wstring> m_mapping
 	{
 		{ RELEASE_BUILD_STRING, MAKE_RELEASE_BUILD_STRING(CHINESE_TRADITIONAL_PROGRAM_NAME, L"由 DeviceIoControl 建立。") },
 		{ TEST_BUILD_STRING, MAKE_NONRELEASE_BUILD_STRING(CHINESE_TRADITIONAL_PROGRAM_NAME, L"測試版本" , L"由 DeviceIoControl 建立。") },
@@ -60,6 +60,8 @@ private:
 		{ L"Cannot communicate with the requested device.", L"無法與所要求的設備進行通訊。" },
 		{ L"Failed to detect the host's RGB devices.", L"未能偵測到主機的 RGB 裝置。" },
 		{ L"Failed to detected Model ID.", L"未能偵測到型號識別碼。" },
-		{ L"\nPress ENTER to exit.", L"\n按回車鍵退出。" }
+		{ L"\nPress ENTER to exit.", L"\n按回車鍵退出。" },
+		{ L"Device monitor mode is not configured correctly! Fallback to default mode.", L"裝置監控模式設定不正確! 已回復為預設模式。" },
+		{ L"{%s} - %s failed with error status: 0x%08x.", L"{%s} - %s 因錯誤狀態而失敗: 0x%08x." }
 	};
 };

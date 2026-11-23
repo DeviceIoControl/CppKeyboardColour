@@ -16,3 +16,4 @@
 #include "PortugueseTranslator.h"
 #include "ChineseSimplifiedTranslator.h"
 #include "ChineseTraditionalTranslator.h"
+#include "PolishTranslator.h"

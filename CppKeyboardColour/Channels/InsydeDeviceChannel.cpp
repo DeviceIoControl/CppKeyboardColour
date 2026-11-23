@@ -6,6 +6,7 @@
 
 #define INSYDE_DLL L"InsydeDCHU.dll"
 
+
 namespace 
 {
 	HMODULE LoadInsydeDCHU_DLL() 
