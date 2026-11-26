@@ -6,7 +6,7 @@
 class WbemClassEnumerator
 {
 public:
-	WbemClassEnumerator(ScopedComPtr<IEnumWbemClassObject> pEnumerator);
+	explicit WbemClassEnumerator(ScopedComPtr<IEnumWbemClassObject> pEnumerator);
 	~WbemClassEnumerator() = default;
 
 	bool Skip(uint32_t count = 1);

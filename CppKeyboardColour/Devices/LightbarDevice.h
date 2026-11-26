@@ -12,7 +12,7 @@ class LightbarDevice
 	: public IDevice
 {
 public:
-	LightbarDevice(std::shared_ptr<IDeviceChannel> pDeviceChannel);
+	explicit LightbarDevice(std::shared_ptr<IDeviceChannel> pDeviceChannel);
 	~LightbarDevice() override = default;
 
 	bool SetColour(Zone zone, const Colour& colour) override;
@@ -22,5 +22,5 @@ public:
 
 private:
 	ColourFactory m_colourFactory{};
-	std::shared_ptr<IDeviceChannel> m_pDevChannel;
+	std::shared_ptr<IDeviceChannel> m_pDevChannel{};
 };

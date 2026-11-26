@@ -19,6 +19,6 @@ public:
 	~DeviceFactory() = default;	
 
 private:
-	std::shared_ptr<IDeviceChannel> m_pDevChannel;
-	std::shared_ptr<ModelIdentifier> m_pModelIdentifier;
+	std::shared_ptr<IDeviceChannel> m_pDevChannel{};
+	std::shared_ptr<ModelIdentifier> m_pModelIdentifier{};
 };

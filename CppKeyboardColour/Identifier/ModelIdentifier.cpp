@@ -16,7 +16,8 @@ namespace
 		MODEL_ID_CV15XX, MODEL_ID_NP60SXX, MODEL_ID_V360EXX,
 		MODEL_ID_NP50PXX, MODEL_ID_V175RXX, MODEL_ID_V265RXX,
 		MODEL_ID_NP70RXX, MODEL_ID_W230SXX, MODEL_ID_V370EXX,
-		MODEL_ID_V150RXX, MODEL_ID_NP55HXX //, MODEL_ID_NH77XX
+		MODEL_ID_V150RXX, MODEL_ID_NP55HXX, MODEL_ID_NP50RNX,
+		//, MODEL_ID_NH77XX
 	};
 
 	std::array constexpr g_TripleZoneWmiModelIds
@@ -171,6 +172,9 @@ std::wstring_view ModelIdentifier::ConvertModelIdToString(uint32_t modelId)
 
 	case MODEL_ID_NP55HXX:
 		return L"CLEVO NP55HXX Series";
+
+	case MODEL_ID_NP50RNX:
+		return L" CLEVO NP50RNX Series";
 
 	case MODEL_ID_DEBUG:
 		return L"CLEVO XXXXXX Series";

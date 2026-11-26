@@ -45,7 +45,8 @@ It is designed to provide additional animations for CLEVO & Tongfang based lapto
 | [Custom Animation Speed Commands](https://github.com/DeviceIoControl/CppKeyboardColour#%EF%B8%8F-custom-speed)
 
 - [Debugging Commands](https://github.com/DeviceIoControl/CppKeyboardColour#-device-monitor-mode)
-| [Common Error](https://github.com/DeviceIoControl/CppKeyboardColour#common-errors)
+| [Common Errors](https://github.com/DeviceIoControl/CppKeyboardColour#common-errors)
+| [Model ID](https://github.com/DeviceIoControl/CppKeyboardColour#model-identifier)
 
 - [Console Visibility Commands](https://github.com/DeviceIoControl/CppKeyboardColour#-background-modes)
 
@@ -58,7 +59,7 @@ It is designed to provide additional animations for CLEVO & Tongfang based lapto
 
 **How do I report a software bug?** - *Please create a bug report for it [here](https://github.com/DeviceIoControl/CppKeyboardColour/issues/new/choose).*
 
-**Is my laptop supported?** - *This program is built for laptops based off of the CLEVO / Tongfang ODM design - For a list of supported CLEVO Models, please take a look at the [releases](https://github.com/DeviceIoControl/CppKeyboardColour/releases/latest).*
+**Is my laptop supported?** - *This program is built for laptops based off of the CLEVO / Tongfang ODM design - For a list of supported CLEVO Models, please take a look at the [releases](https://github.com/DeviceIoControl/CppKeyboardColour/releases/latest). You can also check the model identifier by using the `--model` argument to output the Model ID for your system and compare it against the Model list in the release notes*  
 
 **How do I get more themes?** - *Please create an issue and request for it [here](https://github.com/DeviceIoControl/CppKeyboardColour/issues/new/choose).*
 
@@ -92,6 +93,8 @@ Extract the program zip and run the commands **as an administrator**. To execute
 .\CLEVO_KeyboardColour.exe colour [hexColour] [--dmm] [--hide]
 .\CLEVO_KeyboardColour.exe colours [hexColour] [hexColour] [hexColour] [--dmm] [--hide] (3-Zone keyboards only)
 .\CLEVO_KeyboardColour.exe lightbar [hexColour] [--dmm] [--hide]
+.\CLEVO_KeyboardColour.exe --model
+
 ```
 ---
 
@@ -324,7 +327,23 @@ This command works in the same way as the `colour` command - For more info, plea
 
   **This is an optional argument, and will not display the extended console output if the argument is not provided.**
 
-  ⚠️ **Warning:** This argument will have a performance impact when provided and is therefore only recommended for debugging purposes. 
+  ⚠️ **Warning (1):** This argument will have a performance impact when provided and is therefore only recommended for debugging purposes.
+
+  ⚠️ **Warning (2):** The `HKCU\SOFTWARE\CLEVO_KeyboardColour\ConsoleLogLevel` registry key & value will need to be added to your system, ensuring that `ConsoleLogLevel` is a REG_DWORD and set to 1 for this feature to work.
+
+---
+
+### 📝Model Identifier:
+
+To quickly retrieve the Model ID (Model Identifier) for your machine without the need for running an animation command, please use the following command line:
+
+`.\CLEVO_KeyboardColour.exe --model`
+
+This command will display the Model ID and prompt you to exit the program. You can compare your Model ID to the supported device list in the release notes [here](https://github.com/DeviceIoControl/CppKeyboardColour/releases/latest) to manually check if your system is supported.
+
+⚠️*WARNING (1): If your Model ID is 0x00000000, please apply any pending Windows updates on your machine and try again. If this still doesn't work, it is likely that your system is NOT a CLEVO-based laptop and* **support CANNOT be added for your device.**
+
+⚠️*WARNING (2): The `--model` argument cannot be used in conjunction with any other command line arguments.*
 
 ---
 
@@ -365,6 +384,11 @@ The following additional languages are now supported:
 - **French**
 - **German**
 - **Portuguese**
+- **Korean**
+- **Japanese**
+- **Chinese (Simplified)**
+- **Chinese (Traditional)**
+- **Polish**
 
 **To disable this feature, run the `Scripts\DisableTranslations.cmd` command script and restart the program for the settings to take effect.**
 
@@ -384,7 +408,7 @@ The following additional languages are now supported:
 
 4. Run the desired command using the syntax:
    ```
-   .\CLEVO_KeyboardColour.exe theme/inbuilt/backlight/lightbar/colour(s) [argument] [--speed <speed>] [--dmm] [--hide]
+   .\CLEVO_KeyboardColour.exe theme/inbuilt/backlight/lightbar/colour(s) [argument] [--speed <speed>] [--dmm] [--hide] [--model]
    ```
 
 ---

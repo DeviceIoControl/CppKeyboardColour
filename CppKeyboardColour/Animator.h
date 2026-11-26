@@ -8,7 +8,7 @@
 class Animator
 {
 public:
-	Animator(std::unique_ptr<IHost> pHost);
+	explicit Animator(std::unique_ptr<IHost> pHost);
 
 	bool Play(IAnimation* pAnimation, bool bShouldLoop);
 	bool SetSpeedFactor(float factor);

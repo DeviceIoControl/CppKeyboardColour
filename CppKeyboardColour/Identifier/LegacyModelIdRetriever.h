@@ -12,7 +12,7 @@ class LegacyModelIdRetriever
 	: public IModelIdRetriever
 {
 public:
-	LegacyModelIdRetriever(bool useDebugModel = false);
+	explicit LegacyModelIdRetriever(bool useDebugModel = false);
 
 	uint32_t GetModelID() override;
 

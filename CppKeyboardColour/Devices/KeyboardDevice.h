@@ -21,9 +21,9 @@ public:
 	std::wstring GetName() const override;
 	
 private:
-	KeyboardType m_kbType;
-	ColourFactory m_colourFactory;
-	std::shared_ptr<IDeviceChannel> m_pDevChannel;
+	KeyboardType m_kbType{};
+	ColourFactory m_colourFactory{};
+	std::shared_ptr<IDeviceChannel> m_pDevChannel{};
 
 	bool SetKBZoneColour(Zone zone, const Colour& colour);
 	bool SetFullKBColour(const Colour& colour);

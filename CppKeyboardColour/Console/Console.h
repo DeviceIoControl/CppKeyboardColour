@@ -15,7 +15,7 @@ public:
 	~Console() = default;
 
 	bool CanLogOnLevel(LogLevel level) const;
-	void SetTitle(const std::wstring& title);
+	void SetTitle(const std::wstring& title, bool bLogTitle = true);
 
 	void Hide();
 	void Show();
@@ -37,13 +37,13 @@ public:
 
 private:
 	HWND m_hWnd{};
-	LogLevel m_baseLoglevel;
+	LogLevel m_baseLoglevel{};
 	std::mutex m_outputLock{};
-	std::atomic<bool> m_isVisible{};
-	std::unique_ptr<ILogger> m_pLogger;
-	std::unique_ptr<ITranslator> m_pTranslator;
+	LANGID m_currentLanguage{};
+	std::atomic<bool> m_isVisible = true;
+	std::unique_ptr<ILogger> m_pLogger{};
+	std::unique_ptr<ITranslator> m_pTranslator{};
 
-	LANGID m_currentLanguage = GetUserDefaultLangID();
 
 	// The process will terminate when this function is called.
 	[[noreturn]] void OnFatalMessage();

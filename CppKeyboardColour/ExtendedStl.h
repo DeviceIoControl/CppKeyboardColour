@@ -4,6 +4,8 @@
 #include "Devices/DeviceMask.h"
 #include "Common/KeyboardType.h"
 
+#define XSTD_FORMAT_PREALLOC_BUFFER_LENGTH 0x200
+
 namespace xstd
 {
 	template<typename _Ty>
@@ -83,23 +85,20 @@ namespace xstd
 	template<typename ..._TArgs>
 	std::wstring format(const std::wstring& format, _TArgs&& ...args)
 	{
-		std::wstring allocated_string(0x200, 0);
+		std::array<wchar_t, XSTD_FORMAT_PREALLOC_BUFFER_LENGTH> stack_string{};
 
-		const auto length = xstd::snwprintf(nullptr, 0, format.c_str(), args...);
+		const auto required_len = xstd::snwprintf(stack_string.data(), XSTD_FORMAT_PREALLOC_BUFFER_LENGTH, format.c_str(), args...);
 
-		if (length == 0xffffffff)
+		if (required_len < XSTD_FORMAT_PREALLOC_BUFFER_LENGTH && required_len > 0)
 		{
-			return L"";
+			return std::wstring{ stack_string.data(), static_cast<size_t>(required_len) };
 		}
 
-		if (allocated_string.size() != length)
-		{
-			allocated_string.resize(length);
-		}
+		std::wstring heap_string(required_len, 0);
 
-		xstd::swprintf(allocated_string.data(), format.c_str(), std::forward<_TArgs>(args)...);
+		std::ignore = xstd::swprintf(heap_string.data(), format.c_str(), std::forward<_TArgs>(args)...);
 
-		return allocated_string;
+		return heap_string;
 	}
 
 	constexpr float lerp(float a, float b, float t) noexcept

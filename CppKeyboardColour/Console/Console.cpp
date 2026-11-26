@@ -22,7 +22,6 @@ namespace
 		const auto level = Registry::GetRegDWORDValue(HKEY_CURRENT_USER, KB_CONFIG_REGKEY, KB_CONFIG_CONSOLE_LOGLEVEL);
 		return static_cast<LogLevel>(std::min<uint32_t>(level.value_or(xstd::to_underlying(CONSOLE_BASE_LOGLEVEL)), xstd::to_underlying(LogLevel::Fatal)));
 	}
-
 } // namespace
 
 Console::Console(std::unique_ptr<TranslatorFactory> pTranslatorFactory)
@@ -37,7 +36,7 @@ Console::Console(std::unique_ptr<TranslatorFactory> pTranslatorFactory)
 	m_baseLoglevel = GetConsoleBaseLogLevel();
 	m_pLogger = std::make_unique<ConsoleLogger>();
 	m_pTranslator = pTranslatorFactory->Create(m_currentLanguage);
-	m_isVisible = !!(GetWindowLongPtrW(m_hWnd, GWL_STYLE) & WS_VISIBLE);
+	m_isVisible = IsWindowVisible(m_hWnd);
 }
 
 Console::Console()
@@ -45,17 +44,20 @@ Console::Console()
 {
 }
 
-void Console::SetTitle(const std::wstring& title)
+void Console::SetTitle(const std::wstring& title, bool bLogTitle /* = true */)
 {
-	const auto translatedTitle = m_pTranslator->Translate(title).append(L"\n");
+	const auto translatedTitle = m_pTranslator->Translate(title);
 	std::ignore = SetConsoleTitleW(translatedTitle.c_str());
 
-	if (!this->IsVisible())
+	if (bLogTitle)
 	{
-		this->Show();
-	}
+		if (!this->IsVisible())
+		{
+			this->Show();
+		}
 
-	m_pLogger->Write(LogLevel::None, translatedTitle);
+		std::ignore = m_pLogger->Write(LogLevel::None, translatedTitle + L"\n");
+	}
 
 	// Check if the current translator is compatible with the detected language ID.
 	// If not, that means we are using the fallback language.

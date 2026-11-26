@@ -77,11 +77,11 @@ uint32_t ModelIdRetriever::GetModelID()
 		return MODEL_ID_DEBUG;
 	}
 
-	WbemClassEnumerator enumerator = m_wbemService.GetWbemInstanceEnumerator(L"Win32_PnpEntity");
+	WbemClassEnumerator enumerator{ m_wbemService.GetWbemInstanceEnumerator(L"Win32_PnpEntity") };
 	
-	while (const auto object = enumerator.Next())
+	while (const auto device = enumerator.Next())
 	{
-		const auto devInstancePath = GetWin32PnpEntityPNPDeviceIDProperty(object.Get());
+		const auto devInstancePath = GetWin32PnpEntityPNPDeviceIDProperty(device.Get());
 		if (!IsDeviceOnPCIBus(devInstancePath))
 		{
 			continue;

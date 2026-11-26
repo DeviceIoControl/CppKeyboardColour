@@ -104,6 +104,6 @@ int wmain(int argc, const wchar_t* argv[])
 	}
 
 	EnterHiddenMode(!enableDeviceMonitorMode && enableHiddenMode);
-
+	
 	return DoCommandOperation(std::move(pHost), cmdLines);
 }

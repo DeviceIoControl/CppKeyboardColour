@@ -79,7 +79,7 @@ static DWORD DoSystemAnimationOperation(std::unique_ptr<IHost> pHost, SystemAnim
 	// NOTE: If no keyboard is found, we would recieve a DeviceChannelType::None here.
 	// 
 	// *NOTE: The technical restrictions for this limitation been resolved, so an
-	// investigation needs to take place to determine the viability for removing this gate.
+	// investigation is needed to determine the viability for removing this gate.
 	// 
 	if (pHost->GetDeviceChannelType(DeviceMask::Keyboard) != DeviceChannelType::Wmi)
 	{

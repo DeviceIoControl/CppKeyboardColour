@@ -34,8 +34,9 @@
 
 #define CP_UTF16 65001
 
+
 #define MAKE_NONRELEASE_BUILD_STRING(programName, buildType, suffix) (programName L" 1.26.XXXX (" buildType L") - " suffix)
-#define MAKE_RELEASE_BUILD_STRING(programName, suffix) (programName L" 1.26.1115 - " suffix)
+#define MAKE_RELEASE_BUILD_STRING(programName, suffix) (programName L" 1.26.1126 - " suffix)
 
 #define DEBUG_BUILD_STRING MAKE_NONRELEASE_BUILD_STRING(L"CLEVO Keyboard Colours Tool", L"Debug Build", L"Created by DeviceIoControl.")
 #define TEST_BUILD_STRING MAKE_NONRELEASE_BUILD_STRING(L"CLEVO Keyboard Colours Tool", L"Test Build", L"Created by DeviceIoControl.")

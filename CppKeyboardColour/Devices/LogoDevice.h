@@ -12,7 +12,7 @@ class LogoDevice
 	: public IDevice
 {
 public:
-	LogoDevice(std::shared_ptr<IDeviceChannel> pDeviceChannel);
+	explicit LogoDevice(std::shared_ptr<IDeviceChannel> pDeviceChannel);
 	~LogoDevice() override = default;
 
 	bool SetColour(Zone zone, const Colour& colour) override;
